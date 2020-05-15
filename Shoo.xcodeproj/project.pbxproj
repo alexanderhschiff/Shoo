@@ -13,8 +13,9 @@
 		13EF84B7246DACB90049CCD1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13EF84B6246DACB90049CCD1 /* Assets.xcassets */; };
 		13EF84BA246DACB90049CCD1 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13EF84B9246DACB90049CCD1 /* Preview Assets.xcassets */; };
 		13EF84BD246DACB90049CCD1 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 13EF84BB246DACB90049CCD1 /* LaunchScreen.storyboard */; };
-		13EF84C5246DB13C0049CCD1 /* MemberView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13EF84C4246DB13C0049CCD1 /* MemberView.swift */; };
+		13EF84C5246DB13C0049CCD1 /* PersonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13EF84C4246DB13C0049CCD1 /* PersonView.swift */; };
 		13EF84C7246DB1AB0049CCD1 /* StoplightView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13EF84C6246DB1AB0049CCD1 /* StoplightView.swift */; };
+		13FE4B5A246E32F800D15BE9 /* FreePeopleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13FE4B59246E32F800D15BE9 /* FreePeopleView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,8 +27,9 @@
 		13EF84B9246DACB90049CCD1 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		13EF84BC246DACB90049CCD1 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		13EF84BE246DACB90049CCD1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		13EF84C4246DB13C0049CCD1 /* MemberView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemberView.swift; sourceTree = "<group>"; };
+		13EF84C4246DB13C0049CCD1 /* PersonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonView.swift; sourceTree = "<group>"; };
 		13EF84C6246DB1AB0049CCD1 /* StoplightView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoplightView.swift; sourceTree = "<group>"; };
+		13FE4B59246E32F800D15BE9 /* FreePeopleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FreePeopleView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -60,11 +62,12 @@
 		13EF84AF246DACB30049CCD1 /* Shoo */ = {
 			isa = PBXGroup;
 			children = (
-				13EF84C4246DB13C0049CCD1 /* MemberView.swift */,
+				13EF84C4246DB13C0049CCD1 /* PersonView.swift */,
 				13EF84C6246DB1AB0049CCD1 /* StoplightView.swift */,
 				13EF84B0246DACB30049CCD1 /* AppDelegate.swift */,
 				13EF84B2246DACB30049CCD1 /* SceneDelegate.swift */,
 				13EF84B4246DACB30049CCD1 /* ContentView.swift */,
+				13FE4B59246E32F800D15BE9 /* FreePeopleView.swift */,
 				13EF84B6246DACB90049CCD1 /* Assets.xcassets */,
 				13EF84BB246DACB90049CCD1 /* LaunchScreen.storyboard */,
 				13EF84BE246DACB90049CCD1 /* Info.plist */,
@@ -155,8 +158,9 @@
 				13EF84C7246DB1AB0049CCD1 /* StoplightView.swift in Sources */,
 				13EF84B1246DACB30049CCD1 /* AppDelegate.swift in Sources */,
 				13EF84B3246DACB30049CCD1 /* SceneDelegate.swift in Sources */,
-				13EF84C5246DB13C0049CCD1 /* MemberView.swift in Sources */,
+				13EF84C5246DB13C0049CCD1 /* PersonView.swift in Sources */,
 				13EF84B5246DACB30049CCD1 /* ContentView.swift in Sources */,
+				13FE4B5A246E32F800D15BE9 /* FreePeopleView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -8,17 +8,22 @@
 
 import SwiftUI
 
-struct MemberView: View {
+enum Status{
+	case red, yellow, green
+}
+
+struct PersonView: View {
 	
 	let name: String
-	let status: Int
+	let status: Status
 	let reason: String
 	
 	var body: some View {
 		ZStack{
 			Color.white
+				.opacity(0.8)
+				.blur(radius: 1)
 			HStack{
-				StoplightView(color: self.status)
 				VStack(alignment: .leading){
 					Text(self.name)
 						.font(.largeTitle)
@@ -34,15 +39,19 @@ struct MemberView: View {
 			}
 			.padding()
 		}
-		.frame(maxWidth: .infinity)
-		.frame(height: 150)
+		.frame(width: 250, height: 120)
 		.cornerRadius(20)
-		.shadow(radius: 20, y: 10)
+		.shadow(radius: 5, x: 1, y: 4)
 	}
 }
 
-struct MemberView_Previews: PreviewProvider {
+struct PersonView_Previews: PreviewProvider {
 	static var previews: some View {
-		MemberView(name: "Alex", status: 0, reason: "Watching TV")
+		ZStack{
+			/*LinearGradient(gradient: Gradient(colors: [.blue, .red, .white]), startPoint: .topLeading, endPoint: .bottomTrailing).edgesIgnoringSafeArea(.all)*/
+			
+			PersonView(name: "Alexander", status: .red, reason: "📺 Watching TV")
+		}
+		
 	}
 }
