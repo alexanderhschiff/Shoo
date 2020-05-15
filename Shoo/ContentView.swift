@@ -12,31 +12,31 @@ struct Reason: ViewModifier {
 	func body(content: Content) -> some View {
 		content
 			.font(.headline)
-			.padding()
-	}
+			.padding()	}
 }
 
 extension View{
 	func reasonStyle() -> some View{
-		ZStack{
-			Color.white
-				.opacity(0.8)
+		ZStack(alignment: .leading){
+			Color.gray
+				.opacity(0.3)
 				.blur(radius: 1)
 			self.modifier(Reason())
 		}
-		.frame(height: 50)
+		.frame(width: 250, height: 50)
 		.cornerRadius(20)
-		.shadow(radius: 5, y: 2)
+		.shadow(radius: 5, y: 5)
 	}
 }
 
 
 struct ContentView: View {
 	@State private var backgroundColor = Color.red
+	@State private var addUserView = false
 	var freePeople = 3
-		
+	
 	var body: some View {
-		VStack(alignment: .leading){
+		VStack(alignment: .leading, spacing: 0){
 			VStack(alignment: .leading){
 				HStack{
 					Text("Home")
@@ -45,6 +45,9 @@ struct ContentView: View {
 					Spacer()
 					Image(systemName: "person.badge.plus.fill")
 						.font(.title)
+						.onTapGesture {
+							self.addUserView = true
+					}
 				}
 				FreePeopleView(freePeople: self.freePeople)
 					.font(.headline)
@@ -61,10 +64,15 @@ struct ContentView: View {
 				.padding()
 			}
 			
-			Text("Your status")
-				.font(.title)
-				.fontWeight(.bold)
-				.padding(.horizontal)
+			VStack(alignment: .leading){
+				Text("Your status")
+					.font(.title)
+					.fontWeight(.bold)
+				
+				Text("What's happening")
+					.font(.subheadline)
+			}
+			.padding(.horizontal)
 			
 			ScrollView(.horizontal, showsIndicators: false){
 				HStack{
@@ -81,7 +89,14 @@ struct ContentView: View {
 				.padding(EdgeInsets(top: 5, leading: 0, bottom: 10, trailing: 0))
 			}
 			
+			Text("For how long?")
+				.font(.subheadline)
+				.padding(.horizontal)
+			
 			Spacer()
+		}
+		.sheet(isPresented: $addUserView){
+			AddPersonView()
 		}
 		
 		

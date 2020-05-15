@@ -20,8 +20,8 @@ struct PersonView: View {
 	
 	var body: some View {
 		ZStack{
-			Color.white
-				.opacity(0.8)
+			Color.gray
+				.opacity(0.3)
 				.blur(radius: 1)
 			HStack{
 				VStack(alignment: .leading){
