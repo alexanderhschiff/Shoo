@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1346B9F0246F870400EECEC9 /* TimeSliderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1346B9EF246F870400EECEC9 /* TimeSliderView.swift */; };
 		13EF84B1246DACB30049CCD1 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13EF84B0246DACB30049CCD1 /* AppDelegate.swift */; };
 		13EF84B3246DACB30049CCD1 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13EF84B2246DACB30049CCD1 /* SceneDelegate.swift */; };
 		13EF84B5246DACB30049CCD1 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13EF84B4246DACB30049CCD1 /* ContentView.swift */; };
@@ -20,6 +21,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		1346B9EF246F870400EECEC9 /* TimeSliderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeSliderView.swift; sourceTree = "<group>"; };
 		13EF84AD246DACB30049CCD1 /* Shoo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Shoo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		13EF84B0246DACB30049CCD1 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		13EF84B2246DACB30049CCD1 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -69,6 +71,7 @@
 				13EF84B0246DACB30049CCD1 /* AppDelegate.swift */,
 				13EF84B2246DACB30049CCD1 /* SceneDelegate.swift */,
 				13EF84B4246DACB30049CCD1 /* ContentView.swift */,
+				1346B9EF246F870400EECEC9 /* TimeSliderView.swift */,
 				13FE4B5F246E417100D15BE9 /* AddPersonView.swift */,
 				13FE4B59246E32F800D15BE9 /* FreePeopleView.swift */,
 				13EF84B6246DACB90049CCD1 /* Assets.xcassets */,
@@ -162,6 +165,7 @@
 				13EF84B1246DACB30049CCD1 /* AppDelegate.swift in Sources */,
 				13EF84B3246DACB30049CCD1 /* SceneDelegate.swift in Sources */,
 				13EF84C5246DB13C0049CCD1 /* PersonView.swift in Sources */,
+				1346B9F0246F870400EECEC9 /* TimeSliderView.swift in Sources */,
 				13EF84B5246DACB30049CCD1 /* ContentView.swift in Sources */,
 				13FE4B5A246E32F800D15BE9 /* FreePeopleView.swift in Sources */,
 				13FE4B60246E417100D15BE9 /* AddPersonView.swift in Sources */,

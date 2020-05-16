@@ -29,11 +29,40 @@ extension View{
 	}
 }
 
-
 struct ContentView: View {
 	@State private var backgroundColor = Color.red
 	@State private var addUserView = false
 	var freePeople = 3
+	
+	@State private var time: Int = 10
+	var displayTime: String{
+		switch time{
+		case 0:
+			return "10 minutes"
+		case 1:
+			return "15 minutes"
+		case 2:
+			return "20 minutes"
+		case 3:
+			return "30 minutes"
+		case 4:
+			return "45 minutes"
+		case 5:
+			return "1 hour"
+		case 6:
+			return "2 hours"
+		case 7:
+			return "3 hours"
+		case 8:
+			return "4 hours"
+		case 9:
+			return "A while"
+		case 10:
+			return "All day"
+		default:
+			return "A while"
+		}
+	}
 	
 	var body: some View {
 		VStack(alignment: .leading, spacing: 0){
@@ -93,14 +122,22 @@ struct ContentView: View {
 				.font(.subheadline)
 				.padding(.horizontal)
 			
+			VStack(alignment: .leading, spacing: 0){
+				HStack{
+					Image(systemName: "timer")
+					Text("\(self.displayTime)")
+						.font(.headline)
+						.fontWeight(.bold)
+				}
+				TimeSliderView(time: $time)
+			}
+			.padding()
+			
 			Spacer()
 		}
 		.sheet(isPresented: $addUserView){
 			AddPersonView()
 		}
-		
-		
-		
 	}
 }
 
