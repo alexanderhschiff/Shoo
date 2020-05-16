@@ -135,8 +135,8 @@ struct ContentView: View {
 			
 			Spacer()
 		}
-		.sheet(isPresented: $addUserView){
-			AddPersonView()
+        .sheet(isPresented: $addUserView){
+            SignInView()
 		}
 	}
 }

@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 51;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -18,6 +18,10 @@
 		13EF84C7246DB1AB0049CCD1 /* StoplightView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13EF84C6246DB1AB0049CCD1 /* StoplightView.swift */; };
 		13FE4B5A246E32F800D15BE9 /* FreePeopleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13FE4B59246E32F800D15BE9 /* FreePeopleView.swift */; };
 		13FE4B60246E417100D15BE9 /* AddPersonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13FE4B5F246E417100D15BE9 /* AddPersonView.swift */; };
+		533625202470A28E00E0B2AD /* SignIn.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5336251F2470A28E00E0B2AD /* SignIn.swift */; };
+		539389662470A74C0022A4BE /* SignInView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 539389652470A74C0022A4BE /* SignInView.swift */; };
+		53EB16AA2470AE970054D68A /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 53EB16A92470AE970054D68A /* GoogleService-Info.plist */; };
+		E539DD5D3A82D2A56E259595 /* Pods_Shoo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6BA254581662AEDEBF7C399A /* Pods_Shoo.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -34,6 +38,13 @@
 		13EF84C6246DB1AB0049CCD1 /* StoplightView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoplightView.swift; sourceTree = "<group>"; };
 		13FE4B59246E32F800D15BE9 /* FreePeopleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FreePeopleView.swift; sourceTree = "<group>"; };
 		13FE4B5F246E417100D15BE9 /* AddPersonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddPersonView.swift; sourceTree = "<group>"; };
+		4EB87A76A42D2162D42F98D0 /* Pods-Shoo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Shoo.release.xcconfig"; path = "Target Support Files/Pods-Shoo/Pods-Shoo.release.xcconfig"; sourceTree = "<group>"; };
+		5336251E2470A21800E0B2AD /* Shoo.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Shoo.entitlements; sourceTree = "<group>"; };
+		5336251F2470A28E00E0B2AD /* SignIn.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignIn.swift; sourceTree = "<group>"; };
+		539389652470A74C0022A4BE /* SignInView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInView.swift; sourceTree = "<group>"; };
+		53EB16A92470AE970054D68A /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		6BA254581662AEDEBF7C399A /* Pods_Shoo.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Shoo.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		8508412224277439BAC427FB /* Pods-Shoo.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Shoo.debug.xcconfig"; path = "Target Support Files/Pods-Shoo/Pods-Shoo.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -41,6 +52,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E539DD5D3A82D2A56E259595 /* Pods_Shoo.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -52,6 +64,8 @@
 			children = (
 				13EF84AF246DACB30049CCD1 /* Shoo */,
 				13EF84AE246DACB30049CCD1 /* Products */,
+				8E8BD6CC2FFB35C542E01025 /* Pods */,
+				A7F636ABD516EB7E0A324827 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -66,12 +80,16 @@
 		13EF84AF246DACB30049CCD1 /* Shoo */ = {
 			isa = PBXGroup;
 			children = (
+				5336251E2470A21800E0B2AD /* Shoo.entitlements */,
 				13EF84C4246DB13C0049CCD1 /* PersonView.swift */,
 				13EF84C6246DB1AB0049CCD1 /* StoplightView.swift */,
 				13EF84B0246DACB30049CCD1 /* AppDelegate.swift */,
+				5336251F2470A28E00E0B2AD /* SignIn.swift */,
 				13EF84B2246DACB30049CCD1 /* SceneDelegate.swift */,
 				13EF84B4246DACB30049CCD1 /* ContentView.swift */,
+				539389652470A74C0022A4BE /* SignInView.swift */,
 				1346B9EF246F870400EECEC9 /* TimeSliderView.swift */,
+				53EB16A92470AE970054D68A /* GoogleService-Info.plist */,
 				13FE4B5F246E417100D15BE9 /* AddPersonView.swift */,
 				13FE4B59246E32F800D15BE9 /* FreePeopleView.swift */,
 				13EF84B6246DACB90049CCD1 /* Assets.xcassets */,
@@ -90,6 +108,23 @@
 			path = "Preview Content";
 			sourceTree = "<group>";
 		};
+		8E8BD6CC2FFB35C542E01025 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				8508412224277439BAC427FB /* Pods-Shoo.debug.xcconfig */,
+				4EB87A76A42D2162D42F98D0 /* Pods-Shoo.release.xcconfig */,
+			);
+			path = Pods;
+			sourceTree = "<group>";
+		};
+		A7F636ABD516EB7E0A324827 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				6BA254581662AEDEBF7C399A /* Pods_Shoo.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -97,9 +132,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 13EF84C1246DACB90049CCD1 /* Build configuration list for PBXNativeTarget "Shoo" */;
 			buildPhases = (
+				9A0A5D7F713DE23C7FFCC8FE /* [CP] Check Pods Manifest.lock */,
 				13EF84A9246DACB30049CCD1 /* Sources */,
 				13EF84AA246DACB30049CCD1 /* Frameworks */,
 				13EF84AB246DACB30049CCD1 /* Resources */,
+				D67A63FCE0FB55AA29967197 /* [CP] Embed Pods Frameworks */,
+				79F518909E286818C03D0882 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -148,6 +186,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				53EB16AA2470AE970054D68A /* GoogleService-Info.plist in Resources */,
 				13EF84BD246DACB90049CCD1 /* LaunchScreen.storyboard in Resources */,
 				13EF84BA246DACB90049CCD1 /* Preview Assets.xcassets in Resources */,
 				13EF84B7246DACB90049CCD1 /* Assets.xcassets in Resources */,
@@ -156,14 +195,75 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		79F518909E286818C03D0882 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Shoo/Pods-Shoo-resources-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Copy Pods Resources";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Shoo/Pods-Shoo-resources-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Shoo/Pods-Shoo-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		9A0A5D7F713DE23C7FFCC8FE /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-Shoo-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		D67A63FCE0FB55AA29967197 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Shoo/Pods-Shoo-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Shoo/Pods-Shoo-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Shoo/Pods-Shoo-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		13EF84A9246DACB30049CCD1 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 				13EF84C7246DB1AB0049CCD1 /* StoplightView.swift in Sources */,
+				533625202470A28E00E0B2AD /* SignIn.swift in Sources */,
 				13EF84B1246DACB30049CCD1 /* AppDelegate.swift in Sources */,
 				13EF84B3246DACB30049CCD1 /* SceneDelegate.swift in Sources */,
+				539389662470A74C0022A4BE /* SignInView.swift in Sources */,
 				13EF84C5246DB13C0049CCD1 /* PersonView.swift in Sources */,
 				1346B9F0246F870400EECEC9 /* TimeSliderView.swift in Sources */,
 				13EF84B5246DACB30049CCD1 /* ContentView.swift in Sources */,
@@ -302,17 +402,22 @@
 		};
 		13EF84C2246DACB90049CCD1 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 8508412224277439BAC427FB /* Pods-Shoo.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = Shoo/Shoo.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_ASSET_PATHS = "\"Shoo/Preview Content\"";
+				DEVELOPMENT_TEAM = 97J2HJ2DUM;
 				ENABLE_PREVIEWS = YES;
+				GCC_NO_COMMON_BLOCKS = NO;
 				INFOPLIST_FILE = Shoo/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = me.alexanderschiff.Shoo;
+				LLVM_LTO = NO;
+				PRODUCT_BUNDLE_IDENTIFIER = me.alexanderschiff.ShooApp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -321,17 +426,22 @@
 		};
 		13EF84C3246DACB90049CCD1 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 4EB87A76A42D2162D42F98D0 /* Pods-Shoo.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = Shoo/Shoo.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_ASSET_PATHS = "\"Shoo/Preview Content\"";
+				DEVELOPMENT_TEAM = 97J2HJ2DUM;
 				ENABLE_PREVIEWS = YES;
+				GCC_NO_COMMON_BLOCKS = NO;
 				INFOPLIST_FILE = Shoo/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = me.alexanderschiff.Shoo;
+				LLVM_LTO = NO;
+				PRODUCT_BUNDLE_IDENTIFIER = me.alexanderschiff.ShooApp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";

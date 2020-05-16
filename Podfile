@@ -13,4 +13,9 @@ pod 'Firebase/Analytics'
 # For example, to use Firebase Authentication and Cloud Firestore
 pod 'Firebase/Auth'
 pod 'Firebase/Firestore'
+pod 'Firebase/Database'
+pod 'FirebaseFirestoreSwift'
+pod 'FirebaseUI/OAuth'
+pod 'FirebaseUI'
+pod 'Firebase'
 end
