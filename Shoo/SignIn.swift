@@ -29,8 +29,14 @@ class SignInVC: UIViewController, FUIAuthDelegate {
         let providers = [provider]
         authUI?.providers = providers
         let authViewController = authUI!.authViewController()
+        authUI?.delegate = self
         self.present(authViewController, animated: true, completion: nil)
     }
+    
+    func authUI(_ authUI: FUIAuth, didSignInWith authDataResult: AuthDataResult?, error: Error?) {
+        //Do something if implementing
+    }
+
 }
 
 
