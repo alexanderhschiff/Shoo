@@ -19,7 +19,7 @@ struct SignIn: UIViewControllerRepresentable {
     func updateUIViewController(_ uiViewController: UIViewController, context: Context) {
     }
 }
-struct SignInView: View {
+struct SignInViewOld: View {
     var body: some View {
         SignIn()
     }
@@ -27,6 +27,6 @@ struct SignInView: View {
 
 struct SignInView_Previews: PreviewProvider {
     static var previews: some View {
-        SignInView()
+        SignInViewOld()
     }
 }

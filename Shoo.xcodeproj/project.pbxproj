@@ -18,9 +18,23 @@
 		13EF84C7246DB1AB0049CCD1 /* StoplightView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13EF84C6246DB1AB0049CCD1 /* StoplightView.swift */; };
 		13FE4B5A246E32F800D15BE9 /* FreePeopleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13FE4B59246E32F800D15BE9 /* FreePeopleView.swift */; };
 		13FE4B60246E417100D15BE9 /* AddPersonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13FE4B5F246E417100D15BE9 /* AddPersonView.swift */; };
-		533625202470A28E00E0B2AD /* SignIn.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5336251F2470A28E00E0B2AD /* SignIn.swift */; };
-		539389662470A74C0022A4BE /* SignInView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 539389652470A74C0022A4BE /* SignInView.swift */; };
-		53EB16AA2470AE970054D68A /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 53EB16A92470AE970054D68A /* GoogleService-Info.plist */; };
+		53EB16B22471B9F10054D68A /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53EB16B12471B9F10054D68A /* HomeView.swift */; };
+		53EB16BB2471BBC60054D68A /* Spark.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53EB16B92471BBC60054D68A /* Spark.swift */; };
+		53EB16BC2471BBC60054D68A /* SparkUI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53EB16B72471BBC60054D68A /* SparkUI.swift */; };
+		53EB16BD2471BBC60054D68A /* SparkError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53EB16B82471BBC60054D68A /* SparkError.swift */; };
+		53EB16BE2471BBC60054D68A /* SparkAuth.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53EB16B32471BBC50054D68A /* SparkAuth.swift */; };
+		53EB16BF2471BBC60054D68A /* LaunchScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53EB16B42471BBC60054D68A /* LaunchScreenView.swift */; };
+		53EB16C02471BBC60054D68A /* SignInView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53EB16BA2471BBC60054D68A /* SignInView.swift */; };
+		53EB16C12471BBC60054D68A /* SparkFirestore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53EB16B62471BBC60054D68A /* SparkFirestore.swift */; };
+		53EB16C22471BBC60054D68A /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53EB16B52471BBC60054D68A /* ProfileView.swift */; };
+		53EB16CC2471BBD60054D68A /* DocumentSerializable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53EB16C72471BBD50054D68A /* DocumentSerializable.swift */; };
+		53EB16CD2471BBD60054D68A /* Typealiases.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53EB16CB2471BBD60054D68A /* Typealiases.swift */; };
+		53EB16CE2471BBD60054D68A /* ActivityIndicatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53EB16C52471BBD50054D68A /* ActivityIndicatorView.swift */; };
+		53EB16CF2471BBD60054D68A /* Profile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53EB16CA2471BBD60054D68A /* Profile.swift */; };
+		53EB16D02471BBD60054D68A /* SignInWithAppleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53EB16C62471BBD50054D68A /* SignInWithAppleView.swift */; };
+		53EB16D12471BBD60054D68A /* SparkKeys.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53EB16C82471BBD50054D68A /* SparkKeys.swift */; };
+		53EB16D22471BBD60054D68A /* ActivityIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53EB16C92471BBD50054D68A /* ActivityIndicator.swift */; };
+		53EB16D92471C28A0054D68A /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 53EB16D82471C28A0054D68A /* GoogleService-Info.plist */; };
 		E539DD5D3A82D2A56E259595 /* Pods_Shoo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6BA254581662AEDEBF7C399A /* Pods_Shoo.framework */; };
 /* End PBXBuildFile section */
 
@@ -40,9 +54,23 @@
 		13FE4B5F246E417100D15BE9 /* AddPersonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddPersonView.swift; sourceTree = "<group>"; };
 		4EB87A76A42D2162D42F98D0 /* Pods-Shoo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Shoo.release.xcconfig"; path = "Target Support Files/Pods-Shoo/Pods-Shoo.release.xcconfig"; sourceTree = "<group>"; };
 		5336251E2470A21800E0B2AD /* Shoo.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Shoo.entitlements; sourceTree = "<group>"; };
-		5336251F2470A28E00E0B2AD /* SignIn.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignIn.swift; sourceTree = "<group>"; };
-		539389652470A74C0022A4BE /* SignInView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInView.swift; sourceTree = "<group>"; };
-		53EB16A92470AE970054D68A /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		53EB16B12471B9F10054D68A /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
+		53EB16B32471BBC50054D68A /* SparkAuth.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SparkAuth.swift; sourceTree = "<group>"; };
+		53EB16B42471BBC60054D68A /* LaunchScreenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchScreenView.swift; sourceTree = "<group>"; };
+		53EB16B52471BBC60054D68A /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
+		53EB16B62471BBC60054D68A /* SparkFirestore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SparkFirestore.swift; sourceTree = "<group>"; };
+		53EB16B72471BBC60054D68A /* SparkUI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SparkUI.swift; sourceTree = "<group>"; };
+		53EB16B82471BBC60054D68A /* SparkError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SparkError.swift; sourceTree = "<group>"; };
+		53EB16B92471BBC60054D68A /* Spark.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Spark.swift; sourceTree = "<group>"; };
+		53EB16BA2471BBC60054D68A /* SignInView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SignInView.swift; path = ../SignInView.swift; sourceTree = "<group>"; };
+		53EB16C52471BBD50054D68A /* ActivityIndicatorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityIndicatorView.swift; sourceTree = "<group>"; };
+		53EB16C62471BBD50054D68A /* SignInWithAppleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInWithAppleView.swift; sourceTree = "<group>"; };
+		53EB16C72471BBD50054D68A /* DocumentSerializable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DocumentSerializable.swift; sourceTree = "<group>"; };
+		53EB16C82471BBD50054D68A /* SparkKeys.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SparkKeys.swift; sourceTree = "<group>"; };
+		53EB16C92471BBD50054D68A /* ActivityIndicator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityIndicator.swift; sourceTree = "<group>"; };
+		53EB16CA2471BBD60054D68A /* Profile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Profile.swift; sourceTree = "<group>"; };
+		53EB16CB2471BBD60054D68A /* Typealiases.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Typealiases.swift; sourceTree = "<group>"; };
+		53EB16D82471C28A0054D68A /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		6BA254581662AEDEBF7C399A /* Pods_Shoo.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Shoo.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		8508412224277439BAC427FB /* Pods-Shoo.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Shoo.debug.xcconfig"; path = "Target Support Files/Pods-Shoo/Pods-Shoo.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -80,21 +108,38 @@
 		13EF84AF246DACB30049CCD1 /* Shoo */ = {
 			isa = PBXGroup;
 			children = (
+				53EB16D52471BC650054D68A /* UI Views */,
+				53EB16D42471BC2E0054D68A /* Help */,
+				53EB16D32471BC0C0054D68A /* Spark */,
 				5336251E2470A21800E0B2AD /* Shoo.entitlements */,
+				53EB16C62471BBD50054D68A /* SignInWithAppleView.swift */,
+				53EB16B42471BBC60054D68A /* LaunchScreenView.swift */,
+				1346B9EF246F870400EECEC9 /* TimeSliderView.swift */,
+				13FE4B59246E32F800D15BE9 /* FreePeopleView.swift */,
+				13FE4B5F246E417100D15BE9 /* AddPersonView.swift */,
+				53EB16BA2471BBC60054D68A /* SignInView.swift */,
 				13EF84C4246DB13C0049CCD1 /* PersonView.swift */,
+				53EB16B52471BBC60054D68A /* ProfileView.swift */,
 				13EF84C6246DB1AB0049CCD1 /* StoplightView.swift */,
+				53EB16B12471B9F10054D68A /* HomeView.swift */,
+				53EB16C92471BBD50054D68A /* ActivityIndicator.swift */,
+				53EB16C52471BBD50054D68A /* ActivityIndicatorView.swift */,
+				53EB16CB2471BBD60054D68A /* Typealiases.swift */,
+				53EB16CA2471BBD60054D68A /* Profile.swift */,
+				53EB16C72471BBD50054D68A /* DocumentSerializable.swift */,
+				53EB16B92471BBC60054D68A /* Spark.swift */,
+				53EB16B32471BBC50054D68A /* SparkAuth.swift */,
+				53EB16B82471BBC60054D68A /* SparkError.swift */,
+				53EB16B62471BBC60054D68A /* SparkFirestore.swift */,
+				53EB16B72471BBC60054D68A /* SparkUI.swift */,
+				53EB16C82471BBD50054D68A /* SparkKeys.swift */,
 				13EF84B0246DACB30049CCD1 /* AppDelegate.swift */,
-				5336251F2470A28E00E0B2AD /* SignIn.swift */,
 				13EF84B2246DACB30049CCD1 /* SceneDelegate.swift */,
 				13EF84B4246DACB30049CCD1 /* ContentView.swift */,
-				539389652470A74C0022A4BE /* SignInView.swift */,
-				1346B9EF246F870400EECEC9 /* TimeSliderView.swift */,
-				53EB16A92470AE970054D68A /* GoogleService-Info.plist */,
-				13FE4B5F246E417100D15BE9 /* AddPersonView.swift */,
-				13FE4B59246E32F800D15BE9 /* FreePeopleView.swift */,
 				13EF84B6246DACB90049CCD1 /* Assets.xcassets */,
 				13EF84BB246DACB90049CCD1 /* LaunchScreen.storyboard */,
 				13EF84BE246DACB90049CCD1 /* Info.plist */,
+				53EB16D82471C28A0054D68A /* GoogleService-Info.plist */,
 				13EF84B8246DACB90049CCD1 /* Preview Content */,
 			);
 			path = Shoo;
@@ -106,6 +151,29 @@
 				13EF84B9246DACB90049CCD1 /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		53EB16D32471BC0C0054D68A /* Spark */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Spark;
+			path = ..;
+			sourceTree = "<group>";
+		};
+		53EB16D42471BC2E0054D68A /* Help */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Help;
+			sourceTree = "<group>";
+		};
+		53EB16D52471BC650054D68A /* UI Views */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = "UI Views";
+			path = ..;
 			sourceTree = "<group>";
 		};
 		8E8BD6CC2FFB35C542E01025 /* Pods */ = {
@@ -186,7 +254,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				53EB16AA2470AE970054D68A /* GoogleService-Info.plist in Resources */,
+				53EB16D92471C28A0054D68A /* GoogleService-Info.plist in Resources */,
 				13EF84BD246DACB90049CCD1 /* LaunchScreen.storyboard in Resources */,
 				13EF84BA246DACB90049CCD1 /* Preview Assets.xcassets in Resources */,
 				13EF84B7246DACB90049CCD1 /* Assets.xcassets in Resources */,
@@ -259,16 +327,30 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				53EB16BD2471BBC60054D68A /* SparkError.swift in Sources */,
+				53EB16CF2471BBD60054D68A /* Profile.swift in Sources */,
+				53EB16CC2471BBD60054D68A /* DocumentSerializable.swift in Sources */,
 				13EF84C7246DB1AB0049CCD1 /* StoplightView.swift in Sources */,
-				533625202470A28E00E0B2AD /* SignIn.swift in Sources */,
 				13EF84B1246DACB30049CCD1 /* AppDelegate.swift in Sources */,
+				53EB16BC2471BBC60054D68A /* SparkUI.swift in Sources */,
+				53EB16BB2471BBC60054D68A /* Spark.swift in Sources */,
+				53EB16C02471BBC60054D68A /* SignInView.swift in Sources */,
 				13EF84B3246DACB30049CCD1 /* SceneDelegate.swift in Sources */,
-				539389662470A74C0022A4BE /* SignInView.swift in Sources */,
+				53EB16BF2471BBC60054D68A /* LaunchScreenView.swift in Sources */,
+				53EB16B22471B9F10054D68A /* HomeView.swift in Sources */,
 				13EF84C5246DB13C0049CCD1 /* PersonView.swift in Sources */,
 				1346B9F0246F870400EECEC9 /* TimeSliderView.swift in Sources */,
 				13EF84B5246DACB30049CCD1 /* ContentView.swift in Sources */,
+				53EB16D22471BBD60054D68A /* ActivityIndicator.swift in Sources */,
+				53EB16D02471BBD60054D68A /* SignInWithAppleView.swift in Sources */,
+				53EB16D12471BBD60054D68A /* SparkKeys.swift in Sources */,
 				13FE4B5A246E32F800D15BE9 /* FreePeopleView.swift in Sources */,
+				53EB16CE2471BBD60054D68A /* ActivityIndicatorView.swift in Sources */,
+				53EB16C12471BBC60054D68A /* SparkFirestore.swift in Sources */,
+				53EB16CD2471BBD60054D68A /* Typealiases.swift in Sources */,
+				53EB16C22471BBC60054D68A /* ProfileView.swift in Sources */,
 				13FE4B60246E417100D15BE9 /* AddPersonView.swift in Sources */,
+				53EB16BE2471BBC60054D68A /* SparkAuth.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
