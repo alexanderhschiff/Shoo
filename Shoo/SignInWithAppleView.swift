@@ -18,7 +18,7 @@ struct SignInWithAppleView: UIViewRepresentable {
     }
     
     func makeUIView(context: Context) -> ASAuthorizationAppleIDButton {
-        let button = ASAuthorizationAppleIDButton(authorizationButtonType: .continue, authorizationButtonStyle: .whiteOutline)
+        let button = ASAuthorizationAppleIDButton(authorizationButtonType: .default, authorizationButtonStyle: .whiteOutline)
         button.addTarget(context.coordinator, action:  #selector(Coordinator.didTapButton), for: .touchUpInside)
         return button
     }

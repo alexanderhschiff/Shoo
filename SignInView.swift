@@ -10,23 +10,39 @@ import SwiftUI
 
 struct SignInView: View {
     var body: some View {
-        ActivityIndicatorView(isPresented: $activityIndicatorInfo.isPresented, message: activityIndicatorInfo.message) {
-            SignInWithAppleView(activityIndicatorInfo: self.$activityIndicatorInfo, alertInfo: self.$alertInfo).frame(width: 200, height: 50)
+        VStack(alignment: .leading){
+            
+            Text("Welcome to Shoo")
+                .fontWeight(.heavy)
+                .font(.largeTitle)
+                .padding()
+            
+            Spacer()
+            
+            Text("Join a house and get started shooing your housemates! Sign in to get started")
+                .font(.headline)
+                .padding()
+            
+            ActivityIndicatorView(isPresented: $activityIndicatorInfo.isPresented, message: activityIndicatorInfo.message) {
+                SignInWithAppleView(activityIndicatorInfo: self.$activityIndicatorInfo, alertInfo: self.$alertInfo).frame(width: 200, height: 50)
+            }
+            
+            Spacer()
         }
     }
     
     // MARK: - Activity Indicator
     @State private var activityIndicatorInfo = SparkUIDefault.activityIndicatorInfo
-
+    
     func startActivityIndicator(message: String) {
         activityIndicatorInfo.message = message
         activityIndicatorInfo.isPresented = true
     }
-
+    
     func stopActivityIndicator() {
         activityIndicatorInfo.isPresented = false
     }
-
+    
     func updateActivityIndicator(message: String) {
         stopActivityIndicator()
         startActivityIndicator(message: message)

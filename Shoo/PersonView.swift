@@ -15,7 +15,7 @@ enum Status{
 struct PersonView: View {
 	
 	let name: String
-	let status: Status
+	let status: Int
 	let reason: String
 	
 	var body: some View {
