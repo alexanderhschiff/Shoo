@@ -20,7 +20,7 @@ struct ContentView: View {
             } else if spark.isUserAuthenticated == .signedOut {
                 SignInView()
             } else if spark.isUserAuthenticated == .signedIn {
-                HomeView()
+                HomeView().environmentObject(HouseData(userID: self.spark.profile.uid))
             }
         }.onAppear{
             self.spark.configureFirebaseStateDidChange()

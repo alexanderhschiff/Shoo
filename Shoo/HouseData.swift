@@ -9,6 +9,7 @@
 import Foundation
 import FirebaseFirestore
 import Firebase
+import SwiftUI
 
 struct Mate: Identifiable {
     var id: String
@@ -17,6 +18,7 @@ struct Mate: Identifiable {
     var status: Int
     var end: Date?
 }
+
 
 class HouseData: ObservableObject {
     var houseID: String
@@ -43,7 +45,7 @@ class HouseData: ObservableObject {
         }
         //if a house exists
         if (houseID != ""){
-            db.collection("houses").document(houseID).collection("Mates")
+            db.collection("Houses").document(houseID).collection("Mates")
                 .addSnapshotListener { snap, err in
                     if err != nil{
                         self.createHouse(uid: userID)
@@ -70,9 +72,9 @@ class HouseData: ObservableObject {
     private func createHouse(uid: String) {
         //create a new house and add myself
         var ref: DocumentReference? = nil
-        ref = db.collection("houses").addDocument(data: [
+        ref = db.collection("Houses").addDocument(data: [
             "name": "house",
-            "mates": [uid]
+            "Mates": [uid]
         ]){ err in
             if let err = err {
                 print("Error adding document: \(err)")

@@ -9,10 +9,9 @@
 import SwiftUI
 
 struct HomeView: View {
+    @EnvironmentObject var house: HouseData
     @State private var backgroundColor = Color.red
     @State private var addUserView = false
-    var freePeople = 3
-    @ObservedObject var house = HouseData(userID: profile.uid)
     
     @State private var time: Int = 10
     var displayTime: String{
@@ -58,7 +57,7 @@ struct HomeView: View {
                             self.addUserView = true
                     }
                 }
-                FreePeopleView(freePeople: self.freePeople)
+                FreePeopleView(freePeople: house.mates.count)
                     .font(.headline)
                     .offset(y: -10)
             }

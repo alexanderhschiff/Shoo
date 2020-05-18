@@ -50,7 +50,7 @@ struct PersonView_Previews: PreviewProvider {
 		ZStack{
 			/*LinearGradient(gradient: Gradient(colors: [.blue, .red, .white]), startPoint: .topLeading, endPoint: .bottomTrailing).edgesIgnoringSafeArea(.all)*/
 			
-			PersonView(name: "Alexander", status: .red, reason: "📺 Watching TV")
+			PersonView(name: "Alexander", status: 0, reason: "📺 Watching TV")
 		}
 		
 	}
