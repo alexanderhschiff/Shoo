@@ -18,12 +18,12 @@
 		13EF84C5246DB13C0049CCD1 /* PersonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13EF84C4246DB13C0049CCD1 /* PersonView.swift */; };
 		13EF84C7246DB1AB0049CCD1 /* StoplightView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13EF84C6246DB1AB0049CCD1 /* StoplightView.swift */; };
 		13FE4B5A246E32F800D15BE9 /* FreePeopleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13FE4B59246E32F800D15BE9 /* FreePeopleView.swift */; };
-		13FE4B60246E417100D15BE9 /* AddPersonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13FE4B5F246E417100D15BE9 /* AddPersonView.swift */; };
-		5398FA0B2474760E00467D67 /* SignInView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5398FA0A2474760D00467D67 /* SignInView.swift */; };
 		5398FA4B2474E62B00467D67 /* EditCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5398FA4A2474E62B00467D67 /* EditCardView.swift */; };
 		5398FA4D2474E63800467D67 /* BottomView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5398FA4C2474E63800467D67 /* BottomView.swift */; };
 		5398FA4F2474E7D500467D67 /* ProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5398FA4E2474E7D500467D67 /* ProgressView.swift */; };
-		53DDBA662474566600D07C60 /* CreateJoinHouseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53DDBA652474566600D07C60 /* CreateJoinHouseView.swift */; };
+		5398FA522474F2F500467D67 /* EditHomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5398FA512474F2F500467D67 /* EditHomeView.swift */; };
+		5398FA552474F33200467D67 /* SignInView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5398FA542474F33200467D67 /* SignInView.swift */; };
+		5398FA5C2474F47E00467D67 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 5398FA5B2474F47E00467D67 /* Default-568h@2x.png */; };
 		53DDBA6824745D3200D07C60 /* Mate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53DDBA6724745D3200D07C60 /* Mate.swift */; };
 		53EB16B22471B9F10054D68A /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53EB16B12471B9F10054D68A /* HomeView.swift */; };
 		53EB16BB2471BBC60054D68A /* Fire.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53EB16B92471BBC60054D68A /* Fire.swift */; };
@@ -56,14 +56,14 @@
 		13EF84C4246DB13C0049CCD1 /* PersonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonView.swift; sourceTree = "<group>"; };
 		13EF84C6246DB1AB0049CCD1 /* StoplightView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoplightView.swift; sourceTree = "<group>"; };
 		13FE4B59246E32F800D15BE9 /* FreePeopleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FreePeopleView.swift; sourceTree = "<group>"; };
-		13FE4B5F246E417100D15BE9 /* AddPersonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddPersonView.swift; sourceTree = "<group>"; };
 		19D61C28CE417EC4A67E5C38 /* Pods-Shoo.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Shoo.debug.xcconfig"; path = "Target Support Files/Pods-Shoo/Pods-Shoo.debug.xcconfig"; sourceTree = "<group>"; };
 		5336251E2470A21800E0B2AD /* Shoo.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Shoo.entitlements; sourceTree = "<group>"; };
-		5398FA0A2474760D00467D67 /* SignInView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SignInView.swift; path = /Users/benjaminschiff/Documents/Shoo/Shoo/SignInView.swift; sourceTree = "<absolute>"; };
 		5398FA4A2474E62B00467D67 /* EditCardView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditCardView.swift; sourceTree = "<group>"; };
 		5398FA4C2474E63800467D67 /* BottomView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BottomView.swift; sourceTree = "<group>"; };
 		5398FA4E2474E7D500467D67 /* ProgressView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProgressView.swift; sourceTree = "<group>"; };
-		53DDBA652474566600D07C60 /* CreateJoinHouseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateJoinHouseView.swift; sourceTree = "<group>"; };
+		5398FA512474F2F500467D67 /* EditHomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditHomeView.swift; sourceTree = "<group>"; };
+		5398FA542474F33200467D67 /* SignInView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInView.swift; sourceTree = "<group>"; };
+		5398FA5B2474F47E00467D67 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 		53DDBA6724745D3200D07C60 /* Mate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Mate.swift; sourceTree = "<group>"; };
 		53EB16B12471B9F10054D68A /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 		53EB16B32471BBC50054D68A /* FireAuth.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FireAuth.swift; sourceTree = "<group>"; };
@@ -126,40 +126,14 @@
 		13EF84AF246DACB30049CCD1 /* Shoo */ = {
 			isa = PBXGroup;
 			children = (
-				5336251E2470A21800E0B2AD /* Shoo.entitlements */,
-				5398FA0A2474760D00467D67 /* SignInView.swift */,
-				53EB16C62471BBD50054D68A /* SignInWithAppleView.swift */,
-				53EB16B42471BBC60054D68A /* LaunchScreenView.swift */,
-				1346B9EF246F870400EECEC9 /* TimeSliderView.swift */,
-				13FE4B59246E32F800D15BE9 /* FreePeopleView.swift */,
-				13FE4B5F246E417100D15BE9 /* AddPersonView.swift */,
-				13EF84C4246DB13C0049CCD1 /* PersonView.swift */,
-				13EF84C6246DB1AB0049CCD1 /* StoplightView.swift */,
-				53EB16B12471B9F10054D68A /* HomeView.swift */,
-				5398FA4E2474E7D500467D67 /* ProgressView.swift */,
-				53EB16C92471BBD50054D68A /* ActivityIndicator.swift */,
-				53EB16C52471BBD50054D68A /* ActivityIndicatorView.swift */,
-				53EB16CB2471BBD60054D68A /* Typealiases.swift */,
-				53EB16CA2471BBD60054D68A /* Profile.swift */,
-				53EB16C72471BBD50054D68A /* DocumentSerializable.swift */,
-				5398FA4A2474E62B00467D67 /* EditCardView.swift */,
-				5398FA4C2474E63800467D67 /* BottomView.swift */,
-				53EB16B92471BBC60054D68A /* Fire.swift */,
-				53DDBA6724745D3200D07C60 /* Mate.swift */,
-				53DDBA652474566600D07C60 /* CreateJoinHouseView.swift */,
-				53EB16B32471BBC50054D68A /* FireAuth.swift */,
-				53EB16B82471BBC60054D68A /* FireError.swift */,
-				53EB16B62471BBC60054D68A /* FireFirestore.swift */,
-				53EB16B72471BBC60054D68A /* FireUI.swift */,
-				53EB16C82471BBD50054D68A /* FireKeys.swift */,
-				13EF84B0246DACB30049CCD1 /* AppDelegate.swift */,
-				13EF84B2246DACB30049CCD1 /* SceneDelegate.swift */,
-				13EF84B4246DACB30049CCD1 /* ContentView.swift */,
-				53EB16DA2471F66A0054D68A /* ReasonView.swift */,
-				13EF84B6246DACB90049CCD1 /* Assets.xcassets */,
-				13EF84BB246DACB90049CCD1 /* LaunchScreen.storyboard */,
 				13EF84BE246DACB90049CCD1 /* Info.plist */,
-				53EB16D82471C28A0054D68A /* GoogleService-Info.plist */,
+				5336251E2470A21800E0B2AD /* Shoo.entitlements */,
+				5398FA572474F38200467D67 /* Reusable Views */,
+				5398FA532474F30900467D67 /* Sheet Views */,
+				5398FA502474F1AD00467D67 /* Main Views */,
+				5398FA5A2474F41900467D67 /* Structs and Classes */,
+				5398FA592474F3BD00467D67 /* Fire */,
+				5398FA582474F3AC00467D67 /* Native Controllers */,
 				13EF84B8246DACB90049CCD1 /* Preview Content */,
 			);
 			path = Shoo;
@@ -171,6 +145,82 @@
 				13EF84B9246DACB90049CCD1 /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		5398FA502474F1AD00467D67 /* Main Views */ = {
+			isa = PBXGroup;
+			children = (
+				13EF84B4246DACB30049CCD1 /* ContentView.swift */,
+				53EB16B12471B9F10054D68A /* HomeView.swift */,
+				5398FA542474F33200467D67 /* SignInView.swift */,
+				53EB16B42471BBC60054D68A /* LaunchScreenView.swift */,
+				5398FA512474F2F500467D67 /* EditHomeView.swift */,
+				5398FA4A2474E62B00467D67 /* EditCardView.swift */,
+			);
+			path = "Main Views";
+			sourceTree = "<group>";
+		};
+		5398FA532474F30900467D67 /* Sheet Views */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = "Sheet Views";
+			path = ..;
+			sourceTree = "<group>";
+		};
+		5398FA572474F38200467D67 /* Reusable Views */ = {
+			isa = PBXGroup;
+			children = (
+				5398FA4C2474E63800467D67 /* BottomView.swift */,
+				13EF84C6246DB1AB0049CCD1 /* StoplightView.swift */,
+				1346B9EF246F870400EECEC9 /* TimeSliderView.swift */,
+				13FE4B59246E32F800D15BE9 /* FreePeopleView.swift */,
+				13EF84C4246DB13C0049CCD1 /* PersonView.swift */,
+				5398FA4E2474E7D500467D67 /* ProgressView.swift */,
+				53EB16DA2471F66A0054D68A /* ReasonView.swift */,
+			);
+			name = "Reusable Views";
+			path = ..;
+			sourceTree = "<group>";
+		};
+		5398FA582474F3AC00467D67 /* Native Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				5398FA5B2474F47E00467D67 /* Default-568h@2x.png */,
+				13EF84B6246DACB90049CCD1 /* Assets.xcassets */,
+				13EF84B2246DACB30049CCD1 /* SceneDelegate.swift */,
+				13EF84B0246DACB30049CCD1 /* AppDelegate.swift */,
+				13EF84BB246DACB90049CCD1 /* LaunchScreen.storyboard */,
+				53EB16D82471C28A0054D68A /* GoogleService-Info.plist */,
+			);
+			path = "Native Controllers";
+			sourceTree = "<group>";
+		};
+		5398FA592474F3BD00467D67 /* Fire */ = {
+			isa = PBXGroup;
+			children = (
+				53EB16C92471BBD50054D68A /* ActivityIndicator.swift */,
+				53EB16C52471BBD50054D68A /* ActivityIndicatorView.swift */,
+				53EB16B92471BBC60054D68A /* Fire.swift */,
+				53EB16B32471BBC50054D68A /* FireAuth.swift */,
+				53EB16B82471BBC60054D68A /* FireError.swift */,
+				53EB16B62471BBC60054D68A /* FireFirestore.swift */,
+				53EB16B72471BBC60054D68A /* FireUI.swift */,
+				53EB16C82471BBD50054D68A /* FireKeys.swift */,
+				53EB16C62471BBD50054D68A /* SignInWithAppleView.swift */,
+			);
+			path = Fire;
+			sourceTree = "<group>";
+		};
+		5398FA5A2474F41900467D67 /* Structs and Classes */ = {
+			isa = PBXGroup;
+			children = (
+				53EB16CA2471BBD60054D68A /* Profile.swift */,
+				53EB16CB2471BBD60054D68A /* Typealiases.swift */,
+				53EB16C72471BBD50054D68A /* DocumentSerializable.swift */,
+				53DDBA6724745D3200D07C60 /* Mate.swift */,
+			);
+			path = "Structs and Classes";
 			sourceTree = "<group>";
 		};
 		8E8BD6CC2FFB35C542E01025 /* Pods */ = {
@@ -245,6 +295,7 @@
 				53EB16D92471C28A0054D68A /* GoogleService-Info.plist in Resources */,
 				13EF84BD246DACB90049CCD1 /* LaunchScreen.storyboard in Resources */,
 				13EF84BA246DACB90049CCD1 /* Preview Assets.xcassets in Resources */,
+				5398FA5C2474F47E00467D67 /* Default-568h@2x.png in Resources */,
 				13EF84B7246DACB90049CCD1 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -305,6 +356,8 @@
 				53EB16CC2471BBD60054D68A /* DocumentSerializable.swift in Sources */,
 				13EF84C7246DB1AB0049CCD1 /* StoplightView.swift in Sources */,
 				5398FA4F2474E7D500467D67 /* ProgressView.swift in Sources */,
+				5398FA522474F2F500467D67 /* EditHomeView.swift in Sources */,
+				5398FA552474F33200467D67 /* SignInView.swift in Sources */,
 				53EB16DB2471F66A0054D68A /* ReasonView.swift in Sources */,
 				13EF84B1246DACB30049CCD1 /* AppDelegate.swift in Sources */,
 				53EB16BC2471BBC60054D68A /* FireUI.swift in Sources */,
@@ -313,19 +366,16 @@
 				5398FA4D2474E63800467D67 /* BottomView.swift in Sources */,
 				53EB16BF2471BBC60054D68A /* LaunchScreenView.swift in Sources */,
 				53EB16B22471B9F10054D68A /* HomeView.swift in Sources */,
-				53DDBA662474566600D07C60 /* CreateJoinHouseView.swift in Sources */,
 				13EF84C5246DB13C0049CCD1 /* PersonView.swift in Sources */,
 				1346B9F0246F870400EECEC9 /* TimeSliderView.swift in Sources */,
 				13EF84B5246DACB30049CCD1 /* ContentView.swift in Sources */,
 				53EB16D22471BBD60054D68A /* ActivityIndicator.swift in Sources */,
-				5398FA0B2474760E00467D67 /* SignInView.swift in Sources */,
 				53EB16D02471BBD60054D68A /* SignInWithAppleView.swift in Sources */,
 				53EB16D12471BBD60054D68A /* FireKeys.swift in Sources */,
 				13FE4B5A246E32F800D15BE9 /* FreePeopleView.swift in Sources */,
 				53EB16CE2471BBD60054D68A /* ActivityIndicatorView.swift in Sources */,
 				53EB16C12471BBC60054D68A /* FireFirestore.swift in Sources */,
 				53EB16CD2471BBD60054D68A /* Typealiases.swift in Sources */,
-				13FE4B60246E417100D15BE9 /* AddPersonView.swift in Sources */,
 				53EB16BE2471BBC60054D68A /* FireAuth.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

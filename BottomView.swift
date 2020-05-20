@@ -21,6 +21,7 @@ struct Blur: UIViewRepresentable {
 struct BottomView: View {
 	
 	@Binding var more: Bool
+    @Binding var eType: presentSheet
 	
 	var body: some View {
 		VStack(spacing: 0){
@@ -39,6 +40,7 @@ struct BottomView: View {
 			.background(Blur(style: .systemMaterial))
 			.onTapGesture {
 				self.more = true
+                self.eType = .more
 			}
 			
 			HStack{
@@ -89,7 +91,7 @@ struct BottomView_Previews: PreviewProvider {
 	static var previews: some View {
 		ZStack{
 			LinearGradient(gradient: Gradient(colors: [Color.red, Color.blue]), startPoint: .top, endPoint: .bottom)
-			BottomView(more: .constant(false))
+            BottomView(more: .constant(false), eType: .constant(.more))
 		}
 	}
 }

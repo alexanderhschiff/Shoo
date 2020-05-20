@@ -2,9 +2,6 @@
 <Workspace
    version = "1.0">
    <FileRef
-      location = "group:/Users/benjaminschiff/Documents/Shoo/Shoo/SignInView.swift">
-   </FileRef>
-   <FileRef
       location = "group:Shoo.xcodeproj">
    </FileRef>
    <FileRef
