@@ -11,7 +11,7 @@ import AuthenticationServices
 
 struct SignInWithAppleView: UIViewRepresentable {
     
-    @EnvironmentObject var spark: Spark
+    @EnvironmentObject var fire: Fire
     
     func makeCoordinator() -> Coordinator {
         return Coordinator(self)
@@ -40,12 +40,12 @@ struct SignInWithAppleView: UIViewRepresentable {
         @objc func didTapButton() {
             #if !targetEnvironment(simulator)
             parent?.startActivityIndicator(message: "Signing up with Apple...")
-            let nonce = SparkAuth.randomNonceString()
+            let nonce = FireAuth.randomNonceString()
             currentNonce = nonce
             let appleIDProvider = ASAuthorizationAppleIDProvider()
             let request = appleIDProvider.createRequest()
-            request.requestedScopes = [.fullName, .email]
-            request.nonce = SparkAuth.sha256(nonce)
+            request.requestedScopes = [.fullName]
+            request.nonce = FireAuth.sha256(nonce)
             
             let authorizationController = ASAuthorizationController(authorizationRequests: [request])
             authorizationController.delegate = self
@@ -83,11 +83,11 @@ struct SignInWithAppleView: UIViewRepresentable {
                 }
                 
                 parent.updateActivityIndicator(message: "Saving to database...")
-                SparkAuth.signIn(providerID: SparkAuth.providerID.apple, idTokenString: idTokenString, nonce: nonce) { (result) in
+                FireAuth.signIn(providerID: FireAuth.providerID.apple, idTokenString: idTokenString, nonce: nonce) { (result) in
                     switch result {
                     case .success(let authDataResult):
                         let signInWithAppleResult = (authDataResult, appleIDCredential)
-                        SparkAuth.handle(signInWithAppleResult) { (result) in
+                        FireAuth.handle(signInWithAppleResult) { (result) in
                             switch result {
                             case .success(let profile):
                                 print("Successfully Signed in with Apple into Firebase: \(profile)")

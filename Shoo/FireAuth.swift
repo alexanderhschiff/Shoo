@@ -1,16 +1,15 @@
 //
-//  SparkAuth.swift
-//  SwiftUISignInWithAppleAndFirebaseDemo
+//  FireAuth.swift
+//  Shoo
 //
-//  Created by Alex Nagy on 08/12/2019.
-//  Copyright © 2019 Alex Nagy. All rights reserved.
+//  Created by Benjamin Schiff on 5/17/20.
+//  Copyright © 2020 Alexander Schiff. All rights reserved.
 //
-
 import SwiftUI
 import FirebaseAuth
 import CryptoKit
 
-struct SparkAuth {
+struct FireAuth {
     
     struct providerID {
         static let apple = "apple.com"
@@ -67,24 +66,22 @@ struct SparkAuth {
             }
         }
         
-        let email = signInWithAppleResult.authDataResult.user.email ?? ""
+        //let email = signInWithAppleResult.authDataResult.user.email ?? ""
         
         var data: [String: Any]
         
         if name != "" {
             data = [
-                SparkKeys.Profile.uid: uid,
-                SparkKeys.Profile.name: name,
-                SparkKeys.Profile.email: email
+                FireKeys.Profile.uid: uid,
+                FireKeys.Profile.name: name,
             ]
         } else {
             data = [
-                SparkKeys.Profile.uid: uid,
-                SparkKeys.Profile.email: email
+                FireKeys.Profile.uid: uid,
             ]
         }
         
-        SparkFirestore.mergeProfile(data, uid: uid) { (result) in
+        FireFirestore.mergeProfile(data, uid: uid) { (result) in
             completion(result)
         }
     }

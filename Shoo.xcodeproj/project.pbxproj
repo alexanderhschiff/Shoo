@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		119A826CA9E0D03C55D46C21 /* Pods_Shoo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9F9C7F1ED6940993E4B38ACE /* Pods_Shoo.framework */; };
 		1346B9F0246F870400EECEC9 /* TimeSliderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1346B9EF246F870400EECEC9 /* TimeSliderView.swift */; };
 		13EF84B1246DACB30049CCD1 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13EF84B0246DACB30049CCD1 /* AppDelegate.swift */; };
 		13EF84B3246DACB30049CCD1 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13EF84B2246DACB30049CCD1 /* SceneDelegate.swift */; };
@@ -18,25 +19,28 @@
 		13EF84C7246DB1AB0049CCD1 /* StoplightView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13EF84C6246DB1AB0049CCD1 /* StoplightView.swift */; };
 		13FE4B5A246E32F800D15BE9 /* FreePeopleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13FE4B59246E32F800D15BE9 /* FreePeopleView.swift */; };
 		13FE4B60246E417100D15BE9 /* AddPersonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13FE4B5F246E417100D15BE9 /* AddPersonView.swift */; };
+		5398FA0B2474760E00467D67 /* SignInView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5398FA0A2474760D00467D67 /* SignInView.swift */; };
+		5398FA4B2474E62B00467D67 /* EditCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5398FA4A2474E62B00467D67 /* EditCardView.swift */; };
+		5398FA4D2474E63800467D67 /* BottomView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5398FA4C2474E63800467D67 /* BottomView.swift */; };
+		5398FA4F2474E7D500467D67 /* ProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5398FA4E2474E7D500467D67 /* ProgressView.swift */; };
+		53DDBA662474566600D07C60 /* CreateJoinHouseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53DDBA652474566600D07C60 /* CreateJoinHouseView.swift */; };
+		53DDBA6824745D3200D07C60 /* Mate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53DDBA6724745D3200D07C60 /* Mate.swift */; };
 		53EB16B22471B9F10054D68A /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53EB16B12471B9F10054D68A /* HomeView.swift */; };
-		53EB16BB2471BBC60054D68A /* Spark.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53EB16B92471BBC60054D68A /* Spark.swift */; };
-		53EB16BC2471BBC60054D68A /* SparkUI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53EB16B72471BBC60054D68A /* SparkUI.swift */; };
-		53EB16BD2471BBC60054D68A /* SparkError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53EB16B82471BBC60054D68A /* SparkError.swift */; };
-		53EB16BE2471BBC60054D68A /* SparkAuth.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53EB16B32471BBC50054D68A /* SparkAuth.swift */; };
+		53EB16BB2471BBC60054D68A /* Fire.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53EB16B92471BBC60054D68A /* Fire.swift */; };
+		53EB16BC2471BBC60054D68A /* FireUI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53EB16B72471BBC60054D68A /* FireUI.swift */; };
+		53EB16BD2471BBC60054D68A /* FireError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53EB16B82471BBC60054D68A /* FireError.swift */; };
+		53EB16BE2471BBC60054D68A /* FireAuth.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53EB16B32471BBC50054D68A /* FireAuth.swift */; };
 		53EB16BF2471BBC60054D68A /* LaunchScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53EB16B42471BBC60054D68A /* LaunchScreenView.swift */; };
-		53EB16C02471BBC60054D68A /* SignInView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53EB16BA2471BBC60054D68A /* SignInView.swift */; };
-		53EB16C12471BBC60054D68A /* SparkFirestore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53EB16B62471BBC60054D68A /* SparkFirestore.swift */; };
+		53EB16C12471BBC60054D68A /* FireFirestore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53EB16B62471BBC60054D68A /* FireFirestore.swift */; };
 		53EB16CC2471BBD60054D68A /* DocumentSerializable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53EB16C72471BBD50054D68A /* DocumentSerializable.swift */; };
 		53EB16CD2471BBD60054D68A /* Typealiases.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53EB16CB2471BBD60054D68A /* Typealiases.swift */; };
 		53EB16CE2471BBD60054D68A /* ActivityIndicatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53EB16C52471BBD50054D68A /* ActivityIndicatorView.swift */; };
 		53EB16CF2471BBD60054D68A /* Profile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53EB16CA2471BBD60054D68A /* Profile.swift */; };
 		53EB16D02471BBD60054D68A /* SignInWithAppleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53EB16C62471BBD50054D68A /* SignInWithAppleView.swift */; };
-		53EB16D12471BBD60054D68A /* SparkKeys.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53EB16C82471BBD50054D68A /* SparkKeys.swift */; };
+		53EB16D12471BBD60054D68A /* FireKeys.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53EB16C82471BBD50054D68A /* FireKeys.swift */; };
 		53EB16D22471BBD60054D68A /* ActivityIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53EB16C92471BBD50054D68A /* ActivityIndicator.swift */; };
 		53EB16D92471C28A0054D68A /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 53EB16D82471C28A0054D68A /* GoogleService-Info.plist */; };
 		53EB16DB2471F66A0054D68A /* ReasonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53EB16DA2471F66A0054D68A /* ReasonView.swift */; };
-		53EB16DD2471FE660054D68A /* HouseData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53EB16DC2471FE660054D68A /* HouseData.swift */; };
-		E539DD5D3A82D2A56E259595 /* Pods_Shoo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6BA254581662AEDEBF7C399A /* Pods_Shoo.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -53,28 +57,32 @@
 		13EF84C6246DB1AB0049CCD1 /* StoplightView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoplightView.swift; sourceTree = "<group>"; };
 		13FE4B59246E32F800D15BE9 /* FreePeopleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FreePeopleView.swift; sourceTree = "<group>"; };
 		13FE4B5F246E417100D15BE9 /* AddPersonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddPersonView.swift; sourceTree = "<group>"; };
-		4EB87A76A42D2162D42F98D0 /* Pods-Shoo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Shoo.release.xcconfig"; path = "Target Support Files/Pods-Shoo/Pods-Shoo.release.xcconfig"; sourceTree = "<group>"; };
+		19D61C28CE417EC4A67E5C38 /* Pods-Shoo.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Shoo.debug.xcconfig"; path = "Target Support Files/Pods-Shoo/Pods-Shoo.debug.xcconfig"; sourceTree = "<group>"; };
 		5336251E2470A21800E0B2AD /* Shoo.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Shoo.entitlements; sourceTree = "<group>"; };
+		5398FA0A2474760D00467D67 /* SignInView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SignInView.swift; path = /Users/benjaminschiff/Documents/Shoo/Shoo/SignInView.swift; sourceTree = "<absolute>"; };
+		5398FA4A2474E62B00467D67 /* EditCardView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditCardView.swift; sourceTree = "<group>"; };
+		5398FA4C2474E63800467D67 /* BottomView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BottomView.swift; sourceTree = "<group>"; };
+		5398FA4E2474E7D500467D67 /* ProgressView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProgressView.swift; sourceTree = "<group>"; };
+		53DDBA652474566600D07C60 /* CreateJoinHouseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateJoinHouseView.swift; sourceTree = "<group>"; };
+		53DDBA6724745D3200D07C60 /* Mate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Mate.swift; sourceTree = "<group>"; };
 		53EB16B12471B9F10054D68A /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
-		53EB16B32471BBC50054D68A /* SparkAuth.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SparkAuth.swift; sourceTree = "<group>"; };
+		53EB16B32471BBC50054D68A /* FireAuth.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FireAuth.swift; sourceTree = "<group>"; };
 		53EB16B42471BBC60054D68A /* LaunchScreenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchScreenView.swift; sourceTree = "<group>"; };
-		53EB16B62471BBC60054D68A /* SparkFirestore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SparkFirestore.swift; sourceTree = "<group>"; };
-		53EB16B72471BBC60054D68A /* SparkUI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SparkUI.swift; sourceTree = "<group>"; };
-		53EB16B82471BBC60054D68A /* SparkError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SparkError.swift; sourceTree = "<group>"; };
-		53EB16B92471BBC60054D68A /* Spark.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Spark.swift; sourceTree = "<group>"; };
-		53EB16BA2471BBC60054D68A /* SignInView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SignInView.swift; path = ../SignInView.swift; sourceTree = "<group>"; };
+		53EB16B62471BBC60054D68A /* FireFirestore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FireFirestore.swift; sourceTree = "<group>"; };
+		53EB16B72471BBC60054D68A /* FireUI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FireUI.swift; sourceTree = "<group>"; };
+		53EB16B82471BBC60054D68A /* FireError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FireError.swift; sourceTree = "<group>"; };
+		53EB16B92471BBC60054D68A /* Fire.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Fire.swift; sourceTree = "<group>"; };
 		53EB16C52471BBD50054D68A /* ActivityIndicatorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityIndicatorView.swift; sourceTree = "<group>"; };
 		53EB16C62471BBD50054D68A /* SignInWithAppleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInWithAppleView.swift; sourceTree = "<group>"; };
 		53EB16C72471BBD50054D68A /* DocumentSerializable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DocumentSerializable.swift; sourceTree = "<group>"; };
-		53EB16C82471BBD50054D68A /* SparkKeys.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SparkKeys.swift; sourceTree = "<group>"; };
+		53EB16C82471BBD50054D68A /* FireKeys.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FireKeys.swift; sourceTree = "<group>"; };
 		53EB16C92471BBD50054D68A /* ActivityIndicator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityIndicator.swift; sourceTree = "<group>"; };
 		53EB16CA2471BBD60054D68A /* Profile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Profile.swift; sourceTree = "<group>"; };
 		53EB16CB2471BBD60054D68A /* Typealiases.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Typealiases.swift; sourceTree = "<group>"; };
 		53EB16D82471C28A0054D68A /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		53EB16DA2471F66A0054D68A /* ReasonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReasonView.swift; sourceTree = "<group>"; };
-		53EB16DC2471FE660054D68A /* HouseData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HouseData.swift; sourceTree = "<group>"; };
-		6BA254581662AEDEBF7C399A /* Pods_Shoo.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Shoo.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		8508412224277439BAC427FB /* Pods-Shoo.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Shoo.debug.xcconfig"; path = "Target Support Files/Pods-Shoo/Pods-Shoo.debug.xcconfig"; sourceTree = "<group>"; };
+		9F9C7F1ED6940993E4B38ACE /* Pods_Shoo.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Shoo.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		D6546FD8C1DDDF477EA0C54D /* Pods-Shoo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Shoo.release.xcconfig"; path = "Target Support Files/Pods-Shoo/Pods-Shoo.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -82,20 +90,28 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E539DD5D3A82D2A56E259595 /* Pods_Shoo.framework in Frameworks */,
+				119A826CA9E0D03C55D46C21 /* Pods_Shoo.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		08FD44192C22C5A9D8417A4B /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				9F9C7F1ED6940993E4B38ACE /* Pods_Shoo.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		13EF84A4246DACB30049CCD1 = {
 			isa = PBXGroup;
 			children = (
 				13EF84AF246DACB30049CCD1 /* Shoo */,
 				13EF84AE246DACB30049CCD1 /* Products */,
 				8E8BD6CC2FFB35C542E01025 /* Pods */,
-				A7F636ABD516EB7E0A324827 /* Frameworks */,
+				08FD44192C22C5A9D8417A4B /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -110,31 +126,32 @@
 		13EF84AF246DACB30049CCD1 /* Shoo */ = {
 			isa = PBXGroup;
 			children = (
-				53EB16D52471BC650054D68A /* UI Views */,
-				53EB16D42471BC2E0054D68A /* Help */,
-				53EB16D32471BC0C0054D68A /* Spark */,
 				5336251E2470A21800E0B2AD /* Shoo.entitlements */,
+				5398FA0A2474760D00467D67 /* SignInView.swift */,
 				53EB16C62471BBD50054D68A /* SignInWithAppleView.swift */,
 				53EB16B42471BBC60054D68A /* LaunchScreenView.swift */,
 				1346B9EF246F870400EECEC9 /* TimeSliderView.swift */,
 				13FE4B59246E32F800D15BE9 /* FreePeopleView.swift */,
 				13FE4B5F246E417100D15BE9 /* AddPersonView.swift */,
-				53EB16BA2471BBC60054D68A /* SignInView.swift */,
 				13EF84C4246DB13C0049CCD1 /* PersonView.swift */,
 				13EF84C6246DB1AB0049CCD1 /* StoplightView.swift */,
 				53EB16B12471B9F10054D68A /* HomeView.swift */,
-				53EB16DC2471FE660054D68A /* HouseData.swift */,
+				5398FA4E2474E7D500467D67 /* ProgressView.swift */,
 				53EB16C92471BBD50054D68A /* ActivityIndicator.swift */,
 				53EB16C52471BBD50054D68A /* ActivityIndicatorView.swift */,
 				53EB16CB2471BBD60054D68A /* Typealiases.swift */,
 				53EB16CA2471BBD60054D68A /* Profile.swift */,
 				53EB16C72471BBD50054D68A /* DocumentSerializable.swift */,
-				53EB16B92471BBC60054D68A /* Spark.swift */,
-				53EB16B32471BBC50054D68A /* SparkAuth.swift */,
-				53EB16B82471BBC60054D68A /* SparkError.swift */,
-				53EB16B62471BBC60054D68A /* SparkFirestore.swift */,
-				53EB16B72471BBC60054D68A /* SparkUI.swift */,
-				53EB16C82471BBD50054D68A /* SparkKeys.swift */,
+				5398FA4A2474E62B00467D67 /* EditCardView.swift */,
+				5398FA4C2474E63800467D67 /* BottomView.swift */,
+				53EB16B92471BBC60054D68A /* Fire.swift */,
+				53DDBA6724745D3200D07C60 /* Mate.swift */,
+				53DDBA652474566600D07C60 /* CreateJoinHouseView.swift */,
+				53EB16B32471BBC50054D68A /* FireAuth.swift */,
+				53EB16B82471BBC60054D68A /* FireError.swift */,
+				53EB16B62471BBC60054D68A /* FireFirestore.swift */,
+				53EB16B72471BBC60054D68A /* FireUI.swift */,
+				53EB16C82471BBD50054D68A /* FireKeys.swift */,
 				13EF84B0246DACB30049CCD1 /* AppDelegate.swift */,
 				13EF84B2246DACB30049CCD1 /* SceneDelegate.swift */,
 				13EF84B4246DACB30049CCD1 /* ContentView.swift */,
@@ -156,44 +173,13 @@
 			path = "Preview Content";
 			sourceTree = "<group>";
 		};
-		53EB16D32471BC0C0054D68A /* Spark */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			name = Spark;
-			path = ..;
-			sourceTree = "<group>";
-		};
-		53EB16D42471BC2E0054D68A /* Help */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Help;
-			sourceTree = "<group>";
-		};
-		53EB16D52471BC650054D68A /* UI Views */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			name = "UI Views";
-			path = ..;
-			sourceTree = "<group>";
-		};
 		8E8BD6CC2FFB35C542E01025 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				8508412224277439BAC427FB /* Pods-Shoo.debug.xcconfig */,
-				4EB87A76A42D2162D42F98D0 /* Pods-Shoo.release.xcconfig */,
+				19D61C28CE417EC4A67E5C38 /* Pods-Shoo.debug.xcconfig */,
+				D6546FD8C1DDDF477EA0C54D /* Pods-Shoo.release.xcconfig */,
 			);
 			path = Pods;
-			sourceTree = "<group>";
-		};
-		A7F636ABD516EB7E0A324827 /* Frameworks */ = {
-			isa = PBXGroup;
-			children = (
-				6BA254581662AEDEBF7C399A /* Pods_Shoo.framework */,
-			);
-			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -203,11 +189,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 13EF84C1246DACB90049CCD1 /* Build configuration list for PBXNativeTarget "Shoo" */;
 			buildPhases = (
-				9A0A5D7F713DE23C7FFCC8FE /* [CP] Check Pods Manifest.lock */,
+				132CE4A0DC165E32F8D326D8 /* [CP] Check Pods Manifest.lock */,
 				13EF84A9246DACB30049CCD1 /* Sources */,
 				13EF84AA246DACB30049CCD1 /* Frameworks */,
 				13EF84AB246DACB30049CCD1 /* Resources */,
-				D67A63FCE0FB55AA29967197 /* [CP] Embed Pods Frameworks */,
+				DE39288A46EC7B4902394FD5 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -266,7 +252,7 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		9A0A5D7F713DE23C7FFCC8FE /* [CP] Check Pods Manifest.lock */ = {
+		132CE4A0DC165E32F8D326D8 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -288,7 +274,7 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		D67A63FCE0FB55AA29967197 /* [CP] Embed Pods Frameworks */ = {
+		DE39288A46EC7B4902394FD5 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -312,31 +298,35 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				53EB16BD2471BBC60054D68A /* SparkError.swift in Sources */,
+				53EB16BD2471BBC60054D68A /* FireError.swift in Sources */,
 				53EB16CF2471BBD60054D68A /* Profile.swift in Sources */,
+				53DDBA6824745D3200D07C60 /* Mate.swift in Sources */,
+				5398FA4B2474E62B00467D67 /* EditCardView.swift in Sources */,
 				53EB16CC2471BBD60054D68A /* DocumentSerializable.swift in Sources */,
 				13EF84C7246DB1AB0049CCD1 /* StoplightView.swift in Sources */,
+				5398FA4F2474E7D500467D67 /* ProgressView.swift in Sources */,
 				53EB16DB2471F66A0054D68A /* ReasonView.swift in Sources */,
 				13EF84B1246DACB30049CCD1 /* AppDelegate.swift in Sources */,
-				53EB16BC2471BBC60054D68A /* SparkUI.swift in Sources */,
-				53EB16BB2471BBC60054D68A /* Spark.swift in Sources */,
-				53EB16C02471BBC60054D68A /* SignInView.swift in Sources */,
+				53EB16BC2471BBC60054D68A /* FireUI.swift in Sources */,
+				53EB16BB2471BBC60054D68A /* Fire.swift in Sources */,
 				13EF84B3246DACB30049CCD1 /* SceneDelegate.swift in Sources */,
+				5398FA4D2474E63800467D67 /* BottomView.swift in Sources */,
 				53EB16BF2471BBC60054D68A /* LaunchScreenView.swift in Sources */,
 				53EB16B22471B9F10054D68A /* HomeView.swift in Sources */,
+				53DDBA662474566600D07C60 /* CreateJoinHouseView.swift in Sources */,
 				13EF84C5246DB13C0049CCD1 /* PersonView.swift in Sources */,
 				1346B9F0246F870400EECEC9 /* TimeSliderView.swift in Sources */,
 				13EF84B5246DACB30049CCD1 /* ContentView.swift in Sources */,
 				53EB16D22471BBD60054D68A /* ActivityIndicator.swift in Sources */,
+				5398FA0B2474760E00467D67 /* SignInView.swift in Sources */,
 				53EB16D02471BBD60054D68A /* SignInWithAppleView.swift in Sources */,
-				53EB16DD2471FE660054D68A /* HouseData.swift in Sources */,
-				53EB16D12471BBD60054D68A /* SparkKeys.swift in Sources */,
+				53EB16D12471BBD60054D68A /* FireKeys.swift in Sources */,
 				13FE4B5A246E32F800D15BE9 /* FreePeopleView.swift in Sources */,
 				53EB16CE2471BBD60054D68A /* ActivityIndicatorView.swift in Sources */,
-				53EB16C12471BBC60054D68A /* SparkFirestore.swift in Sources */,
+				53EB16C12471BBC60054D68A /* FireFirestore.swift in Sources */,
 				53EB16CD2471BBD60054D68A /* Typealiases.swift in Sources */,
 				13FE4B60246E417100D15BE9 /* AddPersonView.swift in Sources */,
-				53EB16BE2471BBC60054D68A /* SparkAuth.swift in Sources */,
+				53EB16BE2471BBC60054D68A /* FireAuth.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -470,11 +460,12 @@
 		};
 		13EF84C2246DACB90049CCD1 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 8508412224277439BAC427FB /* Pods-Shoo.debug.xcconfig */;
+			baseConfigurationReference = 19D61C28CE417EC4A67E5C38 /* Pods-Shoo.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = Shoo/Shoo.entitlements;
-				CODE_SIGN_STYLE = Automatic;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_STYLE = Manual;
 				DEVELOPMENT_ASSET_PATHS = "\"Shoo/Preview Content\"";
 				DEVELOPMENT_TEAM = 97J2HJ2DUM;
 				ENABLE_PREVIEWS = YES;
@@ -487,6 +478,7 @@
 				LLVM_LTO = NO;
 				PRODUCT_BUNDLE_IDENTIFIER = me.alexanderschiff.ShooApp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = DevShooProfile;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -494,11 +486,12 @@
 		};
 		13EF84C3246DACB90049CCD1 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 4EB87A76A42D2162D42F98D0 /* Pods-Shoo.release.xcconfig */;
+			baseConfigurationReference = D6546FD8C1DDDF477EA0C54D /* Pods-Shoo.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = Shoo/Shoo.entitlements;
-				CODE_SIGN_STYLE = Automatic;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_STYLE = Manual;
 				DEVELOPMENT_ASSET_PATHS = "\"Shoo/Preview Content\"";
 				DEVELOPMENT_TEAM = 97J2HJ2DUM;
 				ENABLE_PREVIEWS = YES;
@@ -511,6 +504,7 @@
 				LLVM_LTO = NO;
 				PRODUCT_BUNDLE_IDENTIFIER = me.alexanderschiff.ShooApp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = DevShooProfile;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};

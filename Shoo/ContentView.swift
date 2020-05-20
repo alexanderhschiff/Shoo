@@ -12,18 +12,18 @@ import SwiftUI
 
 struct ContentView: View {
     
-    @EnvironmentObject var spark: Spark
+    @EnvironmentObject var fire: Fire
     var body: some View {
         ZStack {
-            if spark.isUserAuthenticated == .undefined {
+            if fire.isUserAuthenticated == .undefined {
                 LaunchScreenView()
-            } else if spark.isUserAuthenticated == .signedOut {
+            } else if fire.isUserAuthenticated == .signedOut {
                 SignInView()
-            } else if spark.isUserAuthenticated == .signedIn {
-                HomeView().environmentObject(HouseData(userID: self.spark.profile.uid))
+            } else if fire.isUserAuthenticated == .signedIn {
+                HomeView().environmentObject(fire)
             }
         }.onAppear{
-            self.spark.configureFirebaseStateDidChange()
+            self.fire.configureFirebaseStateDidChange()
         }
     }
 }

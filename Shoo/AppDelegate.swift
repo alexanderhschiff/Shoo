@@ -8,6 +8,9 @@
 
 import UIKit
 import Firebase
+import FirebaseMessaging
+import UserNotifications
+
 
 
 @UIApplicationMain
@@ -18,9 +21,43 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 	func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
 		// Override point for customization after application launch.
         FirebaseApp.configure()
+        
 		return true
 	}
-
+    /*
+    //MARK: - UIApplicationDelegate Methods
+           @available(iOS 10.0, *)
+           func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification, withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
+               let userInfo = notification.request.content.userInfo
+               
+               
+               // Print message ID.
+               //    if let messageID = userInfo[gcmMessageIDKey]
+               //    {
+               //      print("Message ID: \(messageID)")
+               //    }
+               
+               // Print full message.
+               print(userInfo)
+               
+               //    let code = String.getString(message: userInfo["code"])
+               guard let aps = userInfo["aps"] as? Dictionary<String, Any> else { return }
+               guard let alert = aps["alert"] as? String else { return }
+               //    guard let body = alert["body"] as? String else { return }
+               
+               completionHandler([])
+           }
+           
+           // Handle notification messages after display notification is tapped by the user.
+           
+           @available(iOS 10.0, *)
+           func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse, withCompletionHandler completionHandler: @escaping () -> Void) {
+               let userInfo = response.notification.request.content.userInfo
+               
+               print(userInfo)
+               completionHandler()
+           }
+*/
 	// MARK: UISceneSession Lifecycle
 
 	func application(_ application: UIApplication, configurationForConnecting connectingSceneSession: UISceneSession, options: UIScene.ConnectionOptions) -> UISceneConfiguration {

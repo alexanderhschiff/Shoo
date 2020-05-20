@@ -1,9 +1,9 @@
 //
-//  SparkUI.swift
-//  SwiftUISignInWithAppleAndFirebaseDemo
+//  FireUI.swift
+//  Shoo
 //
-//  Created by Alex Nagy on 08/12/2019.
-//  Copyright © 2019 Alex Nagy. All rights reserved.
+//  Created by Benjamin Schiff on 5/17/20.
+//  Copyright © 2020 Alexander Schiff. All rights reserved.
 //
 
 import Foundation
@@ -22,7 +22,7 @@ struct ActivityIndicatorInfo {
     var message: String
 }
 
-struct SparkUIDefault {
+struct FireUIDefault {
     static let alertInfo = AlertInfo(isPresented: false, title: "", message: "", actionText: "", actionTag: 0)
     static let activityIndicatorInfo = ActivityIndicatorInfo(isPresented: false, message: "Working...")
 }

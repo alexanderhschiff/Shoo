@@ -1,14 +1,14 @@
 //
-//  SparkError.swift
-//  SwiftUISignInWithAppleAndFirebaseDemo
+//  FireAuthError.swift
+//  Shoo
 //
-//  Created by Alex Nagy on 08/12/2019.
-//  Copyright © 2019 Alex Nagy. All rights reserved.
+//  Created by Benjamin Schiff on 5/17/20.
+//  Copyright © 2020 Alexander Schiff. All rights reserved.
 //
 
 import Foundation
 
-struct SparkAuthError: Error {
+struct FireAuthError: Error {
     static let noAuthDataResult = NSError(domain: "No Auth Data Result", code: 400, userInfo: nil)
     static let noCurrentUser = NSError(domain: "No Current User", code: 401, userInfo: nil)
     static let noDocumentSnapshot = NSError(domain: "No Document Snapshot", code: 402, userInfo: nil)
