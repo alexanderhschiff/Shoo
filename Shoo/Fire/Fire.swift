@@ -23,11 +23,15 @@ class HouseRepository {
     private var houseDB = Firestore.firestore().collection("Homes")
     private var mateDB = Firestore.firestore().collection("profiles")
     
-    func startListener(Fid: String, result: @escaping (Result<[Mate], Error>) -> Void) {
+    func startListener(Fid: String, userID: String, result: @escaping (Result<[Mate], Error>) -> Void) {
         stopListener()
         var mateIDs: [String] = []
+        var fid = Fid
+        if fid == "" {
+            fid = createHouse(uid: userID)
+        }
         hListener = houseDB
-            .document(Fid)
+            .document(fid)
             .addSnapshotListener { (snapshot, error) in
                 if let error = error {
                     result(.failure(error))
@@ -39,7 +43,7 @@ class HouseRepository {
                     return
                 }
                 dump(documents.data())
-                let houses = documents.get("mates") as? [String] ?? ["noMates"]
+                let houses = documents.get("mates") as? [String] ?? []
                 mateIDs = houses
 
                 if(mateIDs != []){
@@ -67,6 +71,12 @@ class HouseRepository {
         mateDB.document(mate.id).setData(mate.toJSONSnapshot)
     }
     
+    func updateHouse(_ prof: Profile, _ oldID: String){
+        mateDB.document(prof.uid).updateData(["house": prof.house])
+        houseDB.document(prof.house).updateData(["mates": FieldValue.arrayUnion([prof.uid])])
+        houseDB.document(oldID).updateData(["mates": FieldValue.arrayRemove([prof.uid])])
+    }
+    
     func updateMate(_ mate: Mate) {
         mateDB.document(mate.id).updateData(mate.toJSONSnapshot)
     }
@@ -85,12 +95,32 @@ class HouseRepository {
     deinit {
         stopListener()
     }
+    
+    func createHouse(uid: String) -> String{
+        //xvar houseID = UserDefaults.standard.string(forKey: "houseId") ?? ""
+        //create a new house and add myself
+        var ref: DocumentReference? = nil
+        let db = Firestore.firestore()
+        ref = db.collection("Homes").addDocument(data: [
+            "name": "house",
+            "Mates": [uid]
+        ]){ err in
+            if let err = err {
+                print("Error adding document: \(err)")
+            } else {
+                print("Document added with ID: \(ref!.documentID)")
+            }
+        }
+        dump(ref?.documentID)
+        //db.collection("profiles").document(uid).setValue(houseID, forKey: "house")
+        return ref?.documentID ?? ""
+    }
 }
 class Fire: ObservableObject {
     
     @Published var isUserAuthenticated: FireAuthState = .undefined
-    @Published var profile: Profile = Profile(uid: "", name: "", reason: "", status: 0, end: Date(), house: "testHouse")
-    @Published var houseID: String = UserDefaults.standard.string(forKey: "houseId") ?? "noHouse"
+    @Published var profile: Profile = Profile(uid: "", name: "", reason: "", status: 0, end: Date(), start: Date(), house: "")
+    //@Published var houseID: String = UserDefaults.standard.string(forKey: "houseId") ?? ""
 
     
     var mateList: [String] = []
@@ -127,8 +157,8 @@ class Fire: ObservableObject {
     
     func startListener() {
         self.error = nil
-        
-        repository.startListener(Fid: self.profile.house, result: {[weak self] (result) in
+        dump(self.profile)
+        repository.startListener(Fid: self.profile.house, userID: self.profile.uid, result: {[weak self] (result) in
             guard let `self` = self else { return }
             switch result {
             case .success(let items):
@@ -153,6 +183,11 @@ class Fire: ObservableObject {
         repository.removeMate(mate)
     }
     
+    func updateHouse(_ prof: Profile, _ oldID: String){
+        repository.updateHouse(prof, oldID)
+        self.startListener()
+    }
+    
     func stopListener() {
         repository.stopListener()
     }
@@ -160,23 +195,8 @@ class Fire: ObservableObject {
     func signOut(){
         self.isUserAuthenticated = .signedOut
     }
-    private func createHouse(uid: String) {
-        //create a new house and add myself
-        var ref: DocumentReference? = nil
-        let db = Firestore.firestore()
-        ref = db.collection("Houses").addDocument(data: [
-            "name": "house",
-            "Mates": [uid]
-        ]){ err in
-            if let err = err {
-                print("Error adding document: \(err)")
-            } else {
-                print("Document added with ID: \(ref!.documentID)")
-            }
-        }
-        houseID = ref?.documentID ?? ""
-        db.collection("profiles").document(uid).setValue(houseID, forKey: "house")
-    }
+    
+    
 }
 
 
@@ -186,49 +206,3 @@ struct Fire_Previews: PreviewProvider {
         /*@START_MENU_TOKEN@*/Text("Hello, World!")/*@END_MENU_TOKEN@*/
     }
 }
-
-/*
- public func getHouse(houseID: String, userID: String){
- self.houseID = houseID
- 
- if (houseID != ""){
- db.collection("Houses").document(houseID)
- .addSnapshotListener { documentSnapshot, error in
- guard let document = documentSnapshot else {
- print("Error fetching document: \(error!)")
- return
- }
- guard let data = document.data() else {
- self.createHouse(uid: userID)
- print("Document data was empty.")
- return
- }
- self.mateList = document.get("Mates") as! [String]
- dump(self.mateList)
- }
- self.mateList.append("test1")
- if(self.mateList != []){
- db.collection("profiles").whereField("id", in: mateList)
- .addSnapshotListener { snap, err in
- if err != nil{
- self.createHouse(uid: userID)
- return
- }
- for i in snap!.documentChanges{
- 
- let id = i.document.documentID
- let name = i.document.get("name") as! String
- let reason = i.document.get("reason") as! String
- let status = i.document.get("status") as! Int
- let end = i.document.get("end") as? Date
- print(name)
- self.mates.append(Mate(id: id, name: name, reason: reason, status: status, end: end))
- }
- }
- }
- }
- //no house exists - create house
- else {
- createHouse(uid: userID)
- }
- */

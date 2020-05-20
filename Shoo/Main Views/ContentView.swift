@@ -20,7 +20,11 @@ struct ContentView: View {
             } else if fire.isUserAuthenticated == .signedOut {
                 SignInView()
             } else if fire.isUserAuthenticated == .signedIn {
-                HomeView().environmentObject(fire)
+                if(fire.profile.uid == ""){
+                    LaunchScreenView()
+                }else{
+                    HomeView().environmentObject(fire)
+                }
             }
         }.onAppear{
             self.fire.configureFirebaseStateDidChange()

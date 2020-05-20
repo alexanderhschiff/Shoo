@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 51;
+	objectVersion = 52;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -24,6 +24,7 @@
 		5398FA522474F2F500467D67 /* EditHomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5398FA512474F2F500467D67 /* EditHomeView.swift */; };
 		5398FA552474F33200467D67 /* SignInView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5398FA542474F33200467D67 /* SignInView.swift */; };
 		5398FA5C2474F47E00467D67 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 5398FA5B2474F47E00467D67 /* Default-568h@2x.png */; };
+		5398FA5F247502F700467D67 /* CodeScanner in Frameworks */ = {isa = PBXBuildFile; productRef = 5398FA5E247502F700467D67 /* CodeScanner */; };
 		53DDBA6824745D3200D07C60 /* Mate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53DDBA6724745D3200D07C60 /* Mate.swift */; };
 		53EB16B22471B9F10054D68A /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53EB16B12471B9F10054D68A /* HomeView.swift */; };
 		53EB16BB2471BBC60054D68A /* Fire.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53EB16B92471BBC60054D68A /* Fire.swift */; };
@@ -90,6 +91,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5398FA5F247502F700467D67 /* CodeScanner in Frameworks */,
 				119A826CA9E0D03C55D46C21 /* Pods_Shoo.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -154,8 +156,6 @@
 				53EB16B12471B9F10054D68A /* HomeView.swift */,
 				5398FA542474F33200467D67 /* SignInView.swift */,
 				53EB16B42471BBC60054D68A /* LaunchScreenView.swift */,
-				5398FA512474F2F500467D67 /* EditHomeView.swift */,
-				5398FA4A2474E62B00467D67 /* EditCardView.swift */,
 			);
 			path = "Main Views";
 			sourceTree = "<group>";
@@ -163,6 +163,8 @@
 		5398FA532474F30900467D67 /* Sheet Views */ = {
 			isa = PBXGroup;
 			children = (
+				5398FA4A2474E62B00467D67 /* EditCardView.swift */,
+				5398FA512474F2F500467D67 /* EditHomeView.swift */,
 			);
 			name = "Sheet Views";
 			path = ..;
@@ -250,6 +252,9 @@
 			dependencies = (
 			);
 			name = Shoo;
+			packageProductDependencies = (
+				5398FA5E247502F700467D67 /* CodeScanner */,
+			);
 			productName = Shoo;
 			productReference = 13EF84AD246DACB30049CCD1 /* Shoo.app */;
 			productType = "com.apple.product-type.application";
@@ -278,6 +283,9 @@
 				Base,
 			);
 			mainGroup = 13EF84A4246DACB30049CCD1;
+			packageReferences = (
+				5398FA5D247502F700467D67 /* XCRemoteSwiftPackageReference "CodeScanner" */,
+			);
 			productRefGroup = 13EF84AE246DACB30049CCD1 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -582,6 +590,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		5398FA5D247502F700467D67 /* XCRemoteSwiftPackageReference "CodeScanner" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/twostraws/CodeScanner";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.0.6;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		5398FA5E247502F700467D67 /* CodeScanner */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 5398FA5D247502F700467D67 /* XCRemoteSwiftPackageReference "CodeScanner" */;
+			productName = CodeScanner;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 13EF84A5246DACB30049CCD1 /* Project object */;
 }
