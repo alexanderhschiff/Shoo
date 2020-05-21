@@ -167,7 +167,21 @@ struct EditCardView: View {
                     }
                     TimeSliderView(time: self.$time)
                         .frame(height: 60)
-                        .offset(y: 5)
+						.gesture(
+							DragGesture()
+								.onChanged{ gesture in
+									let time = Int(gesture.location.x)/(Int(UIScreen.main.bounds.width)/11)
+									if time > 11{
+										self.time = 11
+									}
+									else if time < 0{
+										self.time = 0
+									}
+									else{
+										self.time = time
+									}
+							}
+						)
                 }
             }
             .padding()
@@ -198,6 +212,6 @@ struct EditCardView: View {
 
 struct EditCardView_Previews: PreviewProvider {
     static var previews: some View {
-        EditCardView()
+		EditCardView().environmentObject(Fire())
     }
 }

@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		119A826CA9E0D03C55D46C21 /* Pods_Shoo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9F9C7F1ED6940993E4B38ACE /* Pods_Shoo.framework */; };
 		1346B9F0246F870400EECEC9 /* TimeSliderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1346B9EF246F870400EECEC9 /* TimeSliderView.swift */; };
+		1349BE4B2476E77E00F5704A /* Test_Delete.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1349BE4A2476E77E00F5704A /* Test_Delete.swift */; };
 		13EF84B1246DACB30049CCD1 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13EF84B0246DACB30049CCD1 /* AppDelegate.swift */; };
 		13EF84B3246DACB30049CCD1 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13EF84B2246DACB30049CCD1 /* SceneDelegate.swift */; };
 		13EF84B5246DACB30049CCD1 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13EF84B4246DACB30049CCD1 /* ContentView.swift */; };
@@ -48,6 +49,7 @@
 
 /* Begin PBXFileReference section */
 		1346B9EF246F870400EECEC9 /* TimeSliderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeSliderView.swift; sourceTree = "<group>"; };
+		1349BE4A2476E77E00F5704A /* Test_Delete.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Test_Delete.swift; sourceTree = "<group>"; };
 		13EF84AD246DACB30049CCD1 /* Shoo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Shoo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		13EF84B0246DACB30049CCD1 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		13EF84B2246DACB30049CCD1 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -160,6 +162,7 @@
 				53EB16B12471B9F10054D68A /* HomeView.swift */,
 				5398FA542474F33200467D67 /* SignInView.swift */,
 				53EB16B42471BBC60054D68A /* LaunchScreenView.swift */,
+				1349BE4A2476E77E00F5704A /* Test_Delete.swift */,
 			);
 			path = "Main Views";
 			sourceTree = "<group>";
@@ -378,6 +381,7 @@
 				53EB16BB2471BBC60054D68A /* Fire.swift in Sources */,
 				13EF84B3246DACB30049CCD1 /* SceneDelegate.swift in Sources */,
 				5398FA4D2474E63800467D67 /* BottomView.swift in Sources */,
+				1349BE4B2476E77E00F5704A /* Test_Delete.swift in Sources */,
 				53EB16BF2471BBC60054D68A /* LaunchScreenView.swift in Sources */,
 				53EB16B22471B9F10054D68A /* HomeView.swift in Sources */,
 				13EF84C5246DB13C0049CCD1 /* PersonView.swift in Sources */,

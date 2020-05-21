@@ -35,8 +35,6 @@ struct BottomView: View {
     @EnvironmentObject var fire: Fire
     let bottomSafeArea: CGFloat
     
-    
-    
     @Binding var more: Bool
     @Binding var eType: presentSheet
     @State private var press = false
@@ -95,12 +93,14 @@ struct BottomView: View {
                     .padding()
                     .background(Color(UIColor.systemBackground))
                     .clipShape(RoundedRectangle(cornerRadius: 20, style: .continuous))
+					.shadow(radius: 3, y: 2)
                 //.foregroundColor(.primary)
                 Spacer()
                 Image(systemName: "minus")
                     .padding()
                     .background(Color(UIColor.systemBackground))
                     .clipShape(RoundedRectangle(cornerRadius: 20, style: .continuous))
+					.shadow(radius: 3, y: 2)
                 //.foregroundColor(.primary)
             }
             .font(.headline)

@@ -36,8 +36,9 @@ struct HomeView: View {
                                         self.showSheet = true
                                 }
                             }
-                            FreePeopleView(freePeople: self.fire.mates.count)
+							FreePeopleView(freePeople: self.fire.mates.count)
                                 .font(.headline)
+								.foregroundColor(.secondary)
                         }
                         .padding([.horizontal, .bottom])
                         .padding(.top, geo.safeAreaInsets.top)
@@ -62,7 +63,7 @@ struct HomeView: View {
                     BottomView(bottomSafeArea: geo.safeAreaInsets.bottom, more: self.$showSheet, eType: self.$sheetType).environmentObject(self.fire)
                 }
             }
-            .edgesIgnoringSafeArea(.all)
+			.edgesIgnoringSafeArea(.all)
             .onAppear(perform: {
                 self.fire.startListener()
             })
@@ -70,6 +71,7 @@ struct HomeView: View {
                     self.fire.stopListener()
                 })
         }
+		.background(Color(UIColor.secondarySystemBackground))
         .sheet(isPresented: self.$showSheet){
             if(self.sheetType == .more){
                 EditCardView().environmentObject(self.fire)
@@ -85,6 +87,6 @@ struct HomeView: View {
 
 struct HomeView_Previews: PreviewProvider {
     static var previews: some View {
-        HomeView()
+        HomeView().environmentObject(Fire())
     }
 }
