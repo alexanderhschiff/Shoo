@@ -8,16 +8,42 @@
 
 import SwiftUI
 
-let blueGradient = Gradient(colors: [ColorPalette.blue1, ColorPalette.blue2])
-
 struct LaunchScreenView: View {
     var body: some View {
-        ZStack {
-        LinearGradient(gradient: blueGradient,startPoint: .topLeading, endPoint: .bottomTrailing)
-        Text("Loading...")
-            .foregroundColor(.yellow)
-            .font(.largeTitle)
-        }.edgesIgnoringSafeArea(.all)
+        GeometryReader { geo in
+            ZStack{
+                VStack(alignment: .leading){
+                    VStack(alignment: .leading, spacing: 0){
+                        HStack{
+                            Text("Home")
+                                .fontWeight(.heavy)
+                                .font(.largeTitle)
+                            Spacer()
+                            Image(systemName: "person.badge.plus.fill")
+                                .font(.title)
+                        }
+                        Text("")
+                            .font(.headline)
+                    }
+                    .padding(.horizontal)
+                    .padding(.top, geo.safeAreaInsets.top)
+                    .background(Blur(style: .systemChromeMaterial))
+                    //.edgesIgnoringSafeArea(.top)
+                    
+                    Spacer()
+                }
+                
+                VStack(spacing: 0){
+                    Spacer()
+                    BottomView(more: .constant(false), eType: .constant(.more))
+                    Rectangle()
+                        .frame(width: geo.size.width, height: geo.safeAreaInsets.bottom)
+                        .foregroundColor(Color.white.opacity(0))
+                        .background(Blur(style: .systemChromeMaterial))
+                }
+                    
+            }.edgesIgnoringSafeArea(.all)
+        }
     }
 }
 
@@ -25,13 +51,4 @@ struct LaunchScreenView_Previews: PreviewProvider {
     static var previews: some View {
         LaunchScreenView()
     }
-}
-
-import UIKit
-
-enum ColorPalette {
-
-    static let blue1 =  Color(UIColor(red:0.067, green: 0.337, blue: 1.000, alpha: 1.000))
-
-    static let blue2 =  Color(UIColor(red:0.000, green: 0.047, blue: 0.710, alpha: 1.000))
 }

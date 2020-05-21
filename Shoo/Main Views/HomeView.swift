@@ -23,45 +23,54 @@ struct HomeView: View {
             ZStack{
                 VStack(alignment: .leading){
                     VStack(alignment: .leading, spacing: 0){
-                        HStack{
-                            Text("Home")
-                                .fontWeight(.heavy)
-                                .font(.largeTitle)
-                            Spacer()
-                            Image(systemName: "person.badge.plus.fill")
-                                .font(.title)
-                                .onTapGesture {
-                                    self.sheetType = .editHouse
-                                    self.showSheet = true
+                        VStack(alignment: .leading, spacing: 0){
+                            HStack{
+                                Text("Home")
+                                    .fontWeight(.heavy)
+                                    .font(.largeTitle)
+                                Spacer()
+                                Image(systemName: "person.badge.plus.fill")
+                                    .font(.title)
+                                    .onTapGesture {
+                                        self.sheetType = .editHouse
+                                        self.showSheet = true
+                                }
                             }
+                            FreePeopleView(freePeople: self.fire.mates.count)
+                                .font(.headline)
                         }
-                        FreePeopleView(freePeople: self.fire.mates.count)
-                            .font(.headline)
+                        .padding(.horizontal)
+                        .padding(.top, geo.safeAreaInsets.top)
+                        .background(Blur(style: .systemChromeMaterial))
+                        
+                        Spacer()
                     }
-                    .padding([.horizontal, .top])
                     
                     ScrollView(.vertical, showsIndicators: false){
                         VStack{
                             ForEach(self.fire.mates) { mate in
                                 PersonView(name: mate.name, status: mate.status, reason: mate.reason, endTime: mate.end)
                             }
-                            /*ForEach(0..<8){ mate in
-                             PersonView(name: "Alexander", status: mate%3, reason: "👨‍💻 Working", endTime: Date().addingTimeInterval(TimeInterval(mate*1300)))
-                             }*/
                         }
-                        
                     }
-                    
                 }
-            }.onAppear(perform: {
+                
+                VStack(spacing: 0){
+                    Spacer()
+                    BottomView(more: self.$showSheet, eType: self.$sheetType)
+                    Rectangle()
+                        .frame(width: geo.size.width, height: geo.safeAreaInsets.bottom)
+                        .foregroundColor(Color.white.opacity(0))
+                        .background(Blur(style: .systemChromeMaterial))
+                }
+            }
+            .edgesIgnoringSafeArea(.all)
+            .onAppear(perform: {
                 self.fire.startListener()
             })
                 .onDisappear(perform: {
                     self.fire.stopListener()
                 })
-            
-            BottomView(more: self.$showSheet, eType: self.$sheetType)
-                .position(x: UIScreen.main.bounds.width/2, y: UIScreen.main.bounds.height - 120)
         }.sheet(isPresented: self.$showSheet){
             if(self.sheetType == .more){
                 EditCardView()

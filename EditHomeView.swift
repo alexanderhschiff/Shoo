@@ -27,9 +27,11 @@ struct EditHomeView: View {
             
             dump(details)
             let newID = details[0]
+            if fire.testHouse(newID) {
             let oldID = fire.profile.house
             fire.profile.house = newID
             fire.updateHouse(fire.profile, oldID)
+            }
         case .failure(let error):
             print("Scanning failed \(error)")
         }

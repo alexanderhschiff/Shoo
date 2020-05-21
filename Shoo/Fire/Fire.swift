@@ -45,26 +45,57 @@ class HouseRepository {
                 dump(documents.data())
                 let houses = documents.get("mates") as? [String] ?? []
                 mateIDs = houses
-
+                
                 if(mateIDs != []){
-                self.mListener = self.mateDB
-                    .whereField("uid", in: mateIDs)
-                    .addSnapshotListener { (snapshot, error) in
-                        if let error = error {
-                            result(.failure(error))
-                            return
-                        }
-                        
-                        guard let documents = snapshot?.documents else {
-                            result(.failure(NSError(domain: "", code: 0, userInfo: [NSLocalizedDescriptionKey: "Snapshot is empty"])))
-                            return
-                        }
-                        
-                        let mates = documents.map { Mate(document: $0) }
-                        result(.success(mates))
-                }
+                    self.mListener = self.mateDB
+                        .whereField("uid", in: mateIDs)
+                        .addSnapshotListener { (snapshot, error) in
+                            if let error = error {
+                                result(.failure(error))
+                                return
+                            }
+                            
+                            guard let documents = snapshot?.documents else {
+                                result(.failure(NSError(domain: "", code: 0, userInfo: [NSLocalizedDescriptionKey: "Snapshot is empty"])))
+                                return
+                            }
+                            
+                            let mates = documents.map { Mate(document: $0) }
+                            result(.success(mates))
+                    }
                 }
         }
+    }
+    
+    func createHouse(uid: String) -> String{
+        //xvar houseID = UserDefaults.standard.string(forKey: "houseId") ?? ""
+        //create a new house and add myself
+        var ref: DocumentReference? = nil
+        ref = houseDB.addDocument(data: [
+            "name": "house",
+            "Mates": [uid]
+        ]){ err in
+            if let err = err {
+                print("Error adding document: \(err)")
+            } else {
+                print("Document added with ID: \(ref!.documentID)")
+            }
+        }
+        dump(ref?.documentID)
+        //db.collection("profiles").document(uid).setValue(houseID, forKey: "house")
+        return ref?.documentID ?? ""
+    }
+    
+    func checkHouseExists(_ houseId: String) -> Bool{
+        let docRef = houseDB.document(houseId)
+        var out = false
+        docRef.getDocument { (document, error) in
+            if let document = document {
+                out = document.exists
+            }
+            
+        }
+        return out
     }
     
     func addMate(_ mate: Mate) {
@@ -96,32 +127,32 @@ class HouseRepository {
         stopListener()
     }
     
-    func createHouse(uid: String) -> String{
-        //xvar houseID = UserDefaults.standard.string(forKey: "houseId") ?? ""
-        //create a new house and add myself
-        var ref: DocumentReference? = nil
-        let db = Firestore.firestore()
-        ref = db.collection("Homes").addDocument(data: [
-            "name": "house",
-            "Mates": [uid]
-        ]){ err in
-            if let err = err {
-                print("Error adding document: \(err)")
-            } else {
-                print("Document added with ID: \(ref!.documentID)")
-            }
+    func qUpdateStatus(_ statusInt: Int, _ profile: Profile){
+        var prof = profile
+        prof.end = Date().addingTimeInterval(86400)
+        prof.start = Date()
+        switch statusInt {
+        case 1:
+            prof.status = 1
+            prof.reason = "Quiet"
+        case 2:
+            prof.status = 2
+            prof.reason = "Shoo"
+        default:
+            prof.status = 0
+            prof.reason = "Free"
         }
-        dump(ref?.documentID)
-        //db.collection("profiles").document(uid).setValue(houseID, forKey: "house")
-        return ref?.documentID ?? ""
+        mateDB.document(prof.uid).updateData(["reason": prof.reason,"status": prof.status, "end": prof.end, "start": prof.start])
     }
+    
+    
 }
 class Fire: ObservableObject {
     
     @Published var isUserAuthenticated: FireAuthState = .undefined
     @Published var profile: Profile = Profile(uid: "", name: "", reason: "", status: 0, end: Date(), start: Date(), house: "")
     //@Published var houseID: String = UserDefaults.standard.string(forKey: "houseId") ?? ""
-
+    
     
     var mateList: [String] = []
     var authStateDidChangeListenerHandle: AuthStateDidChangeListenerHandle?
@@ -170,6 +201,10 @@ class Fire: ObservableObject {
         } )
     }
     
+    func quickUpdateStatus(statInt: Int, profile: Profile) {
+        repository.qUpdateStatus(statInt, profile)
+    }
+    
     func addMate(_ mate: Mate) {
         repository.addMate(mate)
     }
@@ -196,13 +231,9 @@ class Fire: ObservableObject {
         self.isUserAuthenticated = .signedOut
     }
     
-    
-}
-
-
-
-struct Fire_Previews: PreviewProvider {
-    static var previews: some View {
-        /*@START_MENU_TOKEN@*/Text("Hello, World!")/*@END_MENU_TOKEN@*/
+    func testHouse(_ houseId: String) -> Bool{
+        return repository.checkHouseExists(houseId)
     }
+    
+    
 }

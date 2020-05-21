@@ -10,13 +10,13 @@ import Foundation
 
 struct Profile: Identifiable {
     
-    let id = UUID()
-    let uid: String
-    let name: String
-    let reason: String
-    let status: Int
-    let end: Date
-    let start: Date
+    var id = UUID()
+    var uid: String
+    var name: String
+    var reason: String
+    var status: Int
+    var end: Date
+    var start: Date
     var house: String
 }
 
@@ -29,7 +29,7 @@ extension Profile: DocumentSerializable {
         let status = documentData[FireKeys.Profile.status] as? Int ?? 0
         let end = documentData[FireKeys.Profile.end] as? Date ?? Date()
         let start = documentData[FireKeys.Profile.end] as? Date ?? Date()
-        let house = documentData[FireKeys.Profile.house] as? String ?? "testHouse"
+        let house = documentData[FireKeys.Profile.house] as? String ?? ""
         
         self.init(uid: uid, name: name, reason: reason, status: status, end: end, start: start, house: house)
     }

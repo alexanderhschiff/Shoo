@@ -86,10 +86,9 @@ struct PersonView: View {
             }
             .padding()
         }
-        .cornerRadius(20)
-            .overlay(RoundedRectangle(cornerRadius: 20).stroke(color, lineWidth: 4))
+        .clipShape(RoundedRectangle(cornerRadius: 20, style: .continuous))
+        .overlay(RoundedRectangle(cornerRadius: 20, style: .continuous).stroke(color, lineWidth: 2))
         .padding()
-        
         .frame(width: UIScreen.main.bounds.width, height: 120)
         .shadow(radius: 5, y: 4)
     }
