@@ -20,8 +20,11 @@ struct Blur: UIViewRepresentable {
 
 struct BottomView: View {
     
+    let bottomSafeArea: CGFloat
+    
     @Binding var more: Bool
     @Binding var eType: presentSheet
+    @State private var press = false
     
     var body: some View {
         VStack(spacing: 0){
@@ -37,11 +40,15 @@ struct BottomView: View {
             }
             .padding(.horizontal)
             .frame(width: UIScreen.main.bounds.width)
-            .background(Blur(style: .systemMaterial))
+            .background(press ? Blur(style: .systemUltraThinMaterial) : Blur(style: .prominent))
             .onTapGesture {
                 self.more = true
                 self.eType = .more
             }
+            .onLongPressGesture {
+                 self.press = true
+            }
+            
             
             HStack{
                 Text("Free")
@@ -49,9 +56,11 @@ struct BottomView: View {
                 Spacer()
                 Text("Quiet")
                     .statusButtonStyle(color: Color.yellow)
+                    .shadow(radius: 0)
                 Spacer()
                 Text("Shoo")
                     .statusButtonStyle(color: Color.red)
+                    .shadow(radius: 0)
                 Spacer()
                 Image(systemName: "plus")
                     .padding()
@@ -66,10 +75,10 @@ struct BottomView: View {
                     .foregroundColor(.primary)
             }
             .font(.headline)
-            .padding([.horizontal, .top])
-                //.padding(.bottom, 20)
-                .frame(width: UIScreen.main.bounds.width)
-                .background(Blur(style: .systemChromeMaterial))
+            .padding()
+            .padding(.bottom, bottomSafeArea)
+            .frame(width: UIScreen.main.bounds.width)
+            .background(Blur(style: .systemChromeMaterial))
         }
         
     }
@@ -81,7 +90,7 @@ struct BottomView_Previews: PreviewProvider {
             LinearGradient(gradient: Gradient(colors: [Color.red, Color.blue]), startPoint: .top, endPoint: .bottom)
             VStack{
                 Spacer()
-                BottomView(more: .constant(false), eType: .constant(.more))
+                BottomView(bottomSafeArea: 20, more: .constant(false), eType: .constant(.more))
             }.edgesIgnoringSafeArea(.bottom)
         }
     }

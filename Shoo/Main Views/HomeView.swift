@@ -21,7 +21,7 @@ struct HomeView: View {
     var body: some View {
         GeometryReader { geo in
             ZStack{
-                VStack(alignment: .leading){
+                VStack(alignment: .leading, spacing: 0){
                     VStack(alignment: .leading, spacing: 0){
                         VStack(alignment: .leading, spacing: 0){
                             HStack{
@@ -39,11 +39,11 @@ struct HomeView: View {
                             FreePeopleView(freePeople: self.fire.mates.count)
                                 .font(.headline)
                         }
-                        .padding(.horizontal)
+                        .padding([.horizontal, .bottom])
                         .padding(.top, geo.safeAreaInsets.top)
+                        .frame(width: UIScreen.main.bounds.width)
                         .background(Blur(style: .systemChromeMaterial))
                         
-                        Spacer()
                     }
                     
                     ScrollView(.vertical, showsIndicators: false){
@@ -53,15 +53,13 @@ struct HomeView: View {
                             }
                         }
                     }
+                    
+                    Spacer()
                 }
                 
                 VStack(spacing: 0){
                     Spacer()
-                    BottomView(more: self.$showSheet, eType: self.$sheetType)
-                    Rectangle()
-                        .frame(width: geo.size.width, height: geo.safeAreaInsets.bottom)
-                        .foregroundColor(Color.white.opacity(0))
-                        .background(Blur(style: .systemChromeMaterial))
+                    BottomView(bottomSafeArea: geo.safeAreaInsets.bottom, more: self.$showSheet, eType: self.$sheetType)
                 }
             }
             .edgesIgnoringSafeArea(.all)
@@ -71,7 +69,8 @@ struct HomeView: View {
                 .onDisappear(perform: {
                     self.fire.stopListener()
                 })
-        }.sheet(isPresented: self.$showSheet){
+        }
+        .sheet(isPresented: self.$showSheet){
             if(self.sheetType == .more){
                 EditCardView()
             }

@@ -41,7 +41,7 @@ struct StatusButton: ViewModifier {
             .foregroundColor(Color(UIColor.systemBackground))
             .fixedSize(horizontal: true, vertical: false)
             .clipShape(RoundedRectangle(cornerRadius: 20, style: .continuous))
-            .shadow(radius: 3)
+            .shadow(radius: 3, y: 2)
     }
 }
 
@@ -175,11 +175,11 @@ struct EditCardView: View {
             
             Spacer()
         }
-        .alert(isPresented: $custom,  TextAlert(title: "+ Custom", action: { response in
+        /*.alert(isPresented: $custom,  TextAlert(title: "+ Custom", action: { response in
             if let response = response {
                 self.reasons.insert(response, at: 1)
             }
-        }))
+        }))*/
     }
 }
 
