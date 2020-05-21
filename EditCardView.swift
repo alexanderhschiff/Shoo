@@ -51,16 +51,44 @@ extension View{
     }
 }
 
+
+
 struct EditCardView: View {
     @EnvironmentObject var fire: Fire
-    
     @State private var time: Int = 10
     
-    @State private var reasons = ["+ Custom", "👩‍💻 Working", "📺 Watching TV", "🏃‍♂️ Exercising", "📱 On the phone"]
+    @State private var addReason = ""
+    @State private var reasons = ["👩‍💻 Working", "📺 Watching TV", "🏃‍♂️ Exercising", "📱 On the phone"]
     
     @State private var newEnd = Date() //Need to figure out how to do the date....
     @State private var newStatus: Int = 0
     @State private var newReason: String = ""
+    
+    func addReasonFunc() {
+        let nR = addReason.trimmingCharacters(in: .whitespacesAndNewlines)
+        dump(nR)
+        guard nR.count > 0 else {
+            addReason = ""
+            custom = false
+            return
+        }
+        
+        reasons.insert(nR, at: 0)
+        newReason = nR
+        addReason = ""
+        custom = false
+        self.fire.saveCustomReasons(reasons: reasons)
+    }
+    
+    private func dismissKeyboard() {
+        let windows = UIApplication.shared.windows
+        let keyWindows = windows.filter({$0.isKeyWindow})
+        if (!keyWindows.isEmpty){
+            let window = keyWindows.first
+            window?.endEditing(true)
+        }
+        self.custom = false
+    }
     
     var displayTime: String{
         switch time{
@@ -134,57 +162,67 @@ struct EditCardView: View {
                 Text("What's happening")
                     .font(.subheadline)
                     .padding(.leading)
-                
+                    
                 ScrollView(.horizontal, showsIndicators: false){
                     HStack(spacing: 0){
+                        if(self.custom){
+                            TextField("Custom", text: $addReason, onCommit: addReasonFunc)
+                                .reasonStyle()
+                                .disableAutocorrection(true)
+                                .padding([.leading, .bottom, .top])
+                        }
+                        else {
+                            Text("+ Custom")
+                                .reasonStyle()
+                                .padding([.leading, .bottom])
+                                .onTapGesture {
+                                    self.custom = true
+                            }
+                        }
                         ForEach(reasons, id: \.self){ reason in
                             Text(reason)
                                 .reasonStyle()
                                 .padding([.leading, .bottom])
                                 .onTapGesture {
-                                    if reason == "+ Custom" {
-                                        self.custom = true
-                                    } else {
-                                        //set view
-                                        self.newReason = reason
-                                    }
+                                    self.newReason = reason
                             }
                         }
                     }
                 }
-            }.padding(.top)
+            }
             
             VStack(alignment: .leading){
                 Text("For how long?")
                     .font(.subheadline)
-                
+                    //.padding()
                 VStack(alignment: .leading, spacing: 0){
                     HStack{
                         Image(systemName: "timer")
                         Text("\(self.displayTime)")
                             .font(.headline)
                             .fontWeight(.bold)
-                    }
+                            
+                    }//.padding()
                     TimeSliderView(time: self.$time)
                         .frame(height: 60)
-						.gesture(
-							DragGesture()
-								.onChanged{ gesture in
-									let time = Int(gesture.location.x)/(Int(UIScreen.main.bounds.width)/11)
-									if time > 11{
-										self.time = 11
-									}
-									else if time < 0{
-										self.time = 0
-									}
-									else{
-										self.time = time
-									}
-							}
-						)
+                        .padding([.top, .bottom, .trailing])
+                        .highPriorityGesture(
+                            DragGesture()
+                                .onChanged{ gesture in
+                                    let time = Int(gesture.location.x)/(Int(UIScreen.main.bounds.width)/11)
+                                    if time > 11{
+                                        self.time = 11
+                                    }
+                                    else if time < 0{
+                                        self.time = 0
+                                    }
+                                    else{
+                                        self.time = time
+                                    }
+                            }
+                    )
                 }
-            }
-            .padding()
+            }.padding(.leading)
             
             Button(action: {
                 //to do
@@ -192,26 +230,22 @@ struct EditCardView: View {
                 Text("Notify All")
             }
             .wideButtonStyle(color: getColor(self.newStatus))
-            
             Spacer()
         }.onDisappear {
-            //self.fire.saveState(user: fire.profile, reason: self.newReason, status: self.newStatus, end: self.newEnd)
-            self.newStatus = 0
+            self.fire.saveState(user: self.fire.profile, status: self.newStatus, reason: self.newReason, end: self.newEnd)
+            self.fire.saveCustomReasons(reasons: self.reasons)
         }
         .onAppear {
             self.newReason = self.fire.profile.reason
             self.newStatus = self.fire.profile.status
+            self.reasons = self.fire.getCustomReasons()
         }
-        /*.alert(isPresented: $custom,  TextAlert(title: "+ Custom", action: { response in
-         if let response = response {
-         self.reasons.insert(response, at: 1)
-         }
-         }))*/
     }
 }
 
+
 struct EditCardView_Previews: PreviewProvider {
     static var previews: some View {
-		EditCardView().environmentObject(Fire())
+        EditCardView().environmentObject(Fire())
     }
 }

@@ -29,16 +29,24 @@ struct HomeView: View {
                                     .fontWeight(.heavy)
                                     .font(.largeTitle)
                                 Spacer()
-                                Image(systemName: "person.badge.plus.fill")
-                                    .font(.title)
-                                    .onTapGesture {
-                                        self.sheetType = .editHouse
-                                        self.showSheet = true
+                                
+                                Button(action: {
+                                    self.sheetType = .editHouse
+                                    self.showSheet = true
+                                }){
+                                    ZStack(alignment: .center){
+                                        Circle()
+                                            .frame(width: 50, height: 50)
+                                            .foregroundColor(Color(UIColor.systemBackground))
+                                            .shadow(radius: 3, y: 3)
+                                        Image(systemName: "person.badge.plus.fill")
+                                            .renderingMode(.original)
+                                    }
                                 }
                             }
-							FreePeopleView(freePeople: self.fire.mates.count)
+                            FreePeopleView(freePeople: self.fire.mates.count)
                                 .font(.headline)
-								.foregroundColor(.secondary)
+                                .foregroundColor(.secondary)
                         }
                         .padding([.horizontal, .bottom])
                         .padding(.top, geo.safeAreaInsets.top)
@@ -52,7 +60,11 @@ struct HomeView: View {
                             ForEach(self.fire.mates) { mate in
                                 PersonView(name: mate.name, status: mate.status, reason: mate.reason, endTime: mate.end)
                             }
+                            Rectangle()
+                                .foregroundColor(Color.white.opacity(0))
+                                .frame(height: UIScreen.main.bounds.height * 0.23)
                         }
+                        
                     }
                     
                     Spacer()
@@ -63,7 +75,7 @@ struct HomeView: View {
                     BottomView(bottomSafeArea: geo.safeAreaInsets.bottom, more: self.$showSheet, eType: self.$sheetType).environmentObject(self.fire)
                 }
             }
-			.edgesIgnoringSafeArea(.all)
+            .edgesIgnoringSafeArea(.all)
             .onAppear(perform: {
                 self.fire.startListener()
             })
@@ -71,7 +83,7 @@ struct HomeView: View {
                     self.fire.stopListener()
                 })
         }
-		.background(Color(UIColor.secondarySystemBackground))
+        .background(Color(UIColor.secondarySystemBackground))
         .sheet(isPresented: self.$showSheet){
             if(self.sheetType == .more){
                 EditCardView().environmentObject(self.fire)

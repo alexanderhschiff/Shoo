@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		119A826CA9E0D03C55D46C21 /* Pods_Shoo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9F9C7F1ED6940993E4B38ACE /* Pods_Shoo.framework */; };
 		1346B9F0246F870400EECEC9 /* TimeSliderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1346B9EF246F870400EECEC9 /* TimeSliderView.swift */; };
-		1349BE4B2476E77E00F5704A /* Test_Delete.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1349BE4A2476E77E00F5704A /* Test_Delete.swift */; };
 		13EF84B1246DACB30049CCD1 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13EF84B0246DACB30049CCD1 /* AppDelegate.swift */; };
 		13EF84B3246DACB30049CCD1 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13EF84B2246DACB30049CCD1 /* SceneDelegate.swift */; };
 		13EF84B5246DACB30049CCD1 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13EF84B4246DACB30049CCD1 /* ContentView.swift */; };
@@ -45,11 +44,13 @@
 		53EB16DB2471F66A0054D68A /* ReasonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53EB16DA2471F66A0054D68A /* ReasonView.swift */; };
 		53F46F1A2476461B00BC02AD /* HandleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53F46F192476461B00BC02AD /* HandleView.swift */; };
 		53F46F1E24765D4700BC02AD /* TextAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53F46F1D24765D4700BC02AD /* TextAlert.swift */; };
+		53F46F20247707F400BC02AD /* KeyboardAdaptive.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53F46F1F247707F400BC02AD /* KeyboardAdaptive.swift */; };
+		53F46F222477082200BC02AD /* KeyboardHeightPublisher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53F46F212477082200BC02AD /* KeyboardHeightPublisher.swift */; };
+		53F46F242477083B00BC02AD /* UIResponder+Current.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53F46F232477083B00BC02AD /* UIResponder+Current.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		1346B9EF246F870400EECEC9 /* TimeSliderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeSliderView.swift; sourceTree = "<group>"; };
-		1349BE4A2476E77E00F5704A /* Test_Delete.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Test_Delete.swift; sourceTree = "<group>"; };
 		13EF84AD246DACB30049CCD1 /* Shoo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Shoo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		13EF84B0246DACB30049CCD1 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		13EF84B2246DACB30049CCD1 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -88,6 +89,9 @@
 		53EB16DA2471F66A0054D68A /* ReasonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReasonView.swift; sourceTree = "<group>"; };
 		53F46F192476461B00BC02AD /* HandleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HandleView.swift; sourceTree = "<group>"; };
 		53F46F1D24765D4700BC02AD /* TextAlert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextAlert.swift; sourceTree = "<group>"; };
+		53F46F1F247707F400BC02AD /* KeyboardAdaptive.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardAdaptive.swift; sourceTree = "<group>"; };
+		53F46F212477082200BC02AD /* KeyboardHeightPublisher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardHeightPublisher.swift; sourceTree = "<group>"; };
+		53F46F232477083B00BC02AD /* UIResponder+Current.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIResponder+Current.swift"; sourceTree = "<group>"; };
 		9F9C7F1ED6940993E4B38ACE /* Pods_Shoo.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Shoo.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D6546FD8C1DDDF477EA0C54D /* Pods-Shoo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Shoo.release.xcconfig"; path = "Target Support Files/Pods-Shoo/Pods-Shoo.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -162,7 +166,6 @@
 				53EB16B12471B9F10054D68A /* HomeView.swift */,
 				5398FA542474F33200467D67 /* SignInView.swift */,
 				53EB16B42471BBC60054D68A /* LaunchScreenView.swift */,
-				1349BE4A2476E77E00F5704A /* Test_Delete.swift */,
 			);
 			path = "Main Views";
 			sourceTree = "<group>";
@@ -228,6 +231,9 @@
 			children = (
 				53EB16CA2471BBD60054D68A /* Profile.swift */,
 				53EB16CB2471BBD60054D68A /* Typealiases.swift */,
+				53F46F1F247707F400BC02AD /* KeyboardAdaptive.swift */,
+				53F46F212477082200BC02AD /* KeyboardHeightPublisher.swift */,
+				53F46F232477083B00BC02AD /* UIResponder+Current.swift */,
 				53EB16C72471BBD50054D68A /* DocumentSerializable.swift */,
 				53DDBA6724745D3200D07C60 /* Mate.swift */,
 			);
@@ -366,6 +372,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				53F46F242477083B00BC02AD /* UIResponder+Current.swift in Sources */,
 				53EB16BD2471BBC60054D68A /* FireError.swift in Sources */,
 				53EB16CF2471BBD60054D68A /* Profile.swift in Sources */,
 				53DDBA6824745D3200D07C60 /* Mate.swift in Sources */,
@@ -381,8 +388,8 @@
 				53EB16BB2471BBC60054D68A /* Fire.swift in Sources */,
 				13EF84B3246DACB30049CCD1 /* SceneDelegate.swift in Sources */,
 				5398FA4D2474E63800467D67 /* BottomView.swift in Sources */,
-				1349BE4B2476E77E00F5704A /* Test_Delete.swift in Sources */,
 				53EB16BF2471BBC60054D68A /* LaunchScreenView.swift in Sources */,
+				53F46F222477082200BC02AD /* KeyboardHeightPublisher.swift in Sources */,
 				53EB16B22471B9F10054D68A /* HomeView.swift in Sources */,
 				13EF84C5246DB13C0049CCD1 /* PersonView.swift in Sources */,
 				1346B9F0246F870400EECEC9 /* TimeSliderView.swift in Sources */,
@@ -391,6 +398,7 @@
 				53F46F1E24765D4700BC02AD /* TextAlert.swift in Sources */,
 				53EB16D02471BBD60054D68A /* SignInWithAppleView.swift in Sources */,
 				53EB16D12471BBD60054D68A /* FireKeys.swift in Sources */,
+				53F46F20247707F400BC02AD /* KeyboardAdaptive.swift in Sources */,
 				53F46F1A2476461B00BC02AD /* HandleView.swift in Sources */,
 				13FE4B5A246E32F800D15BE9 /* FreePeopleView.swift in Sources */,
 				53EB16CE2471BBD60054D68A /* ActivityIndicatorView.swift in Sources */,

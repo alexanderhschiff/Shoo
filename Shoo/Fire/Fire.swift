@@ -247,5 +247,18 @@ class Fire: ObservableObject {
         return repository.checkHouseExists(houseId)
     }
     
+    func saveState(user: Profile, status: Int, reason: String, end: Date) {
+        repository.saveState(user: user, status: status, reason: reason, end: end)
+    }
+    
+    let userDefaults = UserDefaults.standard
+    
+    func saveCustomReasons(reasons: [String]){
+        userDefaults.set(reasons, forKey: "reasons")
+    }
+    func getCustomReasons() -> [String] {
+        return userDefaults.object(forKey: "reasons") as? [String] ?? ["👩‍💻 Working", "📺 Watching TV", "🏃‍♂️ Exercising", "📱 On the phone"]
+    }
+    
     
 }
