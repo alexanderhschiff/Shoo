@@ -9,6 +9,8 @@
 import SwiftUI
 
 struct LaunchScreenView: View {
+    @EnvironmentObject var fire: Fire
+    
     var body: some View {
         GeometryReader { geo in
             ZStack{
@@ -35,7 +37,7 @@ struct LaunchScreenView: View {
                 
                 VStack(spacing: 0){
                     Spacer()
-                    BottomView(bottomSafeArea: geo.safeAreaInsets.bottom, more: .constant(false), eType: .constant(.more))
+                    BottomView(bottomSafeArea: geo.safeAreaInsets.bottom, more: .constant(false), eType: .constant(.more)).environmentObject(self.fire)
                 }
                     
             }.edgesIgnoringSafeArea(.all)

@@ -52,10 +52,15 @@ extension View{
 }
 
 struct EditCardView: View {
+    @EnvironmentObject var fire: Fire
     
     @State private var time: Int = 10
     
     @State private var reasons = ["+ Custom", "👩‍💻 Working", "📺 Watching TV", "🏃‍♂️ Exercising", "📱 On the phone"]
+    
+    @State private var newEnd = Date() //Need to figure out how to do the date....
+    @State private var newStatus: Int = 0
+    @State private var newReason: String = ""
     
     var displayTime: String{
         switch time{
@@ -94,7 +99,7 @@ struct EditCardView: View {
             
             Spacer()
             
-            PersonView(name: "Alex", status: 0, reason: "👩‍💻 Working", endTime: Date().addingTimeInterval(9000))
+            PersonView(name: fire.profile.name, status: newStatus, reason: newReason, endTime: newEnd)
             
             Spacer()
             
@@ -106,17 +111,17 @@ struct EditCardView: View {
                     Text("Free")
                         .statusButtonStyle(color: Color.green)
                         .onTapGesture {
-                            //to do
+                            self.newStatus = 0
                     }
                     Text("Quiet")
                         .statusButtonStyle(color: Color.yellow)
                         .onTapGesture {
-                            //to do
+                            self.newStatus = 1
                     }
                     Text("Shoo")
                         .statusButtonStyle(color: Color.red)
                         .onTapGesture {
-                            //to do
+                            self.newStatus = 2
                     }
                     Spacer()
                 }
@@ -141,6 +146,7 @@ struct EditCardView: View {
                                         self.custom = true
                                     } else {
                                         //set view
+                                        self.newReason = reason
                                     }
                             }
                         }
@@ -171,15 +177,22 @@ struct EditCardView: View {
             }){
                 Text("Notify All")
             }
-            .wideButtonStyle(color: Color.green)
+            .wideButtonStyle(color: getColor(self.newStatus))
             
             Spacer()
+        }.onDisappear {
+            //self.fire.saveState(user: fire.profile, reason: self.newReason, status: self.newStatus, end: self.newEnd)
+            self.newStatus = 0
+        }
+        .onAppear {
+            self.newReason = self.fire.profile.reason
+            self.newStatus = self.fire.profile.status
         }
         /*.alert(isPresented: $custom,  TextAlert(title: "+ Custom", action: { response in
-            if let response = response {
-                self.reasons.insert(response, at: 1)
-            }
-        }))*/
+         if let response = response {
+         self.reasons.insert(response, at: 1)
+         }
+         }))*/
     }
 }
 

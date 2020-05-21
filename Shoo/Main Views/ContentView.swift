@@ -16,12 +16,12 @@ struct ContentView: View {
     var body: some View {
         ZStack {
             if fire.isUserAuthenticated == .undefined {
-                LaunchScreenView()
+                LaunchScreenView().environmentObject(fire)
             } else if fire.isUserAuthenticated == .signedOut {
                 SignInView()
             } else if fire.isUserAuthenticated == .signedIn {
                 if(fire.profile.uid == ""){
-                    LaunchScreenView()
+                    LaunchScreenView().environmentObject(fire)
                 }else{
                     HomeView().environmentObject(fire)
                 }

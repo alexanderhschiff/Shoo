@@ -63,34 +63,34 @@ struct PersonView: View {
     var body: some View {
         ZStack{
             //color
-            Color.white
+            color
             
             HStack{
                 VStack(alignment: .leading, spacing: 0){
                     Text(self.name)
                         .font(.largeTitle)
                         .fontWeight(.heavy)
-                        .foregroundColor(color)
+                        .foregroundColor(Color(UIColor.systemBackground))
                     
                     Text(self.countdown)
                         .font(.headline)
                         .fontWeight(.semibold)
-                        .foregroundColor(Color.black)
+                        .foregroundColor(Color(UIColor.systemBackground))
         
                     Spacer()
                 }
                 Spacer()
                 ProgressView(progress: 0.75, width: 7)
-                    .foregroundColor(color)
+                    .foregroundColor(Color(UIColor.systemBackground))
                     .frame(width: 60, height: 60)
             }
             .padding()
         }
         .clipShape(RoundedRectangle(cornerRadius: 20, style: .continuous))
-        .overlay(RoundedRectangle(cornerRadius: 20, style: .continuous).stroke(color, lineWidth: 2))
+        //.overlay(RoundedRectangle(cornerRadius: 20, style: .continuous).stroke(color, lineWidth: 2))
         .padding()
         .frame(width: UIScreen.main.bounds.width, height: 120)
-        .shadow(radius: 5, y: 4)
+            //.shadow(color: color, radius: 2, x: 4, y: 4)
     }
 }
 

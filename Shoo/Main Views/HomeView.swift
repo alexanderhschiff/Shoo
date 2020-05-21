@@ -47,7 +47,7 @@ struct HomeView: View {
                     }
                     
                     ScrollView(.vertical, showsIndicators: false){
-                        VStack{
+                        VStack(spacing: 0){
                             ForEach(self.fire.mates) { mate in
                                 PersonView(name: mate.name, status: mate.status, reason: mate.reason, endTime: mate.end)
                             }
@@ -59,7 +59,7 @@ struct HomeView: View {
                 
                 VStack(spacing: 0){
                     Spacer()
-                    BottomView(bottomSafeArea: geo.safeAreaInsets.bottom, more: self.$showSheet, eType: self.$sheetType)
+                    BottomView(bottomSafeArea: geo.safeAreaInsets.bottom, more: self.$showSheet, eType: self.$sheetType).environmentObject(self.fire)
                 }
             }
             .edgesIgnoringSafeArea(.all)
@@ -72,7 +72,7 @@ struct HomeView: View {
         }
         .sheet(isPresented: self.$showSheet){
             if(self.sheetType == .more){
-                EditCardView()
+                EditCardView().environmentObject(self.fire)
             }
             else{
                 EditHomeView().environmentObject(self.fire)

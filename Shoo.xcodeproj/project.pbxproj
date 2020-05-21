@@ -43,7 +43,7 @@
 		53EB16D92471C28A0054D68A /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 53EB16D82471C28A0054D68A /* GoogleService-Info.plist */; };
 		53EB16DB2471F66A0054D68A /* ReasonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53EB16DA2471F66A0054D68A /* ReasonView.swift */; };
 		53F46F1A2476461B00BC02AD /* HandleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53F46F192476461B00BC02AD /* HandleView.swift */; };
-		53F46F1C247646CA00BC02AD /* TextAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53F46F1B247646CA00BC02AD /* TextAlert.swift */; };
+		53F46F1E24765D4700BC02AD /* TextAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53F46F1D24765D4700BC02AD /* TextAlert.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -85,7 +85,7 @@
 		53EB16D82471C28A0054D68A /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		53EB16DA2471F66A0054D68A /* ReasonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReasonView.swift; sourceTree = "<group>"; };
 		53F46F192476461B00BC02AD /* HandleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HandleView.swift; sourceTree = "<group>"; };
-		53F46F1B247646CA00BC02AD /* TextAlert.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TextAlert.swift; path = ../../Desktop/TextAlert.swift; sourceTree = "<group>"; };
+		53F46F1D24765D4700BC02AD /* TextAlert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextAlert.swift; sourceTree = "<group>"; };
 		9F9C7F1ED6940993E4B38ACE /* Pods_Shoo.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Shoo.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D6546FD8C1DDDF477EA0C54D /* Pods-Shoo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Shoo.release.xcconfig"; path = "Target Support Files/Pods-Shoo/Pods-Shoo.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -182,8 +182,8 @@
 				1346B9EF246F870400EECEC9 /* TimeSliderView.swift */,
 				13FE4B59246E32F800D15BE9 /* FreePeopleView.swift */,
 				13EF84C4246DB13C0049CCD1 /* PersonView.swift */,
+				53F46F1D24765D4700BC02AD /* TextAlert.swift */,
 				5398FA4E2474E7D500467D67 /* ProgressView.swift */,
-				53F46F1B247646CA00BC02AD /* TextAlert.swift */,
 				53EB16DA2471F66A0054D68A /* ReasonView.swift */,
 				53F46F192476461B00BC02AD /* HandleView.swift */,
 			);
@@ -384,7 +384,7 @@
 				1346B9F0246F870400EECEC9 /* TimeSliderView.swift in Sources */,
 				13EF84B5246DACB30049CCD1 /* ContentView.swift in Sources */,
 				53EB16D22471BBD60054D68A /* ActivityIndicator.swift in Sources */,
-				53F46F1C247646CA00BC02AD /* TextAlert.swift in Sources */,
+				53F46F1E24765D4700BC02AD /* TextAlert.swift in Sources */,
 				53EB16D02471BBD60054D68A /* SignInWithAppleView.swift in Sources */,
 				53EB16D12471BBD60054D68A /* FireKeys.swift in Sources */,
 				53F46F1A2476461B00BC02AD /* HandleView.swift in Sources */,

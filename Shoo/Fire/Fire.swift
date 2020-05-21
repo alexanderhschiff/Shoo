@@ -20,6 +20,7 @@ enum FireAuthState {
 class HouseRepository {
     private var hListener: ListenerRegistration?
     private var mListener: ListenerRegistration?
+    private var pListener: ListenerRegistration?
     private var houseDB = Firestore.firestore().collection("Homes")
     private var mateDB = Firestore.firestore().collection("profiles")
     
@@ -30,6 +31,7 @@ class HouseRepository {
         if fid == "" {
             fid = createHouse(uid: userID)
         }
+        
         hListener = houseDB
             .document(fid)
             .addSnapshotListener { (snapshot, error) in
@@ -43,10 +45,10 @@ class HouseRepository {
                     return
                 }
                 dump(documents.data())
-                let houses = documents.get("mates") as? [String] ?? []
-                mateIDs = houses
+                mateIDs = documents.get("mates") as? [String] ?? []
                 
                 if(mateIDs != []){
+                    mateIDs.removeAll(where: { $0 == userID })
                     self.mListener = self.mateDB
                         .whereField("uid", in: mateIDs)
                         .addSnapshotListener { (snapshot, error) in
@@ -65,6 +67,7 @@ class HouseRepository {
                     }
                 }
         }
+        
     }
     
     func createHouse(uid: String) -> String{
@@ -128,21 +131,29 @@ class HouseRepository {
     }
     
     func qUpdateStatus(_ statusInt: Int, _ profile: Profile){
-        var prof = profile
-        prof.end = Date().addingTimeInterval(86400)
-        prof.start = Date()
-        switch statusInt {
-        case 1:
-            prof.status = 1
-            prof.reason = "Quiet"
-        case 2:
-            prof.status = 2
-            prof.reason = "Shoo"
-        default:
-            prof.status = 0
-            prof.reason = "Free"
+        if(statusInt != profile.status) {
+            var prof = profile
+            prof.end = Date().addingTimeInterval(86400)
+            prof.start = Date()
+            switch statusInt {
+            case 1:
+                prof.status = 1
+                prof.reason = "Quiet"
+            case 2:
+                prof.status = 2
+                prof.reason = "Shoo"
+            default:
+                prof.status = 0
+                prof.reason = "Free"
+            }
+            mateDB.document(prof.uid).updateData(["reason": prof.reason,"status": prof.status, "end": prof.end, "start": prof.start])
         }
-        mateDB.document(prof.uid).updateData(["reason": prof.reason,"status": prof.status, "end": prof.end, "start": prof.start])
+    }
+    
+    func saveState(user: Profile, status: Int, reason: String, end: Date) {
+        if (user.status != status || user.reason != reason || user.end != end){
+            mateDB.document(user.uid).updateData(["reason": reason,"status": status, "end": end, "start": Date()])
+        }
     }
     
     
@@ -186,9 +197,9 @@ class Fire: ObservableObject {
     @Published var error: Error? = nil
     var repository = HouseRepository()
     
+    
     func startListener() {
         self.error = nil
-        dump(self.profile)
         repository.startListener(Fid: self.profile.house, userID: self.profile.uid, result: {[weak self] (result) in
             guard let `self` = self else { return }
             switch result {
@@ -200,6 +211,7 @@ class Fire: ObservableObject {
             }
         } )
     }
+    
     
     func quickUpdateStatus(statInt: Int, profile: Profile) {
         repository.qUpdateStatus(statInt, profile)

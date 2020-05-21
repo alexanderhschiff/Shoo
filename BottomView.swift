@@ -8,6 +8,18 @@
 
 import SwiftUI
 
+func getColor (_ status: Int) -> Color {
+    switch  status{
+    case 0:
+        return Color.green
+    case 1:
+        return Color.yellow
+    case 2:
+        return Color.red
+    default:
+        return Color.red
+}}
+
 struct Blur: UIViewRepresentable {
     var style: UIBlurEffect.Style = .systemMaterial
     func makeUIView(context: Context) -> UIVisualEffectView {
@@ -20,7 +32,10 @@ struct Blur: UIViewRepresentable {
 
 struct BottomView: View {
     
+    @EnvironmentObject var fire: Fire
     let bottomSafeArea: CGFloat
+    
+    
     
     @Binding var more: Bool
     @Binding var eType: presentSheet
@@ -31,11 +46,12 @@ struct BottomView: View {
             HStack {
                 ProgressView(progress: 0.1, width: 5)
                     .frame(width: 40, height: 40)
-                    .foregroundColor(.primary)
+                    .foregroundColor(getColor(self.fire.profile.status))
                     .padding(.vertical)
                 
-                Text("Watching TV – Shoo for 2 hours")
+                Text(fire.profile.reason)
                     .font(.headline)
+                    .foregroundColor(getColor(self.fire.profile.status))
                 Spacer()
             }
             .padding(.horizontal)
@@ -46,33 +62,46 @@ struct BottomView: View {
                 self.eType = .more
             }
             .onLongPressGesture {
-                 self.press = true
+                self.press = true
             }
             
             
             HStack{
                 Text("Free")
                     .statusButtonStyle(color: Color.green)
+                    .onTapGesture {
+                        self.fire.quickUpdateStatus(statInt: 0, profile: self.fire.profile)
+                }
                 Spacer()
                 Text("Quiet")
                     .statusButtonStyle(color: Color.yellow)
                     .shadow(radius: 0)
+                    .onTapGesture {
+                        self.fire.quickUpdateStatus(statInt: 1, profile: self.fire.profile)
+                }
                 Spacer()
                 Text("Shoo")
                     .statusButtonStyle(color: Color.red)
                     .shadow(radius: 0)
-                Spacer()
+                    .onTapGesture {
+                        self.fire.quickUpdateStatus(statInt: 2, profile: self.fire.profile)
+                }
+                Group{
+                    Spacer()
+                    Divider().frame(height: 40)
+                    Spacer()
+                }
                 Image(systemName: "plus")
                     .padding()
                     .background(Color(UIColor.systemBackground))
                     .clipShape(RoundedRectangle(cornerRadius: 20, style: .continuous))
-                    .foregroundColor(.primary)
+                //.foregroundColor(.primary)
                 Spacer()
                 Image(systemName: "minus")
                     .padding()
                     .background(Color(UIColor.systemBackground))
                     .clipShape(RoundedRectangle(cornerRadius: 20, style: .continuous))
-                    .foregroundColor(.primary)
+                //.foregroundColor(.primary)
             }
             .font(.headline)
             .padding()

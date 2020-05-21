@@ -10,13 +10,28 @@ import FirebaseFirestore
 
 struct FireFirestore {
     
-    static func retreiveProfile(uid: String, completion: @escaping (Result<Profile, Error>) -> ()) {
+    static func retreiveProfile(uid: String, result: @escaping (Result<Profile, Error>) -> ()) {
         let reference = Firestore
             .firestore()
             .collection(FireKeys.CollectionPath.profiles)
             .document(uid)
-        getDocument(for: reference) { (result) in
-            switch result {
+            .addSnapshotListener{ (snapshot, error) in
+            if let error = error {
+                result(.failure(error))
+                return
+            }
+            
+            guard let documents = snapshot else {
+                result(.failure(NSError(domain: "", code: 0, userInfo: [NSLocalizedDescriptionKey: "Snapshot is empty"])))
+                return
+            }
+            
+                let data = documents.data()
+                let prof = Profile(documentData: data!)!
+                result(.success(prof))
+        }
+            /*
+                switch result {
             case .success(let data):
                 guard let profile = Profile(documentData: data) else {
                     completion(.failure(FireAuthError.noProfile))
@@ -25,10 +40,9 @@ struct FireFirestore {
                 completion(.success(profile))
             case .failure(let err):
                 completion(.failure(err))
-            }
+            }*/
         }
         
-    }
     
     static func mergeProfile(_ data: [String: Any], uid: String, completion: @escaping (Result<Bool, Error>) -> ()) {
         let reference = Firestore
