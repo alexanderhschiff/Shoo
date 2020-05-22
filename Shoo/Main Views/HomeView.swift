@@ -9,66 +9,10 @@
 import SwiftUI
 
 enum presentSheet{
-	case editHouse, more, settings
+    case editHouse, more, settings
 }
 
 struct HomeView: View {
-	@EnvironmentObject var fire: Fire
-	@State private var backgroundColor = Color.red
-	@State private var showSheet = false
-	@State private var sheetType: presentSheet = .editHouse
-	
-	var body: some View {
-		GeometryReader { geo in
-			ZStack{
-				ScrollView(.vertical, showsIndicators: false){
-					VStack(spacing: 0){
-						Rectangle()
-							.foregroundColor(Color.white.opacity(0))
-							.frame(height: UIScreen.main.bounds.height * 0.15)
-						ForEach(self.fire.mates) { mate in
-							PersonView(name: mate.name, status: mate.status, reason: mate.reason, endTime: mate.end)
-						}
-						Rectangle()
-							.foregroundColor(Color.white.opacity(0))
-							.frame(height: UIScreen.main.bounds.height * 0.23)
-					}
-				}
-				
-				VStack(spacing: 0){
-					TopView(topSafeArea: geo.safeAreaInsets.top, sheetType: self.$sheetType, showSheet: self.$showSheet).environmentObject(self.fire)
-						.onAppear{
-							print("LOOK HERE")
-							dump(self.fire.mates)
-					}
-					Spacer()
-				}
-				
-				VStack(spacing: 0){
-					Spacer()
-					BottomView(bottomSafeArea: geo.safeAreaInsets.bottom, more: self.$showSheet, eType: self.$sheetType).environmentObject(self.fire)
-				}
-			}
-			.edgesIgnoringSafeArea(.all)
-			.onAppear(perform: {
-				self.fire.startListener()
-			})
-				.onDisappear(perform: {
-					self.fire.stopListener()
-				})
-		}
-		.background(Color(UIColor.secondarySystemBackground))
-		.sheet(isPresented: self.$showSheet){
-			if self.sheetType == .more{
-				EditCardView().environmentObject(self.fire)
-			}
-			else if self.sheetType == .editHouse{
-				EditHomeView().environmentObject(self.fire)
-			} else {
-				SettingsView().environmentObject(self.fire)
-			}
-		}
-	}
     @EnvironmentObject var fire: Fire
     @State private var backgroundColor = Color.red
     @State private var showSheet = false
@@ -80,53 +24,26 @@ struct HomeView: View {
     var body: some View {
         GeometryReader { geo in
             ZStack{
-                VStack(alignment: .leading, spacing: 0){
-                    VStack(alignment: .leading, spacing: 0){
-                        VStack(alignment: .leading, spacing: 0){
-                            HStack{
-                                Text("Home")
-                                    .fontWeight(.heavy)
-                                    .font(.largeTitle)
-                                Spacer()
-                                
-                                Button(action: {
-                                    self.sheetType = .editHouse
-                                    self.showSheet = true
-                                }){
-                                    ZStack(alignment: .center){
-                                        Circle()
-                                            .frame(width: 50, height: 50)
-                                            .foregroundColor(Color(UIColor.systemBackground))
-                                            .shadow(radius: 3, y: 3)
-                                        Image(systemName: "person.badge.plus.fill")
-                                            .renderingMode(.original)
-                                    }
-                                }
-                            }
-                            FreePeopleView(freePeople: self.fire.mates.count)
-                                .font(.headline)
-                                .foregroundColor(.secondary)
+                ScrollView(.vertical, showsIndicators: false){
+                    VStack(spacing: 0){
+                        Rectangle()
+                            .foregroundColor(Color.white.opacity(0))
+                            .frame(height: UIScreen.main.bounds.height * 0.15)
+                        ForEach(self.fire.mates) { mate in
+                            PersonView(currentTime: self.currentTime, name: mate.name, status: mate.status, reason: mate.reason, endTime: mate.end, startTime: mate.start)
                         }
-                        .padding([.horizontal, .bottom])
-                        .padding(.top, geo.safeAreaInsets.top)
-                        .frame(width: UIScreen.main.bounds.width)
-                        .background(Blur(style: .systemChromeMaterial))
-                        
+                        Rectangle()
+                            .foregroundColor(Color.white.opacity(0))
+                            .frame(height: UIScreen.main.bounds.height * 0.23)
                     }
-                    
-                    ScrollView(.vertical, showsIndicators: false){
-                        VStack(spacing: 0){
-                            ForEach(self.fire.mates) { mate in
-                                PersonView(currentTime: self.currentTime, name: mate.name, status: mate.status, reason: mate.reason, endTime: mate.end, startTime: mate.start)
-                            }
-                            //rectangle just adds stuff to go under z stack when you scroll down
-                            Rectangle()
-                                .foregroundColor(Color.white.opacity(0))
-                                .frame(height: UIScreen.main.bounds.height * 0.23)
-                        }
-                        
+                }
+                
+                VStack(spacing: 0){
+                    TopView(topSafeArea: geo.safeAreaInsets.top, sheetType: self.$sheetType, showSheet: self.$showSheet).environmentObject(self.fire)
+                        .onAppear{
+                            print("LOOK HERE")
+                            dump(self.fire.mates)
                     }
-                    
                     Spacer()
                 }
                 
@@ -148,11 +65,13 @@ struct HomeView: View {
         }
         .background(Color(UIColor.secondarySystemBackground))
         .sheet(isPresented: self.$showSheet){
-            if(self.sheetType == .more){
+            if self.sheetType == .more{
                 EditCardView().environmentObject(self.fire)
             }
-            else{
+            else if self.sheetType == .editHouse{
                 EditHomeView().environmentObject(self.fire)
+            } else {
+                SettingsView().environmentObject(self.fire)
             }
         }
     }
@@ -161,7 +80,7 @@ struct HomeView: View {
 
 
 struct HomeView_Previews: PreviewProvider {
-	static var previews: some View {
-		HomeView().environmentObject(Fire())
-	}
+    static var previews: some View {
+        HomeView().environmentObject(Fire())
+    }
 }

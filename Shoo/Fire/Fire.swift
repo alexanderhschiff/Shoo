@@ -225,7 +225,20 @@ class Fire: ObservableObject {
     @Published var mates: [Mate] = []
     @Published var error: Error? = nil
     var repository = HouseRepository()
+    @Published var currentTime: Date = Date()
     
+    lazy var timer = Timer.scheduledTimer(timeInterval: 10, target: self, selector: #selector(fireTimer), userInfo: nil, repeats: true)
+    @objc func fireTimer() {
+        currentTime = Date()
+        if currentTime > self.profile.end {
+            self.profile.status = -1
+            self.changeStatus(-1)
+        }
+    }
+    
+    func changeStatus(_ newStat: Int){
+        db.collection("profiles").document(self.profile.uid).updateData(["status": -1])
+    }
     
     func startListener() {
         self.error = nil
