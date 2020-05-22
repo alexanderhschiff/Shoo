@@ -26,9 +26,9 @@ extension Profile: DocumentSerializable {
         let uid = documentData[FireKeys.Profile.uid] as? String ?? ""
         let name = documentData[FireKeys.Profile.name] as? String ?? ""
         let reason = documentData[FireKeys.Profile.reason] as? String ?? ""
-        let status = documentData[FireKeys.Profile.status] as? Int ?? 0
+        let status = documentData[FireKeys.Profile.status] as? Int ?? -1
         let end = documentData[FireKeys.Profile.end] as? Date ?? Date()
-        let start = documentData[FireKeys.Profile.end] as? Date ?? Date()
+        let start = documentData[FireKeys.Profile.end] as? Date ?? Date.distantFuture
         let house = documentData[FireKeys.Profile.house] as? String ?? ""
         
         self.init(uid: uid, name: name, reason: reason, status: status, end: end, start: start, house: house)

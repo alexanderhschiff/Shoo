@@ -13,18 +13,18 @@ enum Status{
 }
 
 struct PersonView: View {
-    
+    @State var currentTime: Date
     let name: String
     let status: Int
     let reason: String
     let endTime: Date
+    let startTime: Date
     
     var progress: Float{
         return 0.4
     }
     
     var countdown: String{
-        let now = Date()
         
         let formatter = DateComponentsFormatter()
         formatter.unitsStyle = .full
@@ -44,7 +44,7 @@ struct PersonView: View {
             ret += "Error"
         }
         
-        return reason + ", " + ret + (formatter.string(from: now, to: endTime) ?? "No time")
+        return reason + ", " + ret + (formatter.string(from: currentTime, to: endTime) ?? "No time")
     }
     
     var color: Color{
@@ -56,8 +56,16 @@ struct PersonView: View {
         case 2:
             return Color.red
         default:
-            return Color.red
+            return Color.gray
         }
+    }
+    
+    func timePercentage() -> Float {
+        let denom = endTime.timeIntervalSince(startTime)
+        let num = endTime.timeIntervalSince(currentTime)
+        //print(num)
+        //print(denom)
+        return max(0, min(Float(num/denom), 1))
     }
     
     var body: some View {
@@ -80,7 +88,7 @@ struct PersonView: View {
                     Spacer()
                 }
                 Spacer()
-                ProgressView(progress: 0.75, width: 7)
+                ProgressView(progress: timePercentage(), width: 7)
                     .foregroundColor(Color(UIColor.systemBackground))
                     .frame(width: 60, height: 60)
             }
@@ -98,8 +106,6 @@ struct PersonView_Previews: PreviewProvider {
     static var previews: some View {
         ZStack{
             Color.white
-            
-            PersonView(name: "Alexander", status: 0, reason: "Watching TV", endTime: Date().addingTimeInterval(13800))
         }
         
     }

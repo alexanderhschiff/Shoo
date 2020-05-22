@@ -78,6 +78,7 @@ struct FireAuth {
         } else {
             data = [
                 FireKeys.Profile.uid: uid,
+                FireKeys.Profile.name: "changeNameInSettings"
             ]
         }
         

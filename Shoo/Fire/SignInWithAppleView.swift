@@ -82,7 +82,7 @@ struct SignInWithAppleView: UIViewRepresentable {
                     return
                 }
                 
-                parent.updateActivityIndicator(message: "Saving to database...")
+                parent.updateActivityIndicator(message: "Logging in...")
                 FireAuth.signIn(providerID: FireAuth.providerID.apple, idTokenString: idTokenString, nonce: nonce) { (result) in
                     switch result {
                     case .success(let authDataResult):

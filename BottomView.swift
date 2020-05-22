@@ -18,7 +18,7 @@ func getColor (_ status: Int) -> Color {
         return Color.red
     default:
         return Color.red
-}}
+    }}
 
 struct Blur: UIViewRepresentable {
     var style: UIBlurEffect.Style = .systemMaterial
@@ -93,14 +93,20 @@ struct BottomView: View {
                     .padding()
                     .background(Color(UIColor.systemBackground))
                     .clipShape(RoundedRectangle(cornerRadius: 20, style: .continuous))
-					.shadow(radius: 3, y: 2)
+                    .shadow(radius: 3, y: 2)
+                    .onTapGesture {
+                        self.fire.quickUpdateTime(1, profile: self.fire.profile)
+                }
                 //.foregroundColor(.primary)
                 Spacer()
                 Image(systemName: "minus")
                     .padding()
                     .background(Color(UIColor.systemBackground))
                     .clipShape(RoundedRectangle(cornerRadius: 20, style: .continuous))
-					.shadow(radius: 3, y: 2)
+                    .shadow(radius: 3, y: 2)
+                    .onTapGesture {
+                        self.fire.quickUpdateTime(-1, profile: self.fire.profile)
+                    }
                 //.foregroundColor(.primary)
             }
             .font(.headline)

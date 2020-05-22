@@ -17,6 +17,10 @@ enum FireAuthState {
     case undefined, signedOut, signedIn
 }
 
+enum CheckError: Error {
+    case couldNotFindDocument
+}
+
 class HouseRepository {
     private var hListener: ListenerRegistration?
     private var mListener: ListenerRegistration?
@@ -30,8 +34,8 @@ class HouseRepository {
         var fid = Fid
         if fid == "" {
             fid = createHouse(uid: userID)
+            mateDB.document(userID).setData([ "house": fid ], merge: true)
         }
-        
         hListener = houseDB
             .document(fid)
             .addSnapshotListener { (snapshot, error) in
@@ -47,7 +51,7 @@ class HouseRepository {
                 dump(documents.data())
                 mateIDs = documents.get("mates") as? [String] ?? []
                 
-                if(mateIDs != []){
+                if(mateIDs.count > 1){
                     mateIDs.removeAll(where: { $0 == userID })
                     self.mListener = self.mateDB
                         .whereField("uid", in: mateIDs)
@@ -63,7 +67,8 @@ class HouseRepository {
                             }
                             
                             let mates = documents.map { Mate(document: $0) }
-                            result(.success(mates))
+                            let oMates = mates.sorted { $0.name.lowercased() < $1.name.lowercased() }
+                            result(.success(oMates))
                     }
                 }
         }
@@ -79,9 +84,9 @@ class HouseRepository {
             "Mates": [uid]
         ]){ err in
             if let err = err {
-                print("Error adding document: \(err)")
+                print("Error creating house: \(err)")
             } else {
-                print("Document added with ID: \(ref!.documentID)")
+                print("House create with ID: \(ref!.documentID)")
             }
         }
         dump(ref?.documentID)
@@ -89,17 +94,18 @@ class HouseRepository {
         return ref?.documentID ?? ""
     }
     
-    func checkHouseExists(_ houseId: String) -> Bool{
+    func checkHouseExists( _ houseId: String, completion: @escaping (Result<Bool, CheckError>) -> Void) {
+        print(".5")
+        //semaphore.wait()
         let docRef = houseDB.document(houseId)
-        var out = false
         docRef.getDocument { (document, error) in
-            if let document = document {
-                out = document.exists
-            }
-            
+            //semaphore.signal()
+            completion(.success(true))
+            print("1")
         }
-        return out
-    }
+        //semaphore.signal()
+        completion(.failure(.couldNotFindDocument))
+        }
     
     func addMate(_ mate: Mate) {
         mateDB.document(mate.id).setData(mate.toJSONSnapshot)
@@ -109,6 +115,18 @@ class HouseRepository {
         mateDB.document(prof.uid).updateData(["house": prof.house])
         houseDB.document(prof.house).updateData(["mates": FieldValue.arrayUnion([prof.uid])])
         houseDB.document(oldID).updateData(["mates": FieldValue.arrayRemove([prof.uid])])
+        houseDB.document(oldID).getDocument { (document, error) in
+            let numMates = document?.get("mates") as? [String] ?? []
+            if numMates.count == 0 {
+                self.houseDB.document(oldID).delete() { err in
+                    if let err = err {
+                        print("Error removing document: \(err)")
+                    } else {
+                        print("Document successfully removed!")
+                    }
+                }
+            }
+        }
     }
     
     func updateMate(_ mate: Mate) {
@@ -133,21 +151,32 @@ class HouseRepository {
     func qUpdateStatus(_ statusInt: Int, _ profile: Profile){
         if(statusInt != profile.status) {
             var prof = profile
-            prof.end = Date().addingTimeInterval(86400)
+            prof.end = Calendar.current.nextDate(after: Date(), matching: DateComponents(hour: 0, minute: 0), matchingPolicy: .nextTimePreservingSmallerComponents)!
             prof.start = Date()
             switch statusInt {
             case 1:
                 prof.status = 1
-                prof.reason = "Quiet"
+                prof.reason = ""
             case 2:
                 prof.status = 2
-                prof.reason = "Shoo"
-            default:
+                prof.reason = ""
+            case 0:
                 prof.status = 0
-                prof.reason = "Free"
+                prof.reason = ""
+            default:
+                prof.status = -1
+                prof.reason = ""
             }
             mateDB.document(prof.uid).updateData(["reason": prof.reason,"status": prof.status, "end": prof.end, "start": prof.start])
         }
+    }
+    
+    func qUpdateTime(_ state: Double, _ profile: Profile){
+        var prof = profile
+        dump(prof.end)
+        prof.end = profile.end + (10 * 60 * state)
+        dump(prof.end)
+        mateDB.document(prof.uid).updateData(["end": prof.end])
     }
     
     func saveState(user: Profile, status: Int, reason: String, end: Date) {
@@ -161,7 +190,7 @@ class HouseRepository {
 class Fire: ObservableObject {
     
     @Published var isUserAuthenticated: FireAuthState = .undefined
-    @Published var profile: Profile = Profile(uid: "", name: "", reason: "", status: 0, end: Date(), start: Date(), house: "")
+    @Published var profile: Profile = Profile(uid: "", name: "", reason: "", status: -1, end: Date.distantFuture, start: Date(), house: "")
     //@Published var houseID: String = UserDefaults.standard.string(forKey: "houseId") ?? ""
     
     
@@ -239,13 +268,37 @@ class Fire: ObservableObject {
         repository.stopListener()
     }
     
+    //not fully functional
     func signOut(){
         self.isUserAuthenticated = .signedOut
     }
     
     func testHouse(_ houseId: String) -> Bool{
-        return repository.checkHouseExists(houseId)
+        let semaphore = DispatchSemaphore(value: 1)
+        var outP = false
+        DispatchQueue.global(qos: .userInteractive).async {
+            var out = false
+            self.db.collection("Homes").document(houseId).getDocument { (document, error) in
+                semaphore.wait()
+                //print("waiting")
+                out = ((document?.exists) != nil)
+            }
+            outP = out
+            //print("signal")
+            semaphore.signal()
+        }
+        //print(outP)
+        return true
     }
+        
+        /*repository.checkHouseExists(semaphore, houseId, completion: { result in
+            switch result{
+            case .success(let exists):
+                out = exists
+            case .failure( _):
+                out = false
+            }
+        })*/
     
     func saveState(user: Profile, status: Int, reason: String, end: Date) {
         repository.saveState(user: user, status: status, reason: reason, end: end)
@@ -258,6 +311,16 @@ class Fire: ObservableObject {
     }
     func getCustomReasons() -> [String] {
         return userDefaults.object(forKey: "reasons") as? [String] ?? ["👩‍💻 Working", "📺 Watching TV", "🏃‍♂️ Exercising", "📱 On the phone"]
+    }
+    
+    func changeName(_ newName: String) {
+        self.profile.name = newName
+        db.collection("profiles").document(self.profile.uid).updateData(["name": newName])
+    }
+    
+    func quickUpdateTime(_ state: Int, profile: Profile){
+        self.profile.end = profile.end + (10*60*Double(state))
+        db.collection("profiles").document(self.profile.uid).updateData(["end": (profile.end + (10*60*Double(state)))])
     }
     
     
