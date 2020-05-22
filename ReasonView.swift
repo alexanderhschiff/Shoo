@@ -9,21 +9,23 @@
 import SwiftUI
 
 struct Reason: ViewModifier {
+	
+	let selected: Bool
+	
     func body(content: Content) -> some View {
         content
             .font(.headline)
             .padding()
-            .background(Color.gray.opacity(0.5))
+			.background(selected == true ? Color(UIColor.systemBackground): Color.gray.opacity(0.7))
             .cornerRadius(20)
             .shadow(radius: 3, y: 2)
 			.lineLimit(1)
 			.fixedSize(horizontal: false, vertical: true)
-
     }
 }
 
 extension View{
-    func reasonStyle() -> some View{
-        self.modifier(Reason())
+	func reasonStyle(selected: Bool) -> some View{
+        self.modifier(Reason(selected: selected))
     }
 }

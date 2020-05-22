@@ -123,12 +123,10 @@ struct EditCardView: View {
                         self.newStatus = 0
                     }
                     .buttonStyle(StatusButtonStyle(color: Color.green))
-                    Spacer()
                     Button("Quiet"){
                         self.newStatus = 1
                     }
                     .buttonStyle(StatusButtonStyle(color: Color.yellow))
-                    Spacer()
                     Button("Shoo"){
                         self.newStatus = 2
                     }
@@ -187,7 +185,7 @@ struct EditCardView: View {
                          }*/
                         ForEach(reasons, id: \.self){ reason in
                             Text(reason)
-                                .reasonStyle()
+								.reasonStyle(selected: reason == self.newReason)
                                 .padding([.leading, .bottom])
                                 .onTapGesture {
                                     self.newReason = reason
@@ -237,7 +235,10 @@ struct EditCardView: View {
             }
             .wideButtonStyle(color: getColor(self.newStatus))
             Spacer()
-        }.onDisappear {
+        }
+		.background(Color(UIColor.secondarySystemBackground))
+		.edgesIgnoringSafeArea(.bottom)
+		.onDisappear {
             self.fire.saveState(user: self.fire.profile, status: self.newStatus, reason: self.newReason, end: self.newEnd())
             self.fire.saveCustomReasons(reasons: self.reasons)
         }
