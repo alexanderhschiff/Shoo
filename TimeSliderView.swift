@@ -51,7 +51,7 @@ struct TimeSliderView: View {
 struct TimeSliderView_Previews: PreviewProvider {
     static var previews: some View {
         ZStack{
-            TimeSliderView(time: .constant(4))
+            TimeSliderView(time: .constant(9))
         }
     }
 }

@@ -309,6 +309,7 @@ class Fire: ObservableObject {
     func saveCustomReasons(reasons: [String]){
         userDefaults.set(reasons, forKey: "reasons")
     }
+	
     func getCustomReasons() -> [String] {
         return userDefaults.object(forKey: "reasons") as? [String] ?? ["👩‍💻 Working", "📺 Watching TV", "🏃‍♂️ Exercising", "📱 On the phone"]
     }

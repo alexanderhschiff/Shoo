@@ -16,12 +16,14 @@ struct Reason: ViewModifier {
             .background(Color.gray.opacity(0.5))
             .cornerRadius(20)
             .shadow(radius: 3, y: 2)
+			.lineLimit(1)
+			.fixedSize(horizontal: false, vertical: true)
+
     }
 }
 
 extension View{
     func reasonStyle() -> some View{
         self.modifier(Reason())
-        
     }
 }
