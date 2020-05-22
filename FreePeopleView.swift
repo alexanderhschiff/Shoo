@@ -8,25 +8,33 @@
 
 import SwiftUI
 
+
+
 struct FreePeopleView: View {
-	
-	var freePeople: Int
-	
-	var body: some View {
-		switch freePeople{
-		case 0:
-			return Text("Nobody is free 😕")
-		case 1:
-			return Text("One person is free")
-		default:
-			return Text("\(freePeople) people are down to hang")
+	@EnvironmentObject var fire: Fire
+		
+	var messgage: String{
+		var i = 0
+		
+		for mate in self.fire.mates{
+			if mate.status == 0{
+				i += 1
+			}
 		}
 		
+		switch i{
+		case 0:
+			return "Nobody is free 😕"
+		case 1:
+			return "One person is free"
+		default:
+			return "\(i) people are down to hang"
+		}
 	}
-}
-
-struct FreePeopleView_Previews: PreviewProvider {
-	static var previews: some View {
-		FreePeopleView(freePeople: 1)
+	
+	var body: some View {
+		Text(messgage)
+		.font(.headline)
+		.foregroundColor(.secondary)
 	}
 }

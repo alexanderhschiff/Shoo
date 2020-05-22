@@ -256,9 +256,13 @@ class Fire: ObservableObject {
     func saveCustomReasons(reasons: [String]){
         userDefaults.set(reasons, forKey: "reasons")
     }
+	
     func getCustomReasons() -> [String] {
         return userDefaults.object(forKey: "reasons") as? [String] ?? ["👩‍💻 Working", "📺 Watching TV", "🏃‍♂️ Exercising", "📱 On the phone"]
     }
-    
-    
+	
+	func changeName(_ newName: String) {
+		self.profile.name = newName
+		db.collection("profiles").document(self.profile.uid).updateData(["name": newName])
+	}
 }

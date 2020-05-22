@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		119A826CA9E0D03C55D46C21 /* Pods_Shoo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9F9C7F1ED6940993E4B38ACE /* Pods_Shoo.framework */; };
 		1346B9F0246F870400EECEC9 /* TimeSliderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1346B9EF246F870400EECEC9 /* TimeSliderView.swift */; };
+		1349BE4D24771F0900F5704A /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1349BE4C24771F0800F5704A /* SettingsView.swift */; };
+		1349BE4F2477544F00F5704A /* TopView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1349BE4E2477544E00F5704A /* TopView.swift */; };
 		13EF84B1246DACB30049CCD1 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13EF84B0246DACB30049CCD1 /* AppDelegate.swift */; };
 		13EF84B3246DACB30049CCD1 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13EF84B2246DACB30049CCD1 /* SceneDelegate.swift */; };
 		13EF84B5246DACB30049CCD1 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13EF84B4246DACB30049CCD1 /* ContentView.swift */; };
@@ -16,7 +18,6 @@
 		13EF84BA246DACB90049CCD1 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13EF84B9246DACB90049CCD1 /* Preview Assets.xcassets */; };
 		13EF84BD246DACB90049CCD1 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 13EF84BB246DACB90049CCD1 /* LaunchScreen.storyboard */; };
 		13EF84C5246DB13C0049CCD1 /* PersonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13EF84C4246DB13C0049CCD1 /* PersonView.swift */; };
-		13EF84C7246DB1AB0049CCD1 /* StoplightView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13EF84C6246DB1AB0049CCD1 /* StoplightView.swift */; };
 		13FE4B5A246E32F800D15BE9 /* FreePeopleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13FE4B59246E32F800D15BE9 /* FreePeopleView.swift */; };
 		5398FA4B2474E62B00467D67 /* EditCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5398FA4A2474E62B00467D67 /* EditCardView.swift */; };
 		5398FA4D2474E63800467D67 /* BottomView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5398FA4C2474E63800467D67 /* BottomView.swift */; };
@@ -51,6 +52,8 @@
 
 /* Begin PBXFileReference section */
 		1346B9EF246F870400EECEC9 /* TimeSliderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeSliderView.swift; sourceTree = "<group>"; };
+		1349BE4C24771F0800F5704A /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
+		1349BE4E2477544E00F5704A /* TopView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopView.swift; sourceTree = "<group>"; };
 		13EF84AD246DACB30049CCD1 /* Shoo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Shoo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		13EF84B0246DACB30049CCD1 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		13EF84B2246DACB30049CCD1 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -60,7 +63,6 @@
 		13EF84BC246DACB90049CCD1 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		13EF84BE246DACB90049CCD1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		13EF84C4246DB13C0049CCD1 /* PersonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonView.swift; sourceTree = "<group>"; };
-		13EF84C6246DB1AB0049CCD1 /* StoplightView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoplightView.swift; sourceTree = "<group>"; };
 		13FE4B59246E32F800D15BE9 /* FreePeopleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FreePeopleView.swift; sourceTree = "<group>"; };
 		19D61C28CE417EC4A67E5C38 /* Pods-Shoo.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Shoo.debug.xcconfig"; path = "Target Support Files/Pods-Shoo/Pods-Shoo.debug.xcconfig"; sourceTree = "<group>"; };
 		5336251E2470A21800E0B2AD /* Shoo.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Shoo.entitlements; sourceTree = "<group>"; };
@@ -164,6 +166,7 @@
 			children = (
 				13EF84B4246DACB30049CCD1 /* ContentView.swift */,
 				53EB16B12471B9F10054D68A /* HomeView.swift */,
+				1349BE4C24771F0800F5704A /* SettingsView.swift */,
 				5398FA542474F33200467D67 /* SignInView.swift */,
 				53EB16B42471BBC60054D68A /* LaunchScreenView.swift */,
 			);
@@ -183,10 +186,10 @@
 		5398FA572474F38200467D67 /* Reusable Views */ = {
 			isa = PBXGroup;
 			children = (
+				1349BE4E2477544E00F5704A /* TopView.swift */,
 				5398FA4C2474E63800467D67 /* BottomView.swift */,
-				13EF84C6246DB1AB0049CCD1 /* StoplightView.swift */,
-				1346B9EF246F870400EECEC9 /* TimeSliderView.swift */,
 				13FE4B59246E32F800D15BE9 /* FreePeopleView.swift */,
+				1346B9EF246F870400EECEC9 /* TimeSliderView.swift */,
 				13EF84C4246DB13C0049CCD1 /* PersonView.swift */,
 				53F46F1D24765D4700BC02AD /* TextAlert.swift */,
 				5398FA4E2474E7D500467D67 /* ProgressView.swift */,
@@ -377,8 +380,8 @@
 				53EB16CF2471BBD60054D68A /* Profile.swift in Sources */,
 				53DDBA6824745D3200D07C60 /* Mate.swift in Sources */,
 				5398FA4B2474E62B00467D67 /* EditCardView.swift in Sources */,
+				1349BE4D24771F0900F5704A /* SettingsView.swift in Sources */,
 				53EB16CC2471BBD60054D68A /* DocumentSerializable.swift in Sources */,
-				13EF84C7246DB1AB0049CCD1 /* StoplightView.swift in Sources */,
 				5398FA4F2474E7D500467D67 /* ProgressView.swift in Sources */,
 				5398FA522474F2F500467D67 /* EditHomeView.swift in Sources */,
 				5398FA552474F33200467D67 /* SignInView.swift in Sources */,
@@ -392,6 +395,7 @@
 				53F46F222477082200BC02AD /* KeyboardHeightPublisher.swift in Sources */,
 				53EB16B22471B9F10054D68A /* HomeView.swift in Sources */,
 				13EF84C5246DB13C0049CCD1 /* PersonView.swift in Sources */,
+				1349BE4F2477544F00F5704A /* TopView.swift in Sources */,
 				1346B9F0246F870400EECEC9 /* TimeSliderView.swift in Sources */,
 				13EF84B5246DACB30049CCD1 /* ContentView.swift in Sources */,
 				53EB16D22471BBD60054D68A /* ActivityIndicator.swift in Sources */,
