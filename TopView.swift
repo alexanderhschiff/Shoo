@@ -29,7 +29,7 @@ struct TopView: View {
 		VStack(alignment: .leading, spacing: 0){
 			HStack{
 				VStack(alignment: .leading){
-					Text("Home")
+                    Text(self.fire.houseName)
 						.fontWeight(.heavy)
 						.font(.largeTitle)
 					FreePeopleView().environmentObject(self.fire)
@@ -71,7 +71,7 @@ struct TopView: View {
             .padding(.top, (UIApplication.shared.windows.last?.safeAreaInsets.top)!)
             .frame(width: UIScreen.main.bounds.width)
             .background(Blur(style: .systemMaterial))
-		}
+        }
 	}
 }
 

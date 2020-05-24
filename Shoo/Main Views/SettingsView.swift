@@ -15,11 +15,17 @@ extension UIApplication {
     }
 }
 
+enum editType {
+    case name, houseName
+}
+
 struct SettingsView: View {
     
     @EnvironmentObject var fire: Fire
     @State private var name = "Name"
+    @State private var houseName = "Home"
     @State private var reasons: [String] = []
+    @State private var currentEdit: editType = .name
     
     @Environment(\.presentationMode) var presentationMode
     
@@ -69,21 +75,64 @@ struct SettingsView: View {
                         Text("Edit name")
                         ZStack{
                             TextField(name, text: $name, onEditingChanged: { _ in
-                                self.color = Color.blue
+                                if self.currentEdit == .name {
+                                    self.color = Color.blue
+                                }
                             }, onCommit: {
-                                self.fire.changeName(self.name)
-                                self.color = Color.gray
+                                if self.currentEdit == .name {
+                                    self.fire.changeName(self.name)
+                                    self.color = Color.gray
+                                }
                             })
                                 .textFieldStyle(PlainTextFieldStyle())
                                 .padding()
                                 .background(Color(UIColor.systemBackground))
                                 .clipShape(RoundedRectangle(cornerRadius: 20, style: .continuous))
+                            .onTapGesture {
+                                    self.currentEdit = .name
+                            }
                             
                             HStack{
                                 Spacer()
                                 Button(action: {
                                     UIApplication.shared.endEditing() // Call to dismiss keyboard
                                     self.fire.changeName(self.name)
+                                    self.color = Color.gray
+                                }){
+                                    Image(systemName: "checkmark.circle")
+                                        .padding(.trailing)
+                                        .font(.title)
+                                        .foregroundColor(color)
+                                }
+                            }
+                        }
+                    }
+                    VStack(alignment: .leading, spacing: 5){
+                        Text("Edit house name")
+                        ZStack{
+                            TextField(houseName, text: $houseName, onEditingChanged: { _ in
+                                if self.currentEdit == .houseName {
+                                self.color = Color.blue
+                                }
+                            }, onCommit: {
+                                if self.currentEdit == .name {
+                                self.fire.setHouseName(self.houseName)
+                                self.color = Color.gray
+                                }
+                            })
+                                .textFieldStyle(PlainTextFieldStyle())
+                                .padding()
+                                .background(Color(UIColor.systemBackground))
+                                .clipShape(RoundedRectangle(cornerRadius: 20, style: .continuous))
+                                .onTapGesture {
+                                    self.currentEdit = .houseName
+                            }
+                            
+                            HStack{
+                                Spacer()
+                                Button(action: {
+                                    UIApplication.shared.endEditing() // Call to dismiss keyboard
+                                    self.fire.setHouseName(self.houseName)
                                     self.color = Color.gray
                                 }){
                                     Image(systemName: "checkmark.circle")
@@ -157,6 +206,7 @@ struct SettingsView: View {
         .onAppear{
             self.name = self.fire.profile.name
             self.reasons = self.fire.getCustomReasons()
+            self.houseName = self.fire.houseName
         }
     }
 }

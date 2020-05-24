@@ -81,7 +81,7 @@ class HouseRepository {
 		var ref: DocumentReference? = nil
 		ref = houseDB.addDocument(data: [
 			"name": "house",
-			"Mates": [uid]
+			"mates": [uid]
 		]){ err in
 			if let err = err {
 				print("Error creating house: \(err)")
@@ -191,7 +191,7 @@ class Fire: ObservableObject {
 	
 	@Published var isUserAuthenticated: FireAuthState = .undefined
     @Published var profile: Profile = Profile(uid: "", name: "", reason: "", status: -1, end: Date().timeIntervalSince1970, start: Date().timeIntervalSince1970, house: "")
-	//@Published var houseID: String = UserDefaults.standard.string(forKey: "houseId") ?? ""
+	@Published var houseName: String = "Home"
 	
 	
 	var mateList: [String] = []
@@ -228,7 +228,7 @@ class Fire: ObservableObject {
 
 	
 	func changeStatus(_ newStat: Int){
-		db.collection("profiles").document(self.profile.uid).updateData(["status": -1])
+		db.collection("profiles").document(self.profile.uid).updateData(["status": newStat])
 	}
 	
 	func startListener() {
@@ -243,6 +243,7 @@ class Fire: ObservableObject {
 				self.error = error
 			}
 		} )
+        getHouseName()
 	}
 	
 	
@@ -331,5 +332,16 @@ class Fire: ObservableObject {
                 return
             }
         }
+    }
+    
+    func setHouseName(_ newName: String) {
+        self.houseName = newName
+        db.collection("Homes").document(self.profile.house).updateData(["name": newName])
+    }
+    
+    func getHouseName() {
+        db.collection("Homes").document(self.profile.house).getDocument { (document, error) in
+            self.houseName = document?.get("name") as? String ?? "Home"
+            }
     }
 }

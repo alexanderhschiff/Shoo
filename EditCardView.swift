@@ -13,8 +13,8 @@ struct EditCardView: View {
     @State private var tapped = false
     @State private var showingAlert = false
     @EnvironmentObject var fire: Fire
+    @State private var interval: Double = 60
     @State private var time: Int = 10
-    @State private var interval: Double = 0
     
     @State private var addReason = ""
     @State private var reasons = ["👩‍💻 Working", "📺 Watching TV", "🏃‍♂️ Exercising", "📱 On the phone"]
@@ -111,10 +111,10 @@ struct EditCardView: View {
             
             Spacer()
             
-            PersonView(name: fire.profile.name, status: newStatus, reason: newReason, endTime: TimeInterval(interval), startTime: fire.profile.start, id: fire.profile.uid).environmentObject(fire)
+            PersonView(t: $time, name: fire.profile.name, status: newStatus, reason: newReason, endTime: interval, startTime: fire.profile.start, id: fire.profile.uid).environmentObject(fire)
             
             Spacer()
-            
+           
             VStack(alignment: .leading, spacing: 10){
                 Text("Your status")
                     .font(.subheadline)

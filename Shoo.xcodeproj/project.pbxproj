@@ -52,7 +52,7 @@
 		1346B9EF246F870400EECEC9 /* TimeSliderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeSliderView.swift; sourceTree = "<group>"; };
 		1349BE4C24771F0800F5704A /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		1349BE4E2477544E00F5704A /* TopView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopView.swift; sourceTree = "<group>"; };
-		13EF84AD246DACB30049CCD1 /* Shoo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Shoo.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		13EF84AD246DACB30049CCD1 /* ShooApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ShooApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		13EF84B0246DACB30049CCD1 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		13EF84B2246DACB30049CCD1 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		13EF84B4246DACB30049CCD1 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -128,7 +128,7 @@
 		13EF84AE246DACB30049CCD1 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				13EF84AD246DACB30049CCD1 /* Shoo.app */,
+				13EF84AD246DACB30049CCD1 /* ShooApp.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -268,7 +268,7 @@
 				5398FA5E247502F700467D67 /* CodeScanner */,
 			);
 			productName = Shoo;
-			productReference = 13EF84AD246DACB30049CCD1 /* Shoo.app */;
+			productReference = 13EF84AD246DACB30049CCD1 /* ShooApp.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -553,7 +553,7 @@
 				LLVM_LTO = NO;
 				MACOSX_DEPLOYMENT_TARGET = 13.4;
 				PRODUCT_BUNDLE_IDENTIFIER = me.alexanderschiff.ShooApp;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = ShooApp;
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
@@ -581,7 +581,7 @@
 				LLVM_LTO = NO;
 				MACOSX_DEPLOYMENT_TARGET = 13.4;
 				PRODUCT_BUNDLE_IDENTIFIER = me.alexanderschiff.ShooApp;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = ShooApp;
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;

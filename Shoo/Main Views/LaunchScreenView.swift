@@ -17,7 +17,7 @@ struct LaunchScreenView: View {
 				VStack(alignment: .leading){
 					VStack(alignment: .leading, spacing: 0){
 						HStack{
-							Text("Home")
+							Text("")
 								.fontWeight(.heavy)
 								.font(.largeTitle)
 							Spacer()
