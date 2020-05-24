@@ -15,8 +15,8 @@ struct Mate: Identifiable {
     var name: String
     var reason: String
     var status: Int
-    var end: Date
-    var start: Date
+    var end: Double
+    var start: Double
 }
 
 extension Mate: DocumentSerializable {
@@ -25,9 +25,9 @@ extension Mate: DocumentSerializable {
         let id = documentData[FireKeys.Mate.id] as? String ?? ""
         let name = documentData[FireKeys.Mate.name] as? String ?? ""
         let reason = documentData[FireKeys.Mate.reason] as? String ?? ""
-        let status = documentData[FireKeys.Mate.status] as? Int ?? 0
-        let end = documentData[FireKeys.Mate.end] as? Date ?? Date()
-        let start = documentData[FireKeys.Mate.start] as? Date ?? Date()
+        let status = documentData[FireKeys.Mate.status] as? Int ?? -1
+        let end = documentData[FireKeys.Mate.end] as? Double ?? Date().timeIntervalSince1970
+        let start = documentData[FireKeys.Mate.start] as? Double ?? Date().timeIntervalSince1970
         
         self.init(id: id, name: name, reason: reason, status: status, end: end, start: start)
     }
@@ -36,9 +36,9 @@ extension Mate: DocumentSerializable {
         self.id = document.documentID
         self.name = document.get("name") as? String ?? ""
         self.reason = document.get("reason") as? String ?? ""
-        self.status = document.get("status") as? Int ?? 0
-        self.start = document.get("start") as? Date ?? Date()
-        self.end = document.get("end") as? Date ?? Date()
+        self.status = document.get("status") as? Int ?? -1
+        self.start = document.get("start") as? Double ?? Date().timeIntervalSince1970
+        self.end = document.get("end") as? Double ?? Date().timeIntervalSince1970
     }
     
     var toJSONSnapshot: [String: Any] {

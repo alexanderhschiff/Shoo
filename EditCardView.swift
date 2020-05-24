@@ -9,68 +9,71 @@
 import SwiftUI
 import Foundation
 
-struct WideButton: ViewModifier {
-    let color: Color
-    
-    func body(content: Content) -> some View {
-        content
-            .font(.headline)
-            .padding()
-            .frame(minWidth: 0, maxWidth: .infinity)
-            .background(color)
-            .clipShape(RoundedRectangle(cornerRadius: 20, style: .continuous))
-            .padding()
-            .foregroundColor(Color(UIColor.systemBackground))
-    }
-}
-
-extension View{
-    func wideButtonStyle(color: Color) -> some View{
-        self.modifier(WideButton(color: color))
-    }
-}
-
-struct StatusButtonStyle: ButtonStyle {
-    let color: Color
-    func makeBody(configuration: Self.Configuration) -> some View {
-        configuration.label
-            .font(.headline)
-            .padding()
-            .background(color)
-            .foregroundColor(Color(UIColor.systemBackground))
-            .fixedSize(horizontal: true, vertical: false)
-            .clipShape(RoundedRectangle(cornerRadius: 20, style: .continuous))
-            .shadow(radius: 3, y: 2)
-            .opacity(configuration.isPressed ? 0.7 : 1.0)
-    }
-}
-
-
-
 struct EditCardView: View {
+    @State private var tapped = false
+    @State private var showingAlert = false
     @EnvironmentObject var fire: Fire
     @State private var time: Int = 10
+    @State private var interval: Double = 0
     
     @State private var addReason = ""
     @State private var reasons = ["👩‍💻 Working", "📺 Watching TV", "🏃‍♂️ Exercising", "📱 On the phone"]
     
     @State private var newStatus: Int = 0
     @State private var newReason: String = ""
+    @State private var defaultEnd: Double = Date().timeIntervalSince1970
     
     @State private var custom = false
     
+    @State private var customColor: Color = Color.gray
+    
+    func intervalTime() -> Double{
+        switch self.time{
+        case 0:
+            return Date().timeIntervalSince1970 + 10*60 //10 minutes
+        case 1:
+            return Date().timeIntervalSince1970 + 15*60 //15 minutes
+        case 2:
+            return Date().timeIntervalSince1970 + 20*60 //20 minutes
+        case 3:
+            return Date().timeIntervalSince1970 + 30*60 //30 minutes
+        case 4:
+            return Date().timeIntervalSince1970 + 45*60 //45 minutes
+        case 5:
+            return Date().timeIntervalSince1970 + 60*60//1 hour
+        case 6:
+            return Date().timeIntervalSince1970 + 120*60 //2 hours
+        case 7:
+            return Date().timeIntervalSince1970 + 180*60 //3 hours
+        case 8:
+            return Date().timeIntervalSince1970 + 240*60 //4 hours
+        case 9:
+            return Date().timeIntervalSince1970 + 360*60 //6 hours (a while)
+        case 10:
+            return Calendar.current.nextDate(after: Date(), matching: DateComponents(hour: 0, minute: 0), matchingPolicy: .nextTimePreservingSmallerComponents)!.timeIntervalSince1970//until midnight
+        default:
+            return 0
+        }
+    }
+    
     func addReasonFunc() {
         let nR = addReason.trimmingCharacters(in: .whitespacesAndNewlines)
-        dump(nR)
+        
         guard nR.count > 0 else {
             addReason = ""
             return
         }
         
-        reasons.insert(nR, at: 0)
+        if let i = reasons.firstIndex(of: nR) {
+            self.reasons.remove(at: i)
+            reasons.insert(nR, at: 0)
+        } else {
+            reasons.insert(nR, at: 0)
+            self.fire.saveCustomReasons(reasons: reasons)
+        }
         newReason = nR
         addReason = ""
-        self.fire.saveCustomReasons(reasons: reasons)
+        
     }
     
     var displayTime: String{
@@ -102,15 +105,13 @@ struct EditCardView: View {
         }
     }
     
-    @State private var customColor: Color = Color.gray
-    
     var body: some View {
         VStack(alignment: .leading){
             HandleView()
             
             Spacer()
             
-            PersonView(currentTime: self.currentTime, name: fire.profile.name, status: newStatus, reason: newReason, endTime: newEnd(), startTime: fire.profile.start)
+            PersonView(name: fire.profile.name, status: newStatus, reason: newReason, endTime: TimeInterval(interval), startTime: fire.profile.start, id: fire.profile.uid).environmentObject(fire)
             
             Spacer()
             
@@ -153,10 +154,11 @@ struct EditCardView: View {
                             })
                                 .textFieldStyle(PlainTextFieldStyle())
                                 .font(.headline)
-                                .padding(14)
-                                .background(Color.gray.opacity(0.5))
+                                .padding(16)
+                                .padding(.trailing, 40)
+                                .background(Color.gray.opacity(0.7))
                                 .cornerRadius(20)
-                                .shadow(radius: 3, y: 2)
+                                .shadow(radius: 3, y: 4)
                                 .disableAutocorrection(true)
                                 .padding([.leading, .bottom])
                             
@@ -172,24 +174,21 @@ struct EditCardView: View {
                                         .font(.title)
                                         .foregroundColor(customColor)
                                 }
+                                .padding(.leading, 20)
+                                
                             }
                         }
-                        /*
-                         else {
-                         Text("+ Custom")
-                         .reasonStyle()
-                         .padding([.leading, .bottom])
-                         .onTapGesture {
-                         self.custom = true
-                         }
-                         }*/
+                        .fixedSize(horizontal: true, vertical: true)
+                        .padding(.top, 5)
+                        
                         ForEach(reasons, id: \.self){ reason in
                             Text(reason)
-								.reasonStyle(selected: reason == self.newReason)
+                                .reasonStyle(selected: reason == self.newReason)
                                 .padding([.leading, .bottom])
                                 .onTapGesture {
                                     self.newReason = reason
                             }
+                            .padding(.top, 5)
                         }
                     }
                 }
@@ -223,74 +222,50 @@ struct EditCardView: View {
                                     else{
                                         self.time = time
                                     }
+                                    self.interval = self.intervalTime()
                             }
                     )
+                        .onTapGesture {
+                            self.interval = self.intervalTime()
+                    }
                 }
             }.padding(.leading)
             
-            Button(action: {
-                //to do
-            }){
-                Text("Notify All")
+            VStack(alignment: .center){
+                Button(action: {
+                    self.showingAlert = true
+                    self.tapped = true
+                }){
+                    HStack{
+                        if !self.tapped{
+                            Text("Notify All")
+                        } else{
+                            Image(systemName: "checkmark.circle")
+                        }
+                    }
+                }
+                .buttonStyle(WideButtonStyle(color: getColor(self.newStatus), tapped: tapped))
             }
-            .wideButtonStyle(color: getColor(self.newStatus))
             Spacer()
         }
-		.background(Color(UIColor.secondarySystemBackground))
-		.edgesIgnoringSafeArea(.bottom)
-		.onDisappear {
-            self.fire.saveState(user: self.fire.profile, status: self.newStatus, reason: self.newReason, end: self.newEnd())
+        .background(Color(UIColor.secondarySystemBackground))
+        .edgesIgnoringSafeArea(.bottom)
+        .onDisappear {
+            self.fire.saveState(user: self.fire.profile, status: self.newStatus, reason: self.newReason, end: self.intervalTime())
             self.fire.saveCustomReasons(reasons: self.reasons)
         }
         .onAppear {
             self.newReason = self.fire.profile.reason
             self.newStatus = self.fire.profile.status
             self.reasons = self.fire.getCustomReasons()
+            self.defaultEnd = self.fire.profile.end
         }
-        .onReceive(timer){ input in
-            self.currentTime = input
+        .alert(isPresented: $showingAlert){
+            Alert(title: Text("Feature coming soon..."))
         }
-    }
-    
-    @State var currentTime = Date()
-    //updates every 15 seconds - can update later
-    let timer = Timer.publish(every: 15, on: .main, in: .common).autoconnect()
-    
-    private func newEnd() -> Date {
-        //let calendar = Calendar.autoupdatingCurrent
-        //let date = Date()
-        //let components = calendar.dateComponents([.hour, .minute], from: date)
-        var intervalTime: Date{
-            switch time{
-            case 0:
-                return Date().addingTimeInterval(10*60) //10 minutes
-            case 1:
-                return Date().addingTimeInterval(15*60) //15 minutes
-            case 2:
-                return Date().addingTimeInterval(20*60) //20 minutes
-            case 3:
-                return Date().addingTimeInterval(30*60) //30 minutes
-            case 4:
-                return Date().addingTimeInterval(45*60) //45 minutes
-            case 5:
-                return Date().addingTimeInterval(60*60) //1 hour
-            case 6:
-                return Date().addingTimeInterval(120*60) //2 hours
-            case 7:
-                return Date().addingTimeInterval(180*60) //3 hours
-            case 8:
-                return Date().addingTimeInterval(240*60) //4 hours
-            case 9:
-                return Date().addingTimeInterval(360*60) //6 hours (a while)
-            case 10:
-                return Calendar.current.nextDate(after: Date(), matching: DateComponents(hour: 0, minute: 0), matchingPolicy: .nextTimePreservingSmallerComponents)!//until midnight
-            default:
-                return fire.profile.end
-            }
-        }
-        return intervalTime
     }
 }
+
 
 struct EditCardView_Previews: PreviewProvider {
     static var previews: some View {

@@ -10,9 +10,9 @@ import SwiftUI
 
 struct TimeSliderView: View {
     @Binding var time: Int
-    
+
     let num = 11
-    
+
     var body: some View {
         GeometryReader{ geo in
             HStack(spacing: 2){
@@ -25,24 +25,10 @@ struct TimeSliderView: View {
                     }
                 }
             }
-            .clipShape(RoundedRectangle(cornerRadius: 20, style: .continuous))
+            .clipShape(Capsule())
+            //.clipShape(RoundedRectangle(cornerRadius: 20, style: .continuous))
             .frame(width: geo.size.width)
             .shadow(radius: 3)
-            .gesture(
-                DragGesture()
-                    .onChanged{ gesture in
-                        let time = Int(gesture.location.x)/(Int(geo.size.width)/self.num)
-                        if time > 11{
-                            self.time = 11
-                        }
-                        else if time < 0{
-                            self.time = 0
-                        }
-                        else{
-                            self.time = time
-                        }
-                }
-            )
         }
         
     }

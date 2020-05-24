@@ -8,6 +8,7 @@
 import SwiftUI
 import FirebaseAuth
 import CryptoKit
+import FirebaseFirestore
 
 struct FireAuth {
     
@@ -55,9 +56,8 @@ struct FireAuth {
         var name = ""
         let fullName = signInWithAppleResult.appleIDCredential.fullName
         let givenName = fullName?.givenName ?? ""
-        let middleName = fullName?.middleName ?? ""
         let familyName = fullName?.familyName ?? ""
-        let names = [givenName, middleName, familyName]
+        let names = [givenName,  familyName]
         let filteredNames = names.filter {$0 != ""}
         for i in 0..<filteredNames.count {
             name += filteredNames[i]
@@ -67,7 +67,6 @@ struct FireAuth {
         }
         
         //let email = signInWithAppleResult.authDataResult.user.email ?? ""
-        
         var data: [String: Any]
         
         if name != "" {
@@ -78,9 +77,10 @@ struct FireAuth {
         } else {
             data = [
                 FireKeys.Profile.uid: uid,
-                FireKeys.Profile.name: "changeNameInSettings"
+                //FireKeys.Profile.name: "changeNameInSettings"
             ]
         }
+            
         
         FireFirestore.mergeProfile(data, uid: uid) { (result) in
             completion(result)

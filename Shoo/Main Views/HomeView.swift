@@ -30,7 +30,7 @@ struct HomeView: View {
                             .foregroundColor(Color.white.opacity(0))
                             .frame(height: UIScreen.main.bounds.height * 0.15)
                         ForEach(self.fire.mates) { mate in
-                            PersonView(currentTime: self.currentTime, name: mate.name, status: mate.status, reason: mate.reason, endTime: mate.end, startTime: mate.start)
+                            PersonView(name: mate.name, status: mate.status, reason: mate.reason, endTime: mate.end, startTime: mate.start, id: mate.id).environmentObject(self.fire)
                         }
                         Rectangle()
                             .foregroundColor(Color.white.opacity(0))
@@ -39,7 +39,7 @@ struct HomeView: View {
                 }
                 
                 VStack(spacing: 0){
-                    TopView(topSafeArea: geo.safeAreaInsets.top, sheetType: self.$sheetType, showSheet: self.$showSheet).environmentObject(self.fire)
+                    TopView(sheetType: self.$sheetType, showSheet: self.$showSheet).environmentObject(self.fire)
                         .onAppear{
                             print("LOOK HERE")
                             dump(self.fire.mates)
@@ -49,7 +49,7 @@ struct HomeView: View {
                 
                 VStack(spacing: 0){
                     Spacer()
-                    BottomView(bottomSafeArea: geo.safeAreaInsets.bottom, more: self.$showSheet, eType: self.$sheetType).environmentObject(self.fire)
+                    BottomView(more: self.$showSheet, eType: self.$sheetType).environmentObject(self.fire)
                 }
             }
             .edgesIgnoringSafeArea(.all)

@@ -13,23 +13,20 @@ enum Status{
 }
 
 struct PersonView: View {
-    @State var currentTime: Date
+    @EnvironmentObject var fire: Fire
+    @State var time: TimeInterval = 0
 	let name: String
 	let status: Int
 	let reason: String
-	let endTime: Date
-    let startTime: Date
-	
+	let endTime: TimeInterval
+    let startTime: TimeInterval
+    let id: String
+
 	var progress: Float{
 		return 0.4
 	}
 	
 	var countdown: String{
-		let formatter = DateComponentsFormatter()
-		formatter.unitsStyle = .full
-		formatter.allowedUnits = [.day, .hour, .minute, .second]
-		formatter.maximumUnitCount = 1
-		
 		var ret = ""
 		
 		//there is a reason
@@ -43,7 +40,7 @@ struct PersonView: View {
 			case 2:
 				ret += "shoo for "
 			default:
-				ret += "Nobody knows for "
+				ret += "nobody knows for "
 			}
 		} else { //No reason
 			switch status{
@@ -58,7 +55,15 @@ struct PersonView: View {
 			}
 
 		}
-		return ret + (formatter.string(from: currentTime, to: endTime) ?? "some time")
+        if time > 8*60*60 {
+            return ret + "all day"
+        } else if time > 4*60*60 || time <= 0 {
+            return ret + "a while"
+        } else {
+            let hours = Int(time/3600)
+            let minutes = Int((time/60).truncatingRemainder(dividingBy: 60))
+           return ret + (hours>0 ? "\(hours) hour\(hours == 1 ? "" : "s")": "") + (hours > 0 && minutes > 0 ? ", " : "") + (minutes>0 ? "\(minutes) minute\(minutes == 1 ? "" : "s")": "")
+        }
 	}
 	
 	var body: some View {
@@ -88,13 +93,18 @@ struct PersonView: View {
 					.frame(width: 60, height: 60)
 			}
 			.padding()
-		}
+		}.onAppear {
+            self.time = getCountdownTime(from: self.endTime)
+            Timer.scheduledTimer(withTimeInterval: 5, repeats: true) { _ in
+                self.time = getCountdownTime(from: self.endTime)
+            }.tolerance = 2.0
+        }
 		.clipShape(RoundedRectangle(cornerRadius: 20, style: .continuous))
 			//.overlay(RoundedRectangle(cornerRadius: 20, style: .continuous).stroke(color, lineWidth: 2))
 			.padding(.horizontal)
-			.frame(width: UIScreen.main.bounds.width, height: 120)
+			.frame(width: UIScreen.main.bounds.width)
+            .fixedSize(horizontal: true, vertical: true)
 			.padding(.vertical, 8)
-			
 			.shadow(color: color, radius: 2)
 	}
     
@@ -112,14 +122,17 @@ struct PersonView: View {
     }
     
     func timePercentage() -> Float {
-        let denom = endTime.timeIntervalSince(startTime)
-        let num = endTime.timeIntervalSince(currentTime)
+        let totalTime = endTime - startTime
+        let timeRemaining = time
+        if (timeRemaining < 0){
+            self.fire.noStatus(self.id)
+        }
         //print(num)
         //print(denom)
-        return max(0, min(Float(num/denom), 1))
+        let ret = Float(timeRemaining/totalTime)
+        return ((ret >= 0 && ret <= 1) ? 1 - ret : 0)
+        //max(0, min(Float(timeRemaining/totalTime), 1))
     }
-    
-    
 }
 
 struct PersonView_Previews: PreviewProvider {
@@ -127,7 +140,7 @@ struct PersonView_Previews: PreviewProvider {
 		ZStack{
 			Color.white
 			
-            PersonView(currentTime: Date().addingTimeInterval(300), name: "Alexander", status: 0, reason: "Watching TV and Tv and TV TV", endTime: Date().addingTimeInterval(13800), startTime: Date())
+            //PersonView(currentTime: Date().addingTimeInterval(300), name: "Alexander", status: 0, reason: "Watching TV and Tv and TV TV", endTime: Date().addingTimeInterval(13800), startTime: Date())
 		}
 		
 	}

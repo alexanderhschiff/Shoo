@@ -15,8 +15,8 @@ struct Profile: Identifiable {
     var name: String
     var reason: String
     var status: Int
-    var end: Date
-    var start: Date
+    var end: Double
+    var start: Double
     var house: String
 }
 
@@ -27,8 +27,8 @@ extension Profile: DocumentSerializable {
         let name = documentData[FireKeys.Profile.name] as? String ?? ""
         let reason = documentData[FireKeys.Profile.reason] as? String ?? ""
         let status = documentData[FireKeys.Profile.status] as? Int ?? -1
-        let end = documentData[FireKeys.Profile.end] as? Date ?? Date()
-        let start = documentData[FireKeys.Profile.end] as? Date ?? Date.distantFuture
+        let end = documentData[FireKeys.Profile.end] as? Double ?? Date().timeIntervalSince1970
+        let start = documentData[FireKeys.Profile.end] as? Double ?? Date().timeIntervalSince1970
         let house = documentData[FireKeys.Profile.house] as? String ?? ""
         
         self.init(uid: uid, name: name, reason: reason, status: status, end: end, start: start, house: house)

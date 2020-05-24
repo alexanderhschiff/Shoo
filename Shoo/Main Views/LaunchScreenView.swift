@@ -39,7 +39,7 @@ struct LaunchScreenView: View {
 				
 				VStack(spacing: 0){
 					Spacer()
-					BottomView(bottomSafeArea: geo.safeAreaInsets.bottom, more: .constant(false), eType: .constant(.more)).environmentObject(self.fire)
+					BottomView(more: .constant(false), eType: .constant(.more)).environmentObject(self.fire)
 				}
 				
 			}

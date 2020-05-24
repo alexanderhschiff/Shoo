@@ -10,7 +10,6 @@ import SwiftUI
 
 struct TopView: View {
 	
-	let topSafeArea: CGFloat
 	@EnvironmentObject var fire: Fire
 	
 	@Binding var sheetType: presentSheet
@@ -69,9 +68,9 @@ struct TopView: View {
 				}
 			}
 			.padding([.horizontal, .bottom])
-			.padding(.top, topSafeArea)
-			.frame(width: UIScreen.main.bounds.width)
-			.background(Blur(style: .systemMaterial))
+            .padding(.top, (UIApplication.shared.windows.last?.safeAreaInsets.top)!)
+            .frame(width: UIScreen.main.bounds.width)
+            .background(Blur(style: .systemMaterial))
 		}
 	}
 }

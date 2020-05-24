@@ -48,7 +48,7 @@ class HouseRepository {
 					result(.failure(NSError(domain: "", code: 0, userInfo: [NSLocalizedDescriptionKey: "Snapshot is empty"])))
 					return
 				}
-				dump(documents.data())
+				//dump(documents.data())
 				mateIDs = documents.get("mates") as? [String] ?? []
 				
 				if(mateIDs.count > 1){
@@ -151,8 +151,8 @@ class HouseRepository {
 	func qUpdateStatus(_ statusInt: Int, _ profile: Profile){
 		if(statusInt != profile.status) {
 			var prof = profile
-			prof.end = Calendar.current.nextDate(after: Date(), matching: DateComponents(hour: 0, minute: 0), matchingPolicy: .nextTimePreservingSmallerComponents)!
-			prof.start = Date()
+            prof.end = Calendar.current.nextDate(after: Date(), matching: DateComponents(hour: 0, minute: 0), matchingPolicy: .nextTimePreservingSmallerComponents)!.timeIntervalSince1970
+            prof.start = Date().timeIntervalSince1970
 			switch statusInt {
 			case 1:
 				prof.status = 1
@@ -173,15 +173,15 @@ class HouseRepository {
 	
 	func qUpdateTime(_ state: Double, _ profile: Profile){
 		var prof = profile
-		dump(prof.end)
+		//dump(prof.end)
 		prof.end = profile.end + (10 * 60 * state)
-		dump(prof.end)
+		//dump(prof.end)
 		mateDB.document(prof.uid).updateData(["end": prof.end])
 	}
 	
-	func saveState(user: Profile, status: Int, reason: String, end: Date) {
+	func saveState(user: Profile, status: Int, reason: String, end: Double) {
 		if (user.status != status || user.reason != reason || user.end != end){
-			mateDB.document(user.uid).updateData(["reason": reason,"status": status, "end": end, "start": Date()])
+            mateDB.document(user.uid).updateData(["reason": reason,"status": status, "end": end, "start": Date().timeIntervalSince1970])
 		}
 	}
 	
@@ -190,7 +190,7 @@ class HouseRepository {
 class Fire: ObservableObject {
 	
 	@Published var isUserAuthenticated: FireAuthState = .undefined
-	@Published var profile: Profile = Profile(uid: "", name: "", reason: "", status: -1, end: Date.distantFuture, start: Date(), house: "")
+    @Published var profile: Profile = Profile(uid: "", name: "", reason: "", status: -1, end: Date().timeIntervalSince1970, start: Date().timeIntervalSince1970, house: "")
 	//@Published var houseID: String = UserDefaults.standard.string(forKey: "houseId") ?? ""
 	
 	
@@ -225,16 +225,7 @@ class Fire: ObservableObject {
 	@Published var mates: [Mate] = []
 	@Published var error: Error? = nil
 	var repository = HouseRepository()
-	@Published var currentTime: Date = Date()
-	
-	lazy var timer = Timer.scheduledTimer(timeInterval: 10, target: self, selector: #selector(fireTimer), userInfo: nil, repeats: true)
-	@objc func fireTimer() {
-		currentTime = Date()
-		if currentTime > self.profile.end {
-			self.profile.status = -1
-			self.changeStatus(-1)
-		}
-	}
+
 	
 	func changeStatus(_ newStat: Int){
 		db.collection("profiles").document(self.profile.uid).updateData(["status": -1])
@@ -286,34 +277,28 @@ class Fire: ObservableObject {
 		self.isUserAuthenticated = .signedOut
 	}
 	
-	func testHouse(_ houseId: String) -> Bool{
-		let semaphore = DispatchSemaphore(value: 1)
-		var outP = false
-		DispatchQueue.global(qos: .userInteractive).async {
-			var out = false
-			self.db.collection("Homes").document(houseId).getDocument { (document, error) in
-				semaphore.wait()
-				//print("waiting")
-				out = ((document?.exists) != nil)
-			}
-			outP = out
-			//print("signal")
-			semaphore.signal()
-		}
-		//print(outP)
-		return true
-	}
+    func testHouse(_ houseId: String) -> Bool{
+        /*
+         let semaphore = DispatchSemaphore(value: 1)
+         var outP = false
+         DispatchQueue.global(qos: .userInteractive).async {
+         var out = false
+         self.db.collection("Homes").document(houseId).getDocument { (document, error) in
+         semaphore.wait()
+         //print("waiting")
+         out = ((document?.exists) != nil)
+         }
+         outP = out
+         //print("signal")
+         semaphore.signal()
+         }
+         //print(outP)
+         */
+        return true
+    }
 	
-	/*repository.checkHouseExists(semaphore, houseId, completion: { result in
-	switch result{
-	case .success(let exists):
-	out = exists
-	case .failure( _):
-	out = false
-	}
-	})*/
 	
-	func saveState(user: Profile, status: Int, reason: String, end: Date) {
+	func saveState(user: Profile, status: Int, reason: String, end: Double) {
 		repository.saveState(user: user, status: status, reason: reason, end: end)
 	}
 	
@@ -333,7 +318,18 @@ class Fire: ObservableObject {
 	}
 	
 	func quickUpdateTime(_ state: Int, profile: Profile){
-		self.profile.end = profile.end + (10*60*Double(state))
-		db.collection("profiles").document(self.profile.uid).updateData(["end": (profile.end + (10*60*Double(state)))])
+        self.profile.end = profile.end + (10*60*Double(state))
+        repository.qUpdateTime(Double(state), profile)
+		//db.collection("profiles").document(self.profile.uid).updateData(["end": (profile.end + (10*60*Double(state)))])
 	}
+    
+    func noStatus(_ id: String){
+        for i in 0 ..< mates.count {
+            var mate = mates[i]
+            if mate.id == id {
+                mate.status = -1
+                return
+            }
+        }
+    }
 }
