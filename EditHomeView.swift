@@ -29,6 +29,9 @@ struct EditHomeView: View {
             print("out of async")
             self.presentationMode.wrappedValue.dismiss()
         case .failure(let error):
+            if error == .badInput {
+                //link to settings with alert here
+            }
             print("Scanning failed \(error)")
         }
     }
@@ -71,7 +74,7 @@ struct EditHomeView: View {
         VStack{
             ZStack{
                 if mode == 1 {
-                    CodeScannerView(codeTypes: [.qr], simulatedData: "testHouse", completion: self.handleScan)
+                    CodeScannerView(codeTypes: [.qr], simulatedData: self.fire.profile.house, completion: self.handleScan)
                 } else {
                     ZStack(alignment: .center){
                         Image(uiImage: createCode())
@@ -115,61 +118,6 @@ struct EditHomeView: View {
                     Spacer()
                 }
             }.highPriorityGesture(DragGesture())
-            /*Button(action: {
-             self.isShowingScanner = true
-             }){
-             Text("Join")
-             }
-             .sheet(isPresented: $isShowingScanner){
-             VStack{
-             Button(action: {
-             self.isShowingScanner = false
-             }){
-             Text("Cancel")
-             .padding()
-             .background(Color.white)
-             
-             }
-             CodeScannerView(codeTypes: [.qr], simulatedData: "testHouse", completion: self.handleScan)
-             
-             }.edgesIgnoringSafeArea(.all)
-             }
-             
-             Spacer()
-             */
-            /*
-             Picker(selection: $mode, label: Text("Mode")){
-             ForEach(0..<modes.count){
-             Text(self.modes[$0])
-             }
-             }
-             .pickerStyle(SegmentedPickerStyle())
-             .padding()
-             
-             
-             
-             ZStack{
-             RoundedRectangle(cornerRadius: 50, style: .continuous)
-             .foregroundColor(Color(UIColor.systemBackground))
-             //join
-             /*
-             if mode == 1 {
-             /*CodeScannerView(codeTypes: [.qr], simulatedData: "testHouse", completion: self.handleScan)
-             .frame(width: 200, height: 200)
-             .clipShape(RoundedRectangle(cornerRadius: 50, style: .continuous))
-             */
-             }
-             //share
-             else{
-             Image(uiImage: createCode())
-             .resizable()
-             .interpolation(.none)
-             .scaledToFit()
-             .frame(width: 200, height: 200)
-             }
-             */
-             }.frame(width: 230, height: 230)
-             */
         }
         .background(Color(UIColor.secondarySystemBackground))
         .edgesIgnoringSafeArea(.bottom)
