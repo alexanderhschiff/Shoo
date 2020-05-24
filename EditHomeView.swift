@@ -30,7 +30,7 @@ struct EditHomeView: View {
             self.presentationMode.wrappedValue.dismiss()
         case .failure(let error):
             if error == .badInput {
-                //link to settings with alert here
+                //link to settings with alert heres
             }
             print("Scanning failed \(error)")
         }
