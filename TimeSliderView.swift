@@ -25,8 +25,8 @@ struct TimeSliderView: View {
                     }
                 }
             }
-            .clipShape(Capsule())
-            //.clipShape(RoundedRectangle(cornerRadius: 20, style: .continuous))
+            //.clipShape(Capsule())
+            .clipShape(RoundedRectangle(cornerRadius: 20, style: .continuous))
             .frame(width: geo.size.width)
             .shadow(radius: 3)
         }

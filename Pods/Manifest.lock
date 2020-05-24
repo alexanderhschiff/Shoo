@@ -220,8 +220,6 @@ PODS:
   - BoringSSL-GRPC/Interface (0.0.7)
   - Firebase (6.24.0):
     - Firebase/Core (= 6.24.0)
-  - Firebase/Analytics (6.24.0):
-    - Firebase/Core
   - Firebase/Auth (6.24.0):
     - Firebase/CoreOnly
     - FirebaseAuth (~> 6.5.3)
@@ -369,7 +367,6 @@ PODS:
 
 DEPENDENCIES:
   - Firebase
-  - Firebase/Analytics
   - Firebase/Auth
   - Firebase/Database
   - Firebase/Firestore
@@ -432,6 +429,6 @@ SPEC CHECKSUMS:
   PromisesObjC: c119f3cd559f50b7ae681fa59dc1acd19173b7e6
   Protobuf: 176220c526ad8bd09ab1fb40a978eac3fef665f7
 
-PODFILE CHECKSUM: ae5c02ab71cc286722799e5169047a2b2a8e175b
+PODFILE CHECKSUM: e6aacdb654065b02a4c3bdb8303f6f000f2e4d4d
 
 COCOAPODS: 1.9.1
