@@ -26,9 +26,9 @@ struct FreePeopleView: View {
 		case 0:
 			return "Nobody is free 😕"
 		case 1:
-			return "One person is free"
+			return "One person is free 🤩"
 		default:
-			return "\(i) people are down to hang"
+			return "\(i) people are free 😁"
 		}
 	}
 	

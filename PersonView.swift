@@ -59,15 +59,15 @@ struct PersonView: View {
         }
         
 		let timeLeft = endTime - self.currentTime
-		
         if timeLeft >= 8*60*60 {
             return ret + "all day"
-        } else if timeLeft >= 4*60*60 {
+		} else if timeLeft <= 0 {
+			self.fire.noStatus(id)
+			return "Nobody knows for a while"
+		}
+		else if timeLeft >= 4*60*60 {
             return ret + "a while"
-        } else if timeLeft <= 0 {
-            return ret + "\(timeLeft)"
-        }
-        else {
+		} else {
 			print("TimeInterval for comment: \(timeLeft)")
             let hours = Int(timeLeft/3600)
             let minutes = Int((timeLeft/60).truncatingRemainder(dividingBy: 60))
@@ -97,9 +97,6 @@ struct PersonView: View {
                     Spacer()
                 }
                 Spacer()
-                ProgressView(progress: timePercentage(), width: 7)
-                    .foregroundColor(Color(UIColor.systemBackground))
-                    .frame(width: 60, height: 60)
             }
             .padding()
         }
@@ -114,7 +111,7 @@ struct PersonView: View {
 		.frame(width: UIScreen.main.bounds.width)
 		.fixedSize(horizontal: true, vertical: true)
 		.padding(.vertical, 8)
-		.shadow(color: color, radius: 2)
+		.shadow(color: color, radius: 4, y: 4)
     }
     
     var color: Color{
@@ -139,6 +136,9 @@ struct PersonView: View {
         //print(num)
         //print(denom)
         let ret = Float(timeRemaining/totalTime)
+		print("Time percentage \(ret)")
+		print("Start time \(startTime)")
+		print("End time \(endTime)")
         return ((ret >= 0 && ret <= 1) ? 1 - ret : 0)
         //max(0, min(Float(timeRemaining/totalTime), 1))
     }

@@ -68,8 +68,6 @@ struct TimeSliderView: View {
 						else{
 							self.selection = selection
 						}
-						//self.interval = self.intervalTime()
-						//self.start = Date().timeIntervalSince1970
 						self.time = self.intervalTime()
 						print("dragTime \(self.time)")
 				}
