@@ -75,14 +75,10 @@ struct SettingsView: View {
                         Text("Edit name")
                         ZStack{
                             TextField(name, text: $name, onEditingChanged: { _ in
-                                if self.currentEdit == .name {
                                     self.color = Color.blue
-                                }
                             }, onCommit: {
-                                if self.currentEdit == .name {
                                     self.fire.changeName(self.name)
                                     self.color = Color.gray
-                                }
                             })
                                 .textFieldStyle(PlainTextFieldStyle())
                                 .padding()
@@ -111,14 +107,10 @@ struct SettingsView: View {
                         Text("Edit house name")
                         ZStack{
                             TextField(houseName, text: $houseName, onEditingChanged: { _ in
-                                if self.currentEdit == .houseName {
                                 self.color = Color.blue
-                                }
                             }, onCommit: {
-                                if self.currentEdit == .name {
                                 self.fire.setHouseName(self.houseName)
                                 self.color = Color.gray
-                                }
                             })
                                 .textFieldStyle(PlainTextFieldStyle())
                                 .padding()

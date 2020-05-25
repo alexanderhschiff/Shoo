@@ -13,8 +13,10 @@ struct EditCardView: View {
     @State private var tapped = false
     @State private var showingAlert = false
     @EnvironmentObject var fire: Fire
-    @State private var interval: Double = 60
-    @State private var time: Int = 10
+	
+	//time variables
+	@State private var time: Double = Date().timeIntervalSince1970
+	@State private var selection: Int = 0
     
     @State private var addReason = ""
     @State private var reasons = ["👩‍💻 Working", "📺 Watching TV", "🏃‍♂️ Exercising", "📱 On the phone"]
@@ -22,39 +24,10 @@ struct EditCardView: View {
     @State private var newStatus: Int = 0
     @State private var newReason: String = ""
     @State private var defaultEnd: Double = Date().timeIntervalSince1970
+	@State private var start: Double = Date().timeIntervalSince1970
     
     @State private var custom = false
-    
     @State private var customColor: Color = Color.gray
-    
-    func intervalTime() -> Double{
-        switch self.time{
-        case 0:
-            return Date().timeIntervalSince1970 + 10*60 //10 minutes
-        case 1:
-            return Date().timeIntervalSince1970 + 15*60 //15 minutes
-        case 2:
-            return Date().timeIntervalSince1970 + 20*60 //20 minutes
-        case 3:
-            return Date().timeIntervalSince1970 + 30*60 //30 minutes
-        case 4:
-            return Date().timeIntervalSince1970 + 45*60 //45 minutes
-        case 5:
-            return Date().timeIntervalSince1970 + 60*60//1 hour
-        case 6:
-            return Date().timeIntervalSince1970 + 120*60 //2 hours
-        case 7:
-            return Date().timeIntervalSince1970 + 180*60 //3 hours
-        case 8:
-            return Date().timeIntervalSince1970 + 240*60 //4 hours
-        case 9:
-            return Date().timeIntervalSince1970 + 360*60 //6 hours (a while)
-        case 10:
-            return Calendar.current.nextDate(after: Date(), matching: DateComponents(hour: 0, minute: 0), matchingPolicy: .nextTimePreservingSmallerComponents)!.timeIntervalSince1970//until midnight
-        default:
-            return 0
-        }
-    }
     
     func addReasonFunc() {
         let nR = addReason.trimmingCharacters(in: .whitespacesAndNewlines)
@@ -77,7 +50,7 @@ struct EditCardView: View {
     }
     
     var displayTime: String{
-        switch time{
+        switch selection{
         case 0:
             return "10 minutes"
         case 1:
@@ -111,7 +84,7 @@ struct EditCardView: View {
             
             Spacer()
             
-            PersonView(t: $time, name: fire.profile.name, status: newStatus, reason: newReason, endTime: interval, startTime: fire.profile.start, id: fire.profile.uid).environmentObject(fire)
+			PersonView(t: time, name: fire.profile.name, status: newStatus, reason: newReason, endTime: time, startTime: start, id: fire.profile.uid, timeRInterval: 5).environmentObject(fire)
             
             Spacer()
            
@@ -197,7 +170,6 @@ struct EditCardView: View {
             VStack(alignment: .leading){
                 Text("For how long?")
                     .font(.subheadline)
-                //.padding()
                 VStack(alignment: .leading, spacing: 0){
                     HStack{
                         Image(systemName: "timer")
@@ -205,53 +177,37 @@ struct EditCardView: View {
                             .font(.headline)
                             .fontWeight(.bold)
                         
-                    }//.padding()
-                    TimeSliderView(time: self.$time)
+                    }
+					TimeSliderView(time: self.$time, selection: self.$selection)
                         .frame(height: 60)
                         .padding([.top, .bottom, .trailing])
-                        .highPriorityGesture(
-                            DragGesture()
-                                .onChanged{ gesture in
-                                    let time = Int(gesture.location.x)/(Int(UIScreen.main.bounds.width)/11)
-                                    if time > 11{
-                                        self.time = 11
-                                    }
-                                    else if time < 0{
-                                        self.time = 0
-                                    }
-                                    else{
-                                        self.time = time
-                                    }
-                                    self.interval = self.intervalTime()
-                            }
-                    )
+                        /*
                         .onTapGesture {
                             self.interval = self.intervalTime()
-                    }
+							self.start = Date().timeIntervalSince1970
+                    }*/
                 }
             }.padding(.leading)
-            
-            VStack(alignment: .center){
+
                 Button(action: {
                     self.showingAlert = true
                     self.tapped = true
                 }){
-                    HStack{
                         if !self.tapped{
                             Text("Notify All")
                         } else{
                             Image(systemName: "checkmark.circle")
                         }
-                    }
+                    
                 }
                 .buttonStyle(WideButtonStyle(color: getColor(self.newStatus), tapped: tapped))
-            }
+            
             Spacer()
         }
         .background(Color(UIColor.secondarySystemBackground))
         .edgesIgnoringSafeArea(.bottom)
         .onDisappear {
-            self.fire.saveState(user: self.fire.profile, status: self.newStatus, reason: self.newReason, end: self.intervalTime())
+			self.fire.saveState(user: self.fire.profile, status: self.newStatus, reason: self.newReason, end: self.time)
             self.fire.saveCustomReasons(reasons: self.reasons)
         }
         .onAppear {
@@ -259,6 +215,8 @@ struct EditCardView: View {
             self.newStatus = self.fire.profile.status
             self.reasons = self.fire.getCustomReasons()
             self.defaultEnd = self.fire.profile.end
+			self.time = self.fire.profile.end
+			self.start = self.fire.profile.start
         }
         .alert(isPresented: $showingAlert){
             Alert(title: Text("Feature coming soon..."))

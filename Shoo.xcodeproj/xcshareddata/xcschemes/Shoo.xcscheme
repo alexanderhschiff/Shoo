@@ -15,7 +15,7 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "13EF84AC246DACB30049CCD1"
-               BuildableName = "ShooApp.app"
+               BuildableName = "Shoo.app"
                BlueprintName = "Shoo"
                ReferencedContainer = "container:Shoo.xcodeproj">
             </BuildableReference>
@@ -45,7 +45,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "13EF84AC246DACB30049CCD1"
-            BuildableName = "ShooApp.app"
+            BuildableName = "Shoo.app"
             BlueprintName = "Shoo"
             ReferencedContainer = "container:Shoo.xcodeproj">
          </BuildableReference>
@@ -62,7 +62,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "13EF84AC246DACB30049CCD1"
-            BuildableName = "ShooApp.app"
+            BuildableName = "Shoo.app"
             BlueprintName = "Shoo"
             ReferencedContainer = "container:Shoo.xcodeproj">
          </BuildableReference>

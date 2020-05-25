@@ -32,7 +32,9 @@ struct TopView: View {
                     Text(self.fire.houseName)
                         .fontWeight(.heavy)
                         .font(.largeTitle)
+						.lineLimit(1)
                     FreePeopleView().environmentObject(self.fire)
+					.lineLimit(1)
                 }
                 
                 Spacer()

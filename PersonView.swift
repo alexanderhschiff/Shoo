@@ -13,45 +13,21 @@ enum Status{
 }
 
 struct PersonView: View {
-    @Binding var t: Int
-    
-    var timeInterval: Double{
-        switch t{
-        case 0:
-            return Date().timeIntervalSince1970 + 10*60 //10 minutes
-        case 1:
-            return Date().timeIntervalSince1970 + 15*60 //15 minutes
-        case 2:
-            return Date().timeIntervalSince1970 + 20*60 //20 minutes
-        case 3:
-            return Date().timeIntervalSince1970 + 30*60 //30 minutes
-        case 4:
-            return Date().timeIntervalSince1970 + 45*60 //45 minutes
-        case 5:
-            return Date().timeIntervalSince1970 + 60*60//1 hour
-        case 6:
-            return Date().timeIntervalSince1970 + 120*60 //2 hours
-        case 7:
-            return Date().timeIntervalSince1970 + 180*60 //3 hours
-        case 8:
-            return Date().timeIntervalSince1970 + 240*60 //4 hours
-        case 9:
-            return Date().timeIntervalSince1970 + 360*60 //6 hours (a while)
-        case 10:
-            return Calendar.current.nextDate(after: Date(), matching: DateComponents(hour: 0, minute: 0), matchingPolicy: .nextTimePreservingSmallerComponents)!.timeIntervalSince1970//until midnight
-        default:
-            return 0
-        }
-    }
-    
     @EnvironmentObject var fire: Fire
-    @State var time: TimeInterval = 0
+	
+	//difference from
+	@State var timeInterval: TimeInterval = 1.0
+	
+	//time input
+	let t: Double
+	
     let name: String
     let status: Int
     let reason: String
     let endTime: TimeInterval
     let startTime: TimeInterval
     let id: String
+	let timeRInterval: Double
     
     var progress: Float{
         return 0.4
@@ -60,7 +36,7 @@ struct PersonView: View {
     var countdown: String{
         var ret = ""
         print("personView")
-        print(time)
+        print(timeInterval)
         //there is a reason
         if(!reason.isEmpty){
             ret = reason + ", "
@@ -85,27 +61,29 @@ struct PersonView: View {
             default:
                 ret += "Nobody knows for "
             }
-            
         }
         
-        if timeInterval > 8*60*60 {
+		let timeLeft = t - Date().timeIntervalSince1970
+		
+        if timeLeft >= 8*60*60 {
             return ret + "all day"
-        } else if timeInterval > 4*60*60 {
+        } else if timeLeft >= 4*60*60 {
             return ret + "a while"
-        } else if timeInterval <= 0 {
-            return ret + "fucked up time"
+        } else if timeLeft <= 0 {
+            return ret + "\(timeLeft)"
         }
         else {
-            let hours = Int(timeInterval/3600)
-            let minutes = Int((timeInterval/60).truncatingRemainder(dividingBy: 60))
+			print("TimeInterval for comment: \(timeLeft)")
+            let hours = Int(timeLeft/3600)
+            let minutes = Int((timeLeft/60).truncatingRemainder(dividingBy: 60))
             return ret + (hours>0 ? "\(hours) hour\(hours == 1 ? "" : "s")": "") + (hours > 0 && minutes > 0 ? ", " : "") + (minutes>0 ? "\(minutes) minute\(minutes == 1 ? "" : "s")": "")
         }
     }
-    
+	
     var body: some View {
         ZStack{
             //color
-            color.blur(radius: 5)
+            color
             
             HStack{
                 VStack(alignment: .leading, spacing: 0){
@@ -129,16 +107,18 @@ struct PersonView: View {
                     .frame(width: 60, height: 60)
             }
             .padding()
-        }.onAppear {
-            self.time = getCountdownTime(from: self.endTime)
-            print("initialEnd: \(self.endTime)")
-            Timer.scheduledTimer(withTimeInterval: 5, repeats: true) { _ in
-                self.time = getCountdownTime(from: self.endTime)
-                print("end: \(self.endTime)")
-            }.tolerance = 2.0
         }
+		/*.onAppear {
+			self.timeInterval = getCountdownTime(from: self.endTime)
+			print("InitialendTime: \(self.endTime)")
+            //print("initialEnd: \(self.endTime)")
+			Timer.scheduledTimer(withTimeInterval: self.timeRInterval, repeats: true) { _ in
+				self.timeInterval = getCountdownTime(from: self.endTime)
+                print("endTime: \(self.endTime)")
+				//print("timeInterval: \(self.timeInterval)")
+			}.tolerance = (self.timeRInterval * 0.2)
+        }*/
         .clipShape(RoundedRectangle(cornerRadius: 20, style: .continuous))
-            //.overlay(RoundedRectangle(cornerRadius: 20, style: .continuous).stroke(color, lineWidth: 2))
             .padding(.horizontal)
             .frame(width: UIScreen.main.bounds.width)
             .fixedSize(horizontal: true, vertical: true)
@@ -161,7 +141,7 @@ struct PersonView: View {
     
     func timePercentage() -> Float {
         let totalTime = endTime - startTime
-        let timeRemaining = time
+        let timeRemaining = timeInterval
         if (timeRemaining < 0){
             self.fire.noStatus(self.id)
         }
