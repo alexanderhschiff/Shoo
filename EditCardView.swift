@@ -17,14 +17,15 @@ struct EditCardView: View {
 	//time variables
 	@State private var time: Double = Date().timeIntervalSince1970
 	@State private var selection: Int = 0
+	
+    @State private var defaultEnd: Double = Date().timeIntervalSince1970 //default end is now
+	@State private var start: Double = Date().timeIntervalSince1970 //start is always now
     
     @State private var addReason = ""
     @State private var reasons = ["👩‍💻 Working", "📺 Watching TV", "🏃‍♂️ Exercising", "📱 On the phone"]
     
     @State private var newStatus: Int = 0
     @State private var newReason: String = ""
-    @State private var defaultEnd: Double = Date().timeIntervalSince1970
-	@State private var start: Double = Date().timeIntervalSince1970
     
     @State private var custom = false
     @State private var customColor: Color = Color.gray
@@ -84,7 +85,7 @@ struct EditCardView: View {
             
             Spacer()
             
-			PersonView(t: time, name: fire.profile.name, status: newStatus, reason: newReason, endTime: time, startTime: start, id: fire.profile.uid, timeRInterval: 5).environmentObject(fire)
+			PersonView(name: fire.profile.name, status: newStatus, reason: newReason, endTime: time, startTime: start, id: fire.profile.uid, timerInterval: 5).environmentObject(fire)
             
             Spacer()
            

@@ -15,19 +15,16 @@ enum Status{
 struct PersonView: View {
     @EnvironmentObject var fire: Fire
 	
-	//difference from
-	@State var timeInterval: TimeInterval = 1.0
-	
-	//time input
-	let t: Double
-	
     let name: String
     let status: Int
     let reason: String
-    let endTime: TimeInterval
-    let startTime: TimeInterval
+	
+    let endTime: TimeInterval //set by user (additional time + current time)
+    let startTime: TimeInterval //set on save (current time)
+	@State private var currentTime: TimeInterval = Date().timeIntervalSince1970 //NOW –– updating on timer
+	
     let id: String
-	let timeRInterval: Double
+	let timerInterval: Double //how often to refresh timer
     
     var progress: Float{
         return 0.4
@@ -35,8 +32,6 @@ struct PersonView: View {
     
     var countdown: String{
         var ret = ""
-        print("personView")
-        print(timeInterval)
         //there is a reason
         if(!reason.isEmpty){
             ret = reason + ", "
@@ -63,7 +58,7 @@ struct PersonView: View {
             }
         }
         
-		let timeLeft = t - Date().timeIntervalSince1970
+		let timeLeft = endTime - self.currentTime
 		
         if timeLeft >= 8*60*60 {
             return ret + "all day"
@@ -108,22 +103,18 @@ struct PersonView: View {
             }
             .padding()
         }
-		/*.onAppear {
-			self.timeInterval = getCountdownTime(from: self.endTime)
-			print("InitialendTime: \(self.endTime)")
-            //print("initialEnd: \(self.endTime)")
-			Timer.scheduledTimer(withTimeInterval: self.timeRInterval, repeats: true) { _ in
-				self.timeInterval = getCountdownTime(from: self.endTime)
-                print("endTime: \(self.endTime)")
-				//print("timeInterval: \(self.timeInterval)")
-			}.tolerance = (self.timeRInterval * 0.2)
-        }*/
+		.onAppear {
+			//self.currentTime = getCountdownTime(from: self.endTime)
+			Timer.scheduledTimer(withTimeInterval: self.timerInterval, repeats: true) { _ in
+				self.currentTime = Date().timeIntervalSince1970 //will update current time
+			}.tolerance = (self.timerInterval * 0.2)
+        }
         .clipShape(RoundedRectangle(cornerRadius: 20, style: .continuous))
-            .padding(.horizontal)
-            .frame(width: UIScreen.main.bounds.width)
-            .fixedSize(horizontal: true, vertical: true)
-            .padding(.vertical, 8)
-            .shadow(color: color, radius: 2)
+		.padding(.horizontal)
+		.frame(width: UIScreen.main.bounds.width)
+		.fixedSize(horizontal: true, vertical: true)
+		.padding(.vertical, 8)
+		.shadow(color: color, radius: 2)
     }
     
     var color: Color{
@@ -141,7 +132,7 @@ struct PersonView: View {
     
     func timePercentage() -> Float {
         let totalTime = endTime - startTime
-        let timeRemaining = timeInterval
+		let timeRemaining = endTime - Date().timeIntervalSince1970
         if (timeRemaining < 0){
             self.fire.noStatus(self.id)
         }
