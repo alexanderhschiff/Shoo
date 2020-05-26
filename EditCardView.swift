@@ -13,13 +13,13 @@ struct EditCardView: View {
     @State private var tapped = false
     @State private var showingAlert = false
     @EnvironmentObject var fire: Fire
-	
-	//time variables
-	@State private var time: Double = Date().timeIntervalSince1970
-	@State private var selection: Int = 0
-	
+    
+    //time variables
+    @State private var time: Double = Date().timeIntervalSince1970
+    @State private var selection: Int = 0
+    
     @State private var defaultEnd: Double = Date().timeIntervalSince1970 //default end is now
-	@State private var start: Double = Date().timeIntervalSince1970 //start is always now
+    @State private var start: Double = Date().timeIntervalSince1970 //start is always now
     
     @State private var addReason = ""
     @State private var reasons = ["👩‍💻 Working", "📺 Watching TV", "🏃‍♂️ Exercising", "📱 On the phone"]
@@ -79,19 +79,21 @@ struct EditCardView: View {
         }
     }
     
+    @ObservedObject private var keyboard = KeyboardResponder()
+    
     var body: some View {
         VStack(alignment: .leading){
             HandleView()
             
             Spacer()
             
-			PersonView(name: fire.profile.name, status: newStatus, reason: newReason, endTime: time, startTime: start, id: fire.profile.uid, timerInterval: 5).environmentObject(fire)
+            PersonView(name: fire.profile.name, status: newStatus, reason: newReason, endTime: time, startTime: start, id: fire.profile.uid, timerInterval: 5).environmentObject(fire)
             
             Spacer()
-           
+            
             VStack(alignment: .leading, spacing: 10){
                 Text("Your status")
-                    .font(.subheadline)
+                    .font(.headline)
                 
                 HStack{
                     Button("Free"){
@@ -116,7 +118,7 @@ struct EditCardView: View {
             
             VStack(alignment: .leading){
                 Text("What's happening")
-                    .font(.subheadline)
+                    .font(.headline)
                     .padding(.leading)
                 
                 ScrollView(.horizontal, showsIndicators: false){
@@ -133,7 +135,7 @@ struct EditCardView: View {
                                 .background(Color.gray.opacity(0.7))
                                 .cornerRadius(20)
                                 .shadow(radius: 3, y: 4)
-                                .disableAutocorrection(true)
+                                .disableAutocorrection(false)
                                 .padding([.leading, .bottom])
                             
                             HStack{
@@ -170,45 +172,44 @@ struct EditCardView: View {
             
             VStack(alignment: .leading){
                 Text("For how long?")
-                    .font(.subheadline)
+                    .font(.headline)
                 VStack(alignment: .leading, spacing: 0){
                     HStack{
                         Image(systemName: "timer")
                         Text("\(self.displayTime)")
                             .font(.headline)
                             .fontWeight(.bold)
-                        
                     }
-					TimeSliderView(time: self.$time, selection: self.$selection)
+                    TimeSliderView(time: self.$time, selection: self.$selection)
                         .frame(height: 60)
                         .padding([.top, .bottom, .trailing])
-                        /*
-                        .onTapGesture {
-                            self.interval = self.intervalTime()
-							self.start = Date().timeIntervalSince1970
-                    }*/
                 }
             }.padding(.leading)
-
-                Button(action: {
-                    self.showingAlert = true
-                    self.tapped = true
-                }){
-                        if !self.tapped{
-                            Text("Notify All")
-                        } else{
-                            Image(systemName: "checkmark.circle")
-                        }
-                    
-                }
-                .buttonStyle(WideButtonStyle(color: getColor(self.newStatus), tapped: tapped))
+            
+            Button(action: {
+                self.showingAlert = true
+                self.tapped = true
+            }){
+                HStack{
+                    Spacer()
+                    if !self.tapped{
+                        Text("Notify All")
+                    } else{
+                        Image(systemName: "checkmark.circle")
+                            .font(.title)
+                    }
+                    Spacer()
+                }.padding(.horizontal)
+            }
+            .padding(.horizontal)
+            .buttonStyle(WideButtonStyle(color: getColor(self.newStatus)))
             
             Spacer()
         }
         .background(Color(UIColor.secondarySystemBackground))
         .edgesIgnoringSafeArea(.bottom)
         .onDisappear {
-			self.fire.saveState(user: self.fire.profile, status: self.newStatus, reason: self.newReason, end: self.time)
+            self.fire.saveState(user: self.fire.profile, status: self.newStatus, reason: self.newReason, end: self.time)
             self.fire.saveCustomReasons(reasons: self.reasons)
         }
         .onAppear {
@@ -216,13 +217,15 @@ struct EditCardView: View {
             self.newStatus = self.fire.profile.status
             self.reasons = self.fire.getCustomReasons()
             self.defaultEnd = self.fire.profile.end
-			self.time = self.fire.profile.end
-			self.start = self.fire.profile.start
+            self.time = self.fire.profile.end
+            self.start = self.fire.profile.start
         }
         .alert(isPresented: $showingAlert){
             Alert(title: Text("Feature coming soon..."))
         }
+        .offset(y: -0.3 * keyboard.currentHeight)
     }
+    
 }
 
 

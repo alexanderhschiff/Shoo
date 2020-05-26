@@ -18,8 +18,7 @@ struct HomeView: View {
     @State private var showSheet = false
     @State private var sheetType: presentSheet = .editHouse
     @State var currentTime = Date()
-    //updates every 15 seconds - can update later
-    let timer = Timer.publish(every: 15, on: .main, in: .common).autoconnect()
+
     
     var body: some View {
         GeometryReader { geo in
@@ -30,7 +29,7 @@ struct HomeView: View {
                             .foregroundColor(Color.white.opacity(0))
                             .frame(height: UIScreen.main.bounds.height * 0.15)
                         ForEach(self.fire.mates) { mate in
-							PersonView(name: mate.name, status: mate.status, reason: mate.reason, endTime: mate.end, startTime: mate.start, id: mate.id, timerInterval: 5).environmentObject(self.fire)
+                            PersonView(name: mate.name, status: mate.status, reason: mate.reason, endTime: mate.end, startTime: mate.start, id: mate.id, timerInterval: 5).environmentObject(self.fire)
                         }
                         Rectangle()
                             .foregroundColor(Color.white.opacity(0))
@@ -56,12 +55,9 @@ struct HomeView: View {
             .onAppear(perform: {
                 self.fire.startListener()
             })
-                .onDisappear(perform: {
+            .onDisappear(perform: {
                     self.fire.stopListener()
                 })
-        }
-        .onReceive(timer){ input in
-            self.currentTime = input
         }
         .background(Color(UIColor.secondarySystemBackground))
         .sheet(isPresented: self.$showSheet){

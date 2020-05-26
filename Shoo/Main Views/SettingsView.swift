@@ -49,6 +49,8 @@ struct SettingsView: View {
             Color(UIColor.secondarySystemBackground)
                 .edgesIgnoringSafeArea(.all)
             
+            
+            
             VStack(alignment: .leading){
                 HandleView()
                 
@@ -70,135 +72,140 @@ struct SettingsView: View {
                 }
                 .padding(.horizontal)
                 
-                VStack(alignment: .leading){
-                    VStack(alignment: .leading, spacing: 5){
-                        Text("Edit name")
-                        ZStack{
-                            TextField(name, text: $name, onEditingChanged: { _ in
-                                    self.color = Color.blue
-                            }, onCommit: {
-                                    self.fire.changeName(self.name)
-                                    self.color = Color.gray
-                            })
-                                .textFieldStyle(PlainTextFieldStyle())
-                                .padding()
-                                .background(Color(UIColor.systemBackground))
-                                .clipShape(RoundedRectangle(cornerRadius: 20, style: .continuous))
-                            .onTapGesture {
-                                    self.currentEdit = .name
-                            }
-                            
-                            HStack{
-                                Spacer()
-                                Button(action: {
-                                    UIApplication.shared.endEditing() // Call to dismiss keyboard
-                                    self.fire.changeName(self.name)
-                                    self.color = Color.gray
-                                }){
-                                    Image(systemName: "checkmark.circle")
-                                        .padding(.trailing)
-                                        .font(.title)
-                                        .foregroundColor(color)
+                ScrollView(.vertical){
+                    VStack(alignment: .leading){
+                        VStack(alignment: .leading){
+                            VStack(alignment: .leading, spacing: 5){
+                                Text("Name")
+                                ZStack{
+                                    TextField(name, text: $name, onEditingChanged: { _ in
+                                        self.color = Color.blue
+                                    }, onCommit: {
+                                        self.fire.changeName(self.name)
+                                        self.color = Color.gray
+                                    })
+                                        .textFieldStyle(PlainTextFieldStyle())
+                                        .padding()
+                                        .background(Color(UIColor.systemBackground))
+                                        .clipShape(RoundedRectangle(cornerRadius: 20, style: .continuous))
+                                        .onTapGesture {
+                                            self.currentEdit = .name
+                                    }
+                                    
+                                    HStack{
+                                        Spacer()
+                                        Button(action: {
+                                            UIApplication.shared.endEditing() // Call to dismiss keyboard
+                                            self.fire.changeName(self.name)
+                                            self.color = Color.gray
+                                        }){
+                                            Image(systemName: "checkmark.circle")
+                                                .padding(.trailing)
+                                                .font(.title)
+                                                .foregroundColor(color)
+                                        }
+                                    }
                                 }
                             }
-                        }
-                    }
-                    VStack(alignment: .leading, spacing: 5){
-                        Text("Edit house name")
-                        ZStack{
-                            TextField(houseName, text: $houseName, onEditingChanged: { _ in
-                                self.color = Color.blue
-                            }, onCommit: {
-                                self.fire.setHouseName(self.houseName)
-                                self.color = Color.gray
-                            })
-                                .textFieldStyle(PlainTextFieldStyle())
-                                .padding()
-                                .background(Color(UIColor.systemBackground))
-                                .clipShape(RoundedRectangle(cornerRadius: 20, style: .continuous))
-                                .onTapGesture {
-                                    self.currentEdit = .houseName
-                            }
-                            
-                            HStack{
-                                Spacer()
-                                Button(action: {
-                                    UIApplication.shared.endEditing() // Call to dismiss keyboard
-                                    self.fire.setHouseName(self.houseName)
-                                    self.color = Color.gray
-                                }){
-                                    Image(systemName: "checkmark.circle")
-                                        .padding(.trailing)
-                                        .font(.title)
-                                        .foregroundColor(color)
+                            VStack(alignment: .leading, spacing: 5){
+                                Text("House name")
+                                ZStack{
+                                    TextField(houseName, text: $houseName, onEditingChanged: { _ in
+                                        self.color = Color.blue
+                                    }, onCommit: {
+                                        self.fire.setHouseName(self.houseName)
+                                        self.color = Color.gray
+                                    })
+                                        .textFieldStyle(PlainTextFieldStyle())
+                                        .padding()
+                                        .background(Color(UIColor.systemBackground))
+                                        .clipShape(RoundedRectangle(cornerRadius: 20, style: .continuous))
+                                        .onTapGesture {
+                                            self.currentEdit = .houseName
+                                    }
+                                    
+                                    HStack{
+                                        Spacer()
+                                        Button(action: {
+                                            UIApplication.shared.endEditing() // Call to dismiss keyboard
+                                            self.fire.setHouseName(self.houseName)
+                                            self.color = Color.gray
+                                        }){
+                                            Image(systemName: "checkmark.circle")
+                                                .padding(.trailing)
+                                                .font(.title)
+                                                .foregroundColor(color)
+                                        }
+                                    }
                                 }
                             }
-                        }
-                    }
-                    VStack(alignment: .leading, spacing: 5){
-                        HStack{
-                            Text("Reasons")
-                            Spacer()
-                            EditButton()
-                        }
-                        List {
-                            ForEach(reasons, id: \.self) { reason in
-                                Text(reason)
+                            VStack(alignment: .leading, spacing: 5){
+                                HStack{
+                                    Text("Reasons")
+                                    Spacer()
+                                    EditButton()
+                                }
+                                List {
+                                    ForEach(reasons, id: \.self) { reason in
+                                        Text(reason)
+                                    }
+                                    .onMove(perform: move)
+                                    .onDelete(perform: delete)
+                                }
+                                .cornerRadius(20)
+                                .frame(height: UIScreen.main.bounds.height * 0.3)
                             }
-                            .onMove(perform: move)
-                            .onDelete(perform: delete)
+                            
                         }
-                        .cornerRadius(20)
+                        .padding()
+                        
+                        Spacer()
+                        
+                        Button(action: {
+                            let url: NSURL = URL(string: "https://www.shoo.app/privacy_policy.html")! as NSURL
+                            UIApplication.shared.open(url as URL)
+                        }){
+                            HStack{
+                                Image(systemName: "link.circle.fill")
+                                Text("Privacy policy")
+                            }
+                            .padding()
+                            .background(Color(UIColor.systemBackground))
+                            .clipShape(RoundedRectangle(cornerRadius: 20, style: .continuous))
+                            .padding(.horizontal)
+                        }
+                        
+                        Button(action: {
+                            let url: NSURL = URL(string: "https://www.shoo.app")! as NSURL
+                            UIApplication.shared.open(url as URL)
+                        }){
+                            HStack{
+                                Image(systemName: "link.circle.fill")
+                                Text("App Website")
+                            }
+                            .padding()
+                            .background(Color(UIColor.systemBackground))
+                            .clipShape(RoundedRectangle(cornerRadius: 20, style: .continuous))
+                            .padding(.horizontal)
+                        }
+                        
+                        Text("Made by Alexander and Benjamin Schiff")
+                            .foregroundColor(.secondary)
+                            .font(.headline)
+                            .padding()
+                            .frame(alignment: .center)
                     }
+                }
+                .onDisappear {
+                    self.fire.saveCustomReasons(reasons: self.reasons)
+                }
                     
+                .onAppear{
+                    self.name = self.fire.profile.name
+                    self.reasons = self.fire.getCustomReasons()
+                    self.houseName = self.fire.houseName
                 }
-                .padding()
-                
-                Spacer()
-                
-                Button(action: {
-                    let url: NSURL = URL(string: "https://www.apple.com")! as NSURL
-                    UIApplication.shared.open(url as URL)
-                }){
-                    HStack{
-                        Image(systemName: "link.circle.fill")
-                        Text("Privacy policy")
-                    }
-                    .padding()
-                    .background(Color(UIColor.systemBackground))
-                    .clipShape(RoundedRectangle(cornerRadius: 20, style: .continuous))
-                    .padding(.horizontal)
-                }
-                
-                Button(action: {
-                    let url: NSURL = URL(string: "https://www.apple.com")! as NSURL
-                    UIApplication.shared.open(url as URL)
-                }){
-                    HStack{
-                        Image(systemName: "link.circle.fill")
-                        Text("App Website")
-                    }
-                    .padding()
-                    .background(Color(UIColor.systemBackground))
-                    .clipShape(RoundedRectangle(cornerRadius: 20, style: .continuous))
-                    .padding(.horizontal)
-                }
-                
-                Text("Made by Alexander and Benjamin Schiff")
-                    .foregroundColor(.secondary)
-                    .font(.headline)
-                    .padding()
-                    .frame(alignment: .center)
             }
-        }
-        .onDisappear {
-            self.fire.saveCustomReasons(reasons: self.reasons)
-        }
-            
-        .onAppear{
-            self.name = self.fire.profile.name
-            self.reasons = self.fire.getCustomReasons()
-            self.houseName = self.fire.houseName
         }
     }
 }

@@ -19,6 +19,7 @@
 		13EF84BD246DACB90049CCD1 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 13EF84BB246DACB90049CCD1 /* LaunchScreen.storyboard */; };
 		13EF84C5246DB13C0049CCD1 /* PersonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13EF84C4246DB13C0049CCD1 /* PersonView.swift */; };
 		13FE4B5A246E32F800D15BE9 /* FreePeopleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13FE4B59246E32F800D15BE9 /* FreePeopleView.swift */; };
+		53699026247CABA50053CC92 /* KeyboardResponder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53699025247CABA50053CC92 /* KeyboardResponder.swift */; };
 		538ED768247904640089E931 /* Time.swift in Sources */ = {isa = PBXBuildFile; fileRef = 538ED767247904640089E931 /* Time.swift */; };
 		538ED76A247A312C0089E931 /* ExtensionsAndModifiers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 538ED769247A312C0089E931 /* ExtensionsAndModifiers.swift */; };
 		5398FA4B2474E62B00467D67 /* EditCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5398FA4A2474E62B00467D67 /* EditCardView.swift */; };
@@ -64,6 +65,7 @@
 		13FE4B59246E32F800D15BE9 /* FreePeopleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FreePeopleView.swift; sourceTree = "<group>"; };
 		19D61C28CE417EC4A67E5C38 /* Pods-Shoo.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Shoo.debug.xcconfig"; path = "Target Support Files/Pods-Shoo/Pods-Shoo.debug.xcconfig"; sourceTree = "<group>"; };
 		5336251E2470A21800E0B2AD /* Shoo.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Shoo.entitlements; sourceTree = "<group>"; };
+		53699025247CABA50053CC92 /* KeyboardResponder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardResponder.swift; sourceTree = "<group>"; };
 		538ED767247904640089E931 /* Time.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Time.swift; sourceTree = "<group>"; };
 		538ED769247A312C0089E931 /* ExtensionsAndModifiers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExtensionsAndModifiers.swift; sourceTree = "<group>"; };
 		5398FA4A2474E62B00467D67 /* EditCardView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditCardView.swift; sourceTree = "<group>"; };
@@ -227,6 +229,7 @@
 			isa = PBXGroup;
 			children = (
 				538ED769247A312C0089E931 /* ExtensionsAndModifiers.swift */,
+				53699025247CABA50053CC92 /* KeyboardResponder.swift */,
 				53EB16CA2471BBD60054D68A /* Profile.swift */,
 				53EB16CB2471BBD60054D68A /* Typealiases.swift */,
 				538ED767247904640089E931 /* Time.swift */,
@@ -383,6 +386,7 @@
 				538ED76A247A312C0089E931 /* ExtensionsAndModifiers.swift in Sources */,
 				53EB16BC2471BBC60054D68A /* FireUI.swift in Sources */,
 				53EB16BB2471BBC60054D68A /* Fire.swift in Sources */,
+				53699026247CABA50053CC92 /* KeyboardResponder.swift in Sources */,
 				13EF84B3246DACB30049CCD1 /* SceneDelegate.swift in Sources */,
 				5398FA4D2474E63800467D67 /* BottomView.swift in Sources */,
 				53EB16BF2471BBC60054D68A /* LaunchScreenView.swift in Sources */,
@@ -552,7 +556,7 @@
 				);
 				LLVM_LTO = NO;
 				MACOSX_DEPLOYMENT_TARGET = 13.4;
-				MARKETING_VERSION = 0.2;
+				MARKETING_VERSION = 0.0;
 				PRODUCT_BUNDLE_IDENTIFIER = app.shoo.app;
 				PRODUCT_NAME = Shoo;
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -581,7 +585,7 @@
 				);
 				LLVM_LTO = NO;
 				MACOSX_DEPLOYMENT_TARGET = 13.4;
-				MARKETING_VERSION = 0.2;
+				MARKETING_VERSION = 0.0;
 				PRODUCT_BUNDLE_IDENTIFIER = app.shoo.app;
 				PRODUCT_NAME = Shoo;
 				PROVISIONING_PROFILE_SPECIFIER = "";

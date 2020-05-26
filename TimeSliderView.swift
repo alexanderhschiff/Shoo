@@ -51,7 +51,6 @@ struct TimeSliderView: View {
 						.onTapGesture {
 							self.selection = number
 							self.time = self.intervalTime()
-							print("tapTime \(self.time)")
 					}
 				}
 			}
@@ -69,7 +68,6 @@ struct TimeSliderView: View {
 							self.selection = selection
 						}
 						self.time = self.intervalTime()
-						print("dragTime \(self.time)")
 				}
 			)
 			.clipShape(RoundedRectangle(cornerRadius: 20, style: .continuous))
