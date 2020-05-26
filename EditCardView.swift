@@ -27,6 +27,8 @@ struct EditCardView: View {
     @State private var newStatus: Int = 0
     @State private var newReason: String = ""
     
+    @State private var dataChanged: Bool = false
+    
     @State private var custom = false
     @State private var customColor: Color = Color.gray
     
@@ -84,6 +86,13 @@ struct EditCardView: View {
     var body: some View {
         VStack(alignment: .leading){
             HandleView()
+            HStack{
+                Spacer()
+                Text(dataChanged ? "Dismiss to save".uppercased() : " ")
+                .font(.subheadline)
+                .foregroundColor(Color.primary)
+                Spacer()
+            }
             
             Spacer()
             
@@ -98,14 +107,20 @@ struct EditCardView: View {
                 HStack{
                     Button("Free"){
                         self.newStatus = 0
+                        buttonPressHaptic()
+                        self.dataChanged = true
                     }
                     .buttonStyle(StatusButtonStyle(color: Color.green))
                     Button("Quiet"){
                         self.newStatus = 1
+                        buttonPressHaptic()
+                        self.dataChanged = true
                     }
                     .buttonStyle(StatusButtonStyle(color: Color.yellow))
                     Button("Shoo"){
                         self.newStatus = 2
+                        buttonPressHaptic()
+                        self.dataChanged = true
                     }
                     .buttonStyle(StatusButtonStyle(color: Color.red))
                     
@@ -141,8 +156,10 @@ struct EditCardView: View {
                             HStack{
                                 Spacer()
                                 Button(action: {
+                                    buttonPressHaptic()
                                     UIApplication.shared.endEditing() // Call to dismiss keyboard
                                     self.customColor = Color.gray
+                                    self.dataChanged = true
                                     self.addReasonFunc()
                                 }){
                                     Image(systemName: "checkmark.circle")
@@ -162,6 +179,8 @@ struct EditCardView: View {
                                 .reasonStyle(selected: reason == self.newReason)
                                 .padding([.leading, .bottom])
                                 .onTapGesture {
+                                    self.dataChanged = true
+                                    buttonPressHaptic()
                                     self.newReason = reason
                             }
                             .padding(.top, 5)
@@ -187,6 +206,8 @@ struct EditCardView: View {
             }.padding(.leading)
             
             Button(action: {
+                buttonPressHaptic()
+                self.dataChanged = true
                 self.showingAlert = true
                 self.tapped = true
             }){
@@ -209,6 +230,7 @@ struct EditCardView: View {
         .background(Color(UIColor.secondarySystemBackground))
         .edgesIgnoringSafeArea(.bottom)
         .onDisappear {
+            successHaptic()
             self.fire.saveState(user: self.fire.profile, status: self.newStatus, reason: self.newReason, end: self.time)
             self.fire.saveCustomReasons(reasons: self.reasons)
         }
@@ -219,6 +241,7 @@ struct EditCardView: View {
             self.defaultEnd = self.fire.profile.end
             self.time = self.fire.profile.end
             self.start = self.fire.profile.start
+            self.dataChanged = false
         }
         .alert(isPresented: $showingAlert){
             Alert(title: Text("Feature coming soon..."))

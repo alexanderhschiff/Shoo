@@ -175,9 +175,7 @@ class HouseRepository {
     
     func qUpdateTime(_ state: Double, _ profile: Profile){
         var prof = profile
-        //dump(prof.end)
         prof.end = profile.end + (10 * 60 * state)
-        //dump(prof.end)
         mateDB.document(prof.uid).updateData(["end": prof.end])
     }
     
@@ -187,7 +185,9 @@ class HouseRepository {
         }
     }
     
-    
+    func noStatus(id: String){
+        mateDB.document(id).updateData(["reason": "", "status": -1])
+    }
 }
 class Fire: ObservableObject {
     
@@ -331,11 +331,19 @@ class Fire: ObservableObject {
     
     func noStatus(_ id: String){
         for i in 0 ..< mates.count {
-            var mate = mates[i]
-            if mate.id == id {
-                mate.status = -1
+            let mate = mates[i]
+            if mate.id == id && mate.status > -1 {
+                repository.noStatus(id: id)
                 return
             }
+        }
+    }
+    
+    func noStatus(){
+        if (self.profile.status >= 0){
+            self.profile.reason = ""
+            self.profile.status = -1
+            repository.noStatus(id: self.profile.uid)
         }
     }
     

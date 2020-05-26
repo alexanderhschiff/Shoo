@@ -9,6 +9,8 @@
 import SwiftUI
 
 struct TimeSliderView: View {
+    let selectionFeedbackGenerator = UISelectionFeedbackGenerator()
+    
 	@Binding var time: Double
 	@Binding var selection: Int
 	
@@ -49,6 +51,7 @@ struct TimeSliderView: View {
 						.foregroundColor(number > self.selection ? Color.gray : Color.white)
 						.frame(width: geo.size.width/CGFloat(11)-2, height: 50)
 						.onTapGesture {
+                            self.selectionFeedbackGenerator.selectionChanged()
 							self.selection = number
 							self.time = self.intervalTime()
 					}
@@ -65,6 +68,9 @@ struct TimeSliderView: View {
 							self.selection = 0
 						}
 						else{
+                            if (selection != self.selection){
+                            self.selectionFeedbackGenerator.selectionChanged()
+                            }
 							self.selection = selection
 						}
 						self.time = self.intervalTime()

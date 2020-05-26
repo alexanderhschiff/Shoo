@@ -92,7 +92,12 @@ extension View{
     }
 }
 
-func simpleSuccessHaptic() {
+func buttonPressHaptic() {
+    let generator = UIImpactFeedbackGenerator(style: .light)
+    generator.impactOccurred()
+}
+
+func successHaptic() {
     let generator = UINotificationFeedbackGenerator()
     generator.notificationOccurred(.success)
 }

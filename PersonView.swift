@@ -65,7 +65,7 @@ struct PersonView: View {
         } else if timeLeft <= 0 {
             self.fire.noStatus(id)
             //self.color = Color.gray
-            return "Nobody knows for a while"
+            return "Nobody knows for a good while"
         }
         else if timeLeft >= 4*60*60 {
             return ret + "for a while"

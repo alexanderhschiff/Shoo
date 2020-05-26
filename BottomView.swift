@@ -61,7 +61,7 @@ struct BottomView: View {
         }
         let remainingTime = self.fire.profile.end - currentTime
         if remainingTime <= 0 {
-            self.fire.noStatus(self.fire.profile.uid)
+            self.fire.noStatus()
         }
         if remainingTime > 8*60*60 {
             return ret + "all day"
@@ -92,6 +92,7 @@ struct BottomView: View {
     var body: some View {
         VStack(spacing: 0){
             Button(action: {
+                buttonPressHaptic()
                 self.more = true
                 self.eType = .more
             }){
@@ -119,16 +120,19 @@ struct BottomView: View {
                     Spacer()
                     Button("Free"){
                         self.fire.quickUpdateStatus(statInt: 0, profile: self.fire.profile)
+                        buttonPressHaptic()
                     }
                     .buttonStyle(StatusButtonStyle(color: Color.green))
                     Spacer()
                     Button("Quiet"){
                         self.fire.quickUpdateStatus(statInt: 1, profile: self.fire.profile)
+                        buttonPressHaptic()
                     }
                     .buttonStyle(StatusButtonStyle(color: Color.yellow))
                     Spacer()
                     Button("Shoo"){
                         self.fire.quickUpdateStatus(statInt: 2, profile: self.fire.profile)
+                        buttonPressHaptic()
                     }
                     .buttonStyle(StatusButtonStyle(color: Color.red))
                 }
@@ -139,18 +143,20 @@ struct BottomView: View {
                 }
                 Group{
                     Button(action: {
-                        self.fire.quickUpdateTime(1, profile: self.fire.profile)
+                        self.fire.quickUpdateTime(-1, profile: self.fire.profile)
                         self.currentTime = Date().timeIntervalSince1970
+                        buttonPressHaptic()
                     }){
-                        Image(systemName: "plus")
+                        Image(systemName: "minus")
                     }
                     .buttonStyle(PlusMinusStyle())
                     Spacer()
                     Button(action: {
-                        self.fire.quickUpdateTime(-1, profile: self.fire.profile)
+                        self.fire.quickUpdateTime(1, profile: self.fire.profile)
                         self.currentTime = Date().timeIntervalSince1970
+                        buttonPressHaptic()
                     }){
-                        Image(systemName: "minus")
+                        Image(systemName: "plus")
                     }
                     .buttonStyle(PlusMinusStyle())
                     Spacer()
