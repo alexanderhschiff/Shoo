@@ -14,19 +14,16 @@ func handleScan(result: Result<String, CodeScannerView.ScanError>) {
 self.isShowingScanner = false
 switch result {
 case .success(let code):
+    successHaptic()
 let details = code.components(separatedBy: "\n")
 guard details.count == 1 else { return }
-
-dump(details)
 let newID = details[0]
 if self.fire.testHouse(newID) {
-print("3")
 let oldID = self.fire.profile.house
 self.fire.profile.house = newID
 self.fire.updateHouse(self.fire.profile, oldID)
 self.fire.startListener()
 }
-print("out of async")
 self.presentationMode.wrappedValue.dismiss()
 case .failure(let error):
 if error == .badInput {

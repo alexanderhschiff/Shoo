@@ -230,7 +230,7 @@ struct EditCardView: View {
         .background(Color(UIColor.secondarySystemBackground))
         .edgesIgnoringSafeArea(.bottom)
         .onDisappear {
-            successHaptic()
+            //successHaptic() - Fires too late - see how I can try to fix
             self.fire.saveState(user: self.fire.profile, status: self.newStatus, reason: self.newReason, end: self.time)
             self.fire.saveCustomReasons(reasons: self.reasons)
         }

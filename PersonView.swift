@@ -62,10 +62,9 @@ struct PersonView: View {
         let timeLeft = endTime - self.currentTime
         if timeLeft >= 8*60*60 {
             return ret + "all day"
-        } else if timeLeft <= 0 {
+        } else if timeLeft <= 0 || status == -1 {
             self.fire.noStatus(id)
-            //self.color = Color.gray
-            return "Nobody knows for a good while"
+            return "Nobody knows for a while"
         }
         else if timeLeft >= 4*60*60 {
             return ret + "for a while"

@@ -65,7 +65,7 @@ struct BottomView: View {
         }
         if remainingTime > 8*60*60 {
             return ret + "all day"
-        } else if remainingTime > 4*60*60 || remainingTime <= 0 {
+        } else if remainingTime > 4*60*60 || remainingTime <= 0 || self.fire.profile.status == -1 {
             return ret + "a while"
         } else {
             let hours = Int(remainingTime/3600)

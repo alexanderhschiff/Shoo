@@ -115,8 +115,8 @@ class HouseRepository {
     
     func updateHouse(_ prof: Profile, _ oldID: String){
         mateDB.document(prof.uid).updateData(["house": prof.house])
-        houseDB.document(prof.house).updateData(["mates": FieldValue.arrayUnion([prof.uid])])
         houseDB.document(oldID).updateData(["mates": FieldValue.arrayRemove([prof.uid])])
+        houseDB.document(prof.house).updateData(["mates": FieldValue.arrayUnion([prof.uid])])
         houseDB.document(oldID).getDocument { (document, error) in
             let numMates = document?.get("mates") as? [String] ?? []
             if numMates.count == 0 {
@@ -151,7 +151,9 @@ class HouseRepository {
     }
     
     func qUpdateStatus(_ statusInt: Int, _ profile: Profile){
-        if(statusInt != profile.status) {
+        
+        if(statusInt != profile.status ||
+            profile.end != Calendar.current.nextDate(after: Date(), matching: DateComponents(hour: 0, minute: 0), matchingPolicy: .nextTimePreservingSmallerComponents)!.timeIntervalSince1970) {
             var prof = profile
             prof.end = Calendar.current.nextDate(after: Date(), matching: DateComponents(hour: 0, minute: 0), matchingPolicy: .nextTimePreservingSmallerComponents)!.timeIntervalSince1970
             prof.start = Date().timeIntervalSince1970
