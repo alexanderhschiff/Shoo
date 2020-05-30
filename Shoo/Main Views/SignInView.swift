@@ -15,6 +15,7 @@ struct SignInView: View {
      */
     
     var body: some View {
+		
         ScrollView(.vertical){
             VStack(alignment: .leading){
                 Text("Order in the house")
@@ -62,7 +63,7 @@ struct SignInView: View {
                             .font(.headline)
                             .fontWeight(.bold)
                         
-                        
+                        /*
                         HStack {
                             Button("Free"){
                                 //none
@@ -85,6 +86,7 @@ struct SignInView: View {
                             .buttonStyle(StatusButtonStyle(color: Color.red))
                             Text("Please, leave me alone.")
                         }
+*/
                     }
                     
                     Spacer()
@@ -139,7 +141,10 @@ struct SignInView: View {
                 }
             }
             .padding()
+
         }
+
+
     }
     
     

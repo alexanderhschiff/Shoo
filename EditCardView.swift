@@ -16,8 +16,8 @@ struct EditCardView: View {
     
     //time variables
     @State private var time: Double = Date().timeIntervalSince1970
-    @State private var selection: Int = 0
-    
+    //@State private var selection: Int = 0
+
     @State private var defaultEnd: Double = Date().timeIntervalSince1970 //default end is now
     @State private var start: Double = Date().timeIntervalSince1970 //start is always now
     
@@ -53,7 +53,7 @@ struct EditCardView: View {
     }
     
     var displayTime: String{
-        switch selection{
+		switch self.fire.timeSelection{
         case 0:
             return "10 minutes"
         case 1:
@@ -96,7 +96,7 @@ struct EditCardView: View {
             
             Spacer()
             
-            PersonView(name: fire.profile.name, status: newStatus, reason: newReason, endTime: time, startTime: start, id: fire.profile.uid, timerInterval: 5).environmentObject(fire)
+			PersonView(name: fire.profile.name, status: newStatus, reason: newReason, endTime: time, startTime: start, id: fire.profile.uid, timerInterval: 5).environmentObject(fire).shadow(color: getColor(status: newStatus), radius: 10)
             
             Spacer()
             
@@ -110,19 +110,19 @@ struct EditCardView: View {
                         buttonPressHaptic()
                         self.dataChanged = true
                     }
-                    .buttonStyle(StatusButtonStyle(color: Color.green))
+                    .buttonStyle(StatusButtonStyle(color: Color.green, selected: newStatus == 0))
                     Button("Quiet"){
                         self.newStatus = 1
                         buttonPressHaptic()
                         self.dataChanged = true
                     }
-                    .buttonStyle(StatusButtonStyle(color: Color.yellow))
+                    .buttonStyle(StatusButtonStyle(color: Color.yellow, selected: newStatus == 1))
                     Button("Shoo"){
                         self.newStatus = 2
                         buttonPressHaptic()
                         self.dataChanged = true
                     }
-                    .buttonStyle(StatusButtonStyle(color: Color.red))
+                    .buttonStyle(StatusButtonStyle(color: Color.red, selected: newStatus == 2))
                     
                     Spacer()
                 }
@@ -145,7 +145,7 @@ struct EditCardView: View {
                             })
                                 .textFieldStyle(PlainTextFieldStyle())
                                 .font(.headline)
-                                .padding(16)
+                                .padding(14)
                                 .padding(.trailing, 40)
                                 .background(Color.gray.opacity(0.7))
                                 .cornerRadius(20)
@@ -199,7 +199,7 @@ struct EditCardView: View {
                             .font(.headline)
                             .fontWeight(.bold)
                     }
-                    TimeSliderView(time: self.$time, selection: self.$selection)
+                    TimeSliderView(time: self.$time)
                         .frame(height: 60)
                         .padding([.top, .bottom, .trailing])
                 }
@@ -223,14 +223,14 @@ struct EditCardView: View {
                 }.padding(.horizontal)
             }
             .padding(.horizontal)
-            .buttonStyle(WideButtonStyle(color: getColor(self.newStatus)))
+			.buttonStyle(WideButtonStyle(color: getColor(status: self.newStatus)))
             
             Spacer()
         }
         .background(Color(UIColor.secondarySystemBackground))
         .edgesIgnoringSafeArea(.bottom)
         .onDisappear {
-            successHaptic()
+            //successHaptic()
             self.fire.saveState(user: self.fire.profile, status: self.newStatus, reason: self.newReason, end: self.time)
             self.fire.saveCustomReasons(reasons: self.reasons)
         }

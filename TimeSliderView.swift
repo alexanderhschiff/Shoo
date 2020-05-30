@@ -9,13 +9,14 @@
 import SwiftUI
 
 struct TimeSliderView: View {
+	@EnvironmentObject var fire: Fire
     let selectionFeedbackGenerator = UISelectionFeedbackGenerator()
     
 	@Binding var time: Double
-	@Binding var selection: Int
+	//@Binding var selection: Int
 	
 	func intervalTime() -> Double{
-		switch self.selection{
+		switch self.fire.timeSelection{
 		case 0:
 			return Date().timeIntervalSince1970 + 10*60 //10 minutes
 		case 1:
@@ -48,11 +49,11 @@ struct TimeSliderView: View {
 			HStack(spacing: 2){
 				ForEach(0..<11){ number in
 					Rectangle()
-						.foregroundColor(number > self.selection ? Color.gray : Color.white)
+						.foregroundColor(number > self.fire.timeSelection ? Color.gray : Color.white)
 						.frame(width: geo.size.width/CGFloat(11)-2, height: 50)
 						.onTapGesture {
                             self.selectionFeedbackGenerator.selectionChanged()
-							self.selection = number
+							self.fire.timeSelection = number
 							self.time = self.intervalTime()
 					}
 				}
@@ -60,18 +61,18 @@ struct TimeSliderView: View {
 			.highPriorityGesture(
 				DragGesture()
 					.onChanged{ gesture in
-						let selection = Int(gesture.location.x)/(Int(UIScreen.main.bounds.width)/11)
-						if selection > 11{
-							self.selection = 11
+						let newSelection = Int(gesture.location.x)/(Int(UIScreen.main.bounds.width)/11)
+						if newSelection > 10{
+							self.fire.timeSelection = 10
 						}
-						else if selection < 0{
-							self.selection = 0
+						else if newSelection < 0{
+							self.fire.timeSelection = 0
 						}
 						else{
-                            if (selection != self.selection){
-                            self.selectionFeedbackGenerator.selectionChanged()
+							if (newSelection != self.fire.timeSelection){
+								self.selectionFeedbackGenerator.selectionChanged()
                             }
-							self.selection = selection
+							self.fire.timeSelection = newSelection
 						}
 						self.time = self.intervalTime()
 				}
@@ -85,8 +86,6 @@ struct TimeSliderView: View {
 
 struct TimeSliderView_Previews: PreviewProvider {
 	static var previews: some View {
-		ZStack{
-			TimeSliderView(time: .constant(9), selection: .constant(9))
-		}
+		TimeSliderView(time: .constant(9)).environmentObject(Fire())
 	}
 }

@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		119A826CA9E0D03C55D46C21 /* Pods_Shoo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9F9C7F1ED6940993E4B38ACE /* Pods_Shoo.framework */; };
+		1319D2C1247E1AFA00B2C4E3 /* CodeScanner in Frameworks */ = {isa = PBXBuildFile; productRef = 1319D2C0247E1AFA00B2C4E3 /* CodeScanner */; };
 		1346B9F0246F870400EECEC9 /* TimeSliderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1346B9EF246F870400EECEC9 /* TimeSliderView.swift */; };
 		1349BE4D24771F0900F5704A /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1349BE4C24771F0800F5704A /* SettingsView.swift */; };
 		1349BE4F2477544F00F5704A /* TopView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1349BE4E2477544E00F5704A /* TopView.swift */; };
@@ -28,7 +29,6 @@
 		5398FA522474F2F500467D67 /* EditHomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5398FA512474F2F500467D67 /* EditHomeView.swift */; };
 		5398FA552474F33200467D67 /* SignInView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5398FA542474F33200467D67 /* SignInView.swift */; };
 		5398FA5C2474F47E00467D67 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 5398FA5B2474F47E00467D67 /* Default-568h@2x.png */; };
-		5398FA5F247502F700467D67 /* CodeScanner in Frameworks */ = {isa = PBXBuildFile; productRef = 5398FA5E247502F700467D67 /* CodeScanner */; };
 		53DDBA6824745D3200D07C60 /* Mate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53DDBA6724745D3200D07C60 /* Mate.swift */; };
 		53EB16B22471B9F10054D68A /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53EB16B12471B9F10054D68A /* HomeView.swift */; };
 		53EB16BB2471BBC60054D68A /* Fire.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53EB16B92471BBC60054D68A /* Fire.swift */; };
@@ -101,7 +101,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				5398FA5F247502F700467D67 /* CodeScanner in Frameworks */,
+				1319D2C1247E1AFA00B2C4E3 /* CodeScanner in Frameworks */,
 				119A826CA9E0D03C55D46C21 /* Pods_Shoo.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -268,7 +268,7 @@
 			);
 			name = Shoo;
 			packageProductDependencies = (
-				5398FA5E247502F700467D67 /* CodeScanner */,
+				1319D2C0247E1AFA00B2C4E3 /* CodeScanner */,
 			);
 			productName = Shoo;
 			productReference = 13EF84AD246DACB30049CCD1 /* Shoo.app */;
@@ -629,7 +629,7 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		5398FA5E247502F700467D67 /* CodeScanner */ = {
+		1319D2C0247E1AFA00B2C4E3 /* CodeScanner */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 5398FA5D247502F700467D67 /* XCRemoteSwiftPackageReference "CodeScanner" */;
 			productName = CodeScanner;
