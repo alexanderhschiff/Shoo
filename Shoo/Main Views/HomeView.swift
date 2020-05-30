@@ -29,7 +29,7 @@ struct HomeView: View {
                             .foregroundColor(Color.white.opacity(0))
                             .frame(height: UIScreen.main.bounds.height * 0.15)
                         ForEach(self.fire.mates) { mate in
-                            PersonView(name: mate.name, status: mate.status, reason: mate.reason, endTime: mate.end, startTime: mate.start, id: mate.id, timerInterval: 5).environmentObject(self.fire)
+							PersonView(name: mate.name, status: mate.status, reason: mate.reason, endTime: mate.end, startTime: mate.start, id: mate.id, timerInterval: 5).environmentObject(self.fire).shadow(radius: 4, x: 2, y: 2)
                         }
                         Rectangle()
                             .foregroundColor(Color.white.opacity(0))

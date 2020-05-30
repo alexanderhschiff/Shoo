@@ -172,12 +172,46 @@ class HouseRepository {
             mateDB.document(prof.uid).updateData(["reason": prof.reason,"status": prof.status, "end": prof.end, "start": prof.start])
         }
     }
+	
+	func qUpdateTime(_ profile: Profile, _ timeSelection: Int){
+		var x = 0
+		switch timeSelection{
+		case 0:
+			x = 60 * 10
+		case 1:
+			x = 60 * 15
+		case 2:
+			x = 60 * 20
+		case 3:
+			x = 60 * 30
+		case 4:
+			x = 60 * 45
+		case 5:
+			x = 60 * 60
+		case 6:
+			x = 60 * 120
+		case 7:
+			x = 60 * 180
+		case 8:
+			x = 60 * 240
+		case 9:
+			x = 60 * 60 * 6
+		case 10:
+			x = Int(Calendar.current.nextDate(after: Date(), matching: DateComponents(hour: 0, minute: 0), matchingPolicy: .nextTimePreservingSmallerComponents)!.timeIntervalSince1970 - Date().timeIntervalSince1970)//until midnight
+		default:
+			x = 60 * 60 * 4
+		}
+		var prof = profile
+		prof.end = Double(x) + Date().timeIntervalSince1970 + 60
+        mateDB.document(prof.uid).updateData(["end": prof.end])
+    }
     
+	/*
     func qUpdateTime(_ state: Double, _ profile: Profile){
         var prof = profile
         prof.end = profile.end + (10 * 60 * state)
         mateDB.document(prof.uid).updateData(["end": prof.end])
-    }
+    }*/
     
     func saveState(user: Profile, status: Int, reason: String, end: Double) {
         if (user.status != status || user.reason != reason || user.end != end){
@@ -189,12 +223,13 @@ class HouseRepository {
         mateDB.document(id).updateData(["reason": "", "status": -1])
     }
 }
+
 class Fire: ObservableObject {
     
     @Published var isUserAuthenticated: FireAuthState = .undefined
     @Published var profile: Profile = Profile(uid: "", name: "", reason: "", status: -1, end: Date().timeIntervalSince1970, start: Date().timeIntervalSince1970, house: "")
     @Published var houseName: String = "Home"
-    
+	@Published var timeSelection: Int = 9
     
     var mateList: [String] = []
     var authStateDidChangeListenerHandle: AuthStateDidChangeListenerHandle?
@@ -323,9 +358,36 @@ class Fire: ObservableObject {
         db.collection("profiles").document(self.profile.uid).updateData(["name": newName])
     }
     
-    func quickUpdateTime(_ state: Int, profile: Profile){
-        self.profile.end = profile.end + (10*60*Double(state))
-        repository.qUpdateTime(Double(state), profile)
+    func quickUpdateTime(_ selection: Int, profile: Profile){
+		var x = 0
+		switch timeSelection{
+		case 0:
+			x = 60 * 10
+		case 1:
+			x = 60 * 15
+		case 2:
+			x = 60 * 20
+		case 3:
+			x = 60 * 30
+		case 4:
+			x = 60 * 45
+		case 5:
+			x = 60 * 60
+		case 6:
+			x = 60 * 120
+		case 7:
+			x = 60 * 180
+		case 8:
+			x = 60 * 240
+		case 9:
+			x = 60 * 60 * 6
+		case 10:
+			x = Int(Calendar.current.nextDate(after: Date(), matching: DateComponents(hour: 0, minute: 0), matchingPolicy: .nextTimePreservingSmallerComponents)!.timeIntervalSince1970 - Date().timeIntervalSince1970)//until midnight
+		default:
+			x = 60 * 60 * 4
+		}
+		self.profile.end = Double(x) + Date().timeIntervalSince1970 + 60
+        repository.qUpdateTime(profile, selection)
         //db.collection("profiles").document(self.profile.uid).updateData(["end": (profile.end + (10*60*Double(state)))])
     }
     
