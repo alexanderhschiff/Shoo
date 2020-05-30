@@ -9,12 +9,16 @@
 import SwiftUI
 
 struct WidgetView: View {
+    let size = 3
+    
     var body: some View {
-        VStack{
-        Text("SwiftUI View")
-            Text("Hey Alex")
-        }.frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: .infinity)
-        .background(Color.red)
+        GeometryReader { geo in
+            HStack{
+                
+                CircleStatusView(radius: min(geo.size.height, geo.size.width/CGFloat(self.size)), status: 2, initial: "B")
+                .padding()
+            }
+        }
     }
 }
 

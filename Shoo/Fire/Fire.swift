@@ -183,7 +183,11 @@ class HouseRepository {
     
     func saveState(user: Profile, status: Int, reason: String, end: Double) {
         if (user.status != status || user.reason != reason || user.end != end){
-            mateDB.document(user.uid).updateData(["reason": reason,"status": status, "end": end, "start": Date().timeIntervalSince1970])
+            var endV = end
+            if endV < Date().timeIntervalSince1970 {
+                endV = (Date().timeIntervalSince1970 + 4*60*60)
+            }
+            mateDB.document(user.uid).updateData(["reason": reason,"status": status, "end": endV, "start": Date().timeIntervalSince1970])
         }
     }
     
@@ -191,11 +195,14 @@ class HouseRepository {
         mateDB.document(id).updateData(["reason": "", "status": -1])
     }
 }
+
+
 class Fire: ObservableObject {
     
     @Published var isUserAuthenticated: FireAuthState = .undefined
     @Published var profile: Profile = Profile(uid: "", name: "", reason: "", status: -1, end: Date().timeIntervalSince1970, start: Date().timeIntervalSince1970, house: "")
     @Published var houseName: String = "Home"
+    @Published var reasons: [String] = ["👩‍💻 Working", "📺 Watching TV", "🏃‍♂️ Exercising", "📱 On the phone"]
     
     
     var mateList: [String] = []
@@ -237,6 +244,9 @@ class Fire: ObservableObject {
     
     func startListener() {
         self.error = nil
+        DispatchQueue.main.async {
+            self.reasons = self.userDefaults.object(forKey: "reasons") as? [String] ?? ["👩‍💻 Working", "📺 Watching TV", "🏃‍♂️ Exercising", "📱 On the phone"]
+        }
         repository.startListener(Fid: self.profile.house, userID: self.profile.uid, result: {[weak self] (result) in
             guard let `self` = self else { return }
             switch result {
@@ -275,6 +285,9 @@ class Fire: ObservableObject {
     }
     
     func stopListener() {
+        DispatchQueue.main.async {
+            self.userDefaults.set(self.reasons, forKey: "reasons")
+        }
         repository.stopListener()
     }
     
@@ -313,11 +326,11 @@ class Fire: ObservableObject {
     let userDefaults = UserDefaults.standard
     
     func saveCustomReasons(reasons: [String]){
-        userDefaults.set(reasons, forKey: "reasons")
+        self.reasons = reasons
     }
     
     func getCustomReasons() -> [String] {
-        return userDefaults.object(forKey: "reasons") as? [String] ?? ["👩‍💻 Working", "📺 Watching TV", "🏃‍♂️ Exercising", "📱 On the phone"]
+        return self.reasons
     }
     
     func changeName(_ newName: String) {
