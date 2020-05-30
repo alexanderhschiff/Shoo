@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>366856947427-blb1c2mpsumqnni0fibfi789v0ge0ta5.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.366856947427-blb1c2mpsumqnni0fibfi789v0ge0ta5</string>
+	<key>API_KEY</key>
+	<string>AIzaSyC85np1SY4TelqAwpjxPc-L7QGceOe6Is8</string>
+	<key>GCM_SENDER_ID</key>
+	<string>366856947427</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>app.shoo.app.shooWidget</string>
+	<key>PROJECT_ID</key>
+	<string>shoo-d2945</string>
+	<key>STORAGE_BUCKET</key>
+	<string>shoo-d2945.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:366856947427:ios:7ac9f1fb20a804942a67d6</string>
+	<key>DATABASE_URL</key>
+	<string>https://shoo-d2945.firebaseio.com</string>
+</dict>
+</plist>

@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16097" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="M4Y-Lb-cyx">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Today View Controller-->
+        <scene sceneID="cwh-vc-ff4">
+            <objects>
+                <viewController id="M4Y-Lb-cyx" customClass="TodayViewController" customModule="ShooWidget" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" simulatedAppContext="notificationCenter" id="S3S-Oj-5AN">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="37"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ICe-lj-BIC">
+                                <rect key="frame" x="16" y="0.0" width="288" height="37"/>
+                                <connections>
+                                    <segue destination="mqe-hi-Ogc" kind="embed" identifier="SwiftUISegue" destinationCreationSelector="addSwiftUIView:" id="2Jn-8b-G8X"/>
+                                </connections>
+                            </containerView>
+                        </subviews>
+                        <constraints>
+                            <constraint firstItem="ssy-KU-ocm" firstAttribute="bottom" secondItem="ICe-lj-BIC" secondAttribute="bottom" id="ACT-OZ-rem"/>
+                            <constraint firstItem="ssy-KU-ocm" firstAttribute="bottom" secondItem="ICe-lj-BIC" secondAttribute="bottom" id="NVq-84-Dzq"/>
+                            <constraint firstAttribute="trailing" secondItem="ICe-lj-BIC" secondAttribute="trailing" id="WvD-1X-l35"/>
+                            <constraint firstItem="ICe-lj-BIC" firstAttribute="leading" secondItem="S3S-Oj-5AN" secondAttribute="leading" id="Y1h-oq-B8t"/>
+                            <constraint firstItem="ICe-lj-BIC" firstAttribute="top" secondItem="S3S-Oj-5AN" secondAttribute="top" id="gbz-Sg-bvj"/>
+                            <constraint firstItem="ICe-lj-BIC" firstAttribute="leading" secondItem="S3S-Oj-5AN" secondAttribute="leadingMargin" id="n6e-Ze-xkc"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="ICe-lj-BIC" secondAttribute="trailing" id="up0-l0-I3G"/>
+                            <constraint firstItem="ICe-lj-BIC" firstAttribute="top" secondItem="S3S-Oj-5AN" secondAttribute="topMargin" id="zyP-D0-kuM"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="ssy-KU-ocm"/>
+                    </view>
+                    <extendedEdge key="edgesForExtendedLayout"/>
+                    <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+                    <size key="freeformSize" width="320" height="37"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="vXp-U4-Rya" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="137.68115942028987" y="96.763392857142847"/>
+        </scene>
+        <!--Hosting Controller-->
+        <scene sceneID="cCp-p2-DuY">
+            <objects>
+                <hostingController id="mqe-hi-Ogc" sceneMemberID="viewController">
+                    <size key="freeformSize" width="320" height="100"/>
+                </hostingController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Rso-Gm-ATq" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1012" y="96"/>
+        </scene>
+    </scenes>
+</document>

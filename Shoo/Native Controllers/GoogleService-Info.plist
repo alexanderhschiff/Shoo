@@ -3,9 +3,9 @@
 <plist version="1.0">
 <dict>
 	<key>FIREBASE_ANALYTICS_COLLECTION_DEACTIVATED</key>
-	<true/>
-	<key>FIREBASE_ANALYTICS_COLLECTION_ENABLED</key>
 	<false/>
+	<key>FIREBASE_ANALYTICS_COLLECTION_ENABLED</key>
+	<true/>
 	<key>CLIENT_ID</key>
 	<string>366856947427-7va957o4efuumvj9iatoh2arsohlbd2l.apps.googleusercontent.com</string>
 	<key>REVERSED_CLIENT_ID</key>
