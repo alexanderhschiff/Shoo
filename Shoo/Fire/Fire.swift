@@ -284,13 +284,12 @@ class Fire: ObservableObject {
             switch result {
             case .success(let items):
                 self.mates = items
-                self.getHouseName()
             case .failure(let error):
                 //self.repository.startListener(Fid: self.profile.house, userID: self.profile.uid, result: {_ in })
                 self.error = error
             }
         } )
-        
+        self.getHouseName()
     }
     
     
