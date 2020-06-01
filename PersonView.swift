@@ -97,15 +97,18 @@ struct PersonView: View {
 							//.foregroundColor(Color(UIColor.systemBackground))
 							.transition(.slide)
 						Text(self.name)
-							.font(.largeTitle)
-							.fontWeight(.bold)
+							.font(.system(.largeTitle, design: .rounded))
+							.fontWeight(.semibold)
+							//.font(.largeTitle)
+							//.fontWeight(.bold)
 							//.foregroundColor(Color(UIColor.systemBackground))
 							.lineLimit(1)
 					}
 					
 					Text(self.reason)
-						.font(.headline)
-						.fontWeight(.bold)
+						.font(.system(.title, design: .rounded))
+						//.font(.headline)
+						//.fontWeight(.bold)
 						//.foregroundColor(Color(UIColor.systemBackground))
 						.lineLimit(1)
 					
@@ -114,21 +117,16 @@ struct PersonView: View {
 				Spacer()
 				VStack(alignment: .center){
 					Text("\(self.actionElement) for")
-						.font(.headline)
-						.fontWeight(.semibold)
-						//.foregroundColor(Color(UIColor.systemBackground))
+						.font(.system(.headline, design: .rounded))
 					Text(self.timeElement)
-						.font(.title)
-						.fontWeight(.black)
-						//.foregroundColor(Color(UIColor.systemBackground))
+						.font(.system(.title, design: .rounded))
+						.fontWeight(.semibold)
 				}
 				.padding(10)
-				.background(Blur())
-				.clipShape(Capsule())
-				.frame(width: 110)
-				//.overlay(RoundedRectangle(cornerRadius: 20, style: .continuous).stroke(Color(UIColor.systemBackground), lineWidth: 3).shadow(color: getColor(status: status), radius: 2))
+				//.frame(width: 150)
 			}
 			.padding()
+			
 		}
 		.onAppear {
 			//self.currentTime = getCountdownTime(from: self.endTime)
