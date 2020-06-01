@@ -37,7 +37,7 @@ struct TopView: View {
 						HStack{
 							Text(self.fire.houseName)
 								.fontWeight(.heavy)
-								.font(.system(size: 30))
+								.font(.system(size: 30, weight: .bold))
 								.lineLimit(1)
 								.foregroundColor(.primary)
 							Image(systemName: "chevron.right")

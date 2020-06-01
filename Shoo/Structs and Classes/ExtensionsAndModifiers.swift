@@ -50,11 +50,11 @@ struct WideButtonStyle: ButtonStyle {
 	
 	func makeBody(configuration: Self.Configuration) -> some View {
 		configuration.label
-			.font(.headline)
+			.font(.system(.headline))
 			.padding()
 			.background(color)
 			.clipShape(RoundedRectangle(cornerRadius: 20, style: .continuous))
-			.animation(.spring())
+			.animation(.easeIn)
 			.foregroundColor(Color(UIColor.systemBackground))
 			.scaleEffect(configuration.isPressed ? 0.9 : 1)
 	}
@@ -83,7 +83,7 @@ struct Reason: ViewModifier {
 	
 	func body(content: Content) -> some View {
 		content
-			.font(.headline)
+			.font(.system(.headline))
 			.padding()
 			.background(selected == true ? Color(UIColor.systemBackground): Color.gray.opacity(0.7))
 			.cornerRadius(20)
