@@ -212,6 +212,7 @@ struct BottomView: View {
 			}
 			.font(.headline)
 			.padding([.horizontal, .top])
+			.padding(.bottom, ((UIApplication.shared.windows.last?.safeAreaInsets.bottom)! == 0 ? 10 : 0))
 			.padding(.bottom, (UIApplication.shared.windows.last?.safeAreaInsets.bottom)!)
 			.frame(width: UIScreen.main.bounds.width)
 			.background(Blur(style: .systemUltraThinMaterial))
