@@ -108,3 +108,7 @@ func successHaptic() {
 	let generator = UINotificationFeedbackGenerator()
 	generator.notificationOccurred(.success)
 }
+
+enum houseError: Error {
+    case badQR
+}
