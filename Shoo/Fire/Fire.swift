@@ -174,46 +174,46 @@ class HouseRepository {
             mateDB.document(prof.uid).updateData(["reason": prof.reason,"status": prof.status, "end": prof.end, "start": prof.start])
         }
     }
-	
-	func qUpdateTime(_ profile: Profile, _ timeSelection: Int){
-		var x = 0
-		switch timeSelection{
-		case 0:
-			x = 60 * 10
-		case 1:
-			x = 60 * 15
-		case 2:
-			x = 60 * 20
-		case 3:
-			x = 60 * 30
-		case 4:
-			x = 60 * 45
-		case 5:
-			x = 60 * 60
-		case 6:
-			x = 60 * 120
-		case 7:
-			x = 60 * 180
-		case 8:
-			x = 60 * 240
-		case 9:
-			x = 60 * 60 * 6
-		case 10:
-			x = Int(Calendar.current.nextDate(after: Date(), matching: DateComponents(hour: 0, minute: 0), matchingPolicy: .nextTimePreservingSmallerComponents)!.timeIntervalSince1970 - Date().timeIntervalSince1970)//until midnight
-		default:
-			x = 60 * 60 * 4
-		}
-		var prof = profile
-		prof.end = Double(x) + Date().timeIntervalSince1970 + 60
+    
+    func qUpdateTime(_ profile: Profile, _ timeSelection: Int){
+        var x = 0
+        switch timeSelection{
+        case 0:
+            x = 60 * 10
+        case 1:
+            x = 60 * 15
+        case 2:
+            x = 60 * 20
+        case 3:
+            x = 60 * 30
+        case 4:
+            x = 60 * 45
+        case 5:
+            x = 60 * 60
+        case 6:
+            x = 60 * 120
+        case 7:
+            x = 60 * 180
+        case 8:
+            x = 60 * 240
+        case 9:
+            x = 60 * 60 * 6
+        case 10:
+            x = Int(Calendar.current.nextDate(after: Date(), matching: DateComponents(hour: 0, minute: 0), matchingPolicy: .nextTimePreservingSmallerComponents)!.timeIntervalSince1970 - Date().timeIntervalSince1970)//until midnight
+        default:
+            x = 60 * 60 * 4
+        }
+        var prof = profile
+        prof.end = Double(x) + Date().timeIntervalSince1970 + 60
         mateDB.document(prof.uid).updateData(["end": prof.end])
     }
     
-	/*
-    func qUpdateTime(_ state: Double, _ profile: Profile){
-        var prof = profile
-        prof.end = profile.end + (10 * 60 * state)
-        mateDB.document(prof.uid).updateData(["end": prof.end])
-    }*/
+    /*
+     func qUpdateTime(_ state: Double, _ profile: Profile){
+     var prof = profile
+     prof.end = profile.end + (10 * 60 * state)
+     mateDB.document(prof.uid).updateData(["end": prof.end])
+     }*/
     
     func saveState(user: Profile, status: Int, reason: String, end: Double) {
         if (user.status != status || user.reason != reason || user.end != end){
@@ -236,7 +236,7 @@ class Fire: ObservableObject {
     @Published var isUserAuthenticated: FireAuthState = .undefined
     @Published var profile: Profile = Profile(uid: "", name: "", reason: "", status: -1, end: Date().timeIntervalSince1970, start: Date().timeIntervalSince1970, house: "")
     @Published var houseName: String = "Home"
-	@Published var timeSelection: Int = 9
+    @Published var timeSelection: Int = 9
     @Published var reasons: [String] = ["👩‍💻 Working", "📺 Watching TV", "🏃‍♂️ Exercising", "📱 On the phone"]
     
     
@@ -287,11 +287,12 @@ class Fire: ObservableObject {
             switch result {
             case .success(let items):
                 self.mates = items
-                self.getHouseName()
+                //self.getHouseName() - CALLED MULTIPLE TIMES, MOVED TO LATER
             case .failure(let error):
                 //self.repository.startListener(Fid: self.profile.house, userID: self.profile.uid, result: {_ in })
                 self.error = error
             }
+            self.getHouseName()
         } )
         
     }
@@ -331,24 +332,15 @@ class Fire: ObservableObject {
         self.isUserAuthenticated = .signedOut
     }
     
-    func testHouse(_ houseId: String) -> Bool{
-        /*
-         let semaphore = DispatchSemaphore(value: 1)
-         var outP = false
-         DispatchQueue.global(qos: .userInteractive).async {
-         var out = false
-         self.db.collection("Homes").document(houseId).getDocument { (document, error) in
-         semaphore.wait()
-         //print("waiting")
-         out = ((document?.exists) != nil)
-         }
-         outP = out
-         //print("signal")
-         semaphore.signal()
-         }
-         //print(outP)
-         */
-        return true
+    func testHouse(_ houseId: String, completionHandler: @escaping (Result<Bool, houseError>) -> Void) {
+        self.db.collection("Homes").document(houseId).getDocument { (document, error) in
+            if let document = document, document.exists {
+                completionHandler(.success(true))
+            } else {
+                completionHandler(.failure(.badQR))
+            }
+            //completionHandler(.failure(.badQR)) - DON'T THINK THIS IS NECESSARY BUT CAN POTENTIALLY USE LATER
+        }
     }
     
     
@@ -374,34 +366,34 @@ class Fire: ObservableObject {
     }
     
     func quickUpdateTime(_ selection: Int, profile: Profile){
-		var x = 0
-		switch timeSelection{
-		case 0:
-			x = 60 * 10
-		case 1:
-			x = 60 * 15
-		case 2:
-			x = 60 * 20
-		case 3:
-			x = 60 * 30
-		case 4:
-			x = 60 * 45
-		case 5:
-			x = 60 * 60
-		case 6:
-			x = 60 * 120
-		case 7:
-			x = 60 * 180
-		case 8:
-			x = 60 * 240
-		case 9:
-			x = 60 * 60 * 6
-		case 10:
-			x = Int(Calendar.current.nextDate(after: Date(), matching: DateComponents(hour: 0, minute: 0), matchingPolicy: .nextTimePreservingSmallerComponents)!.timeIntervalSince1970 - Date().timeIntervalSince1970)//until midnight
-		default:
-			x = 60 * 60 * 4
-		}
-		self.profile.end = Double(x) + Date().timeIntervalSince1970 + 60
+        var x = 0
+        switch timeSelection{
+        case 0:
+            x = 60 * 10
+        case 1:
+            x = 60 * 15
+        case 2:
+            x = 60 * 20
+        case 3:
+            x = 60 * 30
+        case 4:
+            x = 60 * 45
+        case 5:
+            x = 60 * 60
+        case 6:
+            x = 60 * 120
+        case 7:
+            x = 60 * 180
+        case 8:
+            x = 60 * 240
+        case 9:
+            x = 60 * 60 * 6
+        case 10:
+            x = Int(Calendar.current.nextDate(after: Date(), matching: DateComponents(hour: 0, minute: 0), matchingPolicy: .nextTimePreservingSmallerComponents)!.timeIntervalSince1970 - Date().timeIntervalSince1970)//until midnight
+        default:
+            x = 60 * 60 * 4
+        }
+        self.profile.end = Double(x) + Date().timeIntervalSince1970 + 60
         repository.qUpdateTime(profile, selection)
         //db.collection("profiles").document(self.profile.uid).updateData(["end": (profile.end + (10*60*Double(state)))])
     }
@@ -431,12 +423,12 @@ class Fire: ObservableObject {
     
     func getHouseName() {
         let docRef = db.collection("Homes").document(self.profile.house)
-
+        
         docRef.getDocument { (document, error) in
             if let document = document, document.exists {
                 let hName = document.get("name") as? String ?? "Home"
                 self.houseName = hName
-                print("houseName: \(hName)")
+                //print("houseName: \(hName)")
             } else {
                 print("Document does not exist")
             }
