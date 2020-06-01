@@ -150,28 +150,25 @@ class HouseRepository {
         stopListener()
     }
     
-    func qUpdateStatus(_ statusInt: Int, _ profile: Profile){
+    func qUpdateStatus(_ status: Status, _ profile: Profile){
         
-        if(statusInt != profile.status ||
+        if(status != profile.status ||
             profile.end != Calendar.current.nextDate(after: Date(), matching: DateComponents(hour: 0, minute: 0), matchingPolicy: .nextTimePreservingSmallerComponents)!.timeIntervalSince1970) {
             var prof = profile
             prof.end = Calendar.current.nextDate(after: Date(), matching: DateComponents(hour: 0, minute: 0), matchingPolicy: .nextTimePreservingSmallerComponents)!.timeIntervalSince1970
             prof.start = Date().timeIntervalSince1970
-            switch statusInt {
-            case 1:
-                prof.status = 1
+            switch status {
+            case .red:
+                prof.status = .red
                 prof.reason = ""
-            case 2:
-                prof.status = 2
-                prof.reason = ""
-            case 0:
-                prof.status = 0
+            case .yellow:
+                prof.status = .yellow
                 prof.reason = ""
             default:
-                prof.status = -1
+                prof.status = .green
                 prof.reason = ""
             }
-            mateDB.document(prof.uid).updateData(["reason": prof.reason,"status": prof.status, "end": prof.end, "start": prof.start])
+            mateDB.document(prof.uid).updateData(["reason": prof.reason,"status": prof.status.rawValue, "end": prof.end, "start": prof.start])
         }
     }
     
@@ -209,24 +206,24 @@ class HouseRepository {
     }
     
     /*
-     func qUpdateTime(_ state: Double, _ profile: Profile){
-     var prof = profile
-     prof.end = profile.end + (10 * 60 * state)
-     mateDB.document(prof.uid).updateData(["end": prof.end])
-     }*/
+    func qUpdateTime(_ state: Double, _ profile: Profile){
+        var prof = profile
+        prof.end = profile.end + (10 * 60 * state)
+        mateDB.document(prof.uid).updateData(["end": prof.end])
+    }*/
     
-    func saveState(user: Profile, status: Int, reason: String, end: Double) {
+    func saveState(user: Profile, status: Status, reason: String, end: Double) {
         if (user.status != status || user.reason != reason || user.end != end){
             var endV = end
             if endV < Date().timeIntervalSince1970 {
                 endV = (Date().timeIntervalSince1970 + 4*60*60)
             }
-            mateDB.document(user.uid).updateData(["reason": reason,"status": status, "end": endV, "start": Date().timeIntervalSince1970])
+            mateDB.document(user.uid).updateData(["reason": reason,"status": status.rawValue, "end": endV, "start": Date().timeIntervalSince1970])
         }
     }
     
     func noStatus(id: String){
-        mateDB.document(id).updateData(["reason": "", "status": -1])
+        mateDB.document(id).updateData(["reason": "", "status": 0])
     }
 }
 
@@ -234,7 +231,7 @@ class HouseRepository {
 class Fire: ObservableObject {
     
     @Published var isUserAuthenticated: FireAuthState = .undefined
-    @Published var profile: Profile = Profile(uid: "", name: "", reason: "", status: -1, end: Date().timeIntervalSince1970, start: Date().timeIntervalSince1970, house: "")
+    @Published var profile: Profile = Profile(uid: "", name: "", reason: "", status: .green, end: Date().timeIntervalSince1970, start: Date().timeIntervalSince1970, house: "")
     @Published var houseName: String = "Home"
     @Published var timeSelection: Int = 9
     @Published var reasons: [String] = ["👩‍💻 Working", "📺 Watching TV", "🏃‍♂️ Exercising", "📱 On the phone"]
@@ -273,8 +270,8 @@ class Fire: ObservableObject {
     var repository = HouseRepository()
     
     
-    func changeStatus(_ newStat: Int){
-        db.collection("profiles").document(self.profile.uid).updateData(["status": newStat])
+    func changeStatus(_ newStatus: Status){
+        db.collection("profiles").document(self.profile.uid).updateData(["status": newStatus.rawValue])
     }
     
     func startListener() {
@@ -287,19 +284,17 @@ class Fire: ObservableObject {
             switch result {
             case .success(let items):
                 self.mates = items
-                //self.getHouseName() - CALLED MULTIPLE TIMES, MOVED TO LATER
             case .failure(let error):
                 //self.repository.startListener(Fid: self.profile.house, userID: self.profile.uid, result: {_ in })
                 self.error = error
             }
-            self.getHouseName()
         } )
-        
+        self.getHouseName()
     }
     
     
-    func quickUpdateStatus(statInt: Int, profile: Profile) {
-        repository.qUpdateStatus(statInt, profile)
+    func quickUpdateStatus(status: Status, profile: Profile) {
+        repository.qUpdateStatus(status, profile)
     }
     
     func addMate(_ mate: Mate) {
@@ -344,7 +339,7 @@ class Fire: ObservableObject {
     }
     
     
-    func saveState(user: Profile, status: Int, reason: String, end: Double) {
+    func saveState(user: Profile, status: Status, reason: String, end: Double) {
         profile.end = end
         profile.start = Date().timeIntervalSince1970
         repository.saveState(user: user, status: status, reason: reason, end: end)
@@ -401,7 +396,7 @@ class Fire: ObservableObject {
     func noStatus(_ id: String){
         for i in 0 ..< mates.count {
             let mate = mates[i]
-            if mate.id == id && mate.status > -1 {
+            if mate.id == id && mate.status != .green {
                 repository.noStatus(id: id)
                 return
             }
@@ -409,9 +404,9 @@ class Fire: ObservableObject {
     }
     
     func noStatus(){
-        if (self.profile.status >= 0){
+        if (self.profile.status != .green){
             self.profile.reason = ""
-            self.profile.status = -1
+            self.profile.status = .green
             repository.noStatus(id: self.profile.uid)
         }
     }
@@ -423,12 +418,12 @@ class Fire: ObservableObject {
     
     func getHouseName() {
         let docRef = db.collection("Homes").document(self.profile.house)
-        
+
         docRef.getDocument { (document, error) in
             if let document = document, document.exists {
                 let hName = document.get("name") as? String ?? "Home"
                 self.houseName = hName
-                //print("houseName: \(hName)")
+                print("houseName: \(hName)")
             } else {
                 print("Document does not exist")
             }

@@ -14,7 +14,7 @@ struct Mate: Identifiable {
     var id: String
     var name: String
     var reason: String
-    var status: Int
+    var status: Status
     var end: Double
     var start: Double
 }
@@ -25,18 +25,19 @@ extension Mate: DocumentSerializable {
         let id = documentData[FireKeys.Mate.id] as? String ?? ""
         let name = documentData[FireKeys.Mate.name] as? String ?? ""
         let reason = documentData[FireKeys.Mate.reason] as? String ?? ""
-        let status = documentData[FireKeys.Mate.status] as? Int ?? -1
+        let status = documentData[FireKeys.Mate.status] as? Int ?? 0
         let end = documentData[FireKeys.Mate.end] as? Double ?? Date().timeIntervalSince1970
         let start = documentData[FireKeys.Mate.start] as? Double ?? Date().timeIntervalSince1970
         
-        self.init(id: id, name: name, reason: reason, status: status, end: end, start: start)
+        self.init(id: id, name: name, reason: reason, status: Status(rawValue: status) ?? .green, end: end, start: start)
     }
     
     init(document: DocumentSnapshot) {
         self.id = document.documentID
         self.name = document.get("name") as? String ?? ""
         self.reason = document.get("reason") as? String ?? ""
-        self.status = document.get("status") as? Int ?? -1
+        let tempStatus: Int = document.get("status") as? Int ?? 2
+        self.status = Status(rawValue: tempStatus) ?? .yellow
         self.start = document.get("start") as? Double ?? Date().timeIntervalSince1970
         self.end = document.get("end") as? Double ?? Date().timeIntervalSince1970
     }

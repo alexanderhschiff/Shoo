@@ -17,7 +17,7 @@ struct FreePeopleView: View {
 		var i = 0 //how many people are shoo or quiet
 		
 		for mate in self.fire.mates{
-			if mate.status != 0{
+            if mate.status == .green {
 				i += 1
 			}
 		}

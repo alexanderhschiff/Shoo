@@ -12,3 +12,9 @@ import AuthenticationServices
 
 
 typealias SignInWithAppleResult = (authDataResult: AuthDataResult, appleIDCredential: ASAuthorizationAppleIDCredential)
+
+enum Status: Int {
+    case green = 0
+    case yellow = 1
+    case red = 2
+}

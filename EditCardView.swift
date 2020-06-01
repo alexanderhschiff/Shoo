@@ -24,7 +24,7 @@ struct EditCardView: View {
     @State private var addReason = ""
     @State private var reasons = ["👩‍💻 Working", "📺 Watching TV", "🏃‍♂️ Exercising", "📱 On the phone"]
     
-    @State private var newStatus: Int = 0
+    @State private var newStatus: Status = .green
     @State private var newReason: String = ""
     
     @State private var dataChanged: Bool = false
@@ -105,24 +105,24 @@ struct EditCardView: View {
                     .font(.headline)
                 
                 HStack{
-                    Button("Free"){
-                        self.newStatus = 0
-                        buttonPressHaptic()
-                        self.dataChanged = true
-                    }
-                    .buttonStyle(StatusButtonStyle(color: Color.green, selected: newStatus == 0))
-                    Button("Quiet"){
-                        self.newStatus = 1
-                        buttonPressHaptic()
-                        self.dataChanged = true
-                    }
-                    .buttonStyle(StatusButtonStyle(color: Color.yellow, selected: newStatus == 1))
-                    Button("Shoo"){
-                        self.newStatus = 2
-                        buttonPressHaptic()
-                        self.dataChanged = true
-                    }
-                    .buttonStyle(StatusButtonStyle(color: Color.red, selected: newStatus == 2))
+                Button("Free"){
+                    self.newStatus = .green
+                    buttonPressHaptic()
+                    self.dataChanged = true
+                }
+                .buttonStyle(StatusButtonStyle(color: Color.green, selected: newStatus == .green))
+                Button("Quiet"){
+                    self.newStatus = .yellow
+                    buttonPressHaptic()
+                    self.dataChanged = true
+                }
+                .buttonStyle(StatusButtonStyle(color: Color.yellow, selected: newStatus == .yellow))
+                Button("Shoo"){
+                    self.newStatus = .red
+                    buttonPressHaptic()
+                    self.dataChanged = true
+                }
+                .buttonStyle(StatusButtonStyle(color: Color.red, selected: newStatus == .red))
                     
                     Spacer()
                 }
