@@ -9,7 +9,7 @@
 import SwiftUI
 
 enum presentSheet{
-    case editHouse, more, settings
+    case editHouse, more, settings, addName
 }
 
 struct HomeView: View {
@@ -54,6 +54,10 @@ struct HomeView: View {
             .edgesIgnoringSafeArea(.all)
             .onAppear(perform: {
                 self.fire.startListener()
+                if self.fire.profile.name == "" {
+                    self.sheetType = .addName
+                    self.showSheet = true
+                }
             })
             .onDisappear(perform: {
                     self.fire.stopListener()
@@ -66,6 +70,8 @@ struct HomeView: View {
             }
             else if self.sheetType == .editHouse{
                 EditHomeView().environmentObject(self.fire)
+            } else if self.sheetType == .addName {
+                AddNameView().environmentObject(self.fire)
             } else {
                 SettingsView().environmentObject(self.fire)
             }

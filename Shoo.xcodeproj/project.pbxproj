@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		119A826CA9E0D03C55D46C21 /* Pods_Shoo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9F9C7F1ED6940993E4B38ACE /* Pods_Shoo.framework */; };
+		119A826CA9E0D03C55D46C21 /* (null) in Frameworks */ = {isa = PBXBuildFile; };
 		1319D2C1247E1AFA00B2C4E3 /* CodeScanner in Frameworks */ = {isa = PBXBuildFile; productRef = 1319D2C0247E1AFA00B2C4E3 /* CodeScanner */; };
 		1346B9F0246F870400EECEC9 /* TimeSliderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1346B9EF246F870400EECEC9 /* TimeSliderView.swift */; };
 		1349BE4D24771F0900F5704A /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1349BE4C24771F0800F5704A /* SettingsView.swift */; };
@@ -29,7 +29,7 @@
 		5398FA522474F2F500467D67 /* EditHomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5398FA512474F2F500467D67 /* EditHomeView.swift */; };
 		5398FA552474F33200467D67 /* SignInView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5398FA542474F33200467D67 /* SignInView.swift */; };
 		5398FA5C2474F47E00467D67 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 5398FA5B2474F47E00467D67 /* Default-568h@2x.png */; };
-		53C8C6E2247E0F2600D2CA3C /* CodeScanner in Frameworks */ = {isa = PBXBuildFile; productRef = 53C8C6E1247E0F2600D2CA3C /* CodeScanner */; };
+		53C40CB52484AB0100F747C5 /* AddNameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53C40CB42484AB0100F747C5 /* AddNameView.swift */; };
 		53C9FBC6248222AA0003F24C /* PushNotificationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53C9FBC5248222AA0003F24C /* PushNotificationManager.swift */; };
 		53DDBA6824745D3200D07C60 /* Mate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53DDBA6724745D3200D07C60 /* Mate.swift */; };
 		53EB16B22471B9F10054D68A /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53EB16B12471B9F10054D68A /* HomeView.swift */; };
@@ -50,7 +50,6 @@
 		53EE4C12247E0BFD00AF5F7E /* SheetExample.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53EE4C11247E0BFD00AF5F7E /* SheetExample.swift */; };
 		53F46F1A2476461B00BC02AD /* HandleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53F46F192476461B00BC02AD /* HandleView.swift */; };
 		53F46F242477083B00BC02AD /* UIResponder+Current.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53F46F232477083B00BC02AD /* UIResponder+Current.swift */; };
-		9424D65291C3920D7EED6B69 /* Pods_Shoo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 84AA9C7C4771CAC27D3998D6 /* Pods_Shoo.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -94,6 +93,7 @@
 		5398FA512474F2F500467D67 /* EditHomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditHomeView.swift; sourceTree = "<group>"; };
 		5398FA542474F33200467D67 /* SignInView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInView.swift; sourceTree = "<group>"; };
 		5398FA5B2474F47E00467D67 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
+		53C40CB42484AB0100F747C5 /* AddNameView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddNameView.swift; sourceTree = "<group>"; };
 		53C8C6E8247E1C4E00D2CA3C /* NotificationCenter.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = NotificationCenter.framework; path = System/Library/Frameworks/NotificationCenter.framework; sourceTree = SDKROOT; };
 		53C8C6EB247E1C4E00D2CA3C /* TodayViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodayViewController.swift; sourceTree = "<group>"; };
 		53C8C6EE247E1C4E00D2CA3C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/MainInterface.storyboard; sourceTree = "<group>"; };
@@ -130,7 +130,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				1319D2C1247E1AFA00B2C4E3 /* CodeScanner in Frameworks */,
-				119A826CA9E0D03C55D46C21 /* Pods_Shoo.framework in Frameworks */,
+				119A826CA9E0D03C55D46C21 /* (null) in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -198,6 +198,7 @@
 			children = (
 				5398FA4A2474E62B00467D67 /* EditCardView.swift */,
 				5398FA512474F2F500467D67 /* EditHomeView.swift */,
+				53C40CB42484AB0100F747C5 /* AddNameView.swift */,
 			);
 			name = "Sheet Views";
 			path = ..;
@@ -456,6 +457,7 @@
 				53EB16BC2471BBC60054D68A /* FireUI.swift in Sources */,
 				53EB16BB2471BBC60054D68A /* Fire.swift in Sources */,
 				53699026247CABA50053CC92 /* KeyboardResponder.swift in Sources */,
+				53C40CB52484AB0100F747C5 /* AddNameView.swift in Sources */,
 				13EF84B3246DACB30049CCD1 /* SceneDelegate.swift in Sources */,
 				5398FA4D2474E63800467D67 /* BottomView.swift in Sources */,
 				53EB16BF2471BBC60054D68A /* LaunchScreenView.swift in Sources */,
