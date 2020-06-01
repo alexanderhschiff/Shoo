@@ -12,63 +12,57 @@ struct BottomView: View {
 	@EnvironmentObject var fire: Fire
 	@State private var currentTime = Date().timeIntervalSince1970
 	
-	var color: Color{
-		switch self.fire.profile.status {
-		case 0:
-			return Color.green
-		case 1:
-			return Color.yellow
-		case 2:
-			return Color.red
-		default:
-			return Color.gray
-		}
-	}
-	
-	var actionElement: String{
-		switch self.fire.profile.status{
-		case 0:
-			return "free"
-		case 1:
-			return "quiet"
-		case 2:
-			return "shoo"
-		default:
-			return "unknown"
-		}
-	}
-	
-	var timeElement: String{
-		let timeLeft = self.fire.profile.end - self.currentTime
-		if timeLeft > 8*60*60 {
-			return "all day"
-		} else if timeLeft <= 0 {
-			self.fire.noStatus(self.fire.profile.uid)
-			//self.color = Color.gray
-			return "a while"
-		}
-		else if timeLeft > 4*60*60 {
-			return "a while"
-		} else {
-			let hours = Int(timeLeft/3600)
-			let minutes = Int((timeLeft/60).truncatingRemainder(dividingBy: 60))
-			return (hours>0 ? "\(hours)h" : "") + (minutes>0 ? "\(minutes)m" : "")
-			//return (hours>0 ? "\(hours) hour\(hours == 1 ? "" : "s")": "") + (hours > 0 && minutes > 0 ? ", " : "") + (minutes>0 ? "\(minutes) minute\(minutes == 1 ? "" : "s")": "")
-		}
-	}
-	
-	var handType: String{
-		switch self.fire.profile.status {
-		case 0: //green
-			return "hand.thumbsup.fill"
-		case 1: //yellow
-			return "hand.raised.fill"
-		case 2: //red
-			return "hand.raised.slash.fill"
-		default: //none
-			return "hand.point.right.fill"
-		}
-	}
+	 var color: Color{
+           switch self.fire.profile.status {
+           case .yellow:
+               return Color.yellow
+           case .red:
+               return Color.red
+           default:
+               return Color.green
+           }
+       }
+       
+       var actionElement: String{
+           switch self.fire.profile.status{
+           case .green:
+               return "free"
+           case .yellow:
+               return "quiet"
+           case .red:
+               return "shoo"
+           }
+       }
+       
+       var timeElement: String{
+           let timeLeft = self.fire.profile.end - self.currentTime
+           if timeLeft > 8*60*60 {
+               return "all day"
+           } else if timeLeft <= 0 {
+               self.fire.noStatus(self.fire.profile.uid)
+               //self.color = Color.gray
+               return "a while"
+           }
+           else if timeLeft > 4*60*60 {
+               return "a while"
+           } else {
+               let hours = Int(timeLeft/3600)
+               let minutes = Int((timeLeft/60).truncatingRemainder(dividingBy: 60))
+               return (hours>0 ? "\(hours)h" : "") + (minutes>0 ? "\(minutes)m" : "")
+               //return (hours>0 ? "\(hours) hour\(hours == 1 ? "" : "s")": "") + (hours > 0 && minutes > 0 ? ", " : "") + (minutes>0 ? "\(minutes) minute\(minutes == 1 ? "" : "s")": "")
+           }
+       }
+       
+       var handType: String{
+           switch self.fire.profile.status {
+           case .yellow:
+               return "hand.raised.fill"
+           case .red: //red
+               return "hand.raised.slash.fill"
+           default: //none
+               return "hand.thumbsup.fill"
+           }
+       }
 	
 	@Binding var more: Bool
 	@Binding var eType: presentSheet
@@ -181,29 +175,29 @@ struct BottomView: View {
 				Group{
 					Spacer()
 					Button("Free"){
-						self.fire.quickUpdateStatus(statInt: 0, profile: self.fire.profile)
+                        self.fire.quickUpdateStatus(status: .green, profile: self.fire.profile)
 						buttonPressHaptic()
 					}
-					.buttonStyle(StatusButtonStyle(color: Color.green, selected: self.fire.profile.status == 0))
+                    .buttonStyle(StatusButtonStyle(color: Color.green, selected: self.fire.profile.status == .green))
 					Spacer()
 					Button("Quiet"){
-						self.fire.quickUpdateStatus(statInt: 1, profile: self.fire.profile)
+                        self.fire.quickUpdateStatus(status: .yellow, profile: self.fire.profile)
 						buttonPressHaptic()
 					}
-					.buttonStyle(StatusButtonStyle(color: Color.yellow, selected: self.fire.profile.status == 1))
+                    .buttonStyle(StatusButtonStyle(color: Color.yellow, selected: self.fire.profile.status == .yellow))
 					Spacer()
 					Button("Shoo"){
-						self.fire.quickUpdateStatus(statInt: 2, profile: self.fire.profile)
+                        self.fire.quickUpdateStatus(status: .red, profile: self.fire.profile)
 						buttonPressHaptic()
 					}
-					.buttonStyle(StatusButtonStyle(color: Color.red, selected: self.fire.profile.status == 2))
+                    .buttonStyle(StatusButtonStyle(color: Color.red, selected: self.fire.profile.status == .red))
 					Group{
 						Spacer()
 						Divider().frame(height: 40)
 						Spacer()
 					}
 					Button("Remind"){
-						self.fire.quickUpdateStatus(statInt: 2, profile: self.fire.profile)
+                        self.fire.quickUpdateStatus(status: .red, profile: self.fire.profile)
 						buttonPressHaptic()
 					}
 					.buttonStyle(StatusButtonStyle(color: Color.gray, selected: false))

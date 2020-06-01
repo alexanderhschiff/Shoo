@@ -14,7 +14,7 @@ struct Profile: Identifiable {
     var uid: String
     var name: String
     var reason: String
-    var status: Int
+    var status: Status
     var end: Double
     var start: Double
     var house: String
@@ -26,19 +26,20 @@ extension Profile: DocumentSerializable {
         let uid = documentData[FireKeys.Profile.uid] as? String ?? ""
         let name = documentData[FireKeys.Profile.name] as? String ?? ""
         let reason = documentData[FireKeys.Profile.reason] as? String ?? ""
-        let status = documentData[FireKeys.Profile.status] as? Int ?? -1
+        let status = documentData[FireKeys.Profile.status] as? Int ?? 0
         let end = documentData[FireKeys.Profile.end] as? Double ?? Date().timeIntervalSince1970
         let start = documentData[FireKeys.Profile.end] as? Double ?? Date().timeIntervalSince1970
         let house = documentData[FireKeys.Profile.house] as? String ?? ""
         
-        self.init(uid: uid, name: name, reason: reason, status: status, end: end, start: start, house: house)
+        self.init(uid: uid, name: name, reason: reason, status: Status(rawValue: status) ?? .green, end: end, start: start, house: house)
     }
     
     var toJSONSnapshot: [String: Any] {
         return [
             "id": self.id,
             "name": self.name,
-            "reason": self.status,
+            "reason": self.reason,
+            "status": self.status,
             "end": self.end,
             "start": self.start,
             "house": self.house
