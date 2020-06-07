@@ -23,6 +23,7 @@ struct FireKeys {
         static let end = "end"
         static let house = "house"
         static let start = "start"
+        static let pushToken = "pushToken"
     }
     
     struct Mate {
@@ -32,5 +33,6 @@ struct FireKeys {
         static let status = "status"
         static let end = "end"
         static let start = "start"
+        static let pushToken = "pushToken"
     }
 }

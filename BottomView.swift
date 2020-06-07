@@ -197,7 +197,8 @@ struct BottomView: View {
 						Spacer()
 					}
 					Button("Remind"){
-                        self.fire.quickUpdateStatus(status: .red, profile: self.fire.profile)
+                        self.fire.remindHouse()
+                        //self.fire.quickUpdateStatus(status: .red, profile: self.fire.profile)
 						buttonPressHaptic()
 					}
 					.buttonStyle(StatusButtonStyle(color: Color.gray, selected: false))

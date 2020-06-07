@@ -17,11 +17,11 @@ struct SignInView: View {
 	var body: some View {
 			VStack(alignment: .leading){
 				Text("Welcome to Shoo")
-					.font(.system(.largeTitle, design: .rounded))
+                    .font(.largeTitle)
 					.fontWeight(.bold)
 				
 				Text("Stop interruptions from every group in your life.")
-					.font(.system(.title, design: .rounded))
+                    .font(.title)
 					.fontWeight(.semibold)
 					.fixedSize(horizontal: false, vertical: true)
 					.foregroundColor(.secondary)
@@ -29,7 +29,7 @@ struct SignInView: View {
 				Divider()
 
 				Text("Shoo is easy.")
-					.font(.system(.headline, design: .rounded))
+                    .font(.headline)
 					.padding(.top)
 				
 				HStack{
