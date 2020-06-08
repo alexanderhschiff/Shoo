@@ -17,7 +17,7 @@ struct EditCardView: View {
     //time variables
     @State private var time: Double = Date().timeIntervalSince1970
     //@State private var selection: Int = 0
-
+    
     @State private var defaultEnd: Double = Date().timeIntervalSince1970 //default end is now
     @State private var start: Double = Date().timeIntervalSince1970 //start is always now
     
@@ -26,8 +26,6 @@ struct EditCardView: View {
     
     @State private var newStatus: Status = .green
     @State private var newReason: String = ""
-    
-    @State private var dataChanged: Bool = false
     
     @State private var custom = false
     @State private var customColor: Color = Color.gray
@@ -53,7 +51,7 @@ struct EditCardView: View {
     }
     
     var displayTime: String{
-		switch self.fire.timeSelection{
+        switch self.fire.timeSelection{
         case 0:
             return "10 minutes"
         case 1:
@@ -86,17 +84,10 @@ struct EditCardView: View {
     var body: some View {
         VStack(alignment: .leading){
             HandleView()
-            HStack{
-                Spacer()
-                Text(dataChanged ? "Dismiss to save".uppercased() : " ")
-                .font(.subheadline)
-                .foregroundColor(Color.primary)
-                Spacer()
-            }
             
             Spacer()
             
-			PersonView(name: fire.profile.name, status: newStatus, reason: newReason, endTime: time, startTime: start, id: fire.profile.uid, timerInterval: 5).environmentObject(fire).shadow(color: getColor(status: newStatus), radius: 10)
+            PersonView(name: fire.profile.name, status: newStatus, reason: newReason, endTime: time, startTime: start, id: fire.profile.uid, timerInterval: 5).environmentObject(fire).shadow(color: getColor(status: newStatus), radius: 10)
             
             Spacer()
             
@@ -105,24 +96,21 @@ struct EditCardView: View {
                     .font(.headline)
                 
                 HStack{
-                Button("Free"){
-                    self.newStatus = .green
-                    buttonPressHaptic()
-                    self.dataChanged = true
-                }
-                .buttonStyle(StatusButtonStyle(color: Color.green, selected: newStatus == .green))
-                Button("Quiet"){
-                    self.newStatus = .yellow
-                    buttonPressHaptic()
-                    self.dataChanged = true
-                }
-                .buttonStyle(StatusButtonStyle(color: Color.yellow, selected: newStatus == .yellow))
-                Button("Shoo"){
-                    self.newStatus = .red
-                    buttonPressHaptic()
-                    self.dataChanged = true
-                }
-                .buttonStyle(StatusButtonStyle(color: Color.red, selected: newStatus == .red))
+                    Button("Free"){
+                        self.newStatus = .green
+                        buttonPressHaptic()
+                    }
+                    .buttonStyle(StatusButtonStyle(color: Color.green, selected: newStatus == .green))
+                    Button("Quiet"){
+                        self.newStatus = .yellow
+                        buttonPressHaptic()
+                    }
+                    .buttonStyle(StatusButtonStyle(color: Color.yellow, selected: newStatus == .yellow))
+                    Button("Shoo"){
+                        self.newStatus = .red
+                        buttonPressHaptic()
+                    }
+                    .buttonStyle(StatusButtonStyle(color: Color.red, selected: newStatus == .red))
                     
                     Spacer()
                 }
@@ -159,7 +147,6 @@ struct EditCardView: View {
                                     buttonPressHaptic()
                                     UIApplication.shared.endEditing() // Call to dismiss keyboard
                                     self.customColor = Color.gray
-                                    self.dataChanged = true
                                     self.addReasonFunc()
                                 }){
                                     Image(systemName: "checkmark.circle")
@@ -179,7 +166,6 @@ struct EditCardView: View {
                                 .reasonStyle(selected: reason == self.newReason)
                                 .padding([.leading, .bottom])
                                 .onTapGesture {
-                                    self.dataChanged = true
                                     buttonPressHaptic()
                                     self.newReason = reason
                             }
@@ -207,14 +193,13 @@ struct EditCardView: View {
             
             Button(action: {
                 buttonPressHaptic()
-                self.dataChanged = true
                 self.showingAlert = true
                 self.tapped = true
             }){
                 HStack{
                     Spacer()
                     if !self.tapped{
-                        Text("Notify All")
+                        Text("Update & Notify All")
                     } else{
                         Image(systemName: "checkmark.circle")
                             .font(.title)
@@ -223,7 +208,21 @@ struct EditCardView: View {
                 }.padding(.horizontal)
             }
             .padding(.horizontal)
-			.buttonStyle(WideButtonStyle(color: getColor(status: self.newStatus)))
+            .buttonStyle(WideButtonStyle(color: getColor(status: self.newStatus)))
+            
+            Button(action: {
+                buttonPressHaptic()
+                self.showingAlert = true
+                self.tapped = true
+            }){
+                HStack{
+                    Spacer()
+                    Text("Update")
+                    Spacer()
+                }.padding(.horizontal)
+            }
+            .padding()
+            .buttonStyle(WideButtonStyle(color: Color.gray))
             
             Spacer()
         }
@@ -241,7 +240,6 @@ struct EditCardView: View {
             self.defaultEnd = self.fire.profile.end
             self.time = self.fire.profile.end
             self.start = self.fire.profile.start
-            self.dataChanged = false
         }
         .alert(isPresented: $showingAlert){
             Alert(title: Text("Feature coming soon..."))

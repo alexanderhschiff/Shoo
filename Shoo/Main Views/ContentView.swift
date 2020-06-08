@@ -28,6 +28,9 @@ struct ContentView: View {
             }
         }.onAppear{
             self.fire.configureFirebaseStateDidChange()
+        }.onDisappear {
+            print("on disappear")
+            self.fire.appWillClose()
         }
     }
 }

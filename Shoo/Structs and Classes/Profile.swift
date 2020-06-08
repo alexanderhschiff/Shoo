@@ -18,6 +18,7 @@ struct Profile: Identifiable {
     var end: Double
     var start: Double
     var house: String
+    var pushToken: String
 }
 
 extension Profile: DocumentSerializable {
@@ -30,8 +31,9 @@ extension Profile: DocumentSerializable {
         let end = documentData[FireKeys.Profile.end] as? Double ?? Date().timeIntervalSince1970
         let start = documentData[FireKeys.Profile.end] as? Double ?? Date().timeIntervalSince1970
         let house = documentData[FireKeys.Profile.house] as? String ?? ""
+        let pushToken = documentData[FireKeys.Profile.pushToken] as? String ?? ""
         
-        self.init(uid: uid, name: name, reason: reason, status: Status(rawValue: status) ?? .green, end: end, start: start, house: house)
+        self.init(uid: uid, name: name, reason: reason, status: Status(rawValue: status) ?? .green, end: end, start: start, house: house, pushToken: pushToken)
     }
     
     var toJSONSnapshot: [String: Any] {

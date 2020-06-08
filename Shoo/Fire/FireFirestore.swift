@@ -11,7 +11,7 @@ import FirebaseFirestore
 struct FireFirestore {
     
     static func retreiveProfile(uid: String, result: @escaping (Result<Profile, Error>) -> ()) {
-        let reference = Firestore
+        let /*reference*/_ = Firestore
             .firestore()
             .collection(FireKeys.CollectionPath.profiles)
             .document(uid)

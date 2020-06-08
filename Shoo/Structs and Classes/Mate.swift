@@ -17,6 +17,7 @@ struct Mate: Identifiable {
     var status: Status
     var end: Double
     var start: Double
+    var pushToken: String
 }
 
 extension Mate: DocumentSerializable {
@@ -28,8 +29,9 @@ extension Mate: DocumentSerializable {
         let status = documentData[FireKeys.Mate.status] as? Int ?? 0
         let end = documentData[FireKeys.Mate.end] as? Double ?? Date().timeIntervalSince1970
         let start = documentData[FireKeys.Mate.start] as? Double ?? Date().timeIntervalSince1970
+        let pushToken = documentData[FireKeys.Mate.pushToken] as? String ?? ""
         
-        self.init(id: id, name: name, reason: reason, status: Status(rawValue: status) ?? .green, end: end, start: start)
+        self.init(id: id, name: name, reason: reason, status: Status(rawValue: status) ?? .green, end: end, start: start, pushToken: pushToken)
     }
     
     init(document: DocumentSnapshot) {
@@ -40,6 +42,7 @@ extension Mate: DocumentSerializable {
         self.status = Status(rawValue: tempStatus) ?? .yellow
         self.start = document.get("start") as? Double ?? Date().timeIntervalSince1970
         self.end = document.get("end") as? Double ?? Date().timeIntervalSince1970
+        self.pushToken = document.get("pushToken") as? String ?? ""
     }
     
     var toJSONSnapshot: [String: Any] {
@@ -48,7 +51,8 @@ extension Mate: DocumentSerializable {
             "name": self.name,
             "reason": self.status,
             "end": self.end,
-            "start": self.start
+            "start": self.start,
+            "pushToken": self.pushToken
         ]
     }
 }
