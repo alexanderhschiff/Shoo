@@ -10,9 +10,9 @@ import UIKit
 import Firebase
 import FirebaseMessaging
 import UserNotifications
-import Fabric
 
-
+//access when setting up the listener slightly later to pass for initial actions
+public var shortcutStatus = statusChange(newStatus: .green, didChange: false)
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterDelegate {
@@ -23,11 +23,40 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         FirebaseApp.configure()
         
         //For crashlytics
-        Fabric.sharedSDK().debug = true
+        //Fabric.sharedSDK().debug = true
         
         //For notifications
-        let pushManager = PushNotificationManager()
-        pushManager.registerForPushNotifications()
+        //let pushManager = PushNotificationManager()
+        //pushManager.registerForPushNotifications()
+        
+        
+        if #available(iOS 10.0, *) {
+            // For iOS 10 display notification (sent via APNS)
+            UNUserNotificationCenter.current().delegate = self
+            //MessagingDelegate = self
+            
+            let authOptions: UNAuthorizationOptions = [.alert, .badge, .sound]
+            UNUserNotificationCenter.current().requestAuthorization(
+                options: authOptions,
+           completionHandler: {_, _ in })
+        } else {
+            let settings: UIUserNotificationSettings =
+                UIUserNotificationSettings(types: [.alert, .badge, .sound], categories: nil)
+            application.registerUserNotificationSettings(settings)
+        }
+        
+        application.registerForRemoteNotifications()
+        
+        if let shortcutItem = launchOptions?[UIApplication.LaunchOptionsKey.shortcutItem] as? UIApplicationShortcutItem {
+            if shortcutItem.type == "app.shoo.app.qFree" {
+                shortcutStatus = statusChange(newStatus: .green, didChange: true)
+            } else if shortcutItem.type == "app.shoo.app.qQuiet" {
+                shortcutStatus = statusChange(newStatus: .yellow, didChange: true)
+            } else if shortcutItem.type == "app.shoo.app.qShoo" {
+                shortcutStatus = statusChange(newStatus: .red, didChange: true)
+            }
+        }
+        
         
         return true
     }
@@ -45,6 +74,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         // Called when the user discards a scene session.
         // If any sessions were discarded while the application was not running, this will be called shortly after application:didFinishLaunchingWithOptions.
         // Use this method to release any resources that were specific to the discarded scenes, as they will not return.
+    }
+    
+    func applicationWillResignActive(_ application: UIApplication) {
+        print("appResignActive")
     }
     
     

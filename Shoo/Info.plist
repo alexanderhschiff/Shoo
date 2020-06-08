@@ -59,6 +59,33 @@
 	<array>
 		<string>UIInterfaceOrientationPortrait</string>
 	</array>
+	<key>UIApplicationShortcutItems</key>
+	<array>
+		<dict>
+			<key>UIApplicationShortcutItemIconSymbolName</key>
+			<string>hand.raised.slash.fill</string>
+			<key>UIApplicationShortcutItemTitle</key>
+			<string>Shoo</string>
+			<key>UIApplicationShortcutItemType</key>
+			<string>app.shoo.app.qShoo</string>
+		</dict>
+		<dict>
+			<key>UIApplicationShortcutItemIconSymbolName</key>
+			<string>hand.raised.fill</string>
+			<key>UIApplicationShortcutItemTitle</key>
+			<string>Quiet</string>
+			<key>UIApplicationShortcutItemType</key>
+			<string>app.shoo.app.qQuiet</string>
+		</dict>
+		<dict>
+			<key>UIApplicationShortcutItemIconSymbolName</key>
+			<string>hand.thumbsup.fill</string>
+			<key>UIApplicationShortcutItemTitle</key>
+			<string>Free</string>
+			<key>UIApplicationShortcutItemType</key>
+			<string>app.shoo.app.qFree</string>
+		</dict>
+	</array>
 	<key>UISupportedInterfaceOrientations~ipad</key>
 	<array>
 		<string>UIInterfaceOrientationPortrait</string>

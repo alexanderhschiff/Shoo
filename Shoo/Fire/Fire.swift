@@ -25,19 +25,18 @@ enum CheckError: Error {
 
 class Fire: ObservableObject {
     
+    // MARK: - Auth
+    
     @Published var isUserAuthenticated: FireAuthState = .undefined
     @Published var profile: Profile = Profile(uid: "", name: "", reason: "", status: .green, end: Date().timeIntervalSince1970, start: Date().timeIntervalSince1970, house: "", pushToken: "")
     @Published var houseName: String = "Home"
     @Published var timeSelection: Int = 9
-    @Published var reasons: [String] = ["👩‍💻 Working", "📺 Watching TV", "🏃‍♂️ Exercising", "📱 On the phone"]
     
-    
-    var mateList: [String] = []
     var authStateDidChangeListenerHandle: AuthStateDidChangeListenerHandle?
     let db = Firestore.firestore()
     private var pushSender = PushNotificationSender()
     
-    // MARK: - Auth
+    
     
     func configureFirebaseStateDidChange() {
         authStateDidChangeListenerHandle = Auth.auth().addStateDidChangeListener({ (auth, user) in
@@ -53,7 +52,10 @@ class Fire: ObservableObject {
                 case .success(let profile):
                     print("Retreived: \(profile)")
                     self.profile = profile
-                    self.updateFirestorePushToken(uid: self.profile.uid)
+                    if shortcutStatus.didChange {
+                        self.quickUpdateStatus(status: shortcutStatus.newStatus, profile: self.profile)
+                    }
+                    self.updateFirestorePushToken()
                 case .failure(let err):
                     print(err.localizedDescription)
                 }
@@ -62,18 +64,84 @@ class Fire: ObservableObject {
         })
     }
     
-    func updateFirestorePushToken(uid: String) {
+    //MARK: - APP CLOSING
+    
+    func appWillClose() {
+        userDefaults.set(self.reasons, forKey: "reasons")
+    }
+    
+    // MARK: - NOTIFICATIONS
+    //saves the last notification sent to see if time difference > 2 minutes or different status
+    @Published var lastNotification = NotificationStruct(status: nil, reason: nil, endTime: nil, sendTime: nil)
+    
+    func updateFirestorePushToken() {
         if let token = Messaging.messaging().fcmToken {
             self.profile.pushToken = token
-            let usersRef = Firestore.firestore().collection("profiles").document(uid)
+            let usersRef = Firestore.firestore().collection("profiles").document(self.profile.uid)
             usersRef.setData(["pushToken": token], merge: true)
         }
     }
     
-    func remindHouse() {
-        pushSender.sendPushNotification(to: "dfN38DhWMUktjpNaHsD-Lo:APA91bF1wZtoo3n0llhesoM05V1VIQmaZ-QdUURApQrRtZ1-kV2yZSfByFI_g59Ijq_k_at7PVRULCt15k2yBhd_2rHYU-825Vy_XCpQrHBsgbq8wGHgmQG28TH5e1XiWfs5pZRiJdsv", title: "Test", body: "hey ben")
+    func testPush() {
+        pushSender.sendPushNotification(to: "et_uzsZta0kkvh7Dc2-lAN:APA91bGIz3ieYLCq3_Zywlhmt_Kc4MGldA58xpom4Of-vUAzz17P31gU-KdlJc4CL26jGSg-9YSKHSsHPCxRTiTn6rgz0A5wpy06pxWA1X0t6GSbUf5qGlOXTTR0p1ixrLd9G4CnuJno", title: "Test", body: "hey dad")
     }
     
+    func remindHouse() {
+        let notif = NotificationStruct(status: self.profile.status, reason: self.profile.reason, endTime: self.profile.end, sendTime: Date().timeIntervalSince1970)
+        if lastNotification.check(canSend: notif) {
+            self.lastNotification = notif
+            for mate in self.mates {
+                pushSender.sendPushNotification(to: mate.pushToken, title: messageTitle(), body: messasageBody())
+            }
+        }
+    }
+    
+    func messageTitle() -> String {
+        var ret = self.profile.name
+        switch self.profile.status {
+        case .red:
+            ret += " says Shoo"
+        case .yellow:
+            ret += " says Quiet"
+        case .green:
+            ret += " is Free"
+        }
+        return ret
+    }
+    
+    func messasageBody() -> String {
+        var ret = ""
+        switch self.profile.status {
+        case .red:
+            ret += "Don't bother "
+        case .yellow:
+            ret += "Be quiet around "
+        case .green:
+            ret += "Hang out with "
+        }
+        ret += self.profile.name
+        ret += " for "
+        ret += timeElement()
+        return ret
+    }
+    
+    func timeElement() -> String{
+        let timeLeft = self.profile.end - Date().timeIntervalSince1970
+        if timeLeft > 8*60*60 {
+            return "all day"
+        } else if timeLeft <= 0 {
+            return "a while"
+        }
+        else if timeLeft > 4*60*60 {
+            return "a while"
+        } else {
+            let hours = Int(timeLeft/3600)
+            let minutes = Int((timeLeft/60).truncatingRemainder(dividingBy: 60))
+            return (hours>0 ? "\(hours) hour\(hours == 1 ? "" : "s")": "") + (hours > 0 && minutes > 0 ? ", " : "") + (minutes>0 ? "\(minutes) minute\(minutes == 1 ? "" : "s")": "")
+        }
+    }
+    
+    // MARK: - STATUS LISTENERS
     @Published var mates: [Mate] = []
     @Published var error: Error? = nil
     var repository = HouseRepository()
@@ -119,11 +187,6 @@ class Fire: ObservableObject {
         repository.removeMate(mate)
     }
     
-    func updateHouse(_ prof: Profile, _ oldID: String){
-        repository.updateHouse(prof, oldID)
-        self.startListener()
-    }
-    
     func stopListener() {
         DispatchQueue.main.async {
             self.userDefaults.set(self.reasons, forKey: "reasons")
@@ -136,32 +199,26 @@ class Fire: ObservableObject {
         self.isUserAuthenticated = .signedOut
     }
     
-    func testHouse(_ houseId: String, completionHandler: @escaping (Result<Bool, houseError>) -> Void) {
-        self.db.collection("Homes").document(houseId).getDocument { (document, error) in
-            if let document = document, document.exists {
-                completionHandler(.success(true))
-            } else {
-                completionHandler(.failure(.badQR))
-            }
-            //completionHandler(.failure(.badQR)) - DON'T THINK THIS IS NECESSARY BUT CAN POTENTIALLY USE LATER
-        }
+    //MARK: - REASONS
+    
+    let userDefaults = UserDefaults.standard
+    @Published var reasons: [String] = ["👩‍💻 Working", "📺 Watching TV", "🏃‍♂️ Exercising", "📱 On the phone"]
+    
+    func saveCustomReasons(reasons: [String]){
+        self.reasons = reasons
+        userDefaults.set(self.reasons, forKey: "reasons")
     }
     
+    func getCustomReasons() -> [String] {
+        return self.reasons
+    }
+    
+    // MARK: - UPDATE STATE
     
     func saveState(user: Profile, status: Status, reason: String, end: Double) {
         profile.end = end
         profile.start = Date().timeIntervalSince1970
         repository.saveState(user: user, status: status, reason: reason, end: end)
-    }
-    
-    let userDefaults = UserDefaults.standard
-    
-    func saveCustomReasons(reasons: [String]){
-        self.reasons = reasons
-    }
-    
-    func getCustomReasons() -> [String] {
-        return self.reasons
     }
     
     func changeName(_ newName: String) {
@@ -220,6 +277,7 @@ class Fire: ObservableObject {
         }
     }
     
+    // MARK: - HOUSE
     func setHouseName(_ newName: String) {
         self.houseName = newName
         db.collection("Homes").document(self.profile.house).updateData(["name": newName])
@@ -239,5 +297,21 @@ class Fire: ObservableObject {
                 }
             }
         }
+    }
+    
+    func testHouse(_ houseId: String, completionHandler: @escaping (Result<Bool, houseError>) -> Void) {
+        self.db.collection("Homes").document(houseId).getDocument { (document, error) in
+            if let document = document, document.exists {
+                completionHandler(.success(true))
+            } else {
+                completionHandler(.failure(.badQR))
+            }
+            //completionHandler(.failure(.badQR)) - DON'T THINK THIS IS NECESSARY BUT CAN POTENTIALLY USE LATER
+        }
+    }
+    
+    func updateHouse(_ prof: Profile, _ oldID: String){
+        repository.updateHouse(prof, oldID)
+        self.startListener()
     }
 }

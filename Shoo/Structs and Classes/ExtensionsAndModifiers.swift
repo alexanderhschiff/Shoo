@@ -112,3 +112,8 @@ func successHaptic() {
 enum houseError: Error {
     case badQR
 }
+
+public struct statusChange {
+    var newStatus: Status
+    var didChange: Bool
+}
