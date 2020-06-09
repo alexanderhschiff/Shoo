@@ -88,7 +88,7 @@ struct EditCardView: View {
 			
 			Spacer()
 			
-			PersonView(name: fire.profile.name, status: newStatus, reason: newReason, endTime: time, startTime: start, id: fire.profile.uid, timerInterval: 5).environmentObject(fire)
+            PersonView(mate: Mate(id: self.fire.profile.uid, name: self.fire.profile.name, reason: self.fire.profile.reason, status: self.fire.profile.status, end: self.fire.profile.end, start: self.fire.profile.start, pushToken: self.fire.profile.pushToken), timerInterval: 5).environmentObject(fire)
 				.shadow(radius: 3, y: 1)
 				.highPriorityGesture(TapGesture()) //to override tap expansion
 			

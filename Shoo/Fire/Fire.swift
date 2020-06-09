@@ -96,7 +96,7 @@ class Fire: ObservableObject {
         }
     }
 	
-	func remindMate(_ token: String) {
+    func remindMate(_ token: String) {
 		pushSender.sendPushNotification(to: token, title: messageTitle(), body: messasageBody())
 	}
     

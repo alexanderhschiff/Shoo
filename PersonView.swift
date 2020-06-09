@@ -26,25 +26,16 @@ struct PersonView: View {
 	
 	let mate: Mate
 	
-	let name = mate.name
-	let status = mate.status
-	//@State private var uStatus: Int = -1
-	let reason: String
-	
-	let endTime: TimeInterval //set by user (additional time + current time)
-	let startTime: TimeInterval //set on save (current time)
 	@State private var currentTime: TimeInterval = Date().timeIntervalSince1970 //NOW –– updating on timer
 	
-	let id: String
 	let timerInterval: Double //how often to refresh timer
-	let token: String
 	
 	var progress: Float{
 		return 0.4
 	}
 	
 	var actionElement: String{
-		switch status{
+        switch mate.status{
 		case .green:
 			return "free"
 		case .yellow:
@@ -55,11 +46,11 @@ struct PersonView: View {
 	}
 	
 	var timeElement: String{
-		let timeLeft = endTime - self.currentTime
+        let timeLeft = mate.end - self.currentTime
 		if timeLeft > 8*60*60 {
 			return "all day"
 		} else if timeLeft <= 0 {
-			self.fire.noStatus(id)
+            self.fire.noStatus(mate.id)
 			//self.color = Color.gray
 			return "a while"
 		}
@@ -74,7 +65,7 @@ struct PersonView: View {
 	}
 	
 	var handType: String{
-		switch status {
+        switch mate.status {
 		case .yellow: //yellow
 			return "hand.raised.fill"
 		case .red: //red
@@ -86,7 +77,7 @@ struct PersonView: View {
 
 	var body: some View {
 		ZStack{
-			getColor(status: status)
+            getColor(status: mate.status)
 			
 			VStack{
 				HStack{
@@ -95,7 +86,7 @@ struct PersonView: View {
 							Image(systemName: handType)
 								.font(.title)
 								//.foregroundColor(Color(UIColor.systemBackground))
-							Text(self.name)
+                            Text(self.mate.name)
 								.font(.system(.largeTitle, design: .rounded))
 								.fontWeight(.semibold)
 								//.font(.largeTitle)
@@ -104,7 +95,7 @@ struct PersonView: View {
 								.lineLimit(1)
 						}
 						
-						Text(self.reason)
+                        Text(self.mate.reason)
 							.font(.system(.title, design: .rounded))
 							//.font(.headline)
 							//.fontWeight(.bold)
@@ -142,7 +133,7 @@ struct PersonView: View {
 				if expanded{
 					HStack{
 						Button(action: {
-							self.fire.remindMate(self.token)
+                            self.fire.remindMate(self.mate.pushToken)
 						}){
 							HStack{
 								Spacer()
@@ -173,6 +164,6 @@ struct PersonView: View {
 
 struct PersonView_Previews: PreviewProvider {
 	static var previews: some View {
-		PersonView(name: "Alex", status: .red, reason: "Working", endTime: Date().addingTimeInterval(8*60+6000).timeIntervalSince1970, startTime: Date().timeIntervalSince1970, id: "alex", timerInterval: 5).environmentObject(Fire())//.environment(\.colorScheme, .dark)
+        PersonView(mate: Mate(id: "", name: "Benjamin", reason: "Testing", status: .green, end: Date().timeIntervalSince1970, start: Date().timeIntervalSinceReferenceDate, pushToken: ""), timerInterval: 5).environmentObject(Fire())//.environment(\.colorScheme, .dark)
 	}
 }
