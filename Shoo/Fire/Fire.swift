@@ -24,6 +24,20 @@ enum CheckError: Error {
 
 
 class Fire: ObservableObject {
+	// MARK: - QUICK ACTION
+	@Published var quickAction: Status? = nil {
+		didSet {
+		quickActionChange()
+		}
+	}
+	
+	func quickActionChange() {
+		if let qA = self.quickAction {
+		self.quickUpdateStatus(status: qA, profile: self.profile)
+		self.quickAction = nil
+		}
+	}
+	
     
     // MARK: - Auth
     
@@ -52,9 +66,9 @@ class Fire: ObservableObject {
                 case .success(let profile):
                     print("Retreived: \(profile)")
                     self.profile = profile
-                    if shortcutStatus.didChange {
-                        self.quickUpdateStatus(status: shortcutStatus.newStatus, profile: self.profile)
-                    }
+					if let qA = self.quickAction {
+						self.quickUpdateStatus(status: qA, profile: self.profile)
+					}
                     self.updateFirestorePushToken()
                 case .failure(let err):
                     print(err.localizedDescription)
@@ -81,20 +95,27 @@ class Fire: ObservableObject {
             usersRef.setData(["pushToken": token], merge: true)
         }
     }
+	
+	func remindMate(_ token: String) {
+		pushSender.sendPushNotification(to: token, title: messageTitle(), body: messasageBody())
+	}
     
     func testPush() {
         pushSender.sendPushNotification(to: "et_uzsZta0kkvh7Dc2-lAN:APA91bGIz3ieYLCq3_Zywlhmt_Kc4MGldA58xpom4Of-vUAzz17P31gU-KdlJc4CL26jGSg-9YSKHSsHPCxRTiTn6rgz0A5wpy06pxWA1X0t6GSbUf5qGlOXTTR0p1ixrLd9G4CnuJno", title: "Test", body: "hey dad")
     }
     
-    func remindHouse() {
-        let notif = NotificationStruct(status: self.profile.status, reason: self.profile.reason, endTime: self.profile.end, sendTime: Date().timeIntervalSince1970)
-        if lastNotification.check(canSend: notif) {
-            self.lastNotification = notif
-            for mate in self.mates {
-                pushSender.sendPushNotification(to: mate.pushToken, title: messageTitle(), body: messasageBody())
-            }
-        }
-    }
+	func remindHouse() {
+		let notif = NotificationStruct(status: self.profile.status, reason: self.profile.reason, endTime: self.profile.end, sendTime: Date().timeIntervalSince1970)
+		if lastNotification.check(canSend: notif) {
+		buttonPressHaptic()
+		self.lastNotification = notif
+			for mate in self.mates {
+		pushSender.sendPushNotification(to: mate.pushToken, title: messageTitle(), body: messasageBody())
+		}
+		} else {
+		errorHaptic()
+		}
+	}
     
     func messageTitle() -> String {
         var ret = self.profile.name
@@ -146,7 +167,7 @@ class Fire: ObservableObject {
     func startListener() {
         self.error = nil
         DispatchQueue.main.async {
-            self.reasons = self.userDefaults.object(forKey: "reasons") as? [String] ?? ["👩‍💻 Working", "📺 Watching TV", "🏃‍♂️ Exercising", "📱 On the phone"]
+            self.reasons = self.userDefaults.object(forKey: "reasons") as? [String] ?? ["Working", "Watching TV", "Exercising", "On the phone"]
         }
         repository.startListener(Fid: self.profile.house, userID: self.profile.uid, result: {[weak self] (result) in
             guard let `self` = self else { return }
@@ -273,6 +294,7 @@ class Fire: ObservableObject {
     func setHouseName(_ newName: String) {
         self.houseName = newName
         db.collection("Homes").document(self.profile.house).updateData(["name": newName])
+		self.getHouseName()
     }
     
     func getHouseName() {
@@ -305,5 +327,6 @@ class Fire: ObservableObject {
     func updateHouse(_ prof: Profile, _ oldID: String){
         repository.updateHouse(prof, oldID)
         self.startListener()
+		self.getHouseName()
     }
 }

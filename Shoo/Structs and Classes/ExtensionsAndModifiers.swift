@@ -115,11 +115,12 @@ func successHaptic() {
 	generator.notificationOccurred(.success)
 }
 
-enum houseError: Error {
-    case badQR
+
+func errorHaptic() {
+	let generator = UINotificationFeedbackGenerator()
+	generator.notificationOccurred(.error)
 }
 
-public struct statusChange {
-    var newStatus: Status
-    var didChange: Bool
+enum houseError: Error {
+    case badQR
 }

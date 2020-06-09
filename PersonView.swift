@@ -24,8 +24,10 @@ struct PersonView: View {
 	
 	@State private var expanded = false
 	
-	let name: String
-	let status: Status
+	let mate: Mate
+	
+	let name = mate.name
+	let status = mate.status
 	//@State private var uStatus: Int = -1
 	let reason: String
 	
@@ -35,6 +37,7 @@ struct PersonView: View {
 	
 	let id: String
 	let timerInterval: Double //how often to refresh timer
+	let token: String
 	
 	var progress: Float{
 		return 0.4
@@ -139,7 +142,7 @@ struct PersonView: View {
 				if expanded{
 					HStack{
 						Button(action: {
-							//to do
+							self.fire.remindMate(self.token)
 						}){
 							HStack{
 								Spacer()

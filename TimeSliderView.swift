@@ -49,7 +49,7 @@ struct TimeSliderView: View {
 			HStack(spacing: 2){
 				ForEach(0..<11){ number in
 					Rectangle()
-						.foregroundColor(number > self.fire.timeSelection ? Color.gray : Color.white)
+						.foregroundColor(number > self.fire.timeSelection ? Color.gray.opacity(0.4) : Color.white)
 						.frame(width: geo.size.width/CGFloat(11)-2, height: 50)
 						.onTapGesture {
                             self.selectionFeedbackGenerator.selectionChanged()
