@@ -12,54 +12,40 @@ struct LaunchScreenView: View {
     @EnvironmentObject var fire: Fire
     
     var body: some View {
-        GeometryReader { geo in
-            ZStack{
-                VStack(alignment: .leading, spacing: 0){
-                    HStack{
-                        VStack(alignment: .leading){
-                            Text("")
-                                .fontWeight(.heavy)
-                                .font(.largeTitle)
-                                .lineLimit(1)
-                            FreePeopleView().environmentObject(self.fire)
-                                .lineLimit(1)
-                        }
-                        
-                        Spacer()
-                        
-                        Button(action: {
-                        }){
-                            ZStack(alignment: .center){
-                                Circle()
-                                    .frame(width: 50, height: 50)
-                                    .foregroundColor(Color(UIColor.systemBackground))
-                                    .shadow(radius: 3, y: 3)
-                                Image(systemName: "gear")
-                                    .font(.headline)
-                                    .foregroundColor(.primary)
-                            }
-                        }
-                        
-                        Button(action: {
-                        }){
-                            ZStack(alignment: .center){
-                                Circle()
-                                    .frame(width: 50, height: 50)
-                                    .foregroundColor(Color(UIColor.systemBackground))
-                                    .shadow(radius: 3, y: 3)
-                                Image(systemName: "person.badge.plus.fill")
-                                    .font(.headline)
-                                    .foregroundColor(.primary)
-                            }
-                        }
-                    }
-                    .padding([.horizontal, .bottom])
-                    .padding(.top, (UIApplication.shared.windows.last?.safeAreaInsets.top)!)
-                    .frame(width: UIScreen.main.bounds.width)
-                    .background(Blur(style: .systemMaterial))
-                }
-            }
-            
+		ZStack{
+			VStack(alignment: .leading, spacing: 0){
+				Text("Loading")
+				.font(.system(size: 20, weight: .semibold))
+				.foregroundColor(.secondary)
+				.lineLimit(1)
+				
+				HStack{
+					Button(action: {
+						//none
+					}){
+						HStack{
+							Text("Home")
+								.font(.system(size: 30, weight: .bold))
+								.lineLimit(1)
+								.foregroundColor(.primary)
+							Image(systemName: "chevron.right")
+								.font(.system(size: 20))
+								.foregroundColor(.primary)
+						}
+					}
+					
+					Spacer()
+					
+					Button(action: {
+						//none
+					}){
+						Image(systemName: "person.crop.circle.fill.badge.plus")
+							.font(.system(size: 30))
+							.foregroundColor(.primary)
+					}
+				}
+			}
+			.padding(.horizontal)
             
             VStack(spacing: 0){
                 Spacer()
@@ -69,7 +55,6 @@ struct LaunchScreenView: View {
         }
         .background(Color(UIColor.secondarySystemBackground))
         .edgesIgnoringSafeArea(.all)
-        
     }
 }
 

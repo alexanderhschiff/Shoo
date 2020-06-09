@@ -54,8 +54,14 @@ struct WideButtonStyle: ButtonStyle {
 			.padding()
 			.background(color)
 			.clipShape(RoundedRectangle(cornerRadius: 20, style: .continuous))
-			.animation(.easeIn)
-			.foregroundColor(Color(UIColor.systemBackground))
+			.foregroundColor(.primary)
+			.scaleEffect(configuration.isPressed ? 0.9 : 1)
+	}
+}
+
+struct ScaleButtonStyle: ButtonStyle {
+	func makeBody(configuration: Self.Configuration) -> some View {
+		configuration.label
 			.scaleEffect(configuration.isPressed ? 0.9 : 1)
 	}
 }
@@ -68,7 +74,7 @@ struct StatusButtonStyle: ButtonStyle {
 			.font(.system(size: 16, weight: .bold))
 			.padding()
 			.background(color)
-			//.foregroundColor(Color(UIColor.systemBackground))
+			.foregroundColor(.primary)
 			.fixedSize(horizontal: true, vertical: false)
 			.clipShape(RoundedRectangle(cornerRadius: 20, style: .continuous))
 			.shadow(color: color, radius: (selected ?  4: 0), y: 2)
@@ -85,9 +91,9 @@ struct Reason: ViewModifier {
 		content
 			.font(.system(.headline))
 			.padding()
-			.background(selected == true ? Color(UIColor.systemBackground): Color.gray.opacity(0.7))
-			.cornerRadius(20)
-			.shadow(radius: 3, y: 4)
+			.background(selected == true ? Color(UIColor.systemBackground): Color.gray.opacity(0.4))
+			.clipShape(RoundedRectangle(cornerRadius: 20, style: .continuous))
+			//.shadow(radius: 2, y: 2)
 			.lineLimit(1)
 			.fixedSize(horizontal: false, vertical: true)
 	}

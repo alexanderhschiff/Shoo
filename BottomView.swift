@@ -166,7 +166,7 @@ struct BottomView: View {
 				}
 			}
 			.padding()
-			.background(self.isDetectingLongPress ? Blur(style: .extraLight): Blur(style: .systemUltraThinMaterial))
+			.background(self.isDetectingLongPress ? Blur(style: .prominent): Blur(style: .systemThinMaterial))
 			.gesture(tapPressGesture)
 			
 			Divider().background(Color.primary)
@@ -210,7 +210,7 @@ struct BottomView: View {
 			.padding(.bottom, ((UIApplication.shared.windows.last?.safeAreaInsets.bottom)! == 0 ? 10 : 0))
 			.padding(.bottom, (UIApplication.shared.windows.last?.safeAreaInsets.bottom)!)
 			.frame(width: UIScreen.main.bounds.width)
-			.background(Blur(style: .systemUltraThinMaterial))
+			.background(Blur(style: .systemThinMaterial))
 		}.onAppear {
 			self.currentTime = Date().timeIntervalSince1970
 			Timer.scheduledTimer(withTimeInterval: 5, repeats: true) { _ in

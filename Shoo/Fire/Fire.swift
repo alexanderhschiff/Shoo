@@ -110,19 +110,11 @@ class Fire: ObservableObject {
     }
     
     func messasageBody() -> String {
-        var ret = ""
-        switch self.profile.status {
-        case .red:
-            ret += "Don't bother "
-        case .yellow:
-            ret += "Be quiet around "
-        case .green:
-            ret += "Hang out with "
-        }
-        ret += self.profile.name
-        ret += " for "
-        ret += timeElement()
-        return ret
+		let reason = self.profile.reason
+		if reason.isEmpty {
+			return "For \(timeElement())"
+		}
+        return "\(self.profile.reason) for \(timeElement())"
     }
     
     func timeElement() -> String{
