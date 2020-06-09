@@ -263,7 +263,7 @@ class Fire: ObservableObject {
         case 9:
             x = 60 * 60 * 6
         case 10:
-            x = Int(Calendar.current.nextDate(after: Date(), matching: DateComponents(hour: 0, minute: 0), matchingPolicy: .nextTimePreservingSmallerComponents)!.timeIntervalSince1970 - Date().timeIntervalSince1970)//until midnight
+            x = Int(Date.distantFuture.timeIntervalSince1970)
         default:
             x = 60 * 60 * 4
         }

@@ -38,7 +38,7 @@ struct TimeSliderView: View {
 		case 9:
 			return Date().timeIntervalSince1970 + 360*60 //6 hours (a while)
 		case 10:
-			return Calendar.current.nextDate(after: Date(), matching: DateComponents(hour: 0, minute: 0), matchingPolicy: .nextTimePreservingSmallerComponents)!.timeIntervalSince1970//until midnight
+            return Date.distantFuture.timeIntervalSince1970
 		default:
 			return 0
 		}

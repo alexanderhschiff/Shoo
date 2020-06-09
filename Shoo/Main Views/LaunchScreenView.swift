@@ -44,6 +44,7 @@ struct LaunchScreenView: View {
 							.foregroundColor(.primary)
 					}
 				}
+                Spacer()
 			}
 			.padding(.horizontal)
             

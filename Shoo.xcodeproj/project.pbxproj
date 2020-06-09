@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		1319D2C1247E1AFA00B2C4E3 /* BuildFile in Frameworks */ = {isa = PBXBuildFile; productRef = 1319D2C0247E1AFA00B2C4E3 /* SwiftPackageProductDependency */; };
+		1319D2C1247E1AFA00B2C4E3 /* CodeScanner in Frameworks */ = {isa = PBXBuildFile; productRef = 1319D2C0247E1AFA00B2C4E3 /* CodeScanner */; };
 		1346B9F0246F870400EECEC9 /* TimeSliderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1346B9EF246F870400EECEC9 /* TimeSliderView.swift */; };
 		1349BE4D24771F0900F5704A /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1349BE4C24771F0800F5704A /* SettingsView.swift */; };
 		1349BE4F2477544F00F5704A /* TopView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1349BE4E2477544E00F5704A /* TopView.swift */; };
@@ -20,7 +20,7 @@
 		13EF84BD246DACB90049CCD1 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 13EF84BB246DACB90049CCD1 /* LaunchScreen.storyboard */; };
 		13EF84C5246DB13C0049CCD1 /* PersonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13EF84C4246DB13C0049CCD1 /* PersonView.swift */; };
 		13FE4B5A246E32F800D15BE9 /* FreePeopleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13FE4B59246E32F800D15BE9 /* FreePeopleView.swift */; };
-		506FC5E3BC0DB3CC156CCDCD /* Pods_Shoo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9152F229ADF24A564C61A6A0 /* Pods_Shoo.framework */; };
+		4B02ED5AB8A85707C6A3E1D0 /* Pods_Shoo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D86F4C75080BB0FFC3EA5093 /* Pods_Shoo.framework */; };
 		53699026247CABA50053CC92 /* KeyboardResponder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53699025247CABA50053CC92 /* KeyboardResponder.swift */; };
 		538ED768247904640089E931 /* Time.swift in Sources */ = {isa = PBXBuildFile; fileRef = 538ED767247904640089E931 /* Time.swift */; };
 		538ED76A247A312C0089E931 /* ExtensionsAndModifiers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 538ED769247A312C0089E931 /* ExtensionsAndModifiers.swift */; };
@@ -84,7 +84,6 @@
 		13EF84BE246DACB90049CCD1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		13EF84C4246DB13C0049CCD1 /* PersonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonView.swift; sourceTree = "<group>"; };
 		13FE4B59246E32F800D15BE9 /* FreePeopleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FreePeopleView.swift; sourceTree = "<group>"; };
-		383C24471EBCD56E7C28EF27 /* Pods-Shoo.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Shoo.debug.xcconfig"; path = "Target Support Files/Pods-Shoo/Pods-Shoo.debug.xcconfig"; sourceTree = "<group>"; };
 		53073A68247F6723004EA863 /* CircleStatusView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircleStatusView.swift; sourceTree = "<group>"; };
 		532E179B247F6EAA00E765AD /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		532E179D247F6EC700E765AD /* FirebaseCore.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = FirebaseCore.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -128,8 +127,9 @@
 		53EE4C11247E0BFD00AF5F7E /* SheetExample.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SheetExample.swift; sourceTree = "<group>"; };
 		53F46F192476461B00BC02AD /* HandleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HandleView.swift; sourceTree = "<group>"; };
 		53F46F232477083B00BC02AD /* UIResponder+Current.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIResponder+Current.swift"; sourceTree = "<group>"; };
-		9152F229ADF24A564C61A6A0 /* Pods_Shoo.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Shoo.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		E494AC105954C48177A21D16 /* Pods-Shoo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Shoo.release.xcconfig"; path = "Target Support Files/Pods-Shoo/Pods-Shoo.release.xcconfig"; sourceTree = "<group>"; };
+		63E2532A8CD19C56080A3DAB /* Pods-Shoo.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Shoo.debug.xcconfig"; path = "Target Support Files/Pods-Shoo/Pods-Shoo.debug.xcconfig"; sourceTree = "<group>"; };
+		6B1E51929324100DD85F3139 /* Pods-Shoo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Shoo.release.xcconfig"; path = "Target Support Files/Pods-Shoo/Pods-Shoo.release.xcconfig"; sourceTree = "<group>"; };
+		D86F4C75080BB0FFC3EA5093 /* Pods_Shoo.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Shoo.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -137,8 +137,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				1319D2C1247E1AFA00B2C4E3 /* BuildFile in Frameworks */,
-				506FC5E3BC0DB3CC156CCDCD /* Pods_Shoo.framework in Frameworks */,
+				1319D2C1247E1AFA00B2C4E3 /* CodeScanner in Frameworks */,
+				4B02ED5AB8A85707C6A3E1D0 /* Pods_Shoo.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -295,7 +295,7 @@
 				532E17A1247F6ECF00E765AD /* FirebaseDatabase.framework */,
 				532E179D247F6EC700E765AD /* FirebaseCore.framework */,
 				53C8C6E8247E1C4E00D2CA3C /* NotificationCenter.framework */,
-				9152F229ADF24A564C61A6A0 /* Pods_Shoo.framework */,
+				D86F4C75080BB0FFC3EA5093 /* Pods_Shoo.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -303,8 +303,8 @@
 		8E8BD6CC2FFB35C542E01025 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				383C24471EBCD56E7C28EF27 /* Pods-Shoo.debug.xcconfig */,
-				E494AC105954C48177A21D16 /* Pods-Shoo.release.xcconfig */,
+				63E2532A8CD19C56080A3DAB /* Pods-Shoo.debug.xcconfig */,
+				6B1E51929324100DD85F3139 /* Pods-Shoo.release.xcconfig */,
 			);
 			path = Pods;
 			sourceTree = "<group>";
@@ -316,13 +316,13 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 13EF84C1246DACB90049CCD1 /* Build configuration list for PBXNativeTarget "Shoo" */;
 			buildPhases = (
-				80A983CC828AA75B89A7059F /* [CP] Check Pods Manifest.lock */,
+				8C40A39C3068F7A43FA62066 /* [CP] Check Pods Manifest.lock */,
 				13EF84A9246DACB30049CCD1 /* Sources */,
 				13EF84AA246DACB30049CCD1 /* Frameworks */,
 				13EF84AB246DACB30049CCD1 /* Resources */,
 				53C8C6F7247E1C4E00D2CA3C /* Embed App Extensions */,
 				5317D1DD2482149A00C79270 /* ShellScript */,
-				073A4C1ED0357AB6186325A2 /* [CP] Embed Pods Frameworks */,
+				ABB6220A161F7778EF34CE8D /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -330,7 +330,7 @@
 			);
 			name = Shoo;
 			packageProductDependencies = (
-				1319D2C0247E1AFA00B2C4E3 /* SwiftPackageProductDependency */,
+				1319D2C0247E1AFA00B2C4E3 /* CodeScanner */,
 			);
 			productName = Shoo;
 			productReference = 13EF84AD246DACB30049CCD1 /* Shoo.app */;
@@ -361,7 +361,7 @@
 			);
 			mainGroup = 13EF84A4246DACB30049CCD1;
 			packageReferences = (
-				5398FA5D247502F700467D67 /* RemoteSwiftPackageReference */,
+				5398FA5D247502F700467D67 /* XCRemoteSwiftPackageReference "CodeScanner" */,
 			);
 			productRefGroup = 13EF84AE246DACB30049CCD1 /* Products */;
 			projectDirPath = "";
@@ -388,23 +388,6 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		073A4C1ED0357AB6186325A2 /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-Shoo/Pods-Shoo-frameworks-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-Shoo/Pods-Shoo-frameworks-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Shoo/Pods-Shoo-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
 		5317D1DD2482149A00C79270 /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -420,9 +403,10 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\n";
+			shellScript = "
+";
 		};
-		80A983CC828AA75B89A7059F /* [CP] Check Pods Manifest.lock */ = {
+		8C40A39C3068F7A43FA62066 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -442,6 +426,23 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		ABB6220A161F7778EF34CE8D /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Shoo/Pods-Shoo-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Shoo/Pods-Shoo-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Shoo/Pods-Shoo-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -632,14 +633,14 @@
 		};
 		13EF84C2246DACB90049CCD1 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 383C24471EBCD56E7C28EF27 /* Pods-Shoo.debug.xcconfig */;
+			baseConfigurationReference = 63E2532A8CD19C56080A3DAB /* Pods-Shoo.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = Shoo/Shoo.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 3;
+				CURRENT_PROJECT_VERSION = 4;
 				DEVELOPMENT_ASSET_PATHS = "\"Shoo/Preview Content\"";
 				DEVELOPMENT_TEAM = 97J2HJ2DUM;
 				ENABLE_PREVIEWS = YES;
@@ -663,14 +664,14 @@
 		};
 		13EF84C3246DACB90049CCD1 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = E494AC105954C48177A21D16 /* Pods-Shoo.release.xcconfig */;
+			baseConfigurationReference = 6B1E51929324100DD85F3139 /* Pods-Shoo.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = Shoo/Shoo.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 3;
+				CURRENT_PROJECT_VERSION = 4;
 				DEVELOPMENT_ASSET_PATHS = "\"Shoo/Preview Content\"";
 				DEVELOPMENT_TEAM = 97J2HJ2DUM;
 				ENABLE_PREVIEWS = YES;
@@ -716,7 +717,7 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		5398FA5D247502F700467D67 /* RemoteSwiftPackageReference */ = {
+		5398FA5D247502F700467D67 /* XCRemoteSwiftPackageReference "CodeScanner" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/twostraws/CodeScanner";
 			requirement = {
@@ -727,9 +728,9 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		1319D2C0247E1AFA00B2C4E3 /* SwiftPackageProductDependency */ = {
+		1319D2C0247E1AFA00B2C4E3 /* CodeScanner */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 5398FA5D247502F700467D67 /* RemoteSwiftPackageReference */;
+			package = 5398FA5D247502F700467D67 /* XCRemoteSwiftPackageReference "CodeScanner" */;
 			productName = CodeScanner;
 		};
 /* End XCSwiftPackageProductDependency section */

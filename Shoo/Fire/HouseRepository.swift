@@ -144,9 +144,9 @@ class HouseRepository {
     func qUpdateStatus(_ status: Status, _ profile: Profile){
         
         if(status != profile.status ||
-            profile.end != Calendar.current.nextDate(after: Date(), matching: DateComponents(hour: 0, minute: 0), matchingPolicy: .nextTimePreservingSmallerComponents)!.timeIntervalSince1970) {
+            profile.end != Date().timeIntervalSince1970 + 360*60) {
             var prof = profile
-            prof.end = Calendar.current.nextDate(after: Date(), matching: DateComponents(hour: 0, minute: 0), matchingPolicy: .nextTimePreservingSmallerComponents)!.timeIntervalSince1970
+            prof.end = Date().timeIntervalSince1970 + 360*60
             prof.start = Date().timeIntervalSince1970
             switch status {
             case .red:
@@ -187,7 +187,7 @@ class HouseRepository {
         case 9:
             x = 60 * 60 * 6
         case 10:
-            x = Int(Calendar.current.nextDate(after: Date(), matching: DateComponents(hour: 0, minute: 0), matchingPolicy: .nextTimePreservingSmallerComponents)!.timeIntervalSince1970 - Date().timeIntervalSince1970)//until midnight
+            x = Int(Date.distantFuture.timeIntervalSince1970)
         default:
             x = 60 * 60 * 4
         }

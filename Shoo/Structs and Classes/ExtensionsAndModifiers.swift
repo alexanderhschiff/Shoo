@@ -124,3 +124,7 @@ func errorHaptic() {
 enum houseError: Error {
     case badQR
 }
+
+//time interval until midnight
+let midnight = Calendar.current.nextDate(after: Date(), matching: DateComponents(hour: 0, minute: 0), matchingPolicy: .nextTimePreservingSmallerComponents)!.timeIntervalSince1970
+

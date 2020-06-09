@@ -87,13 +87,13 @@ struct EditCardView: View {
 			HandleView()
 			
 			Spacer()
-			
+			// MARK: - Person View
             PersonView(mate: Mate(id: self.fire.profile.uid, name: self.fire.profile.name, reason: self.fire.profile.reason, status: self.fire.profile.status, end: self.fire.profile.end, start: self.fire.profile.start, pushToken: self.fire.profile.pushToken), timerInterval: 5).environmentObject(fire)
 				.shadow(radius: 3, y: 1)
 				.highPriorityGesture(TapGesture()) //to override tap expansion
 			
 			Spacer()
-			
+			// MARK: - Statuses
 			VStack(alignment: .leading, spacing: 10){
 				Text("Your status")
 					.font(.headline)
@@ -121,7 +121,7 @@ struct EditCardView: View {
 				.foregroundColor(Color(UIColor.systemBackground))
 			}
 			.padding()
-			
+			// MARK: - REASONS
 			VStack(alignment: .leading){
 				Text("What's happening")
 					.font(.headline)
@@ -178,7 +178,7 @@ struct EditCardView: View {
 					}
 				}
 			}
-			
+			// MARK: - TIME SLIDER
 			VStack(alignment: .leading){
 				Text("For how long?")
 					.font(.headline)
@@ -210,6 +210,7 @@ struct EditCardView: View {
 				
 				Button(action: {
 					buttonPressHaptic()
+                    self.fire.remindHouse()
 					withAnimation(.linear(duration: 0.3)){
 						self.tapped = true
 					}

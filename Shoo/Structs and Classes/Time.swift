@@ -39,7 +39,7 @@ class Time: ObservableObject {
         case 9:
             end = Date().timeIntervalSince1970 + 360*60 //6 hours (a while)
         case 10:
-            end = Calendar.current.nextDate(after: Date(), matching: DateComponents(hour: 0, minute: 0), matchingPolicy: .nextTimePreservingSmallerComponents)!.timeIntervalSince1970//until midnight
+            end = Date.distantFuture.timeIntervalSince1970
         default:
             end = 75
         }

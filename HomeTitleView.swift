@@ -10,14 +10,32 @@ import SwiftUI
 
 struct HomeTitleView: View {
 	@EnvironmentObject var fire: Fire
+    
+    var date: String{
+    let now = Date()
+    let formatter = DateFormatter()
+
+    //weekday
+    formatter.dateFormat = "EEEE"
+    let weekday = formatter.string(from: now)
+
+    //month
+    formatter.dateFormat = "LLLL"
+    let month = formatter.string(from: now)
+
+    //day
+    let day = Calendar.current.dateComponents([.day], from: now).day
+    return "\(weekday), \(month) \(day!)"
+    }
 	
 	@Binding var sheetType: presentSheet
 	@Binding var showSheet: Bool
 	
 	var body: some View {
 		VStack(alignment: .leading, spacing: 0){
-			FreePeopleView().environmentObject(self.fire)
-			.font(.system(size: 20, weight: .semibold))
+			//FreePeopleView().environmentObject(self.fire)
+            Text(date.uppercased())
+			.font(.system(size: 12, weight: .semibold))
 			.foregroundColor(.secondary)
 			.lineLimit(1)
 			
