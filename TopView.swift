@@ -72,6 +72,7 @@ struct TopView: View {
 	}
 }
 
+
 struct TopView_Previews: PreviewProvider {
 	static var previews: some View {
 		TopView(sheetType: .constant(.editHouse), showSheet: .constant(false)).environmentObject(Fire())

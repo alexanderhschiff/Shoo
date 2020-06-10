@@ -8,7 +8,7 @@
 
 import Foundation
 
-let inBetweenWaitingPeriod: Double = 60 * 2 //Can't send for more than 2 minutes
+let inBetweenWaitingPeriod: Double = 30 //Can't send for 30 seconds
 
 struct NotificationStruct {
     let status: Status?

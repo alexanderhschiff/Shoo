@@ -36,6 +36,7 @@
 		53C40CB52484AB0100F747C5 /* AddNameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53C40CB42484AB0100F747C5 /* AddNameView.swift */; };
 		53C9FBC6248222AA0003F24C /* PushNotificationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53C9FBC5248222AA0003F24C /* PushNotificationManager.swift */; };
 		53DDBA6824745D3200D07C60 /* Mate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53DDBA6724745D3200D07C60 /* Mate.swift */; };
+		53E4E87E2490226A00C0D584 /* ShareSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53E4E87D2490226A00C0D584 /* ShareSheet.swift */; };
 		53EB16B22471B9F10054D68A /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53EB16B12471B9F10054D68A /* HomeView.swift */; };
 		53EB16BB2471BBC60054D68A /* Fire.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53EB16B92471BBC60054D68A /* Fire.swift */; };
 		53EB16BC2471BBC60054D68A /* FireUI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53EB16B72471BBC60054D68A /* FireUI.swift */; };
@@ -51,7 +52,6 @@
 		53EB16D12471BBD60054D68A /* FireKeys.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53EB16C82471BBD50054D68A /* FireKeys.swift */; };
 		53EB16D22471BBD60054D68A /* ActivityIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53EB16C92471BBD50054D68A /* ActivityIndicator.swift */; };
 		53EB16D92471C28A0054D68A /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 53EB16D82471C28A0054D68A /* GoogleService-Info.plist */; };
-		53EE4C12247E0BFD00AF5F7E /* SheetExample.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53EE4C11247E0BFD00AF5F7E /* SheetExample.swift */; };
 		53F46F1A2476461B00BC02AD /* HandleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53F46F192476461B00BC02AD /* HandleView.swift */; };
 		53F46F242477083B00BC02AD /* UIResponder+Current.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53F46F232477083B00BC02AD /* UIResponder+Current.swift */; };
 /* End PBXBuildFile section */
@@ -109,6 +109,7 @@
 		53C8C6F8247E1CA600D2CA3C /* WidgetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WidgetView.swift; sourceTree = "<group>"; };
 		53C9FBC5248222AA0003F24C /* PushNotificationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PushNotificationManager.swift; sourceTree = "<group>"; };
 		53DDBA6724745D3200D07C60 /* Mate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Mate.swift; sourceTree = "<group>"; };
+		53E4E87D2490226A00C0D584 /* ShareSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareSheet.swift; sourceTree = "<group>"; };
 		53EB16B12471B9F10054D68A /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 		53EB16B32471BBC50054D68A /* FireAuth.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FireAuth.swift; sourceTree = "<group>"; };
 		53EB16B42471BBC60054D68A /* LaunchScreenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchScreenView.swift; sourceTree = "<group>"; };
@@ -124,7 +125,6 @@
 		53EB16CA2471BBD60054D68A /* Profile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Profile.swift; sourceTree = "<group>"; };
 		53EB16CB2471BBD60054D68A /* Typealiases.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Typealiases.swift; sourceTree = "<group>"; };
 		53EB16D82471C28A0054D68A /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
-		53EE4C11247E0BFD00AF5F7E /* SheetExample.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SheetExample.swift; sourceTree = "<group>"; };
 		53F46F192476461B00BC02AD /* HandleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HandleView.swift; sourceTree = "<group>"; };
 		53F46F232477083B00BC02AD /* UIResponder+Current.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIResponder+Current.swift"; sourceTree = "<group>"; };
 		63E2532A8CD19C56080A3DAB /* Pods-Shoo.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Shoo.debug.xcconfig"; path = "Target Support Files/Pods-Shoo/Pods-Shoo.debug.xcconfig"; sourceTree = "<group>"; };
@@ -192,7 +192,6 @@
 			isa = PBXGroup;
 			children = (
 				13EF84B4246DACB30049CCD1 /* ContentView.swift */,
-				53EE4C11247E0BFD00AF5F7E /* SheetExample.swift */,
 				53EB16B12471B9F10054D68A /* HomeView.swift */,
 				1349BE4C24771F0800F5704A /* SettingsView.swift */,
 				5398FA542474F33200467D67 /* SignInView.swift */,
@@ -264,6 +263,7 @@
 			isa = PBXGroup;
 			children = (
 				538ED769247A312C0089E931 /* ExtensionsAndModifiers.swift */,
+				53E4E87D2490226A00C0D584 /* ShareSheet.swift */,
 				53699025247CABA50053CC92 /* KeyboardResponder.swift */,
 				53EB16CA2471BBD60054D68A /* Profile.swift */,
 				53EB16CB2471BBD60054D68A /* Typealiases.swift */,
@@ -321,8 +321,8 @@
 				13EF84AA246DACB30049CCD1 /* Frameworks */,
 				13EF84AB246DACB30049CCD1 /* Resources */,
 				53C8C6F7247E1C4E00D2CA3C /* Embed App Extensions */,
-				5317D1DD2482149A00C79270 /* ShellScript */,
 				ABB6220A161F7778EF34CE8D /* [CP] Embed Pods Frameworks */,
+				53E4E87F24905E2F00C0D584 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -388,7 +388,7 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		5317D1DD2482149A00C79270 /* ShellScript */ = {
+		53E4E87F24905E2F00C0D584 /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -396,6 +396,7 @@
 			inputFileListPaths = (
 			);
 			inputPaths = (
+				"$(SRCROOT)/$(BUILT_PRODUCTS_DIR)/$(INFOPLIST_PATH)",
 			);
 			outputFileListPaths = (
 			);
@@ -403,8 +404,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "
-";
+			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\n${PODS_ROOT}/FirebaseCrashlytics/run\n";
 		};
 		8C40A39C3068F7A43FA62066 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -462,7 +462,6 @@
 				53EB16CC2471BBD60054D68A /* DocumentSerializable.swift in Sources */,
 				53C9FBC6248222AA0003F24C /* PushNotificationManager.swift in Sources */,
 				5398FA4F2474E7D500467D67 /* ProgressView.swift in Sources */,
-				53EE4C12247E0BFD00AF5F7E /* SheetExample.swift in Sources */,
 				5398FA522474F2F500467D67 /* EditHomeView.swift in Sources */,
 				5398FA552474F33200467D67 /* SignInView.swift in Sources */,
 				53930607248CB296005F7DFD /* HouseRepository.swift in Sources */,
@@ -476,6 +475,7 @@
 				5398FA4D2474E63800467D67 /* BottomView.swift in Sources */,
 				53EB16BF2471BBC60054D68A /* LaunchScreenView.swift in Sources */,
 				53EB16B22471B9F10054D68A /* HomeView.swift in Sources */,
+				53E4E87E2490226A00C0D584 /* ShareSheet.swift in Sources */,
 				13EF84C5246DB13C0049CCD1 /* PersonView.swift in Sources */,
 				1349BE4F2477544F00F5704A /* TopView.swift in Sources */,
 				538ED768247904640089E931 /* Time.swift in Sources */,
@@ -640,7 +640,7 @@
 				CODE_SIGN_ENTITLEMENTS = Shoo/Shoo.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 4;
+				CURRENT_PROJECT_VERSION = 6;
 				DEVELOPMENT_ASSET_PATHS = "\"Shoo/Preview Content\"";
 				DEVELOPMENT_TEAM = 97J2HJ2DUM;
 				ENABLE_PREVIEWS = YES;
@@ -671,7 +671,7 @@
 				CODE_SIGN_ENTITLEMENTS = Shoo/Shoo.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 4;
+				CURRENT_PROJECT_VERSION = 6;
 				DEVELOPMENT_ASSET_PATHS = "\"Shoo/Preview Content\"";
 				DEVELOPMENT_TEAM = 97J2HJ2DUM;
 				ENABLE_PREVIEWS = YES;

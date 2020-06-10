@@ -37,11 +37,12 @@ struct HomeView: View {
 							ForEach(self.fire.mates) { mate in
                                 PersonView(mate: mate, timerInterval: 5)
 									.environmentObject(self.fire)
-									.shadow(radius: 2, x: 0, y: 1)
+									.shadow(radius: 6, x: 0, y: 3)
 							}
 							Rectangle()
 								.foregroundColor(.clear)
 								.frame(height: 0.3 * UIScreen.main.bounds.height)
+                                
 							//no mates
 						} else{
 							VStack{

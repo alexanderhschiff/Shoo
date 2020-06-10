@@ -104,24 +104,6 @@ class HouseRepository {
         mateDB.document(mate.id).setData(mate.toJSONSnapshot)
     }
     
-    func updateHouse(_ prof: Profile, _ oldID: String){
-        mateDB.document(prof.uid).updateData(["house": prof.house])
-        houseDB.document(oldID).updateData(["mates": FieldValue.arrayRemove([prof.uid])])
-        houseDB.document(prof.house).updateData(["mates": FieldValue.arrayUnion([prof.uid])])
-        houseDB.document(oldID).getDocument { (document, error) in
-            let numMates = document?.get("mates") as? [String] ?? []
-            if numMates.count == 0 {
-                self.houseDB.document(oldID).delete() { err in
-                    if let err = err {
-                        print("Error removing document: \(err)")
-                    } else {
-                        print("Document successfully removed!")
-                    }
-                }
-            }
-        }
-    }
-    
     func updateMate(_ mate: Mate) {
         mateDB.document(mate.id).updateData(mate.toJSONSnapshot)
     }
@@ -215,5 +197,27 @@ class HouseRepository {
     
     func noStatus(id: String){
         mateDB.document(id).updateData(["reason": "", "status": 0])
+    }
+    
+    func updateHouse(_ prof: Profile, _ oldID: String){
+        //updates house in cloud
+        mateDB.document(prof.uid).updateData(["house": prof.house])
+        //removes user from old house
+        houseDB.document(oldID).updateData(["mates": FieldValue.arrayRemove([prof.uid])])
+        //adds user to new house
+        houseDB.document(prof.house).updateData(["mates": FieldValue.arrayUnion([prof.uid])])
+        //Deletes hold house if it is now empty
+        houseDB.document(oldID).getDocument { (document, error) in
+            let numMates = document?.get("mates") as? [String] ?? []
+            if numMates.count == 0 {
+                self.houseDB.document(oldID).delete() { err in
+                    if let err = err {
+                        print("Error removing document: \(err)")
+                    } else {
+                        print("Document successfully removed!")
+                    }
+                }
+            }
+        }
     }
 }

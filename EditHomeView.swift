@@ -26,156 +26,184 @@ struct EditHomeView: View {
                         self.fire.profile.house = newID
                         self.fire.updateHouse(self.fire.profile, oldID)
                         self.fire.startListener()
+                        self.presentationMode.wrappedValue.dismiss()
                     }
                 case .failure(let error):
                     print(error.localizedDescription)
                 }
                 
             }
-        self.presentationMode.wrappedValue.dismiss()
+            
         case .failure(let error):
-        if error == .badInput {
-            //na
-        }
-        print("Scanning failed \(error)")
-    }
-}
-
-//creates a qr code and inverts colors if black background -- ALEX I can potentially change the colors but let me know
-private func createCode() -> UIImage {
-    let myString = fire.profile.house
-    let data = myString.data(using: String.Encoding.ascii)
-    guard let qrFilter = CIFilter(name: "CIQRCodeGenerator") else { return UIImage(systemName: "xmark.circle") ?? UIImage()}
-    qrFilter.setValue(data, forKey: "inputMessage")
-    guard let qrImage = qrFilter.outputImage else { return UIImage(systemName: "xmark.circle") ?? UIImage()}
-    let transform = CGAffineTransform(scaleX: 10, y: 10)
-    let scaledQrImage = qrImage.transformed(by: transform)
-    if colorScheme == .dark {
-        guard let colorInvertFilter = CIFilter(name: "CIColorInvert") else { return UIImage(systemName: "xmark.circle") ?? UIImage()}
-        colorInvertFilter.setValue(scaledQrImage, forKey: "inputImage")
-        guard let outputInvertedImage = colorInvertFilter.outputImage else { return UIImage(systemName: "xmark.circle") ?? UIImage()}
-        guard let maskToAlphaFilter = CIFilter(name: "CIMaskToAlpha") else { return UIImage(systemName: "xmark.circle") ?? UIImage()}
-        maskToAlphaFilter.setValue(outputInvertedImage, forKey: "inputImage")
-        guard let outputCIImage = maskToAlphaFilter.outputImage else { return UIImage(systemName: "xmark.circle") ?? UIImage()}
-        let context = CIContext()
-        guard let cgImage = context.createCGImage(outputCIImage, from: outputCIImage.extent) else { return UIImage(systemName: "xmark.circle") ?? UIImage()}
-        return UIImage(cgImage: cgImage)
-    }
-    else{
-        let context = CIContext()
-        guard let cgImage = context.createCGImage(scaledQrImage, from: scaledQrImage.extent) else { return UIImage(systemName: "xmark.circle") ?? UIImage()}
-        return UIImage(cgImage: cgImage)
-    }
-}
-
-func checkPermission() -> Bool{
-    let cameraMediaType = AVMediaType.video
-    let cameraAuthorizationStatus = AVCaptureDevice.authorizationStatus(for: cameraMediaType)
-    
-    switch cameraAuthorizationStatus {
-    case .denied: return false
-    case .authorized: return true
-    case .restricted: return false
-    case .notDetermined:
-        // Prompting user for the permission to use the camera.
-        AVCaptureDevice.requestAccess(for: cameraMediaType) { granted in
-            if granted {
-                print("Granted access to \(cameraMediaType)")
-                self.camAuth = true
-            } else {
-                print("Denied access to \(cameraMediaType)")
+            if error == .badInput {
+                //na
             }
+            print("Scanning failed \(error)")
         }
-    default: return false
     }
-    return false
-}
-
-var modes = ["Share", "Join"]
-@State private var mode = 0
-@State private var isShowingScanner = false
-@State private var camAuth: Bool = false
-
-@Environment(\.presentationMode) var presentationMode
-
-var body: some View {
-    ZStack{
-        if mode == 1 {
-            if camAuth {
-                CodeScannerView(codeTypes: [.qr], simulatedData: self.fire.profile.house, completion: self.handleScan)
-            } else{
-                Button(action: {
-                    UIApplication.shared.open(URL(string: UIApplication.openSettingsURLString)!, options: [:], completionHandler: nil)
-                }){
-                    Text("Please enable camera access to join a house.")
+    
+    //creates a qr code and inverts colors if black background -- ALEX I can potentially change the colors but let me know
+    private func createCode() -> UIImage {
+        let myString = fire.profile.house
+        let data = myString.data(using: String.Encoding.ascii)
+        guard let qrFilter = CIFilter(name: "CIQRCodeGenerator") else { return UIImage(systemName: "xmark.circle") ?? UIImage()}
+        qrFilter.setValue(data, forKey: "inputMessage")
+        guard let qrImage = qrFilter.outputImage else { return UIImage(systemName: "xmark.circle") ?? UIImage()}
+        let transform = CGAffineTransform(scaleX: 10, y: 10)
+        let scaledQrImage = qrImage.transformed(by: transform)
+        if colorScheme == .dark {
+            guard let colorInvertFilter = CIFilter(name: "CIColorInvert") else { return UIImage(systemName: "xmark.circle") ?? UIImage()}
+            colorInvertFilter.setValue(scaledQrImage, forKey: "inputImage")
+            guard let outputInvertedImage = colorInvertFilter.outputImage else { return UIImage(systemName: "xmark.circle") ?? UIImage()}
+            guard let maskToAlphaFilter = CIFilter(name: "CIMaskToAlpha") else { return UIImage(systemName: "xmark.circle") ?? UIImage()}
+            maskToAlphaFilter.setValue(outputInvertedImage, forKey: "inputImage")
+            guard let outputCIImage = maskToAlphaFilter.outputImage else { return UIImage(systemName: "xmark.circle") ?? UIImage()}
+            let context = CIContext()
+            guard let cgImage = context.createCGImage(outputCIImage, from: outputCIImage.extent) else { return UIImage(systemName: "xmark.circle") ?? UIImage()}
+            return UIImage(cgImage: cgImage)
+        }
+        else{
+            let context = CIContext()
+            guard let cgImage = context.createCGImage(scaledQrImage, from: scaledQrImage.extent) else { return UIImage(systemName: "xmark.circle") ?? UIImage()}
+            return UIImage(cgImage: cgImage)
+        }
+    }
+    
+    func checkPermission() -> Bool{
+        let cameraMediaType = AVMediaType.video
+        let cameraAuthorizationStatus = AVCaptureDevice.authorizationStatus(for: cameraMediaType)
+        
+        switch cameraAuthorizationStatus {
+        case .denied: return false
+        case .authorized: return true
+        case .restricted: return false
+        case .notDetermined:
+            // Prompting user for the permission to use the camera.
+            AVCaptureDevice.requestAccess(for: cameraMediaType) { granted in
+                if granted {
+                    print("Granted access to \(cameraMediaType)")
+                    self.camAuth = true
+                } else {
+                    print("Denied access to \(cameraMediaType)")
                 }
             }
-        } else {
-            ZStack(alignment: .center){
-                Image(uiImage: createCode())
-                    .resizable()
-                    .interpolation(.none)
-                    .scaledToFit()
-                    .frame(width: 200, height: 200)
-                    .padding()
-                    .background(Color(UIColor.systemBackground))
-                    .clipShape(RoundedRectangle(cornerRadius: 30, style: .continuous))
-            }
+        default: return false
         }
-        
-        VStack{
-            HStack{
-                Spacer()
-                Picker(selection: $mode, label: Text("Mode")){
-                    ForEach(0..<modes.count){
-                        Text(self.modes[$0])
+        return false
+    }
+    
+    var modes = ["Share", "Join"]
+    @State private var mode = 0
+    @State private var isShowingScanner = false
+    @State private var camAuth: Bool = false
+    
+    
+    @State private var showShareSheet: Bool = false
+    
+    @Environment(\.presentationMode) var presentationMode
+    
+    var body: some View {
+        ZStack{
+            if mode == 1 {
+                if camAuth {
+                    CodeScannerView(codeTypes: [.qr], simulatedData: self.fire.profile.house, completion: self.handleScan)
+                } else{
+                    Button(action: {
+                        UIApplication.shared.open(URL(string: UIApplication.openSettingsURLString)!, options: [:], completionHandler: nil)
+                    }){
+                        Text("Please enable camera access to join a house.")
                     }
                 }
-                .pickerStyle(SegmentedPickerStyle())
-                .highPriorityGesture(DragGesture())
-                .padding()
-                .background(Color(UIColor.systemBackground))
-                .clipShape(RoundedRectangle(cornerRadius: 20, style: .continuous))
-                
-                Spacer()
-                
-                Button(action: {
-                    self.presentationMode.wrappedValue.dismiss()
-                }){
-                    Text("Done")
-                        .padding()
-                        .background(Color(UIColor.systemBackground))
-                        .clipShape(RoundedRectangle(cornerRadius: 20, style: .continuous))
+            } else {
+                ZStack(alignment: .center){
+                    VStack{
+                        Image(uiImage: createCode())
+                            .resizable()
+                            .interpolation(.none)
+                            .scaledToFit()
+                            .frame(width: 200, height: 200)
+                            .padding()
+                            .background(Color(UIColor.systemBackground))
+                            .clipShape(RoundedRectangle(cornerRadius: 30, style: .continuous))
+                            .padding()
+                        Button(action: {
+                            buttonPressHaptic()
+                            self.showShareSheet = true
+                        }){
+                            HStack{
+                                Image(systemName: "square.and.arrow.up")
+                                Text("Share the app")
+                            }
+                            .font(.headline)
+                            .padding()
+                            .background(Color(UIColor.systemBackground))
+                            .clipShape(RoundedRectangle(cornerRadius: 20, style: .continuous))
+                            .padding(.bottom, (UIApplication.shared.windows.last?.safeAreaInsets.bottom)!)
+                        }
+                    }
                 }
-                .padding()
             }
-            .padding(.horizontal)
             
-            Spacer()
-            
-            HStack{
-                Spacer()
-                Text("\(mode == 1 ? "Scan a housemate's code to join the house" : "Share the above code with housemates")")
-                    .font(.headline)
+            VStack{
+                HStack{
+                    Spacer()
+                    Picker(selection: $mode, label: Text("Mode")){
+                        ForEach(0..<modes.count){
+                            Text(self.modes[$0])
+                        }
+                    }
+                    .pickerStyle(SegmentedPickerStyle())
+                    .highPriorityGesture(DragGesture())
                     .padding()
-                    .background(Blur(style: .systemMaterial))
+                    .background(Color(UIColor.systemBackground))
                     .clipShape(RoundedRectangle(cornerRadius: 20, style: .continuous))
-                    .padding(.bottom, (UIApplication.shared.windows.last?.safeAreaInsets.bottom)!)
+                    
+                    Spacer()
+                    
+                    Button(action: {
+                        buttonPressHaptic()
+                        self.presentationMode.wrappedValue.dismiss()
+                    }){
+                        Text("Done")
+                            .padding()
+                            .background(Color(UIColor.systemBackground))
+                            .clipShape(RoundedRectangle(cornerRadius: 20, style: .continuous))
+                    }
+                    .padding()
+                }
+                .padding(.horizontal)
+                
                 Spacer()
+                
+                HStack{
+                    Spacer()
+                    Text("\(mode == 1 ? "Scan a housemate's code to join the house" : "Share the above code with housemates")")
+                        .font(.headline)
+                        .padding()
+                        .background(Blur(style: .systemMaterial))
+                        .clipShape(RoundedRectangle(cornerRadius: 20, style: .continuous))
+                        .padding(.bottom, (UIApplication.shared.windows.last?.safeAreaInsets.bottom)!)
+                    Spacer()
+                }
             }
+        }.highPriorityGesture(DragGesture())
+            .background(Color(UIColor.secondarySystemBackground))
+            .edgesIgnoringSafeArea(.bottom)
+            .onAppear {
+                self.camAuth = self.checkPermission()
         }
-    }.highPriorityGesture(DragGesture())
-        .background(Color(UIColor.secondarySystemBackground))
-        .edgesIgnoringSafeArea(.bottom)
-        .onAppear {
-            self.camAuth = self.checkPermission()
+        .sheet(isPresented: $showShareSheet) {
+            ShareSheet(activityItems: [appURL])
+        }
+        .onDisappear {
+            self.fire.startListener()
+        }
     }
-}
-
-
-struct EditHomeView_Previews: PreviewProvider {
-    static var previews: some View {
-        EditHomeView().environmentObject(Fire()).environment(\.colorScheme, .dark)
+    
+    
+    struct EditHomeView_Previews: PreviewProvider {
+        static var previews: some View {
+            EditHomeView().environmentObject(Fire()).environment(\.colorScheme, .dark)
+        }
     }
-}
 }

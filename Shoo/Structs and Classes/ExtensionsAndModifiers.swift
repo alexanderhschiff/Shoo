@@ -9,6 +9,12 @@
 import SwiftUI
 import Foundation
 
+let appURL: URL = URL(string: "http://itunes.apple.com/app/id1515029874")!
+
+let EMAIL_TO = "hello@shoo.app"
+let Email_Subject = "Hello"
+let emailStr = "\(EMAIL_TO)?subject=\(Email_Subject)?".addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)
+
 struct Blur: UIViewRepresentable {
 	var style: UIBlurEffect.Style = .systemMaterial
 	func makeUIView(context: Context) -> UIVisualEffectView {
@@ -123,6 +129,10 @@ func errorHaptic() {
 
 enum houseError: Error {
     case badQR
+}
+
+func testCrash() {
+    fatalError()
 }
 
 //time interval until midnight
