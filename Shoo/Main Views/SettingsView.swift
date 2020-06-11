@@ -294,10 +294,11 @@ struct SettingsView: View {
                 }
             }
         }.alert(isPresented: $showingAlert){
-            Alert(title: Text("Leaving house"), message: Text("Beta: please restart app for changes to be in effect"), primaryButton: .destructive(Text("Leave")) {
+            Alert(title: Text("Leaving house"), message: Text("Once you leave you must rescan the code to join"), primaryButton: .destructive(Text("Leave")) {
                 let oldID = self.fire.profile.house
                 self.fire.profile.house = self.fire.createHouse()
-                print("leave: \(self.fire.profile.house) : \(oldID)")
+                self.fire.mates = []
+                print("leaving: \(oldID) -> \(self.fire.profile.house)")
                 self.fire.updateHouse(self.fire.profile, oldID)
                 self.fire.startListener()
                 self.presentationMode.wrappedValue.dismiss()

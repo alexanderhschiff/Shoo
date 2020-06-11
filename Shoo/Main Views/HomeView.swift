@@ -35,7 +35,7 @@ struct HomeView: View {
 						HomeTitleView(sheetType: self.$sheetType, showSheet: self.$showSheet).environmentObject(self.fire)
 						if self.fire.mates.count > 0 {
 							ForEach(self.fire.mates) { mate in
-                                PersonView(mate: mate, timerInterval: 5)
+                                PersonView(mate: mate)
 									.environmentObject(self.fire)
 									.shadow(radius: 6, x: 0, y: 3)
 							}

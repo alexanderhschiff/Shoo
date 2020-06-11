@@ -16,6 +16,7 @@ pod 'Firebase/Messaging'
 pod 'Firebase'
 pod 'Firebase/Analytics'
 pod 'Firebase/Crashlytics'
+pod 'Firebase/Performance'
 
 
 end

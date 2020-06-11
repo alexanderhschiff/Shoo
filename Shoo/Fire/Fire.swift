@@ -69,6 +69,7 @@ class Fire: ObservableObject {
                     if let qA = self.quickAction {
                         self.quickUpdateStatus(status: qA, profile: self.profile)
                     }
+                    Crashlytics.crashlytics().setUserID(profile.uid)
                     self.updateFirestorePushToken()
                 case .failure(let err):
                     print(err.localizedDescription)
@@ -339,7 +340,6 @@ class Fire: ObservableObject {
     
     func updateHouse(_ prof: Profile, _ oldID: String){
         repository.updateHouse(prof, oldID)
-        print("leave4")
     }
     
     func createHouse() -> String {

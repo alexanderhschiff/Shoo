@@ -88,7 +88,7 @@ struct EditCardView: View {
             
             Spacer()
             // MARK: - Person View
-            PersonView(mate: Mate(id: self.fire.profile.uid, name: self.fire.profile.name, reason: self.fire.profile.reason, status: self.fire.profile.status, end: self.fire.profile.end, start: self.fire.profile.start, pushToken: self.fire.profile.pushToken), timerInterval: 5).environmentObject(fire)
+            PersonView(id: self.fire.profile.uid, name: self.fire.profile.name, reason: self.newReason, status: self.newStatus, end: self.time, start: self.start, pushToken: self.fire.profile.pushToken).environmentObject(fire)
                 .shadow(radius: 3, y: 1)
                 .highPriorityGesture(TapGesture()) //to override tap expansion
             
@@ -202,6 +202,7 @@ struct EditCardView: View {
             HStack{
                 Button(action: {
                     buttonPressHaptic()
+                    self.fire.saveState(user: self.fire.profile, status: self.newStatus, reason: self.newReason, end: self.time)
                     self.presentationMode.wrappedValue.dismiss()
                 }){
                     Text("Update")
@@ -247,8 +248,8 @@ struct EditCardView: View {
         .background(Color(UIColor.secondarySystemBackground))
         .edgesIgnoringSafeArea(.bottom)
         .onDisappear {
-            //successHaptic() - Fires too late - see how I can try to fix
-            self.fire.saveState(user: self.fire.profile, status: self.newStatus, reason: self.newReason, end: self.time)
+            //Want to not save their status if they dismiss, only save if they press
+            //self.fire.saveState(user: self.fire.profile, status: self.newStatus, reason: self.newReason, end: self.time)
             self.fire.saveCustomReasons(reasons: self.reasons)
         }
         .onAppear {

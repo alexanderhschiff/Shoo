@@ -43,7 +43,7 @@ struct BottomView: View {
             //self.color = Color.gray
             return "a while"
         }
-        else if timeLeft > 4*60*60 {
+        else if timeLeft > 5*60*60 {
             return "a while"
         } else {
             let hours = Int(timeLeft/3600)

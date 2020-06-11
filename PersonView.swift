@@ -24,18 +24,45 @@ struct PersonView: View {
     
     @State private var expanded = false
     
-    let mate: Mate
+    let name: String
+    let id: String
+    let reason: String
+    let status: Status
+    let end: Double
+    let start: Double
+    let pushToken: String
+    
+    
+    init(mate: Mate) {
+        self.name = mate.name
+        self.id = mate.id
+        self.reason = mate.reason
+        self.status = mate.status
+        self.end = mate.end
+        self.start = mate.start
+        self.pushToken = mate.pushToken
+    }
+    
+    init(id: String, name: String, reason: String, status: Status, end: Double, start: Double, pushToken: String) {
+        self.name = name
+        self.id = id
+        self.reason = reason
+        self.status = status
+        self.end = end
+        self.start = start
+        self.pushToken = pushToken
+    }
     
     @State private var currentTime: TimeInterval = Date().timeIntervalSince1970 //NOW –– updating on timer
     
-    let timerInterval: Double //how often to refresh timer
+    let timerInterval: Double = 5 //how often to refresh timer
     
     var progress: Float{
         return 0.4
     }
     
     var actionElement: String{
-        switch mate.status{
+        switch status{
         case .green:
             return "free"
         case .yellow:
@@ -46,15 +73,15 @@ struct PersonView: View {
     }
     
     var timeElement: String{
-        let timeLeft = mate.end - self.currentTime
+        let timeLeft = end - self.currentTime
         if timeLeft > 8*60*60 {
             return "all day"
         } else if timeLeft <= 0 {
-            self.fire.noStatus(mate.id)
+            self.fire.noStatus(id)
             //self.color = Color.gray
             return "a while"
         }
-        else if timeLeft > 4*60*60 {
+        else if timeLeft > 5*60*60 {
             return "a while"
         } else {
             let hours = Int(timeLeft/3600)
@@ -65,7 +92,7 @@ struct PersonView: View {
     }
     
     var handType: String{
-        switch mate.status {
+        switch status {
         case .yellow: //yellow
             return "hand.raised.fill"
         case .red: //red
@@ -77,7 +104,7 @@ struct PersonView: View {
     
     var body: some View {
         ZStack{
-            getColor(status: self.mate.status)
+            getColor(status: self.status)
             
             VStack{
                 HStack{
@@ -86,7 +113,7 @@ struct PersonView: View {
                             Image(systemName: handType)
                                 .font(.title)
                             //.foregroundColor(Color(UIColor.systemBackground))
-                            Text(self.mate.name)
+                            Text(self.name)
                                 .font(.system(.largeTitle, design: .rounded))
                                 .fontWeight(.semibold)
                                 //.font(.largeTitle)
@@ -95,7 +122,7 @@ struct PersonView: View {
                                 .lineLimit(1)
                         }
                         
-                        Text(self.mate.reason)
+                        Text(self.reason)
                             .font(.system(.title, design: .rounded))
                             //.font(.headline)
                             //.fontWeight(.bold)
@@ -129,7 +156,7 @@ struct PersonView: View {
                     HStack{
                         Button(action: {
                             buttonPressHaptic()
-                            self.fire.remindMate(self.mate.pushToken)
+                            self.fire.remindMate(self.pushToken)
                         }){
                             /*HStack{
                              Spacer()
@@ -171,6 +198,6 @@ struct PersonView: View {
 
 struct PersonView_Previews: PreviewProvider {
     static var previews: some View {
-        PersonView(mate: Mate(id: "", name: "Benjamin", reason: "Testing", status: .green, end: Date().timeIntervalSince1970, start: Date().timeIntervalSinceReferenceDate, pushToken: ""), timerInterval: 5).environmentObject(Fire())//.environment(\.colorScheme, .dark)
+        PersonView(mate: Mate(id: "", name: "Benjamin", reason: "Testing", status: .green, end: Date().timeIntervalSince1970, start: Date().timeIntervalSinceReferenceDate, pushToken: "")).environmentObject(Fire())//.environment(\.colorScheme, .dark)
     }
 }

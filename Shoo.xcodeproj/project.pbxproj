@@ -404,7 +404,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\n${PODS_ROOT}/FirebaseCrashlytics/run\n";
+			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\n${PODS_ROOT}/FirebaseCrashlytics/run\n\n";
 		};
 		8C40A39C3068F7A43FA62066 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -640,7 +640,7 @@
 				CODE_SIGN_ENTITLEMENTS = Shoo/Shoo.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 6;
+				CURRENT_PROJECT_VERSION = 8;
 				DEVELOPMENT_ASSET_PATHS = "\"Shoo/Preview Content\"";
 				DEVELOPMENT_TEAM = 97J2HJ2DUM;
 				ENABLE_PREVIEWS = YES;
@@ -671,7 +671,7 @@
 				CODE_SIGN_ENTITLEMENTS = Shoo/Shoo.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 6;
+				CURRENT_PROJECT_VERSION = 8;
 				DEVELOPMENT_ASSET_PATHS = "\"Shoo/Preview Content\"";
 				DEVELOPMENT_TEAM = 97J2HJ2DUM;
 				ENABLE_PREVIEWS = YES;

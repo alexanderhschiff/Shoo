@@ -9,6 +9,7 @@
 import UIKit
 import Firebase
 import FirebaseMessaging
+import FirebaseCrashlytics
 import UserNotifications
 
 
@@ -19,9 +20,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
 		// Override point for customization after application launch.
 		
 		FirebaseApp.configure()
-		
-		//For crashlytics
-		//Fabric.sharedSDK().debug = true
+        Crashlytics.crashlytics()
+
 		
 		//For notifications
 		//let pushManager = PushNotificationManager()
