@@ -183,7 +183,7 @@ struct EditHomeView: View {
                 
                 HStack{
                     Spacer()
-                    Text("\(mode == 1 ? "Scan a housemate's code to join the house" : "Share the above code with housemates")")
+                    Text("\(mode == 1 ? "Scan a code to join the group" : "Share the above code")")
                         .font(.headline)
                         .padding()
                         .background(Blur(style: .systemMaterial))

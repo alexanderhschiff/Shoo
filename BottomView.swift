@@ -73,7 +73,7 @@ struct BottomView: View {
         LongPressGesture(minimumDuration: 2)
             .updating($isDetectingLongPress) { currentstate, gestureState, transaction in
                 gestureState = currentstate
-                buttonPressHaptic(self.fire.reduceHaptics)
+                //buttonPressHaptic(self.fire.reduceHaptics)
                 transaction.animation = Animation.easeIn(duration: 2.0)
         }
         .onEnded { finished in
@@ -138,7 +138,7 @@ struct BottomView: View {
                     .highPriorityGesture(
                         TapGesture()
                             .onEnded{
-                                buttonPressHaptic(self.fire.reduceHaptics)
+                                //buttonPressHaptic(self.fire.reduceHaptics)
                                 self.fire.timeSelection = max(self.fire.timeSelection - 1, 0)
                                 self.fire.quickUpdateTime(self.fire.timeSelection, profile: self.fire.profile)
                                 self.currentTime = Date().timeIntervalSince1970
@@ -167,7 +167,7 @@ struct BottomView: View {
                 }
             }
             .padding()
-            .background(self.isDetectingLongPress ? Blur(style: .prominent): Blur(style: .systemThinMaterial))
+            .background(self.isDetectingLongPress ? Blur(style: .prominent): Blur(style: .systemThickMaterial))
             .background(reduceTransparency ? Color(UIColor.tertiarySystemBackground) : Color.clear)
             .gesture(tapPressGesture)
             
@@ -210,7 +210,7 @@ struct BottomView: View {
             .padding(.bottom, ((UIApplication.shared.windows.last?.safeAreaInsets.bottom)! == 0 ? 10 : 0))
             .padding(.bottom, (UIApplication.shared.windows.last?.safeAreaInsets.bottom)!)
             .frame(width: UIScreen.main.bounds.width)
-            .background(Blur(style: .systemThinMaterial))
+            .background(Blur(style: .systemThickMaterial))
             .background(reduceTransparency ? Color(UIColor.secondarySystemBackground) : Color.clear)
         }.onAppear {
             self.currentTime = Date().timeIntervalSince1970
