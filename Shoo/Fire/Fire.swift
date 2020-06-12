@@ -70,6 +70,9 @@ class Fire: ObservableObject {
                         self.quickUpdateStatus(status: qA, profile: self.profile)
                     }
                     Crashlytics.crashlytics().setUserID(profile.uid)
+                    DispatchQueue.global(qos: .default).async {
+                        self.getDefaults()
+                    }
                     self.updateFirestorePushToken()
                 case .failure(let err):
                     print(err.localizedDescription)
@@ -82,12 +85,15 @@ class Fire: ObservableObject {
     //MARK: - APP CLOSING
     
     func appWillClose() {
-        userDefaults.set(self.reasons, forKey: "reasons")
+        Fire.userDefaults.set(self.reasons, forKey: "reasons")
     }
     
     // MARK: - NOTIFICATIONS
     //saves the last notification sent to see if time difference > 2 minutes or different status
     @Published var lastNotification = NotificationStruct(status: nil, reason: nil, endTime: nil, sendTime: nil)
+    
+    //indicates to homeview to display notification sent UI
+    @Published var isShowingNotification = false
     
     func updateFirestorePushToken() {
         if let token = Messaging.messaging().fcmToken {
@@ -97,8 +103,16 @@ class Fire: ObservableObject {
         }
     }
     
+    func showNotification(){
+        isShowingNotification = true
+        DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
+            self.isShowingNotification = false
+        }
+    }
+    
     func remindMate(_ token: String) {
         pushSender.sendPushNotification(to: token, title: messageTitle(), body: messasageBody())
+        showNotification()
     }
     
     func testPush() {
@@ -107,14 +121,18 @@ class Fire: ObservableObject {
     
     func remindHouse() {
         let notif = NotificationStruct(status: self.profile.status, reason: self.profile.reason, endTime: self.profile.end, sendTime: Date().timeIntervalSince1970)
+        /*print("checkSend: Last notif \(lastNotification)")
+        print("checkSend: currentStatus: \(self.profile.status) : currentReason: \(self.profile.reason)")
+        print("checkSend: New notif \(notif)")*/
         if lastNotification.check(canSend: notif) {
-            buttonPressHaptic()
+            buttonPressHaptic(self.reduceHaptics)
             self.lastNotification = notif
+            showNotification()
             for mate in self.mates {
                 pushSender.sendPushNotification(to: mate.pushToken, title: messageTitle(), body: messasageBody())
             }
         } else {
-            errorHaptic()
+            errorHaptic(self.reduceHaptics)
         }
     }
     
@@ -168,7 +186,7 @@ class Fire: ObservableObject {
     func startListener() {
         self.error = nil
         DispatchQueue.main.async {
-            self.reasons = self.userDefaults.object(forKey: "reasons") as? [String] ?? ["Working", "Watching TV", "Exercising", "On the phone"]
+            self.reasons = Fire.self.userDefaults.object(forKey: "reasons") as? [String] ?? ["Working", "Watching TV", "Exercising", "On the phone"]
         }
         repository.startListener(Fid: self.profile.house, userID: self.profile.uid, result: {[weak self] (result) in
             guard let `self` = self else { return }
@@ -203,7 +221,7 @@ class Fire: ObservableObject {
     
     func stopListener() {
         DispatchQueue.main.async {
-            self.userDefaults.set(self.reasons, forKey: "reasons")
+            Fire.self.userDefaults.set(self.reasons, forKey: "reasons")
         }
         repository.stopListener()
     }
@@ -215,12 +233,12 @@ class Fire: ObservableObject {
     
     //MARK: - REASONS
     
-    let userDefaults = UserDefaults.standard
+    static let userDefaults = UserDefaults.standard
     @Published var reasons: [String] = ["👩‍💻 Working", "📺 Watching TV", "🏃‍♂️ Exercising", "📱 On the phone"]
     
     func saveCustomReasons(reasons: [String]){
         self.reasons = reasons
-        userDefaults.set(self.reasons, forKey: "reasons")
+        Fire.userDefaults.set(self.reasons, forKey: "reasons")
     }
     
     func getCustomReasons() -> [String] {
@@ -345,4 +363,29 @@ class Fire: ObservableObject {
     func createHouse() -> String {
         return self.repository.createHouse(uid: self.profile.uid)
     }
+    
+    
+    // MARK: - Saved Accessibility Settings
+    @Published var reduceHaptics: Bool = false {
+        didSet {
+            Fire.userDefaults.set(self.reduceHaptics, forKey: "reduceHaptics")
+            print("Saved toggle")
+        }
+    }
+    //let userDefaults = UserDefaults.standard
+    
+    func getDefaults() {
+        DispatchQueue.main.async {
+            self.reduceHaptics = Fire.userDefaults.object(forKey: "reduceHaptics") as? Bool ?? false
+        }
+    }
+    
+    func reduceHaptics(_ state: Bool) {
+        DispatchQueue.main.async {
+            self.reduceHaptics = state
+            Fire.userDefaults.set(self.reduceHaptics, forKey: "reduceHaptics")
+        }
+    }
+    
+    
 }

@@ -81,7 +81,7 @@ struct SettingsView: View {
                         .fontWeight(.bold)
                     Spacer()
                     Button(action: {
-                        buttonPressHaptic()
+                        buttonPressHaptic(self.fire.reduceHaptics)
                         self.presentationMode.wrappedValue.dismiss()
                     }){
                         Text("Done".uppercased())
@@ -186,23 +186,44 @@ struct SettingsView: View {
                         
                         //MARK: LEAVE HOUSE
                         Button(action: {
-                            buttonPressHaptic()
+                            buttonPressHaptic(self.fire.reduceHaptics)
                             self.leaveHouse()
                         }){
                             HStack{
                                 Spacer()
-                            Text("Leave house")
-                                .foregroundColor(.red)
+                                Text("Create new house")
+                                    .foregroundColor(.red)
                                 Spacer()
                             }
                             
                         }
-                        .padding(.horizontal)
+                        .padding([.horizontal, .bottom])
                         .buttonStyle(WideButtonStyle(color: Color(UIColor.systemBackground)))
+                        .accessibility(hint: Text("Creates a new house."))
+                        .accessibility(label: Text("Create house"))
+                        
+                        //MARK: ACCESSIBILITY
+                        VStack(alignment: .leading, spacing: 5){
+                            Text("Accessibility")
+                                .padding(.horizontal)
+                            
+                            HStack {
+                                Text("Reduce Haptics")
+                                    .padding()
+                                Toggle("", isOn: $fire.reduceHaptics)
+                                    .padding(.horizontal)
+                            }
+                            .background(Color(UIColor.systemBackground))
+                            .foregroundColor(.primary)
+                            .fixedSize(horizontal: false, vertical: false)
+                            .clipShape(RoundedRectangle(cornerRadius: 20, style: .continuous))
+                            .padding(.horizontal)
+                            .accessibility(hint: Text("Reduces haptics."))
+                        }
                         
                         // MARK: TECHNICAL BUTTONS
                         Button(action: {
-                            buttonPressHaptic()
+                            buttonPressHaptic(self.fire.reduceHaptics)
                             if let url = URL(string: "mailto:\(emailStr ?? "")") {
                                 UIApplication.shared.open(url)
                             }
@@ -215,10 +236,10 @@ struct SettingsView: View {
                             .background(Color(UIColor.systemBackground))
                             .clipShape(RoundedRectangle(cornerRadius: 20, style: .continuous))
                             .padding(.horizontal)
-                        }
+                        }.accessibility(hint: Text("Emails Shoo."))
                         
                         Button(action: {
-                            buttonPressHaptic()
+                            buttonPressHaptic(self.fire.reduceHaptics)
                             var components = URLComponents(url: appURL, resolvingAgainstBaseURL: false)
                             components?.queryItems = [
                                 URLQueryItem(name: "action", value: "write-review")
@@ -230,16 +251,16 @@ struct SettingsView: View {
                         }){
                             HStack{
                                 Image(systemName: "pencil.circle.fill")
-                                Text("Write a review")
+                                Text("Write a review.")
                             }
                             .padding()
                             .background(Color(UIColor.systemBackground))
                             .clipShape(RoundedRectangle(cornerRadius: 20, style: .continuous))
                             .padding(.horizontal)
-                        }
+                        }.accessibility(hint: Text("Links to review."))
                         
                         Button(action: {
-                            buttonPressHaptic()
+                            buttonPressHaptic(self.fire.reduceHaptics)
                             let url: NSURL = URL(string: "https://www.shoo.app/privacy_policy.html")! as NSURL
                             UIApplication.shared.open(url as URL)
                         }){
@@ -251,7 +272,8 @@ struct SettingsView: View {
                             .background(Color(UIColor.systemBackground))
                             .clipShape(RoundedRectangle(cornerRadius: 20, style: .continuous))
                             .padding(.horizontal)
-                        }
+                        }.accessibility(hint: Text("View the privacy policy."))
+                            
                         
                         /* Commented out the "APP WEBSITE" Button
                          Button(action: {
@@ -280,6 +302,7 @@ struct SettingsView: View {
                             .foregroundColor(.secondary)
                             .padding(.leading)
                             .frame(alignment: .center)
+                        .accessibility(label: Text("Build and version number"))
                     }
                 }
                 .onDisappear {
@@ -294,7 +317,7 @@ struct SettingsView: View {
                 }
             }
         }.alert(isPresented: $showingAlert){
-            Alert(title: Text("Leaving house"), message: Text("Once you leave you must rescan the code to join"), primaryButton: .destructive(Text("Leave")) {
+            Alert(title: Text("Leaving house"), message: Text("To create a new house, you first have to leave your current one."), primaryButton: .destructive(Text("Leave")) {
                 let oldID = self.fire.profile.house
                 self.fire.profile.house = self.fire.createHouse()
                 self.fire.mates = []
@@ -302,7 +325,7 @@ struct SettingsView: View {
                 self.fire.updateHouse(self.fire.profile, oldID)
                 self.fire.startListener()
                 self.presentationMode.wrappedValue.dismiss()
-            }, secondaryButton: .cancel())
+                }, secondaryButton: .cancel())
         }
     }
 }

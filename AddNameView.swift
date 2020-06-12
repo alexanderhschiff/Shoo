@@ -40,7 +40,7 @@ struct AddNameView: View {
 						if !self.name.isEmpty {
 							UIApplication.shared.endEditing() // Call to dismiss keyboard
 							self.fire.changeName(self.name)
-							buttonPressHaptic()
+                            buttonPressHaptic(self.fire.reduceHaptics)
 							self.presentationMode.wrappedValue.dismiss()
 						} else{
 							self.color = Color.gray
@@ -85,7 +85,7 @@ struct AddNameView: View {
 								if !self.name.isEmpty {
 									UIApplication.shared.endEditing() // Call to dismiss keyboard
 									self.fire.changeName(self.name)
-									buttonPressHaptic()
+                                    buttonPressHaptic(self.fire.reduceHaptics)
 									self.presentationMode.wrappedValue.dismiss()
 								} else{
 									self.color = Color.gray

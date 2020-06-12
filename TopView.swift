@@ -30,7 +30,7 @@ struct TopView: View {
 			HStack(alignment: .center){
 				VStack(alignment: .leading, spacing: 0){
 					Button(action: {
-						buttonPressHaptic()
+                        buttonPressHaptic(self.fire.reduceHaptics)
 						self.sheetType = .settings
 						self.showSheet = true
 					}){
@@ -55,7 +55,7 @@ struct TopView: View {
 				Spacer()
 				
 				Button(action: {
-					buttonPressHaptic()
+                    buttonPressHaptic(self.fire.reduceHaptics)
 					self.sheetType = .editHouse
 					self.showSheet = true
 				}){

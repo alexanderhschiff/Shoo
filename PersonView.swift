@@ -155,7 +155,7 @@ struct PersonView: View {
                 if expanded{
                     HStack{
                         Button(action: {
-                            buttonPressHaptic()
+                            buttonPressHaptic(self.fire.reduceHaptics)
                             self.fire.remindMate(self.pushToken)
                         }){
                             /*HStack{
@@ -184,7 +184,7 @@ struct PersonView: View {
         }
         .onTapGesture {
             //withAnimation(.linear(duration: 0.1)){
-            buttonPressHaptic()
+            buttonPressHaptic(self.fire.reduceHaptics)
             self.expanded.toggle()
             //}
         }

@@ -41,7 +41,7 @@ struct HomeTitleView: View {
 			
 			HStack{
 				Button(action: {
-					buttonPressHaptic()
+                    buttonPressHaptic(self.fire.reduceHaptics)
 					self.sheetType = .settings
 					self.showSheet = true
 				}){
@@ -59,7 +59,7 @@ struct HomeTitleView: View {
 				Spacer()
 				
 				Button(action: {
-					buttonPressHaptic()
+                    buttonPressHaptic(self.fire.reduceHaptics)
 					self.sheetType = .editHouse
 					self.showSheet = true
 				}){

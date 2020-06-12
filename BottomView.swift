@@ -10,6 +10,7 @@ import SwiftUI
 
 struct BottomView: View {
     @EnvironmentObject var fire: Fire
+    @Environment(\.accessibilityReduceTransparency) var reduceTransparency
     @State private var currentTime = Date().timeIntervalSince1970
     
     var color: Color{
@@ -72,11 +73,11 @@ struct BottomView: View {
         LongPressGesture(minimumDuration: 2)
             .updating($isDetectingLongPress) { currentstate, gestureState, transaction in
                 gestureState = currentstate
-                buttonPressHaptic()
+                buttonPressHaptic(self.fire.reduceHaptics)
                 transaction.animation = Animation.easeIn(duration: 2.0)
         }
         .onEnded { finished in
-            buttonPressHaptic()
+            buttonPressHaptic(self.fire.reduceHaptics)
             self.more = true
             self.eType = .more
         }
@@ -85,7 +86,7 @@ struct BottomView: View {
     var shortPressGesture: some Gesture{
         LongPressGesture(minimumDuration: 0)
             .onEnded { _ in
-                buttonPressHaptic()
+                buttonPressHaptic(self.fire.reduceHaptics)
                 self.more = true
                 self.eType = .more
                 
@@ -137,7 +138,7 @@ struct BottomView: View {
                     .highPriorityGesture(
                         TapGesture()
                             .onEnded{
-                                buttonPressHaptic()
+                                buttonPressHaptic(self.fire.reduceHaptics)
                                 self.fire.timeSelection = max(self.fire.timeSelection - 1, 0)
                                 self.fire.quickUpdateTime(self.fire.timeSelection, profile: self.fire.profile)
                                 self.currentTime = Date().timeIntervalSince1970
@@ -157,7 +158,7 @@ struct BottomView: View {
                     .highPriorityGesture(
                         TapGesture()
                             .onEnded{
-                                buttonPressHaptic()
+                                buttonPressHaptic(self.fire.reduceHaptics)
                                 self.fire.timeSelection = min(self.fire.timeSelection + 1, 10)
                                 self.fire.quickUpdateTime(self.fire.timeSelection, profile: self.fire.profile)
                                 self.currentTime = Date().timeIntervalSince1970
@@ -167,6 +168,7 @@ struct BottomView: View {
             }
             .padding()
             .background(self.isDetectingLongPress ? Blur(style: .prominent): Blur(style: .systemThinMaterial))
+            .background(reduceTransparency ? Color(UIColor.tertiarySystemBackground) : Color.clear)
             .gesture(tapPressGesture)
             
             Divider().background(Color.primary)
@@ -176,19 +178,19 @@ struct BottomView: View {
                     Spacer()
                     Button("Free"){
                         self.fire.quickUpdateStatus(status: .green, profile: self.fire.profile)
-                        buttonPressHaptic()
+                        buttonPressHaptic(self.fire.reduceHaptics)
                     }
                     .buttonStyle(StatusButtonStyle(color: Color.green, selected: self.fire.profile.status == .green))
                     Spacer()
                     Button("Quiet"){
                         self.fire.quickUpdateStatus(status: .yellow, profile: self.fire.profile)
-                        buttonPressHaptic()
+                        buttonPressHaptic(self.fire.reduceHaptics)
                     }
                     .buttonStyle(StatusButtonStyle(color: Color.yellow, selected: self.fire.profile.status == .yellow))
                     Spacer()
                     Button("Shoo"){
                         self.fire.quickUpdateStatus(status: .red, profile: self.fire.profile)
-                        buttonPressHaptic()
+                        buttonPressHaptic(self.fire.reduceHaptics)
                     }
                     .buttonStyle(StatusButtonStyle(color: Color.red, selected: self.fire.profile.status == .red))
                     Group{
@@ -199,7 +201,7 @@ struct BottomView: View {
                     Button("Remind"){
                         self.fire.remindHouse()
                     }
-                    .buttonStyle(StatusButtonStyle(color: Color.gray.opacity(0.4), selected: false))
+                    .buttonStyle(StatusButtonStyle(color: Color(UIColor.tertiarySystemFill), selected: false))
                     Spacer()
                 }
             }
@@ -209,6 +211,7 @@ struct BottomView: View {
             .padding(.bottom, (UIApplication.shared.windows.last?.safeAreaInsets.bottom)!)
             .frame(width: UIScreen.main.bounds.width)
             .background(Blur(style: .systemThinMaterial))
+            .background(reduceTransparency ? Color(UIColor.secondarySystemBackground) : Color.clear)
         }.onAppear {
             self.currentTime = Date().timeIntervalSince1970
             Timer.scheduledTimer(withTimeInterval: 5, repeats: true) { _ in

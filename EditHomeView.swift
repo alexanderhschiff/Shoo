@@ -14,7 +14,7 @@ struct EditHomeView: View {
         self.isShowingScanner = false
         switch result {
         case .success(let code):
-            successHaptic()
+            successHaptic(fire.reduceHaptics)
             let details = code.components(separatedBy: "\n")
             guard details.count == 1 else { return }
             let newID = details[0]
@@ -101,18 +101,19 @@ struct EditHomeView: View {
     @State private var showShareSheet: Bool = false
     
     @Environment(\.presentationMode) var presentationMode
+    @Environment(\.accessibilityReduceTransparency) var reduceTransparency
     
     var body: some View {
         ZStack{
             if mode == 1 {
                 if camAuth {
-                    CodeScannerView(codeTypes: [.qr], simulatedData: self.fire.profile.house, completion: self.handleScan)
+                    CodeScannerView(codeTypes: [.qr], simulatedData: self.fire.profile.house, completion: self.handleScan).accessibility(hint: Text("Scans another user's QR code"))
                 } else{
                     Button(action: {
                         UIApplication.shared.open(URL(string: UIApplication.openSettingsURLString)!, options: [:], completionHandler: nil)
                     }){
                         Text("Please enable camera access to join a house.")
-                    }
+                    }.accessibility(hint: Text("Links to settings enable camera access."))
                 }
             } else {
                 ZStack(alignment: .center){
@@ -126,8 +127,10 @@ struct EditHomeView: View {
                             .background(Color(UIColor.systemBackground))
                             .clipShape(RoundedRectangle(cornerRadius: 30, style: .continuous))
                             .padding()
+                            .accessibility(label: Text("House QR Code"))
+                        
                         Button(action: {
-                            buttonPressHaptic()
+                            buttonPressHaptic(self.fire.reduceHaptics)
                             self.showShareSheet = true
                         }){
                             HStack{
@@ -139,6 +142,8 @@ struct EditHomeView: View {
                             .background(Color(UIColor.systemBackground))
                             .clipShape(RoundedRectangle(cornerRadius: 20, style: .continuous))
                             .padding(.bottom, (UIApplication.shared.windows.last?.safeAreaInsets.bottom)!)
+                            .accessibility(hint: Text("Shares the app."))
+                            .accessibility(label: Text("Share"))
                         }
                     }
                 }
@@ -161,7 +166,7 @@ struct EditHomeView: View {
                     Spacer()
                     
                     Button(action: {
-                        buttonPressHaptic()
+                        buttonPressHaptic(self.fire.reduceHaptics)
                         self.presentationMode.wrappedValue.dismiss()
                     }){
                         Text("Done")
@@ -169,6 +174,7 @@ struct EditHomeView: View {
                             .background(Color(UIColor.systemBackground))
                             .clipShape(RoundedRectangle(cornerRadius: 20, style: .continuous))
                     }
+                    .accessibility(label: Text("Done"))
                     .padding()
                 }
                 .padding(.horizontal)
@@ -181,6 +187,7 @@ struct EditHomeView: View {
                         .font(.headline)
                         .padding()
                         .background(Blur(style: .systemMaterial))
+                        .background(self.reduceTransparency ? Color(UIColor.systemBackground) : Color.clear)
                         .clipShape(RoundedRectangle(cornerRadius: 20, style: .continuous))
                         .padding(.bottom, (UIApplication.shared.windows.last?.safeAreaInsets.bottom)!)
                     Spacer()

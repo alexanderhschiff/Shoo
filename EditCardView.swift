@@ -101,17 +101,17 @@ struct EditCardView: View {
                 HStack{
                     Button("Free"){
                         self.newStatus = .green
-                        buttonPressHaptic()
+                        buttonPressHaptic(self.fire.reduceHaptics)
                     }
                     .buttonStyle(StatusButtonStyle(color: Color.green, selected: newStatus == .green))
                     Button("Quiet"){
                         self.newStatus = .yellow
-                        buttonPressHaptic()
+                        buttonPressHaptic(self.fire.reduceHaptics)
                     }
                     .buttonStyle(StatusButtonStyle(color: Color.yellow, selected: newStatus == .yellow))
                     Button("Shoo"){
                         self.newStatus = .red
-                        buttonPressHaptic()
+                        buttonPressHaptic(self.fire.reduceHaptics)
                     }
                     .buttonStyle(StatusButtonStyle(color: Color.red, selected: newStatus == .red))
                     
@@ -148,7 +148,7 @@ struct EditCardView: View {
                             HStack{
                                 Spacer()
                                 Button(action: {
-                                    buttonPressHaptic()
+                                    buttonPressHaptic(self.fire.reduceHaptics)
                                     UIApplication.shared.endEditing() // Call to dismiss keyboard
                                     self.customColor = Color.gray
                                     self.addReasonFunc()
@@ -170,7 +170,7 @@ struct EditCardView: View {
                                 .reasonStyle(selected: reason == self.newReason)
                                 .padding([.leading, .bottom])
                                 .onTapGesture {
-                                    buttonPressHaptic()
+                                    buttonPressHaptic(self.fire.reduceHaptics)
                                     self.newReason = reason
                             }
                             .padding(.top, 5)
@@ -199,9 +199,10 @@ struct EditCardView: View {
                 }
             }.padding(.leading)
             
+            //MARK: - UPDATE BUTTONS
             HStack{
                 Button(action: {
-                    buttonPressHaptic()
+                    buttonPressHaptic(self.fire.reduceHaptics)
                     self.fire.saveState(user: self.fire.profile, status: self.newStatus, reason: self.newReason, end: self.time)
                     self.presentationMode.wrappedValue.dismiss()
                 }){
@@ -214,15 +215,18 @@ struct EditCardView: View {
                 Spacer()
                 
                 Button(action: {
-                    buttonPressHaptic()
+                    buttonPressHaptic(self.fire.reduceHaptics)
+                    self.fire.saveState(user: self.fire.profile, status: self.newStatus, reason: self.newReason, end: self.time)
                     self.fire.remindHouse()
+                    self.presentationMode.wrappedValue.dismiss()
+                    /*
                     withAnimation(.linear(duration: 0.3)){
                         self.tapped = true
                     }
                     //dismiss edit card view after pressing update, but with time to see checkmark animation
                     DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
                         self.presentationMode.wrappedValue.dismiss()
-                    }
+                    }*/
                 }){
                     if !self.tapped{
                         Text("Update & Notify All")

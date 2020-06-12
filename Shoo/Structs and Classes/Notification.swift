@@ -16,19 +16,19 @@ struct NotificationStruct {
     let endTime: Double?
     let sendTime: Double?
     
+    //will return true if the other notification is different or sent more than 30 seconds later
     func check(canSend other: NotificationStruct) -> Bool {
-        if sendTime != nil {
+        if let mySendTime = sendTime {
             if status == other.status && reason == other.reason && endTime == other.endTime {
-                if let sendTime = sendTime {
-                    let timeDiff = (other.sendTime ?? Date().timeIntervalSince1970) - (sendTime)
-                    return timeDiff > inBetweenWaitingPeriod
-                } else {
-                    return true
-                }
+                let timeDiff = (other.sendTime ?? Date().timeIntervalSince1970) - mySendTime
+                print("checkSend: Time > 30: \(timeDiff > inBetweenWaitingPeriod)")
+                return timeDiff > inBetweenWaitingPeriod
             } else {
+                print("checkSend: different notification")
                 return true
             }
         }
+        print("checkSend: No first notification")
         return true
     }
 }

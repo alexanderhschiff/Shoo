@@ -19,13 +19,13 @@
 	<key>CFBundleVersion</key>
 	<string>$(CURRENT_PROJECT_VERSION)</string>
 	<key>FIREBASE_ANALYTICS_COLLECTION_DEACTIVATED</key>
-	<true/>
+	<false/>
 	<key>FacebookAdvertiserIDCollectionEnabled</key>
 	<false/>
 	<key>FacebookAutoLogAppEventsEnabled</key>
 	<false/>
 	<key>GOOGLE_ANALYTICS_IDFV_COLLECTION_ENABLED</key>
-	<false/>
+	<true/>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>NSCameraUsageDescription</key>
@@ -47,33 +47,6 @@
 			</array>
 		</dict>
 	</dict>
-	<key>UIApplicationShortcutItems</key>
-	<array>
-		<dict>
-			<key>UIApplicationShortcutItemIconSymbolName</key>
-			<string>hand.raised.slash.fill</string>
-			<key>UIApplicationShortcutItemTitle</key>
-			<string>Shoo</string>
-			<key>UIApplicationShortcutItemType</key>
-			<string>app.shoo.app.qShoo</string>
-		</dict>
-		<dict>
-			<key>UIApplicationShortcutItemIconSymbolName</key>
-			<string>hand.raised.fill</string>
-			<key>UIApplicationShortcutItemTitle</key>
-			<string>Quiet</string>
-			<key>UIApplicationShortcutItemType</key>
-			<string>app.shoo.app.qQuiet</string>
-		</dict>
-		<dict>
-			<key>UIApplicationShortcutItemIconSymbolName</key>
-			<string>hand.thumbsup.fill</string>
-			<key>UIApplicationShortcutItemTitle</key>
-			<string>Free</string>
-			<key>UIApplicationShortcutItemType</key>
-			<string>app.shoo.app.qFree</string>
-		</dict>
-	</array>
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>
 	<key>UIMainStoryboardFile</key>
@@ -85,13 +58,6 @@
 	<key>UISupportedInterfaceOrientations</key>
 	<array>
 		<string>UIInterfaceOrientationPortrait</string>
-	</array>
-	<key>UISupportedInterfaceOrientations~ipad</key>
-	<array>
-		<string>UIInterfaceOrientationPortrait</string>
-		<string>UIInterfaceOrientationPortraitUpsideDown</string>
-		<string>UIInterfaceOrientationLandscapeLeft</string>
-		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
 </dict>
 </plist>
