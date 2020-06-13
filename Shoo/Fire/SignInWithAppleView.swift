@@ -8,22 +8,90 @@
 
 import SwiftUI
 import AuthenticationServices
+import UIKit
+
+
+@available(iOS 13.0, *)
+class SignInWithAppleButton: UIControl {
+    var cornerRadius: CGFloat = 10.0 { didSet { updateRadius() } }
+    private var target: Any?
+    private var action: Selector?
+    private var controlEvents: UIControl.Event = .touchUpInside
+    private lazy var whiteButton = ASAuthorizationAppleIDButton(type: .continue, style: .white)
+    private lazy var blackButton = ASAuthorizationAppleIDButton(type: .continue, style: .black)
+    
+    init() {
+        super.init(frame: CGRect.infinite)
+        setupButton()
+    }
+    
+    @available(*, unavailable)
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    override func addTarget(_ target: Any?, action: Selector, for controlEvents: UIControl.Event) {
+        self.target = target
+        self.action = action
+        self.controlEvents = controlEvents
+    }
+    
+    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+        super.traitCollectionDidChange(previousTraitCollection)
+        setupButton()
+    }
+}
+
+// MARK: - Private Methods
+@available(iOS 13.0, *)
+private extension SignInWithAppleButton {
+    func setupButton() {
+        switch traitCollection.userInterfaceStyle {
+        case .dark:
+            subviews.forEach { $0.removeFromSuperview() }
+            addSubview(whiteButton)
+            whiteButton.cornerRadius = cornerRadius
+            whiteButton.frame = CGRect(x: 0, y: 0, width: 200, height: 50)
+            action.map { whiteButton.addTarget(target, action: $0, for: controlEvents) }
+        case _:
+            subviews.forEach { $0.removeFromSuperview() }
+            addSubview(blackButton)
+            blackButton.cornerRadius = cornerRadius
+            blackButton.frame = CGRect(x: 0, y: 0, width: 200, height: 50)
+            action.map { blackButton.addTarget(target, action: $0, for: controlEvents) }
+        }
+    }
+    
+    func updateRadius() {
+        switch traitCollection.userInterfaceStyle {
+        case .dark:
+            whiteButton.cornerRadius = cornerRadius
+        case _:
+            blackButton.cornerRadius = cornerRadius
+        }
+    }
+}
+
+
 
 struct SignInWithAppleView: UIViewRepresentable {
     
     @EnvironmentObject var fire: Fire
+    @Environment(\.colorScheme) var colorScheme
     
     func makeCoordinator() -> Coordinator {
         return Coordinator(self)
     }
     
-    func makeUIView(context: Context) -> ASAuthorizationAppleIDButton {
-        let button = ASAuthorizationAppleIDButton(authorizationButtonType: .continue, authorizationButtonStyle: .whiteOutline)
+    func makeUIView(context: Context) -> SignInWithAppleButton {
+        let button = SignInWithAppleButton()
+         
         button.addTarget(context.coordinator, action:  #selector(Coordinator.didTapButton), for: .touchUpInside)
         return button
     }
     
-    func updateUIView(_ uiView: ASAuthorizationAppleIDButton, context: Context) {
+    func updateUIView(_ uiView: SignInWithAppleButton, context: Context) {
+        //uiView.setNeedsDisplay()
     }
     
     class Coordinator: NSObject, ASAuthorizationControllerDelegate, ASAuthorizationControllerPresentationContextProviding {

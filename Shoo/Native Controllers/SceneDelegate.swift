@@ -11,6 +11,9 @@ import SwiftUI
 
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     
+
+    
+    
     var window: UIWindow?
     var environment = Fire()
     //var selection = TimeSelection()

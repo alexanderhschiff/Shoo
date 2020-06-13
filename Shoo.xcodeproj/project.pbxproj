@@ -644,7 +644,7 @@
 				CODE_SIGN_ENTITLEMENTS = Shoo/Shoo.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 10;
+				CURRENT_PROJECT_VERSION = 12;
 				DEVELOPMENT_ASSET_PATHS = "\"Shoo/Preview Content\"";
 				DEVELOPMENT_TEAM = 97J2HJ2DUM;
 				ENABLE_PREVIEWS = YES;
@@ -675,7 +675,7 @@
 				CODE_SIGN_ENTITLEMENTS = Shoo/Shoo.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 10;
+				CURRENT_PROJECT_VERSION = 12;
 				DEVELOPMENT_ASSET_PATHS = "\"Shoo/Preview Content\"";
 				DEVELOPMENT_TEAM = 97J2HJ2DUM;
 				ENABLE_PREVIEWS = YES;

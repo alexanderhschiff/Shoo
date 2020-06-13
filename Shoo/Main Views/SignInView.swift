@@ -49,7 +49,7 @@ struct SignInView: View {
                     }.accessibility(label: Text("Create account"))
                     
                     ActivityIndicatorView(isPresented: $activityIndicatorInfo.isPresented, message: activityIndicatorInfo.message) {
-                        SignInWithAppleView(activityIndicatorInfo: self.$activityIndicatorInfo, alertInfo: self.$alertInfo).frame(width: 200, height: 50)
+                        SignInWithAppleView(activityIndicatorInfo: self.$activityIndicatorInfo, alertInfo: self.$alertInfo).frame(width: 200, height: 50).cornerRadius(10)
                     }.accessibility(label: Text("Sign in with Apple"))
                         .accessibility(hint: Text("Sign up"))
                     
